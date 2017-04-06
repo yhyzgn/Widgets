@@ -1,0 +1,92 @@
+package com.yhy.widgetdemo;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class MainActivity extends AppCompatActivity {
+    private static final AbsListView.LayoutParams PARAMS = new AbsListView.LayoutParams(AbsListView
+            .LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
+    private static final List<String> WIDGET_NAME_LIST = new ArrayList<>();
+    private static final List<Class> WIDGET_CLASS_LIST = new ArrayList<>();
+
+    private ListView lvWidget;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        lvWidget = (ListView) findViewById(R.id.lv_widget);
+
+        initData();
+
+        initAdapter();
+
+        initListener();
+    }
+
+    private void initListener() {
+        lvWidget.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, WIDGET_CLASS_LIST.get(position));
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initAdapter() {
+        lvWidget.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return WIDGET_NAME_LIST.size();
+            }
+
+            @Override
+            public String getItem(int position) {
+                return WIDGET_NAME_LIST.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView tv = new TextView(MainActivity.this);
+                tv.setTextSize(18);
+                tv.setLayoutParams(PARAMS);
+                tv.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                tv.setPadding(16, 36, 16, 36);
+                tv.setText(getItem(position));
+                return tv;
+            }
+        });
+    }
+
+    private void initData() {
+        WIDGET_NAME_LIST.clear();
+        WIDGET_CLASS_LIST.clear();
+
+        WIDGET_NAME_LIST.add("AdvView");
+        WIDGET_NAME_LIST.add("TitleBar");
+
+        WIDGET_CLASS_LIST.add(AdvActivity.class);
+        WIDGET_CLASS_LIST.add(TitleActivity.class);
+    }
+}

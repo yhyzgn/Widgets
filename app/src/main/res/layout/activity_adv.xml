@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.yhy.widget.adv.TextAdvView
+        android:id="@+id/tav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#090"
+        android:padding="8dp"
+        app:tav_text_color="#fff"
+        app:tav_text_ellipsize="middle"
+        app:tav_text_size="18sp"/>
+
+</LinearLayout>

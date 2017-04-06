@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AbsAdvViewAttrs">
+        <attr name="aav_interval" format="integer|reference"/>
+        <attr name="aav_anim_duration" format="integer|reference"/>
+    </declare-styleable>
+    <declare-styleable name="TextAdvViewAttrs">
+        <attr name="tav_text_size" format="dimension|reference"/>
+        <attr name="tav_text_color" format="color|reference"/>
+        <attr name="tav_text_ellipsize" format="integer">
+            <enum name="start" value="0"/>
+            <enum name="middle" value="1"/>
+            <enum name="end" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AbsNormalTitleBarAttrs">
+        <attr name="titb_left_text" format="string|reference"/>
+        <attr name="titb_right_text" format="string|reference"/>
+        <attr name="titb_left_icon" format="reference"/>
+        <attr name="titb_right_icon" format="reference"/>
+        <attr name="titb_bg_color" format="color"/>
+        <attr name="titb_status_bar_color" format="color"/>
+        <attr name="titb_left_right_padding" format="dimension"/>
+        <attr name="titb_padding_top" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="TextTitleBarAttrs">
+        <attr name="ttb_text_color" format="color"/>
+        <attr name="ttb_text_size" format="dimension"/>
+        <attr name="ttb_text" format="string"/>
+    </declare-styleable>
+</resources>
