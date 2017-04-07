@@ -42,8 +42,8 @@ dependencies {
 
 publish {
     userOrg = 'yhyzgn'
-    groupId = 'com.yhy.widget'
-    artifactId = 'core'
+    groupId = 'com.yhy'
+    artifactId = 'widget'
     publishVersion = '1.0.0'
     desc = 'Some custom view.'
     website = 'https://github.com/SilentWolf1993/Widgets'
