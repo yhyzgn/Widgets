@@ -41,7 +41,7 @@ public abstract class AbsTitleBar extends AppBarLayout {
     /**
      * 让当前Activity支持ActionBar
      *
-     * @param activity
+     * @param activity 当前Activity
      */
     public void support(AppCompatActivity activity) {
         mActivity = activity;
