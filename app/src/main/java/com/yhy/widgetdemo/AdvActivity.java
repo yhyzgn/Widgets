@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yhy.widget.adv.TextAdvView;
-import com.yhy.widget.adv.abs.AbsAdvView;
+import com.yhy.widget.adv.AdvView;
+import com.yhy.widget.adv.adapter.TextAdvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class AdvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adv);
 
-        TextAdvView tavView = (TextAdvView) findViewById(R.id.tav_view);
+        AdvView avView = (AdvView) findViewById(R.id.av_view);
 
         //设置集合
         List<String> items = new ArrayList<>();
@@ -34,7 +34,10 @@ public class AdvActivity extends AppCompatActivity {
         items.add("这是第5个");
         items.add("这是第6个");
         items.add("这是第7个");
-        tavView.setOnItemClickListener(new AbsAdvView.OnItemClickListener() {
+
+        avView.setAdapter(new TextAdvAdapter(this, items));
+
+        avView.setmOnItemClickListener(new AdvView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 TextView tv = (TextView) view;
@@ -42,7 +45,6 @@ public class AdvActivity extends AppCompatActivity {
                         .LENGTH_SHORT).show();
             }
         });
-        tavView.startWithTextList(items);
-        tavView.setCurrentItem(2);
+        avView.setCurrentItem(2);
     }
 }

@@ -53,14 +53,29 @@ public class TextTitleBar extends AbsNormalTitleBar {
         return mTv;
     }
 
+    /**
+     * 设置标题文字
+     *
+     * @param title 标题文字
+     */
     public void setTitle(CharSequence title) {
         mTv.setText(title);
     }
 
+    /**
+     * 设置标题字体颜色
+     *
+     * @param color 字体颜色
+     */
     public void setTextColor(int color) {
         mTv.setTextColor(color);
     }
 
+    /**
+     * 设置标题字体大小
+     *
+     * @param sp 字体大小
+     */
     public void setTextSize(int sp) {
         mTv.setTextSize(sp);
     }

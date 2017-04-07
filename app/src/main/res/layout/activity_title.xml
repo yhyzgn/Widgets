@@ -10,8 +10,7 @@
         android:id="@+id/ttb_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titb_bg_color="#f20"
-        app:titb_left_icon="@mipmap/ic_back"
+        app:titb_bg_color="#34de92"
         app:ttb_text="标题"/>
 
 </LinearLayout>

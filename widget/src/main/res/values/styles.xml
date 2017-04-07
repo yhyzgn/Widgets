@@ -11,10 +11,12 @@
     <!--用于控制ToolBar溢出菜单的样式-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <!-- 设置该属性边距为0dp-->
     <style name="TitleBar" parent="Widget.AppCompat.Toolbar">
-        <item name="contentInsetStart">0dp</item><!-- 设置该属性边距为0dp-->
+        <item name="contentInsetStart">0dp</item>
     </style>
 
+    <!--标题栏样式，让app的主题继承于该主题即可-->
     <style name="Theme.TitbTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="toolbarStyle">@style/TitleBar</item>
         <item name="windowActionBar">false</item>

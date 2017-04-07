@@ -38,7 +38,12 @@ public abstract class AbsTitleBar extends AppBarLayout {
         }
     }
 
-    public void init(AppCompatActivity activity) {
+    /**
+     * 让当前Activity支持ActionBar
+     *
+     * @param activity
+     */
+    public void support(AppCompatActivity activity) {
         mActivity = activity;
         mActivity.setSupportActionBar(tbBar);
         // 隐藏标题
@@ -51,5 +56,10 @@ public abstract class AbsTitleBar extends AppBarLayout {
         }
     }
 
+    /**
+     * 子类回调设置标题View
+     *
+     * @return 标题View
+     */
     protected abstract View getTitleView();
 }

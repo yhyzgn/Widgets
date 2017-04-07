@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yhy.widget.adv.TextAdvView
-        android:id="@+id/tav_view"
+    <com.yhy.widget.adv.AdvView
+        android:id="@+id/av_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#090"
-        android:padding="8dp"
-        app:tav_text_color="#fff"
-        app:tav_text_ellipsize="middle"
-        app:tav_text_size="18sp"/>
+        android:background="#f40"
+        app:av_anim_duration="1000"
+        app:av_interval="4000"/>
 
 </LinearLayout>

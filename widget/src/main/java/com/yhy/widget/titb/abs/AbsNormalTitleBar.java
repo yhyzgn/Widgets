@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.yhy.widget.R;
 import com.yhy.widget.utils.DensityUtils;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by HongYi Yan on 2017/4/6 23:06.
  */
@@ -33,12 +35,16 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
     private int mLeftIcon;
     private int mRightIcon;
 
+    private CircleImageView civLeft;
+    private CircleImageView civRight;
+
     private int mBgColor;
     private int mStatusBarColor;
     private int mLeftRightPadding;
     private int mPaddingTop;
 
     private OnNormalTitleListener mListener;
+    private CircleImgAdapter mAdapter;
 
     public AbsNormalTitleBar(Context context) {
         this(context, null);
@@ -79,6 +85,9 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
         tvLeftText = (TextView) view.findViewById(R.id.tv_left_text);
         tvRightText = (TextView) view.findViewById(R.id.tv_right_text);
 
+        civLeft = (CircleImageView) view.findViewById(R.id.civ_left);
+        civRight = (CircleImageView) view.findViewById(R.id.civ_right);
+
         flCenterView = (FrameLayout) view.findViewById(R.id.fl_center_view);
 
         View centerView = getCenterView();
@@ -92,9 +101,14 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
         return view;
     }
 
+    /**
+     * 从子类中获取到标题中间的View
+     *
+     * @return 中间的View
+     */
     protected abstract View getCenterView();
 
-    protected void configTitle() {
+    private void configTitle() {
         if (!TextUtils.isEmpty(mLeftText)) {
             setLeftBtn(mLeftText);
         }
@@ -120,26 +134,53 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
         setMarginTop();
     }
 
+    /**
+     * 设置左边按钮文字
+     *
+     * @param text 左边按钮文字
+     * @return 当前对象
+     */
     public AbsNormalTitleBar setLeftBtn(CharSequence text) {
         setTextBtn(text, true);
         return this;
     }
 
+    /**
+     * 设置右边按钮文字
+     *
+     * @param text 右边按钮文字
+     * @return 当前对象
+     */
     public AbsNormalTitleBar setRightBtn(CharSequence text) {
         setTextBtn(text, false);
         return this;
     }
 
+    /**
+     * 设置左边按钮图标资源id
+     *
+     * @param iconId 左边按钮资源id
+     * @return 当前对象
+     */
     public AbsNormalTitleBar setLeftBtn(int iconId) {
         setIconBtn(iconId, true);
         return this;
     }
 
+    /**
+     * 设置右边按钮图标资源id
+     *
+     * @param iconId 右边按钮资源id
+     * @return 当前对象
+     */
     public AbsNormalTitleBar setRightBtn(int iconId) {
         setIconBtn(iconId, false);
         return this;
     }
 
+    /**
+     * 设置标题栏上内边距
+     */
     private void setMarginTop() {
         //先修改高度
         LayoutParams params = (LayoutParams) tbBar.getLayoutParams();
@@ -149,9 +190,12 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
         tbBar.setPadding(0, DensityUtils.dp2px(mActivity, mPaddingTop), 0, 0);
     }
 
+    /**
+     * 设置标题栏左右内边距
+     */
     private void setLeftRightPadding() {
         int leftRightPadding = DensityUtils.dp2px(mActivity, mLeftRightPadding);
-        flCenterView.setPadding(leftRightPadding, 0, leftRightPadding, 0);
+        tbBar.setPadding(leftRightPadding, 0, leftRightPadding, 0);
     }
 
     /**
@@ -164,6 +208,12 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
         setStatusBarColor(mStatusBarColor);
     }
 
+    /**
+     * 设置状态栏背景颜色
+     *
+     * @param color 背景颜色
+     * @return 当前对象
+     */
     public AbsNormalTitleBar setStatusBarColor(int color) {
         //设置状态栏颜色
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -177,6 +227,7 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
     private void setTextBtn(CharSequence text, boolean isLeft) {
         if (!TextUtils.isEmpty(text)) {
             if (isLeft) {
+                civLeft.setVisibility(GONE);
                 ivLeftIcon.setVisibility(View.GONE);
                 tvLeftText.setVisibility(View.VISIBLE);
                 tvLeftText.setText(text);
@@ -189,6 +240,7 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
                     }
                 });
             } else {
+                civRight.setVisibility(GONE);
                 ivRightIcon.setVisibility(View.GONE);
                 tvRightText.setVisibility(View.VISIBLE);
                 tvRightText.setText(text);
@@ -207,6 +259,7 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
     private void setIconBtn(int iconId, boolean isLeft) {
         if (iconId > CODE_NO_RES_ID) {
             if (isLeft) {
+                civLeft.setVisibility(GONE);
                 tvLeftText.setVisibility(View.GONE);
                 ivLeftIcon.setVisibility(View.VISIBLE);
                 ivLeftIcon.setImageResource(iconId);
@@ -219,6 +272,7 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
                     }
                 });
             } else {
+                civRight.setVisibility(GONE);
                 tvRightText.setVisibility(View.GONE);
                 ivRightIcon.setVisibility(View.VISIBLE);
                 ivRightIcon.setImageResource(iconId);
@@ -234,14 +288,85 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
         }
     }
 
-    public void setOnNormalTitleListener(OnNormalTitleListener listener) {
-        mListener = listener;
+    private void setCircleImg() {
+        if (null != mAdapter) {
+            if (mAdapter.leftCiv(civLeft)) {
+                civLeft.setVisibility(VISIBLE);
+                tvLeftText.setVisibility(View.GONE);
+                ivLeftIcon.setVisibility(View.GONE);
+            }
+            if (mAdapter.rightCiv(civRight)) {
+                civRight.setVisibility(VISIBLE);
+                tvRightText.setVisibility(View.GONE);
+                ivRightIcon.setVisibility(View.GONE);
+            }
+        }
     }
 
-    public abstract class OnNormalTitleListener {
+    /**
+     * 设置左右按钮的点击事件
+     *
+     * @param listener 点击事件监听器
+     * @return 当前对象
+     */
+    public AbsNormalTitleBar setOnNormalTitleListener(OnNormalTitleListener listener) {
+        mListener = listener;
+        return this;
+    }
 
+    /**
+     * 设置左右圆形图标的适配器
+     *
+     * @param adapter 适配器
+     * @return 当前对象
+     */
+    public AbsNormalTitleBar setCircleImgAdapter(CircleImgAdapter adapter) {
+        mAdapter = adapter;
+        setCircleImg();
+        return this;
+    }
+
+    /**
+     * 圆形图标适配器
+     */
+    public static class CircleImgAdapter {
+        /**
+         * 左边图标适配
+         *
+         * @param leftCiv 左边图标
+         * @return 是否显示
+         */
+        public boolean leftCiv(CircleImageView leftCiv) {
+            return false;
+        }
+
+        /**
+         * 右边图标适配
+         *
+         * @param rightCiv 右边图标
+         * @return 是否显示
+         */
+        public boolean rightCiv(CircleImageView rightCiv) {
+            return false;
+        }
+    }
+
+    /**
+     * 左右按钮点击事件监听器
+     */
+    public abstract class OnNormalTitleListener {
+        /**
+         * 左边按钮点击事件
+         *
+         * @param v 当前按钮
+         */
         public abstract void onLeftClick(View v);
 
+        /**
+         * 右边按钮点击事件
+         *
+         * @param v 当前按钮
+         */
         public void onRightClick(View v) {
         }
     }
