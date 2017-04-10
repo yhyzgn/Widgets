@@ -13,4 +13,19 @@
         app:titb_bg_color="#34de92"
         app:ttb_text="标题"/>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_test"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/iv_test"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"/>
+
 </LinearLayout>

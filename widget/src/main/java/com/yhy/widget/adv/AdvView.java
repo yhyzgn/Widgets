@@ -113,7 +113,7 @@ public class AdvView extends ViewFlipper implements View.OnClickListener {
      *
      * @param listener 条目点击事件
      */
-    public void setmOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
 

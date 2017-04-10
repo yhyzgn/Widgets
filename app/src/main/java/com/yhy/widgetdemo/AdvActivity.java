@@ -37,7 +37,7 @@ public class AdvActivity extends AppCompatActivity {
 
         avView.setAdapter(new TextAdvAdapter(this, items));
 
-        avView.setmOnItemClickListener(new AdvView.OnItemClickListener() {
+        avView.setOnItemClickListener(new AdvView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 TextView tv = (TextView) view;

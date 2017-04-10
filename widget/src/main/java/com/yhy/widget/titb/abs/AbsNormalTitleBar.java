@@ -354,7 +354,7 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
     /**
      * 左右按钮点击事件监听器
      */
-    public abstract class OnNormalTitleListener {
+    public static abstract class OnNormalTitleListener {
         /**
          * 左边按钮点击事件
          *

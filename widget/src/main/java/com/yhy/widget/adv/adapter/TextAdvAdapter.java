@@ -31,15 +31,14 @@ public class TextAdvAdapter extends AdvAdapter<String> {
         return createTextView(getItem(position));
     }
 
-    private TextView createTextView(String text) {
+    protected TextView createTextView(String text) {
         TextView tv = new TextView(mCtx);
         tv.setLayoutParams(mParams);
         tv.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
         tv.setText(text);
         tv.setTextColor(Color.DKGRAY);
-        tv.setTextSize(16);
+        tv.setTextSize(14);
         tv.setSingleLine();
-        tv.setPadding(24, 24, 24, 24);
         tv.setEllipsize(TextUtils.TruncateAt.END);
         return tv;
     }
