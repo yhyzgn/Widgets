@@ -33,6 +33,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 
     compile 'com.android.support:design:25.3.1'
@@ -44,7 +45,7 @@ publish {
     userOrg = 'yhyzgn'
     groupId = 'com.yhy.widget'
     artifactId = 'view-core'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'Some custom view.'
     website = 'https://github.com/SilentWolf1993/Widgets'
 }

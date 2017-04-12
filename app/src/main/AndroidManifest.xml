@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".AdvActivity"/>
         <activity android:name=".TitleActivity"/>
+        <activity android:name=".RvActivity">
+        </activity>
     </application>
 
 </manifest>
