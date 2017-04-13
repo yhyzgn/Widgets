@@ -15,9 +15,9 @@ import com.yhy.widget.R;
  * Created by HongYi Yan on 2017/4/6 22:58.
  */
 public abstract class AbsTitleBar extends AppBarLayout {
-
+    protected AppBarLayout ablBar;
     protected Toolbar tbBar;
-    private FrameLayout flTitle;
+    protected FrameLayout flTitle;
     protected AppCompatActivity mActivity;
 
     public AbsTitleBar(Context context) {
@@ -33,6 +33,7 @@ public abstract class AbsTitleBar extends AppBarLayout {
     private void absInit(Context context, AttributeSet attrs) {
         if (!isInEditMode()) {
             View view = LayoutInflater.from(context).inflate(R.layout.widget_titb_abs, this);
+            ablBar = (AppBarLayout) view.findViewById(R.id.app_bar_layout);
             tbBar = (Toolbar) view.findViewById(R.id.tb_title_bar);
             flTitle = (FrameLayout) view.findViewById(R.id.fl_title);
         }
