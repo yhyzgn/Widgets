@@ -2,6 +2,7 @@ package com.yhy.widget.adv;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -72,8 +73,9 @@ public class AdvView extends ViewFlipper implements View.OnClickListener {
 
         removeAllViews();
 
+        View view;
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            View view = mAdapter.getView(i);
+            view = mAdapter.getView(i);
             view.setTag(i);
             addView(view);
             view.setOnClickListener(this);
@@ -114,7 +116,7 @@ public class AdvView extends ViewFlipper implements View.OnClickListener {
      * @param listener 条目点击事件
      */
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mOnItemClickListener = listener;
+        mOnItemClickListener = listener;
     }
 
     /**
@@ -122,7 +124,7 @@ public class AdvView extends ViewFlipper implements View.OnClickListener {
      */
     public interface OnItemClickListener {
         /**
-         * 天目点击事件
+         * 条目点击事件
          *
          * @param view     当前View
          * @param position 条目索引
