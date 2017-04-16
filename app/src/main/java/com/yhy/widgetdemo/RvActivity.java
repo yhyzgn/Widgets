@@ -23,8 +23,6 @@ public class RvActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rv);
 
         rvContent = (RecyclerView) findViewById(R.id.rv_content);
-        rvContent.addItemDecoration(new RvDivider(this, 2, R.color.colorPrimary, RvDivider
-                .TYPE_CONTENT));
 
         TEST_STR_LIST.add("Test 1");
         TEST_STR_LIST.add("Test 2");
@@ -34,15 +32,31 @@ public class RvActivity extends AppCompatActivity {
         TEST_STR_LIST.add("Test 6");
         TEST_STR_LIST.add("Test 7");
 
-        horizontal();
+//        horizontal();
+
+        vertical();
+
+//        gridview();
     }
 
-    private void horizontal() {
-//        rvContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
-//                false));
-
+    private void gridview() {
         rvContent.setLayoutManager(new GridLayoutManager(this, 3));
 
         rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
+        rvContent.addItemDecoration(new RvDivider(this, getResources().getColor(R.color.colorPrimary)));
+    }
+
+    private void vertical() {
+        rvContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
+        rvContent.addItemDecoration(new RvDivider(this));
+    }
+
+    private void horizontal() {
+        rvContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
+        rvContent.addItemDecoration(new RvDivider(this));
     }
 }

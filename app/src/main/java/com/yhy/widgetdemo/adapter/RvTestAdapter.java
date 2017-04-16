@@ -1,6 +1,7 @@
 package com.yhy.widgetdemo.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
@@ -43,6 +44,7 @@ public class RvTestAdapter extends RecyclerView.Adapter<RvTestAdapter.ViewHolder
             super(itemView);
             mTv = (TextView) itemView;
             mTv.setTextSize(16);
+            mTv.setBackgroundColor(Color.WHITE);
             mTv.setGravity(Gravity.CENTER);
             mTv.setPadding(24, 24, 24, 24);
         }
