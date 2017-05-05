@@ -225,8 +225,8 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
     }
 
     private void setTextBtn(CharSequence text, boolean isLeft) {
-        if (!TextUtils.isEmpty(text)) {
-            if (isLeft) {
+        if (isLeft) {
+            if (!TextUtils.isEmpty(text)) {
                 civLeft.setVisibility(GONE);
                 ivLeftIcon.setVisibility(View.GONE);
                 tvLeftText.setVisibility(View.VISIBLE);
@@ -240,6 +240,10 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
                     }
                 });
             } else {
+                tvLeftText.setVisibility(View.GONE);
+            }
+        } else {
+            if (!TextUtils.isEmpty(text)) {
                 civRight.setVisibility(GONE);
                 ivRightIcon.setVisibility(View.GONE);
                 tvRightText.setVisibility(View.VISIBLE);
@@ -252,13 +256,15 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
                         }
                     }
                 });
+            } else {
+                tvRightText.setVisibility(View.GONE);
             }
         }
     }
 
     private void setIconBtn(int iconId, boolean isLeft) {
-        if (iconId > CODE_NO_RES_ID) {
-            if (isLeft) {
+        if (isLeft) {
+            if (iconId > CODE_NO_RES_ID) {
                 civLeft.setVisibility(GONE);
                 tvLeftText.setVisibility(View.GONE);
                 ivLeftIcon.setVisibility(View.VISIBLE);
@@ -272,6 +278,10 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
                     }
                 });
             } else {
+                ivLeftIcon.setVisibility(View.GONE);
+            }
+        } else {
+            if (iconId > CODE_NO_RES_ID) {
                 civRight.setVisibility(GONE);
                 tvRightText.setVisibility(View.GONE);
                 ivRightIcon.setVisibility(View.VISIBLE);
@@ -284,6 +294,8 @@ public abstract class AbsNormalTitleBar extends AbsTitleBar {
                         }
                     }
                 });
+            } else {
+                ivRightIcon.setVisibility(View.GONE);
             }
         }
     }
