@@ -23,6 +23,8 @@
         <activity android:name=".TitleActivity"/>
         <activity android:name=".RvActivity">
         </activity>
+        <activity android:name=".ETVActivity">
+        </activity>
     </application>
 
 </manifest>

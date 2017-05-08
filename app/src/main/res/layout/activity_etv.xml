@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yhy.widget.tv.ExpandTextView
+        android:id="@+id/etv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="vertical"
+        app:etv_anim_alpha_start="0.2"
+        app:etv_anim_duration="800"
+        app:etv_max_collapsed_lines="4">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:textColor="#666666"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:padding="16dp"
+            android:text="窝草"/>
+    </com.yhy.widget.tv.ExpandTextView>
+
+</LinearLayout>
