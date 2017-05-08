@@ -1,4 +1,4 @@
-package com.yhy.widget.iv;
+package com.yhy.widget.iv.abs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -130,10 +130,6 @@ public abstract class AbsImageView extends AppCompatImageView {
         }
 
         drawView(canvas);
-
-        if (mBorderWidth > 0) {
-            canvas.drawCircle(mBorderRect.centerX(), mBorderRect.centerY(), mBorderRadius, mBorderPaint);
-        }
     }
 
     @Override
@@ -366,7 +362,7 @@ public abstract class AbsImageView extends AppCompatImageView {
         invalidate();
     }
 
-    private RectF calculateBounds() {
+    protected RectF calculateBounds() {
         int availableWidth = getWidth() - getPaddingLeft() - getPaddingRight();
         int availableHeight = getHeight() - getPaddingTop() - getPaddingBottom();
 

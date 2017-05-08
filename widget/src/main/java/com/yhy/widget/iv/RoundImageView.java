@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
+import com.yhy.widget.iv.abs.AbsImageView;
 
 /**
  * Created by HongYi Yan on 2017/5/8 17:35.
@@ -34,10 +35,15 @@ public class RoundImageView extends AbsImageView {
 
     @Override
     protected void drawView(Canvas canvas) {
-        RectF rectF = new RectF(mDrawableRect.left, mDrawableRect.top, mDrawableRect.right, mDrawableRect.bottom);
+        mBorderRadius = mRadius;
+
         if (mFillColor != Color.TRANSPARENT) {
-            canvas.drawRoundRect(rectF, mRadius, mRadius, mFillPaint);
+            canvas.drawRoundRect(mDrawableRect, mRadius, mRadius, mFillPaint);
         }
-        canvas.drawRoundRect(rectF, mRadius, mRadius, mFillPaint);
+        canvas.drawRoundRect(mDrawableRect, mRadius, mRadius, mBitmapPaint);
+
+        if (mBorderWidth > 0) {
+            canvas.drawRoundRect(mBorderRect, mBorderRadius, mBorderRadius, mBorderPaint);
+        }
     }
 }

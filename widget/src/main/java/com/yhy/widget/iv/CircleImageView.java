@@ -3,8 +3,9 @@ package com.yhy.widget.iv;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.RectF;
 import android.util.AttributeSet;
+
+import com.yhy.widget.iv.abs.AbsImageView;
 
 /**
  * Created by HongYi Yan on 2017/5/8 17:34.
@@ -29,5 +30,9 @@ public class CircleImageView extends AbsImageView {
             canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mFillPaint);
         }
         canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
+
+        if (mBorderWidth > 0) {
+            canvas.drawCircle(mBorderRect.centerX(), mBorderRect.centerY(), mBorderRadius, mBorderPaint);
+        }
     }
 }
