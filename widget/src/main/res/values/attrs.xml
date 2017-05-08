@@ -51,4 +51,12 @@
         <!--透明度动画开始时的值-->
         <attr name="etv_anim_alpha_start" format="float"/>
     </declare-styleable>
+
+    <declare-styleable name="AbsImageViewAttrs">
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_fill_color" format="color"/>
+        <attr name="riv_radius" format="dimension"/>
+    </declare-styleable>
 </resources>

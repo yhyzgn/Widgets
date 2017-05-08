@@ -7,13 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.yhy.widget.iv.CircleImageView;
 import com.yhy.widget.titb.TextTitleBar;
 import com.yhy.widget.titb.abs.AbsNormalTitleBar;
 import com.yhy.widgetdemo.utils.ImgUtils;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by HongYi Yan on 2017/4/6 23:54.

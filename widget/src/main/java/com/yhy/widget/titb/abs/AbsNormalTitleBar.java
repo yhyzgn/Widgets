@@ -13,9 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhy.widget.R;
+import com.yhy.widget.iv.CircleImageView;
 import com.yhy.widget.utils.DensityUtils;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by HongYi Yan on 2017/4/6 23:06.

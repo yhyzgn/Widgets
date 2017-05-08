@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".ETVActivity">
         </activity>
+        <activity android:name=".RIVActivity">
+        </activity>
     </application>
 
 </manifest>
