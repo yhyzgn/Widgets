@@ -164,14 +164,6 @@ public abstract class AbsImageView extends AppCompatImageView {
         invalidate();
     }
 
-    /**
-     * @deprecated Use {@link #setBorderColor(int)} instead
-     */
-    @Deprecated
-    public void setBorderColorResource(@ColorRes int borderColorRes) {
-        setBorderColor(getContext().getResources().getColor(borderColorRes));
-    }
-
     @Deprecated
     public int getFillColor() {
         return mFillColor;

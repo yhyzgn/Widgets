@@ -212,7 +212,7 @@ public class ExpandTextView extends LinearLayout implements View.OnClickListener
     /**
      * 设置状态监听事件
      *
-     * @param listener
+     * @param listener 监听事件
      */
     public void setOnExpandStateChangeListener(@Nullable OnExpandStateChangeListener listener) {
         mListener = listener;
