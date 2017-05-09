@@ -35,13 +35,35 @@ public class RoundImageView extends AbsImageView {
 
     @Override
     protected void drawView(Canvas canvas) {
+        //设置圆角半径
         mBorderRadius = mRadius;
 
+        //设置边框绘制区域
+        /*
+        left/top需要加上边框宽度
+        right/bottom需要减去边框宽度
+        这样才能保证边框能完全显示
+         */
+        mBorderRect.left += mBorderWidth;
+        mBorderRect.top += mBorderWidth;
+        mBorderRect.right -= mBorderWidth;
+        mBorderRect.bottom -= mBorderWidth;
+
+        //将绘制图片区域设置为和边框区域一致
+        mDrawableRect.set(mBorderRect);
+
+        //如果不允许边框覆盖，就将图片与边框隔开，间隔宽度为边框宽度
+        if (!mBorderOverlay && mBorderWidth > 0) {
+            mDrawableRect.inset(mBorderWidth, mBorderWidth);
+        }
+
+        //绘制图片
         if (mFillColor != Color.TRANSPARENT) {
             canvas.drawRoundRect(mDrawableRect, mRadius, mRadius, mFillPaint);
         }
         canvas.drawRoundRect(mDrawableRect, mRadius, mRadius, mBitmapPaint);
 
+        //绘制边框
         if (mBorderWidth > 0) {
             canvas.drawRoundRect(mBorderRect, mBorderRadius, mBorderRadius, mBorderPaint);
         }
