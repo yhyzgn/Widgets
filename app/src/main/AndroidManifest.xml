@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".RIVActivity">
         </activity>
+        <activity android:name=".LoadingActivity">
+        </activity>
     </application>
 
 </manifest>

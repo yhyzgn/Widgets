@@ -16,6 +16,7 @@ import java.util.List;
 public class RvActivity extends AppCompatActivity {
     private final List<String> TEST_STR_LIST = new ArrayList<>();
     private RecyclerView rvContent;
+    private RvDivider mDivider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,31 +33,37 @@ public class RvActivity extends AppCompatActivity {
         TEST_STR_LIST.add("Test 6");
         TEST_STR_LIST.add("Test 7");
 
+        mDivider = new RvDivider.Builder(this)
+                .widthDp(10)
+                .color(getResources().getColor(R.color.colorPrimary))
+                .type(RvDivider.DividerType.TYPE_WITH_START)
+                .build();
+
 //        horizontal();
 
-        vertical();
+//        vertical();
 
-//        gridview();
+        gridview();
     }
 
     private void gridview() {
         rvContent.setLayoutManager(new GridLayoutManager(this, 3));
 
         rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
-        rvContent.addItemDecoration(new RvDivider(this, getResources().getColor(R.color.colorPrimary)));
+        rvContent.addItemDecoration(mDivider);
     }
 
     private void vertical() {
         rvContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
-        rvContent.addItemDecoration(new RvDivider(this));
+        rvContent.addItemDecoration(mDivider);
     }
 
     private void horizontal() {
         rvContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
-        rvContent.addItemDecoration(new RvDivider(this));
+        rvContent.addItemDecoration(mDivider);
     }
 }

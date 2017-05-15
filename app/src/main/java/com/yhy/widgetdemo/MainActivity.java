@@ -92,11 +92,13 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_NAME_LIST.add("RvDivider");
         WIDGET_NAME_LIST.add("ExpandTextView");
         WIDGET_NAME_LIST.add("RoundCircleImageView");
+        WIDGET_NAME_LIST.add("LoadingView");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
         WIDGET_CLASS_LIST.add(RvActivity.class);
         WIDGET_CLASS_LIST.add(ETVActivity.class);
         WIDGET_CLASS_LIST.add(RIVActivity.class);
+        WIDGET_CLASS_LIST.add(LoadingActivity.class);
     }
 }

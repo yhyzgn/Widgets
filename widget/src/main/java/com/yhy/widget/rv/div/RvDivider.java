@@ -16,7 +16,7 @@ import com.yhy.widget.utils.DensityUtils;
  */
 public class RvDivider extends RecyclerView.ItemDecoration {
     //绘制方式，默认 只绘制内容区域，边界不绘制
-    private static final int DIVIDER_TYPE = DividerType.TYPE_CENTER;
+    private static final DividerType DIVIDER_TYPE = DividerType.TYPE_WITHOUT_START_END;
     //线条宽度，默认是 0.5dp
     private static final float DIVIDER_WIDTH = 0.5f;
     //线条颜色，默认是 #dddddd
@@ -24,7 +24,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     //上下文对象
     private Context mCtx;
     //绘制方式
-    private int mType;
+    private DividerType mType;
     //线条宽度
     private int mWidthPx;
     //线条颜色
@@ -33,52 +33,15 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     private Paint mPaint;
 
     /**
-     * 构造函数
+     * 构造方法
      *
-     * @param ctx 上下文对象
+     * @param builder 构造器
      */
-    public RvDivider(Context ctx) {
-        this(ctx, DIVIDER_COLOR, DIVIDER_WIDTH, DIVIDER_TYPE);
-    }
-
-    /**
-     * 构造函数
-     *
-     * @param ctx   上下文对象
-     * @param color 线条颜色
-     */
-    public RvDivider(Context ctx, int color) {
-        this(ctx, color, DIVIDER_WIDTH, DIVIDER_TYPE);
-    }
-
-    /**
-     * 构造函数
-     *
-     * @param ctx     上下文对象
-     * @param color   线条颜色
-     * @param widthDp 线条宽度
-     */
-    public RvDivider(Context ctx, int color, float widthDp) {
-        this(ctx, color, widthDp, DIVIDER_TYPE);
-    }
-
-    /**
-     * 构造函数
-     *
-     * @param ctx     上下文对象
-     * @param color   线条颜色
-     * @param widthDp 线条宽度
-     * @param type    绘制类型
-     */
-    public RvDivider(Context ctx, int color, float widthDp, int type) {
-        mCtx = ctx;
-        mColor = color;
-        mWidthPx = DensityUtils.dp2px(mCtx, widthDp);
-        //判断type参数合法性
-        if (type != DividerType.TYPE_CENTER && type != DividerType.TYPE_FILL) {
-            throw new IllegalArgumentException("The argument ype must be one of the DividerType's member.");
-        }
-        mType = type;
+    public RvDivider(Builder builder) {
+        mCtx = builder.mCtx;
+        mColor = builder.mColor;
+        mWidthPx = DensityUtils.dp2px(mCtx, builder.mWidthDp);
+        mType = builder.mType;
 
         //创建画笔
         mPaint = new Paint();
@@ -93,7 +56,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
      *
      * @return 线条绘制类型
      */
-    public int getType() {
+    public DividerType getType() {
         return mType;
     }
 
@@ -103,7 +66,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
      * @param type 绘制类型
      * @return 当前对象
      */
-    public RvDivider setType(int type) {
+    public RvDivider setType(DividerType type) {
         this.mType = type;
         return this;
     }
@@ -193,14 +156,14 @@ public class RvDivider extends RecyclerView.ItemDecoration {
 
             //第一行，绘制上边线
             if (i < spanCount) {
-                top = child.getTop() + params.topMargin - mWidthPx;
+                top = child.getTop() - params.topMargin - mWidthPx;
                 bottom = top + mWidthPx;
 
                 c.drawRect(left, top, right, bottom, mPaint);
             }
 
             //绘制每一行的下边线
-            top = child.getBottom() + params.topMargin;
+            top = child.getBottom() + params.bottomMargin;
             bottom = top + mWidthPx;
             c.drawRect(left, top, right, bottom, mPaint);
             //水平分割线绘制结束
@@ -209,7 +172,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
             //因为此方法是绘制每个child的边界线，所以最终结果是每个child的角落上都是空白，此时就需要用水平分割线或者垂直分割线来填充。
             //这里就选垂直防线分割线来填充。
             //具体方法是将每个child的top值减小mWidth，并且将bottom值增大mWidth，否则最后一行还是会出现空白角落
-            top = child.getTop() + params.topMargin - mWidthPx;
+            top = child.getTop() - params.topMargin - mWidthPx;
             bottom = child.getBottom() + params.bottomMargin + mWidthPx;
 
             //第一列，绘制左边线
@@ -243,8 +206,8 @@ public class RvDivider extends RecyclerView.ItemDecoration {
 
             if (i == 0) {
                 //如果是第一个元素，就绘制左边线
-                //child.getLeft() + params.leftMargin 得到的是child的x起点坐标，需要在该x坐标之前绘制宽度为mWidth的线，所以需要减mWidth
-                left = child.getLeft() + params.leftMargin - mWidthPx;
+                //child.getLeft() - params.leftMargin 得到的是child的x起点坐标，需要在该x坐标之前绘制宽度为mWidth的线，所以需要减mWidth
+                left = child.getLeft() - params.leftMargin - mWidthPx;
                 right = left + mWidthPx;
                 //绘制左边线
                 c.drawRect(left, top, right, bottom, mPaint);
@@ -273,8 +236,8 @@ public class RvDivider extends RecyclerView.ItemDecoration {
 
             if (i == 0) {
                 //如果是第一个元素，就绘制上边线
-                //child.getTop() + params.topMargin 得到的是child的y起点坐标，需要在该y坐标之前绘制宽度为mWidth的线，所以需要减mWidth
-                top = child.getTop() + params.topMargin - mWidthPx;
+                //child.getTop() - params.topMargin 得到的是child的y起点坐标，需要在该y坐标之前绘制宽度为mWidth的线，所以需要减mWidth
+                top = child.getTop() - params.topMargin - mWidthPx;
                 bottom = top + mWidthPx;
                 //绘制上边线
                 c.drawRect(left, top, right, bottom, mPaint);
@@ -303,7 +266,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
             LinearLayoutManager llm = (LinearLayoutManager) lm;
             int orientation = llm.getOrientation();
 
-            if (mType == DividerType.TYPE_CENTER) {
+            if (mType == DividerType.TYPE_WITHOUT_START_END) {
                 //如果只绘制中间区域，则不绘制开始和结束的边界线
                 if (itemPosition < childCount - 1) {
                     //不是最后一个，就绘制下边线或者右边线
@@ -315,20 +278,28 @@ public class RvDivider extends RecyclerView.ItemDecoration {
                         outRect.set(0, 0, mWidthPx, 0);
                     }
                 }
-            } else if (mType == DividerType.TYPE_FILL) {
+            } else {
                 //不仅绘制内容区域，连边界一起绘制
                 if (orientation == LinearLayoutManager.VERTICAL) {
-                    //竖直排列，第一个绘制上边线和下边线
-                    if (itemPosition == 0) {
+                    //如果是第一个条目，并且绘制方式为包含开始或者包含头尾时，绘制上边线
+                    if (itemPosition == 0 && (mType == DividerType.TYPE_WITH_START || mType == DividerType.TYPE_WITH_START_END)) {
                         outRect.top = mWidthPx;
                     }
-                    outRect.bottom = mWidthPx;
+
+                    //如果是中间条目或者绘制绘制方式为包含结尾或者头尾时，绘制下边线
+                    if (itemPosition < childCount - 1 || mType == DividerType.TYPE_WITH_END || mType == DividerType.TYPE_WITH_START_END) {
+                        outRect.bottom = mWidthPx;
+                    }
                 } else if (orientation == LinearLayoutManager.HORIZONTAL) {
-                    //水平排列，第一个绘制左边线和右边线
-                    if (itemPosition == 0) {
+                    //如果是第一个条目，并且绘制方式为包含开始或者包含头尾时，绘制左边线
+                    if (itemPosition == 0 && (mType == DividerType.TYPE_WITH_START || mType == DividerType.TYPE_WITH_START_END)) {
                         outRect.left = mWidthPx;
                     }
-                    outRect.right = mWidthPx;
+
+                    //如果是中间条目或者绘制绘制方式为包含结尾或者头尾时，绘制右边线
+                    if (itemPosition < childCount - 1 || mType == DividerType.TYPE_WITH_END || mType == DividerType.TYPE_WITH_START_END) {
+                        outRect.right = mWidthPx;
+                    }
                 }
             }
         } else if (lm instanceof GridLayoutManager) {
@@ -341,7 +312,11 @@ public class RvDivider extends RecyclerView.ItemDecoration {
             //行数
             int rowCount = childMod == 0 ? childCount / spanCount : childCount / spanCount + 1;
 
-            if (mType == DividerType.TYPE_FILL) {
+            //如果绘制方式为包含边界线，就绘制四周边界线，否则就不会只任何边界线
+            //GridView模式只有两种形式，要么有四周边界线，要么就没有一条边界线，不分开始或者结尾
+            //TYPE_WITH_START 和 TYPE_WITH_END 在此使用时无效
+            if (mType == DividerType.TYPE_WITH_START_END) {
+                //需要绘制边界线
                 if (itemPosition < spanCount) {
                     //第一行
                     outRect.top = mWidthPx;
@@ -355,9 +330,8 @@ public class RvDivider extends RecyclerView.ItemDecoration {
                 //设置右边线和下边线
                 outRect.right = mWidthPx;
                 outRect.bottom = mWidthPx;
-            }
-
-            if (mType == DividerType.TYPE_CENTER) {
+            } else {
+                //不会只任何边界线
                 //左边线和上边线直接不设置，默认为0
                 //先设置右边线和下边线，再在不同的位置改变此设置
                 outRect.right = mWidthPx;
@@ -400,12 +374,81 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     }
 
     /**
+     * 分割线构造器
+     */
+    public static class Builder {
+        //上下文对象
+        private Context mCtx;
+        //绘制方式
+        private DividerType mType = DIVIDER_TYPE;
+        //线条宽度
+        private float mWidthDp = DIVIDER_WIDTH;
+        //线条颜色
+        private int mColor = DIVIDER_COLOR;
+
+        /**
+         * 创建构造器
+         *
+         * @param ctx 上下文
+         */
+        public Builder(Context ctx) {
+            mCtx = ctx;
+        }
+
+        /**
+         * 设置绘制方式
+         *
+         * @param type 绘制方式
+         * @return 当前构造器
+         */
+        public Builder type(DividerType type) {
+            mType = type;
+            return this;
+        }
+
+        /**
+         * 设置线条宽度
+         *
+         * @param widthDp 线条宽度
+         * @return 当前构造器
+         */
+        public Builder widthDp(float widthDp) {
+            mWidthDp = widthDp;
+            return this;
+        }
+
+        /**
+         * 设置线条颜色
+         *
+         * @param color 线条颜色
+         * @return 当前构造器
+         */
+        public Builder color(int color) {
+            mColor = color;
+            return this;
+        }
+
+        /**
+         * 创建分割线
+         *
+         * @return 分割线
+         */
+        public RvDivider build() {
+            return new RvDivider(this);
+        }
+    }
+
+    /**
      * 线条绘制类型
      */
-    public interface DividerType {
-        //只绘制中间部分，边界不绘制
-        int TYPE_CENTER = 2000;
-        //包括边界线绘制
-        int TYPE_FILL = 2001;
+    public enum DividerType {
+        //不绘制任何边界线
+        TYPE_WITHOUT_START_END,
+        //绘制头尾边界线
+        TYPE_WITH_START_END,
+        //绘制开始边线
+        TYPE_WITH_START,
+        //绘制结尾边线
+        TYPE_WITH_END
     }
 }
