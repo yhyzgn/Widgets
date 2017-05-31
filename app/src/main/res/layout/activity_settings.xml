@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ccc"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_name="设置1"
+        app:siv_text="值1"/>
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0.2dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_icon="@mipmap/ic_notice"
+        app:siv_name="设置2"
+        app:siv_show_icon="true"
+        app:siv_text="值2"/>
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0.2dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_icon="@mipmap/ic_settings"
+        app:siv_name="设置3"
+        app:siv_show_arrow="true"
+        app:siv_show_icon="true"/>
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0.2dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_icon="@mipmap/ic_notice"
+        app:siv_name="设置4"
+        app:siv_name_color="@color/colorAccent"
+        app:siv_name_size="16sp"
+        app:siv_show_arrow="true"
+        app:siv_show_icon="true"
+        app:siv_text="值4"/>
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0.2dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_icon="@mipmap/ic_settings"
+        app:siv_name="设置5"
+        app:siv_show_arrow="true"
+        app:siv_show_icon="true"
+        app:siv_text="值5"
+        app:siv_text_color="@color/colorAccent"
+        app:siv_text_size="16sp"/>
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0.2dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_icon="@mipmap/ic_notice"
+        app:siv_name="设置6"
+        app:siv_show_switch="true"/>
+
+    <com.yhy.widget.settings.SettingsItemView
+        android:id="@+id/siv_switch"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="0.2dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_checked_switch="true"
+        app:siv_icon="@mipmap/ic_settings"
+        app:siv_name="设置7"
+        app:siv_show_icon="true"
+        app:siv_show_switch="true"/>
+
+</LinearLayout>

@@ -37,7 +37,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
      *
      * @param builder 构造器
      */
-    public RvDivider(Builder builder) {
+    private RvDivider(Builder builder) {
         mCtx = builder.mCtx;
         mColor = builder.mColor;
         mWidthPx = DensityUtils.dp2px(mCtx, builder.mWidthDp);

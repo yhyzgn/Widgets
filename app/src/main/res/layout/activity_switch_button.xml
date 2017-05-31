@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#fff"
+              android:orientation="vertical"
+              android:padding="20dp">
+
+    <com.yhy.widget.sb.SwitchButton
+        android:id="@+id/switch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <com.yhy.widget.sb.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_checked="true"/>
+
+    <com.yhy.widget.sb.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_checked="true"
+        app:sb_show_indicator="false"/>
+
+    <com.yhy.widget.sb.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_checked="true"
+        app:sb_checked_color="#fdc951"/>
+
+    <com.yhy.widget.sb.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_background="#FFF"
+        app:sb_button_color="#db99c7"
+        app:sb_checked_color="#A36F95"
+        app:sb_checkline_color="#a5dc88"
+        app:sb_shadow_color="#A36F95"
+        app:sb_uncheckcircle_color="#A36F95"
+        />
+
+    <com.yhy.widget.sb.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_enable_effect="false"/>
+
+</LinearLayout>

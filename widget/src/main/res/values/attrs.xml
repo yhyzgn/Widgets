@@ -52,11 +52,17 @@
         <attr name="etv_anim_alpha_start" format="float"/>
     </declare-styleable>
 
+    <!--圆形ImageView属性-->
     <declare-styleable name="AbsImageViewAttrs">
+        <!--边框宽度-->
         <attr name="civ_border_width" format="dimension"/>
+        <!--边框颜色-->
         <attr name="civ_border_color" format="color"/>
+        <!--是否允许边框覆盖在图层上-->
         <attr name="civ_border_overlay" format="boolean"/>
+        <!--填充颜色-->
         <attr name="civ_fill_color" format="color"/>
+        <!--控件四周圆角半径-->
         <attr name="riv_radius" format="dimension"/>
     </declare-styleable>
 
@@ -64,5 +70,43 @@
     <declare-styleable name="LoadingViewAttrs">
         <!--加载控件颜色，默认：#FF4400-->
         <attr name="loading_color" format="color"/>
+    </declare-styleable>
+
+    <!--SwitchButton属性-->
+    <declare-styleable name="SwitchButtonAttrs">
+        <attr name="sb_shadow_radius" format="reference|dimension"/>
+        <attr name="sb_shadow_offset" format="reference|dimension"/>
+        <attr name="sb_shadow_color" format="reference|color"/>
+        <attr name="sb_uncheck_color" format="reference|color"/>
+        <attr name="sb_checked_color" format="reference|color"/>
+        <attr name="sb_border_width" format="reference|dimension"/>
+        <attr name="sb_checkline_color" format="reference|color"/>
+        <attr name="sb_checkline_width" format="reference|dimension"/>
+        <attr name="sb_uncheckcircle_color" format="reference|color"/>
+        <attr name="sb_uncheckcircle_width" format="reference|dimension"/>
+        <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>
+        <attr name="sb_checked" format="reference|boolean"/>
+        <attr name="sb_shadow_effect" format="reference|boolean"/>
+        <attr name="sb_effect_duration" format="reference|integer"/>
+        <attr name="sb_button_color" format="reference|color"/>
+        <attr name="sb_show_indicator" format="reference|boolean"/>
+        <attr name="sb_background" format="reference|color"/>
+        <attr name="sb_enable_effect" format="reference|boolean"/>
+    </declare-styleable>
+
+    <!--SettingsItemView属性-->
+    <declare-styleable name="SettingsItemViewAttrs">
+        <attr name="siv_icon" format="reference"/>
+        <attr name="siv_show_icon" format="boolean"/>
+        <attr name="siv_arrow" format="reference"/>
+        <attr name="siv_show_arrow" format="boolean"/>
+        <attr name="siv_name" format="reference|string"/>
+        <attr name="siv_name_size" format="reference|dimension"/>
+        <attr name="siv_name_color" format="reference|color"/>
+        <attr name="siv_text" format="reference|string"/>
+        <attr name="siv_text_size" format="reference|dimension"/>
+        <attr name="siv_text_color" format="reference|color"/>
+        <attr name="siv_checked_switch" format="boolean"/>
+        <attr name="siv_show_switch" format="boolean"/>
     </declare-styleable>
 </resources>

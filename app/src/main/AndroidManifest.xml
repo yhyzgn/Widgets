@@ -29,6 +29,10 @@
         </activity>
         <activity android:name=".LoadingActivity">
         </activity>
+        <activity android:name=".SwitchButtonActivity">
+        </activity>
+        <activity android:name=".SettingsActivity">
+        </activity>
     </application>
 
 </manifest>
