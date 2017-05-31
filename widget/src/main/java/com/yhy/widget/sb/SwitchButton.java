@@ -617,6 +617,15 @@ public class SwitchButton extends View implements Checkable {
 
     /**
      * 绘制选中状态指示器
+     *
+     * @param canvas    画布
+     * @param color     颜色
+     * @param lineWidth 线条宽度
+     * @param sx        起始点x坐标
+     * @param sy        起始点y坐标
+     * @param ex        结束点x坐标
+     * @param ey        结束点y坐标
+     * @param paint     画笔
      */
     protected void drawCheckedIndicator(Canvas canvas,
                                         int color,
@@ -633,6 +642,8 @@ public class SwitchButton extends View implements Checkable {
 
     /**
      * 绘制关闭状态指示器
+     *
+     * @param canvas 画布
      */
     private void drawUncheckIndicator(Canvas canvas) {
         drawUncheckIndicator(canvas,
@@ -645,6 +656,14 @@ public class SwitchButton extends View implements Checkable {
 
     /**
      * 绘制关闭状态指示器
+     *
+     * @param canvas    画布
+     * @param color     颜色
+     * @param lineWidth 线条宽度
+     * @param centerX   圆心x坐标
+     * @param centerY   运行y坐标
+     * @param radius    半径
+     * @param paint     画笔
      */
     protected void drawUncheckIndicator(Canvas canvas,
                                         int color,
