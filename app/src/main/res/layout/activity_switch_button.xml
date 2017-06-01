@@ -16,21 +16,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:sb_checked="true"/>
+        app:sb_on="true"/>
 
     <com.yhy.widget.sb.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:sb_checked="true"
+        app:sb_on="true"
         app:sb_show_indicator="false"/>
 
     <com.yhy.widget.sb.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:sb_checked="true"
-        app:sb_checked_color="#fdc951"/>
+        app:sb_on="true"
+        app:sb_on_color="#fdc951"/>
 
     <com.yhy.widget.sb.SwitchButton
         android:layout_width="wrap_content"
@@ -38,11 +38,10 @@
         android:layout_marginTop="10dp"
         app:sb_background="#FFF"
         app:sb_button_color="#db99c7"
-        app:sb_checked_color="#A36F95"
-        app:sb_checkline_color="#a5dc88"
-        app:sb_shadow_color="#A36F95"
-        app:sb_uncheckcircle_color="#A36F95"
-        />
+        app:sb_off_circle_color="#A36F95"
+        app:sb_on_color="#A36F95"
+        app:sb_on_line_color="#a5dc88"
+        app:sb_shadow_color="#A36F95"/>
 
     <com.yhy.widget.sb.SwitchButton
         android:layout_width="wrap_content"

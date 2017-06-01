@@ -15,17 +15,17 @@ public class SwitchButtonActivity extends AppCompatActivity {
 
         SwitchButton switchButton = (SwitchButton) findViewById(R.id.switch_button);
 
-        switchButton.setChecked(true);
-        switchButton.isChecked();
+        switchButton.onOrOff(true);
+        switchButton.isOn();
         switchButton.toggle();     //switch state
         switchButton.toggle(false);//switch without animation
         switchButton.setShadowEffect(true);//disable shadow effect
         switchButton.setEnabled(true);//disable button
         switchButton.setEnableEffect(false);//disable the switch animation
-        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        switchButton.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
             @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                Toast.makeText(SwitchButtonActivity.this, "isChecked = " + isChecked, Toast.LENGTH_SHORT).show();
+            public void onCheckedChanged(SwitchButton view, boolean isOn) {
+                Toast.makeText(SwitchButtonActivity.this, "isOn = " + isOn, Toast.LENGTH_SHORT).show();
             }
         });
     }

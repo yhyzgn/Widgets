@@ -12,7 +12,7 @@ import android.view.View;
 import com.yhy.widget.utils.DensityUtils;
 
 /**
- * Created by HongYi Yan on 2017/4/12 12:49.
+ * Created by HongYi Yan onOrOff 2017/4/12 12:49.
  */
 public class RvDivider extends RecyclerView.ItemDecoration {
     //绘制方式，默认 只绘制内容区域，边界不绘制

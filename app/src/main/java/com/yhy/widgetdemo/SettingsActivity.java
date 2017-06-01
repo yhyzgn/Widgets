@@ -17,8 +17,8 @@ public class SettingsActivity extends AppCompatActivity {
         SettingsItemView sivSwitch = (SettingsItemView) findViewById(R.id.siv_switch);
         sivSwitch.setOnSwitchStateChangeListener(new SettingsItemView.OnSwitchStateChangeListener() {
             @Override
-            public void onStateChanged(SettingsItemView siv, SwitchButton sb, boolean isChecked) {
-                Toast.makeText(SettingsActivity.this, siv.getName() + " :: isChecked = " + isChecked, Toast.LENGTH_SHORT).show();
+            public void onStateChanged(SettingsItemView siv, SwitchButton sb, boolean isOn) {
+                Toast.makeText(SettingsActivity.this, siv.getName() + " :: isOn = " + isOn, Toast.LENGTH_SHORT).show();
             }
         });
     }

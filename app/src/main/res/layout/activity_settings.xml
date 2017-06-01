@@ -95,10 +95,11 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         app:siv_arrow="@mipmap/ic_arrow_right"
-        app:siv_checked_switch="true"
         app:siv_icon="@mipmap/ic_settings"
         app:siv_name="设置7"
         app:siv_show_icon="true"
-        app:siv_show_switch="true"/>
+        app:siv_show_switch="true"
+        app:siv_switch_on="true"
+        app:siv_switch_width="56dp"/>
 
 </LinearLayout>

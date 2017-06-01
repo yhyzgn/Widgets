@@ -11,7 +11,7 @@ import com.yhy.widget.R;
 import com.yhy.widget.iv.abs.AbsImageView;
 
 /**
- * Created by HongYi Yan on 2017/5/8 17:35.
+ * Created by HongYi Yan onOrOff 2017/5/8 17:35.
  */
 public class RoundImageView extends AbsImageView {
 

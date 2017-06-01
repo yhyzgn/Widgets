@@ -22,9 +22,15 @@ import com.yhy.widget.sb.SwitchButton;
 import com.yhy.widget.utils.DensityUtils;
 
 /**
- * Created by HongYi Yan on 2017/5/31 13:47.
+ * Created by HongYi Yan onOrOff 2017/5/31 13:47.
  */
 public class SettingsItemView extends LinearLayout {
+    //默认字体大小，14sp
+    private static final int DEF_FONT_SIZE = 14;
+    //默认开关控件宽度，48dp
+    private static final int DEF_SWITCH_WIDTH = 48;
+    //默认开关控件高度，28dp
+    private static final int DEF_SWITCH_HEIGHT = 28;
 
     private ImageView ivIcon;
     private ImageView ivArrow;
@@ -39,9 +45,11 @@ public class SettingsItemView extends LinearLayout {
     private String mText;
     private float mNameSize;
     private float mTextSize;
+    private int mSwitchWidth;
+    private int mSwitchHeight;
     private int mNameColor;
     private int mTextColor;
-    private boolean mCheckedSwitch;
+    private boolean mSwitchOn;
     private boolean mShowSwitch;
     private OnSwitchStateChangeListener mSwitchListener;
 
@@ -75,17 +83,24 @@ public class SettingsItemView extends LinearLayout {
         mName = ta.getString(R.styleable.SettingsItemViewAttrs_siv_name);
         mText = ta.getString(R.styleable.SettingsItemViewAttrs_siv_text);
         //获取到字体大小，单位是px
-        mNameSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_name_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics()));
-        mTextSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_text_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics()));
+        mNameSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_name_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
+        mTextSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_text_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
         mNameColor = ta.getColor(R.styleable.SettingsItemViewAttrs_siv_name_color, Color.BLACK);
         mTextColor = ta.getColor(R.styleable.SettingsItemViewAttrs_siv_text_color, Color.BLACK);
-        mCheckedSwitch = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_checked_switch, false);
+        mSwitchOn = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_switch_on, false);
+        //获取开关控件宽高
+        mSwitchWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_switch_width, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_WIDTH, getResources().getDisplayMetrics()));
+        mSwitchHeight = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_switch_height, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_HEIGHT, getResources().getDisplayMetrics()));
         mShowSwitch = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_show_switch, false);
         ta.recycle();
 
         //将字体大小单位转换为sp
         mNameSize = DensityUtils.px2sp(getContext(), mNameSize);
         mTextSize = DensityUtils.px2sp(getContext(), mTextSize);
+
+        //开关控件宽高
+        sbSwitch.getLayoutParams().width = mSwitchWidth;
+        sbSwitch.getLayoutParams().height = mSwitchHeight;
 
         setIcon(mIcon)
                 .showIcon(mShowIcon)
@@ -97,10 +112,10 @@ public class SettingsItemView extends LinearLayout {
                 .setText(mText)
                 .setTextColor(mTextColor)
                 .setTextSize(mTextSize)
-                .checkSwitch(mCheckedSwitch)
+                .onSwitch(mSwitchOn)
                 .showSwitch(mShowSwitch);
 
-        sbSwitch.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        sbSwitch.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (null != mSwitchListener) {
@@ -202,9 +217,9 @@ public class SettingsItemView extends LinearLayout {
         return this;
     }
 
-    public SettingsItemView checkSwitch(boolean checked) {
-        mCheckedSwitch = checked;
-        sbSwitch.setChecked(mCheckedSwitch);
+    public SettingsItemView onSwitch(boolean checked) {
+        mSwitchOn = checked;
+        sbSwitch.onOrOff(mSwitchOn);
         return this;
     }
 
@@ -220,6 +235,6 @@ public class SettingsItemView extends LinearLayout {
     }
 
     public interface OnSwitchStateChangeListener {
-        void onStateChanged(SettingsItemView siv, SwitchButton sb, boolean isChecked);
+        void onStateChanged(SettingsItemView siv, SwitchButton sb, boolean isOn);
     }
 }

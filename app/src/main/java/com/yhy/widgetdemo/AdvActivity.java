@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HongYi Yan on 2017/4/6 20:24.
+ * Created by HongYi Yan onOrOff 2017/4/6 20:24.
  */
 public class AdvActivity extends AppCompatActivity {
 
