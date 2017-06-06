@@ -11,8 +11,10 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,13 +38,18 @@ public class SettingsItemView extends LinearLayout {
     private ImageView ivArrow;
     private TextView tvName;
     private TextView tvText;
+    private EditText etText;
     private SwitchButton sbSwitch;
     private Drawable mIcon;
     private Drawable mArrow;
     private boolean mShowIcon;
     private boolean mShowArrow;
     private String mName;
+    private int mNameWidth;
+    private int mNameGravity;
     private String mText;
+    private int mTextGravity;
+    private String mHint;
     private float mNameSize;
     private float mTextSize;
     private int mSwitchWidth;
@@ -51,6 +58,7 @@ public class SettingsItemView extends LinearLayout {
     private int mTextColor;
     private boolean mSwitchOn;
     private boolean mShowSwitch;
+    private boolean mEditable;
     private OnSwitchStateChangeListener mSwitchListener;
 
     public SettingsItemView(Context context) {
@@ -73,6 +81,7 @@ public class SettingsItemView extends LinearLayout {
         ivArrow = (ImageView) view.findViewById(R.id.iv_settings_arrow);
         tvName = (TextView) view.findViewById(R.id.tv_settings_name);
         tvText = (TextView) view.findViewById(R.id.tv_settings_text);
+        etText = (EditText) view.findViewById(R.id.et_settings_text);
         sbSwitch = (SwitchButton) view.findViewById(R.id.sb_switch);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemViewAttrs);
@@ -82,16 +91,29 @@ public class SettingsItemView extends LinearLayout {
         mShowArrow = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_show_arrow, false);
         mName = ta.getString(R.styleable.SettingsItemViewAttrs_siv_name);
         mText = ta.getString(R.styleable.SettingsItemViewAttrs_siv_text);
+        mHint = ta.getString(R.styleable.SettingsItemViewAttrs_siv_hint);
         //获取到字体大小，单位是px
         mNameSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_name_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
         mTextSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_text_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
         mNameColor = ta.getColor(R.styleable.SettingsItemViewAttrs_siv_name_color, Color.BLACK);
         mTextColor = ta.getColor(R.styleable.SettingsItemViewAttrs_siv_text_color, Color.BLACK);
+        mNameWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_name_width, 0);
         mSwitchOn = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_switch_on, false);
         //获取开关控件宽高
         mSwitchWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_switch_width, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_WIDTH, getResources().getDisplayMetrics()));
         mSwitchHeight = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_switch_height, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_HEIGHT, getResources().getDisplayMetrics()));
         mShowSwitch = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_show_switch, false);
+
+        mEditable = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_editable, false);
+
+        int nameGravity = ta.getInt(R.styleable.SettingsItemViewAttrs_siv_name_gravity, 0);
+        mNameGravity = nameGravity == 0 ? Gravity.LEFT : nameGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
+        mNameGravity |= Gravity.CENTER_VERTICAL;
+
+        int textGravity = ta.getInt(R.styleable.SettingsItemViewAttrs_siv_text_gravity, 2);
+        mTextGravity = textGravity == 0 ? Gravity.LEFT : textGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
+        mTextGravity |= Gravity.CENTER_VERTICAL;
+
         ta.recycle();
 
         //将字体大小单位转换为sp
@@ -107,13 +129,18 @@ public class SettingsItemView extends LinearLayout {
                 .setArrow(mArrow)
                 .showArrow(mShowArrow)
                 .setName(mName)
+                .setNameWidth(mNameWidth)
                 .setNameColor(mNameColor)
                 .setNameSize(mNameSize)
                 .setText(mText)
+                .setHint(mHint)
+                .setEditable(mEditable)
                 .setTextColor(mTextColor)
                 .setTextSize(mTextSize)
                 .onSwitch(mSwitchOn)
-                .showSwitch(mShowSwitch);
+                .showSwitch(mShowSwitch)
+                .setNameGravity(mNameGravity)
+                .setTextGravity(mTextGravity);
 
         sbSwitch.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
             @Override
@@ -178,11 +205,12 @@ public class SettingsItemView extends LinearLayout {
     public SettingsItemView setText(String text) {
         mText = text;
         tvText.setText(mText);
+        etText.setText(mText);
         return this;
     }
 
     public String getText() {
-        return tvText.getText().toString();
+        return tvText.getVisibility() == VISIBLE ? tvText.getText().toString() : etText.getText().toString();
     }
 
     public SettingsItemView setNameSize(float sp) {
@@ -194,6 +222,7 @@ public class SettingsItemView extends LinearLayout {
     public SettingsItemView setTextSize(float sp) {
         mTextSize = sp;
         tvText.setTextSize(mTextSize);
+        etText.setTextSize(mTextSize);
         return this;
     }
 
@@ -214,6 +243,42 @@ public class SettingsItemView extends LinearLayout {
     public SettingsItemView setTextColor(@ColorInt int color) {
         mTextColor = color;
         tvText.setTextColor(mTextColor);
+        etText.setTextColor(mTextColor);
+        return this;
+    }
+
+    public SettingsItemView setNameWidth(int width) {
+        if (width > 0) {
+            //指定了确定宽度，否则自适应
+            tvName.setWidth(width);
+        }
+        return this;
+    }
+
+    public SettingsItemView setNameGravity(int gravity) {
+        tvName.setGravity(gravity);
+        return this;
+    }
+
+    public SettingsItemView setTextGravity(int gravity) {
+        tvText.setGravity(gravity);
+        etText.setGravity(gravity);
+        return this;
+    }
+
+    public SettingsItemView setHint(String hint) {
+        etText.setHint(hint);
+        return this;
+    }
+
+    public SettingsItemView setEditable(boolean editable) {
+        if (editable) {
+            tvText.setVisibility(GONE);
+            etText.setVisibility(VISIBLE);
+        } else {
+            tvText.setVisibility(VISIBLE);
+            etText.setVisibility(GONE);
+        }
         return this;
     }
 

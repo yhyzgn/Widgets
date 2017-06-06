@@ -101,14 +101,27 @@
         <attr name="siv_arrow" format="reference"/>
         <attr name="siv_show_arrow" format="boolean"/>
         <attr name="siv_name" format="reference|string"/>
+        <attr name="siv_name_width" format="reference|dimension"/>
+        <attr name="siv_name_gravity" format="integer">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
         <attr name="siv_name_size" format="reference|dimension"/>
         <attr name="siv_name_color" format="reference|color"/>
         <attr name="siv_text" format="reference|string"/>
+        <attr name="siv_text_gravity" format="integer">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="siv_hint" format="reference|string"/>
         <attr name="siv_text_size" format="reference|dimension"/>
         <attr name="siv_text_color" format="reference|color"/>
         <attr name="siv_switch_on" format="boolean"/>
         <attr name="siv_switch_width" format="reference|dimension"/>
         <attr name="siv_switch_height" format="reference|dimension"/>
         <attr name="siv_show_switch" format="boolean"/>
+        <attr name="siv_editable" format="boolean"/>
     </declare-styleable>
 </resources>
