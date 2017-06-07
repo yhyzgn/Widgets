@@ -23,6 +23,8 @@ import com.yhy.widget.R;
 import com.yhy.widget.sb.SwitchButton;
 import com.yhy.widget.utils.DensityUtils;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by HongYi Yan onOrOff 2017/5/31 13:47.
  */
@@ -59,6 +61,7 @@ public class SettingsItemView extends LinearLayout {
     private boolean mSwitchOn;
     private boolean mShowSwitch;
     private boolean mEditable;
+    private int mCursorDrawableRes;
     private OnSwitchStateChangeListener mSwitchListener;
 
     public SettingsItemView(Context context) {
@@ -106,6 +109,8 @@ public class SettingsItemView extends LinearLayout {
 
         mEditable = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_editable, false);
 
+        mCursorDrawableRes = ta.getResourceId(R.styleable.SettingsItemViewAttrs_siv_cursor_drawable, -1);
+
         int nameGravity = ta.getInt(R.styleable.SettingsItemViewAttrs_siv_name_gravity, 0);
         mNameGravity = nameGravity == 0 ? Gravity.LEFT : nameGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
         mNameGravity |= Gravity.CENTER_VERTICAL;
@@ -140,7 +145,8 @@ public class SettingsItemView extends LinearLayout {
                 .onSwitch(mSwitchOn)
                 .showSwitch(mShowSwitch)
                 .setNameGravity(mNameGravity)
-                .setTextGravity(mTextGravity);
+                .setTextGravity(mTextGravity)
+                .setCursorDrawableRes(mCursorDrawableRes);
 
         sbSwitch.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
             @Override
@@ -267,7 +273,22 @@ public class SettingsItemView extends LinearLayout {
     }
 
     public SettingsItemView setHint(String hint) {
+        tvText.setHint(hint);
         etText.setHint(hint);
+        return this;
+    }
+
+    public SettingsItemView setCursorDrawableRes(@DrawableRes int resId) {
+        if (resId <= 0) {
+            return this;
+        }
+        //利用反射设置光标样式
+        try {
+            Field cursorDrawableResField = etText.getClass().getField("mCursorDrawableRes");
+            cursorDrawableResField.setAccessible(true);
+            cursorDrawableResField.set(etText, resId);
+        } catch (Exception e) {
+        }
         return this;
     }
 

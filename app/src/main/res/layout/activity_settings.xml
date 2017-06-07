@@ -143,4 +143,19 @@
         app:siv_show_icon="true"
         app:siv_text_gravity="left"/>
 
+    <com.yhy.widget.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_hint="不可编辑的Hint"
+        app:siv_icon="@mipmap/ic_notice"
+        app:siv_name="设置11"
+        app:siv_name_width="100dp"
+        app:siv_show_arrow="true"
+        app:siv_show_icon="true"
+        app:siv_text_gravity="left"/>
+
 </LinearLayout>

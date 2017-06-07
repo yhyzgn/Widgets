@@ -123,5 +123,6 @@
         <attr name="siv_switch_height" format="reference|dimension"/>
         <attr name="siv_show_switch" format="boolean"/>
         <attr name="siv_editable" format="boolean"/>
+        <attr name="siv_cursor_drawable" format="reference"/>
     </declare-styleable>
 </resources>
