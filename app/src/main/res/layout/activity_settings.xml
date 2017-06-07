@@ -134,6 +134,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_cursor_drawable="@drawable/cursor_bg_shape"
         app:siv_editable="true"
         app:siv_hint="请输入...哈哈"
         app:siv_icon="@mipmap/ic_notice"

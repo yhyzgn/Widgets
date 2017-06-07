@@ -283,11 +283,13 @@ public class SettingsItemView extends LinearLayout {
             return this;
         }
         //利用反射设置光标样式
+        //EditText继承于TextView，mCursorDrawableRes是TextView中的私有成员，获取私有成员需要getDeclaredField()而不是getField()
         try {
-            Field cursorDrawableResField = etText.getClass().getField("mCursorDrawableRes");
+            Field cursorDrawableResField = TextView.class.getDeclaredField("mCursorDrawableRes");
             cursorDrawableResField.setAccessible(true);
             cursorDrawableResField.set(etText, resId);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return this;
     }
