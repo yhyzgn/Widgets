@@ -46,6 +46,6 @@ publish {
     artifactId = 'view-core'
     publishVersion = '1.0.11'
     desc = 'Some custom view.'
-    website = 'https://github.com/SilentWolf1993/Widgets'
+    website = 'https://github.com/yhyzgn/Widgets'
 }
 
