@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_NAME_LIST.add("LoadingView");
         WIDGET_NAME_LIST.add("SwitchButton");
         WIDGET_NAME_LIST.add("SettingsItemView");
+        WIDGET_NAME_LIST.add("PreImgActivity");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
@@ -104,5 +105,6 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_CLASS_LIST.add(LoadingActivity.class);
         WIDGET_CLASS_LIST.add(SwitchButtonActivity.class);
         WIDGET_CLASS_LIST.add(SettingsActivity.class);
+        WIDGET_CLASS_LIST.add(PreviewImageActivity.class);
     }
 }

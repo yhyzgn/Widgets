@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".SettingsActivity">
         </activity>
+        <activity android:name=".PreviewImageActivity">
+        </activity>
     </application>
 
 </manifest>

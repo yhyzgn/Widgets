@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">widget</string>
+
+    <string name="pre_img_current_item" formatted="false">%d / %d</string>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_a"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/d"/>
+
+    <ImageView
+        android:id="@+id/iv_b"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:src="@mipmap/e"/>
+
+</LinearLayout>

@@ -37,13 +37,14 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.android.support:design:25.3.1'
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
 }
 
 publish {
     userOrg = 'yhyzgn'
     groupId = 'com.yhy.widget'
     artifactId = 'view-core'
-    publishVersion = '1.0.10'
+    publishVersion = '1.0.11'
     desc = 'Some custom view.'
     website = 'https://github.com/SilentWolf1993/Widgets'
 }
