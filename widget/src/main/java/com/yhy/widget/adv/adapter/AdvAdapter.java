@@ -11,11 +11,13 @@ import java.util.List;
  */
 public abstract class AdvAdapter<T> {
 
+    protected Context mCtx;
     private LayoutInflater mLayoutInflater;
     protected List<T> mData;
 
     public AdvAdapter(Context context, List<T> list) {
-        this.mData = list;
+        mCtx = context;
+        mData = list;
         mLayoutInflater = LayoutInflater.from(context);
     }
 

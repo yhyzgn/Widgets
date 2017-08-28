@@ -22,8 +22,7 @@ public class TextAdvAdapter extends AdvAdapter<String> {
         super(ctx, list);
         mCtx = ctx;
         mDataList = list;
-        mParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
-                .LayoutParams.MATCH_PARENT);
+        mParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     @Override
