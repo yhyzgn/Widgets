@@ -35,6 +35,8 @@
         </activity>
         <activity android:name=".PreviewImageActivity">
         </activity>
+        <activity android:name=".PickViewActivity">
+        </activity>
     </application>
 
 </manifest>
