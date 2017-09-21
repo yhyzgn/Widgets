@@ -6,8 +6,11 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * 修复图片在ViewPager控件中缩放报错的BUG
- * Created by HongYi Yan on 2017/6/15 10:18.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:21
+ * version: 1.0.0
+ * desc   : 修复图片在ViewPager控件中缩放报错的BUG
  */
 public class HackyViewPager extends ViewPager {
 

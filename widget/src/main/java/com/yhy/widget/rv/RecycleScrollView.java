@@ -7,7 +7,11 @@ import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 
 /**
- * Created by HongYi Yan on 2017/4/26 16:24.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:19
+ * version: 1.0.0
+ * desc   :
  */
 public class RecycleScrollView extends ScrollView {
     private int downX;

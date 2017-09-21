@@ -7,7 +7,11 @@ import android.view.View;
 import java.util.List;
 
 /**
- * Created by HongYi Yan on 2017/4/7 13:43.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:18
+ * version: 1.0.0
+ * desc   :
  */
 public abstract class AdvAdapter<T> {
 

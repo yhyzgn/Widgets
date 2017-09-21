@@ -13,7 +13,11 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.yhy.widget.R;
 
 /**
- * Created by HongYi Yan on 2017/6/15 10:37.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:01
+ * version: 1.0.0
+ * desc   :
  */
 public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
     private Context mCtx;

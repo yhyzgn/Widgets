@@ -8,7 +8,11 @@ import android.util.AttributeSet;
 import com.yhy.widget.iv.abs.AbsImageView;
 
 /**
- * Created by HongYi Yan on 2017/5/8 17:34.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:19
+ * version: 1.0.0
+ * desc   :
  */
 public class CircleImageView extends AbsImageView {
 

@@ -14,7 +14,11 @@ import android.view.View;
 import com.yhy.widget.R;
 
 /**
- * Created by HongYi Yan on 2017/5/14 15:49.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:19
+ * version: 1.0.0
+ * desc   :
  */
 public class LoadingView extends View {
     //默认颜色

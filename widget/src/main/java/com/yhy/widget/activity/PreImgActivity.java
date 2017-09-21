@@ -22,6 +22,13 @@ import android.widget.TextView;
 import com.yhy.widget.R;
 import com.yhy.widget.vp.HackyViewPager;
 
+/**
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:01
+ * version: 1.0.0
+ * desc   :
+ */
 public class PreImgActivity extends AppCompatActivity implements ViewTreeObserver.OnPreDrawListener {
     private static final long ANIMATE_DURATION = 400;
     private ImgPreCfg mCfg;

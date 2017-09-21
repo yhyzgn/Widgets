@@ -1,5 +1,8 @@
 package com.yhy.widget.activity;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -8,16 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HongYi Yan on 2017/6/15 10:27.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:01
+ * version: 1.0.0
+ * desc   :
  */
 public class ImgPreCfg<T> implements Serializable {
     private static ImgLoader loader;
-    private int ivX;
-    private int ivY;
-    private int ivWidth;
-    private int ivHeight;
-    private List<T> modelList;
-    private int current;
+    private int mIvX;
+    private int mIvY;
+    private int mIvWidth;
+    private int mIvHeight;
+    private List<T> mModelList;
+    private int mCurrent;
 
     /**
      * 构造函数
@@ -29,8 +36,8 @@ public class ImgPreCfg<T> implements Serializable {
         List<T> temp = new ArrayList<>();
         temp.add(model);
 
-        this.modelList = temp;
-        this.current = 0;
+        this.mModelList = temp;
+        this.mCurrent = 0;
         calculateIv(imgView);
     }
 
@@ -52,8 +59,8 @@ public class ImgPreCfg<T> implements Serializable {
      * @param current   当前选中的索引
      */
     public ImgPreCfg(ImageView imgView, List<T> modelList, int current) {
-        this.modelList = modelList;
-        this.current = current;
+        this.mModelList = modelList;
+        this.mCurrent = current;
         calculateIv(imgView);
     }
 
@@ -72,7 +79,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @return 图片路径集合
      */
     public List<T> getModelList() {
-        return modelList;
+        return mModelList;
     }
 
     /**
@@ -81,7 +88,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @param current 当前条目索引
      */
     public void setCurrent(int current) {
-        this.current = current;
+        this.mCurrent = current;
     }
 
     /**
@@ -90,7 +97,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @return 当前条目索引
      */
     public int getCurrent() {
-        return current;
+        return mCurrent;
     }
 
     /**
@@ -99,7 +106,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @return 原图片控件X坐标
      */
     public int getIvX() {
-        return ivX;
+        return mIvX;
     }
 
     /**
@@ -108,7 +115,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @return 原图片控件Y坐标
      */
     public int getIvY() {
-        return ivY;
+        return mIvY;
     }
 
     /**
@@ -117,7 +124,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @return 原图片控件宽度
      */
     public int getIvWidth() {
-        return ivWidth;
+        return mIvWidth;
     }
 
     /**
@@ -126,7 +133,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @return 原图片控件高度
      */
     public int getIvHeight() {
-        return ivHeight;
+        return mIvHeight;
     }
 
     /**
@@ -144,13 +151,23 @@ public class ImgPreCfg<T> implements Serializable {
      * @param iv 点击的ImageView
      */
     private void calculateIv(ImageView iv) {
-        ivWidth = iv.getWidth();
-        ivHeight = iv.getHeight();
+        if (null != iv) {
+            // 如果传入ImageView，就按该ImageView计算
+            mIvWidth = iv.getWidth();
+            mIvHeight = iv.getHeight();
 
-        int[] points = new int[2];
-        iv.getLocationInWindow(points);
-        ivX = points[0];
-        ivY = points[1];
+            int[] points = new int[2];
+            iv.getLocationInWindow(points);
+            mIvX = points[0];
+            mIvY = points[1];
+        } else {
+            // 如果ImageView为空，就宽高设置为0
+            mIvWidth = 0;
+            mIvHeight = 0;
+            // 并且把起点坐标设置0
+            mIvX = 0;
+            mIvY = 0;
+        }
     }
 
     /**

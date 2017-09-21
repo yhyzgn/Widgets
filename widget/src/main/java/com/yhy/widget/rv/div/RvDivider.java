@@ -177,7 +177,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
 
             //第一列，绘制左边线
             if (i % spanCount == 0) {
-                left = child.getLeft() + params.leftMargin - mWidthPx;
+                left = child.getLeft() - params.leftMargin - mWidthPx;
                 right = left + mWidthPx;
                 c.drawRect(left, top, right, bottom, mPaint);
             }
@@ -275,8 +275,17 @@ public class RvDivider extends RecyclerView.ItemDecoration {
                         outRect.set(0, 0, 0, mWidthPx);
                     } else if (orientation == LinearLayoutManager.HORIZONTAL) {
                         //水平排列，不是最后一个就绘制右边线
-                        outRect.set(0, 0, mWidthPx, 0);
+                        // 为了避免最后一个右边没有边线而比较长，需要将前面所有的分割线往后移分割线宽度的一半，然后再恢复第一个的左边线为0，避免出现左边线
+                        outRect.set(outRect.left += mWidthPx / 2, 0, mWidthPx - mWidthPx / 2, 0);
                     }
+                }
+                if (itemPosition == 0 && orientation == LinearLayoutManager.HORIZONTAL) {
+                    //水平排列，并且是第一个，需要还原左边线
+                    outRect.left -= mWidthPx / 2;
+                }
+                if (itemPosition == childCount - 1 && orientation == LinearLayoutManager.HORIZONTAL) {
+                    //水平排列，并且是最后一个，需要设置左边线
+                    outRect.left += mWidthPx / 2;
                 }
             } else {
                 //不仅绘制内容区域，连边界一起绘制
@@ -319,52 +328,41 @@ public class RvDivider extends RecyclerView.ItemDecoration {
                 //需要绘制边界线
                 if (itemPosition < spanCount) {
                     //第一行
-                    outRect.top = mWidthPx;
+                    outRect.top = mWidthPx / 2;
+                } else {
+                    outRect.top += mWidthPx / 2;
                 }
 
                 if (itemPosition % spanCount == 0) {
                     //第一列
-                    outRect.left = mWidthPx;
+                    outRect.left = mWidthPx / 2;
+                } else {
+                    outRect.left += mWidthPx / 2;
                 }
 
                 //设置右边线和下边线
-                outRect.right = mWidthPx;
-                outRect.bottom = mWidthPx;
+                outRect.right = mWidthPx - outRect.left;
+                outRect.bottom = mWidthPx - outRect.top;
             } else {
                 //不会只任何边界线
                 //左边线和上边线直接不设置，默认为0
-                //先设置右边线和下边线，再在不同的位置改变此设置
-                outRect.right = mWidthPx;
+//                //先设置右边线和下边线，再在不同的位置改变此设置
+//
+                // 由于最后一列不显示右边线，加上以下两行解决能最后一列过长的问题
+                outRect.left += mWidthPx / 2;
+                outRect.right = mWidthPx - outRect.left;
+
                 outRect.bottom = mWidthPx;
+
+                // 由于以上两行，第一列左边线会显示，这里需要还原第一列左边线为不显示
+                if (itemPosition % spanCount == 0) {
+                    outRect.left -= mWidthPx / 2;
+                }
 
                 //最后一列，右边线设置为0
                 if (itemPosition % spanCount == spanCount - 1) {
                     outRect.right = 0;
                 }
-
-                //如果最后一行不完整，也将最后一个元素的右边线设置为0
-//                if (childMod != 0) {
-//                    if (itemPosition == childCount - 1) {
-//                        outRect.right = 0;
-//                    }
-//                }
-
-//                if (childMod == 0) {
-//                    //如果余数为0，说明最后一行完整，将最后一整行下边线设为0
-//                    if (itemPosition >= spanCount * (rowCount - 1)) {
-//                        outRect.bottom = 0;
-//                    }
-//                } else {
-//                    //余数不为0，就将最后余着的和上一行显示在余数后边的元素的下边线设为0
-//                    if (itemPosition >= childCount - spanCount) {
-//                        outRect.bottom = 0;
-//                    }
-//                }
-
-                /***************************************************************/
-                /********** 不再使用以上设置，直接将最后一行下边线设为0 **********/
-                /***************************************************************/
-
                 //最后一行，将下边线设置为0
                 if (itemPosition >= spanCount * (rowCount - 1)) {
                     outRect.bottom = 0;

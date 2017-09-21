@@ -34,9 +34,9 @@ public class RvActivity extends AppCompatActivity {
         TEST_STR_LIST.add("Test 7");
 
         mDivider = new RvDivider.Builder(this)
-                .widthDp(10)
+                .widthDp(30)
                 .color(getResources().getColor(R.color.colorPrimary))
-                .type(RvDivider.DividerType.TYPE_WITH_START)
+                .type(RvDivider.DividerType.TYPE_WITH_START_END)
                 .build();
 
 //        horizontal();
@@ -47,7 +47,7 @@ public class RvActivity extends AppCompatActivity {
     }
 
     private void gridview() {
-        rvContent.setLayoutManager(new GridLayoutManager(this, 3));
+        rvContent.setLayoutManager(new GridLayoutManager(this, 4));
 
         rvContent.setAdapter(new RvTestAdapter(this, TEST_STR_LIST));
         rvContent.addItemDecoration(mDivider);

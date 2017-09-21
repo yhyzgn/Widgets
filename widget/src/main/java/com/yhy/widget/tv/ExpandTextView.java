@@ -23,7 +23,11 @@ import android.widget.TextView;
 import com.yhy.widget.R;
 
 /**
- * Created by HongYi Yan on 2017/5/8 15:45.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:20
+ * version: 1.0.0
+ * desc   :
  */
 public class ExpandTextView extends LinearLayout implements View.OnClickListener {
     private static final String TAG = ExpandTextView.class.getSimpleName();

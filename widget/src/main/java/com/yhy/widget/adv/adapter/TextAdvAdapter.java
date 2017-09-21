@@ -11,7 +11,11 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by HongYi Yan onOrOff 2017/4/7 13:52.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:18
+ * version: 1.0.0
+ * desc   :
  */
 public class TextAdvAdapter extends AdvAdapter<String> {
     private Context mCtx;

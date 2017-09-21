@@ -13,7 +13,11 @@ import com.yhy.widget.R;
 import com.yhy.widget.adv.adapter.AdvAdapter;
 
 /**
- * Created by HongYi Yan on 2017/4/6 13:30.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:18
+ * version: 1.0.0
+ * desc   :
  */
 public class AdvView extends ViewFlipper implements View.OnClickListener {
     private static final int DEFAULT_INTERVAL = 3000; // 默认轮播间隔 3 秒

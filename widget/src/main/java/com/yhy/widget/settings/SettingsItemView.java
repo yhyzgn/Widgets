@@ -26,7 +26,11 @@ import com.yhy.widget.utils.DensityUtils;
 import java.lang.reflect.Field;
 
 /**
- * Created by HongYi Yan onOrOff 2017/5/31 13:47.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-09-21 14:18
+ * version: 1.0.0
+ * desc   :
  */
 public class SettingsItemView extends LinearLayout {
     //默认字体大小，14sp
