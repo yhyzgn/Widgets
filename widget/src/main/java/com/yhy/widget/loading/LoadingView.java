@@ -62,8 +62,8 @@ public class LoadingView extends View {
     }
 
     private void init(Context context, @Nullable AttributeSet attrs) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LoadingViewAttrs);
-        mColor = ta.getColor(R.styleable.LoadingViewAttrs_loading_color, COLOR_DEF);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LoadingView);
+        mColor = ta.getColor(R.styleable.LoadingView_loading_color, COLOR_DEF);
         ta.recycle();
 
         //设置初始状态

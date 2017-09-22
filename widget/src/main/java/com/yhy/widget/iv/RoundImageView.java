@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
@@ -32,8 +31,8 @@ public class RoundImageView extends AbsImageView {
     public RoundImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AbsImageViewAttrs);
-        mRadius = ta.getDimension(R.styleable.AbsImageViewAttrs_riv_radius, 0f);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AbsImageView);
+        mRadius = ta.getDimension(R.styleable.AbsImageView_riv_radius, 0f);
         ta.recycle();
     }
 

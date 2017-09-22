@@ -355,86 +355,86 @@ public class SwitchButton extends View {
 
         TypedArray typedArray = null;
         if (attrs != null) {
-            typedArray = context.obtainStyledAttributes(attrs, R.styleable.SwitchButtonAttrs);
+            typedArray = context.obtainStyledAttributes(attrs, R.styleable.SwitchButton);
         }
 
         shadowEffect = optBoolean(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_shadow_effect,
+                R.styleable.SwitchButton_sb_shadow_effect,
                 true);
 
         offCircleColor = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_off_circle_color,
+                R.styleable.SwitchButton_sb_off_circle_color,
                 0XffAAAAAA);//0XffAAAAAA;
 
         offCircleWidth = optPixelSize(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_off_circle_width,
+                R.styleable.SwitchButton_sb_off_circle_width,
                 dp2pxInt(1.5f));//dp2pxInt(1.5f);
 
         offCircleOffsetX = dp2px(10);
 
         offCircleRadius = optPixelSize(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_off_circle_radius,
+                R.styleable.SwitchButton_sb_off_circle_radius,
                 dp2px(4));//dp2px(4);
 
         onLineOffsetX = dp2px(4);
         onLineOffsetY = dp2px(4);
 
         shadowRadius = optPixelSize(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_shadow_radius,
+                R.styleable.SwitchButton_sb_shadow_radius,
                 dp2pxInt(2.5f));//dp2pxInt(2.5f);
 
         shadowOffset = optPixelSize(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_shadow_offset,
+                R.styleable.SwitchButton_sb_shadow_offset,
                 dp2pxInt(1.5f));//dp2pxInt(1.5f);
 
         shadowColor = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_shadow_color,
+                R.styleable.SwitchButton_sb_shadow_color,
                 0X33000000);//0X33000000;
 
         offColor = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_off_color,
+                R.styleable.SwitchButton_sb_off_color,
                 0XffDDDDDD);//0XffDDDDDD;
 
         onColor = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_on_color,
+                R.styleable.SwitchButton_sb_on_color,
                 0Xff51d367);//0Xff51d367;
 
         borderWidth = optPixelSize(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_border_width,
+                R.styleable.SwitchButton_sb_border_width,
                 dp2pxInt(1));//dp2pxInt(1);
 
         onLineColor = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_on_line_color,
+                R.styleable.SwitchButton_sb_on_line_color,
                 Color.WHITE);//Color.WHITE;
 
         onLineWidth = optPixelSize(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_on_line_width,
+                R.styleable.SwitchButton_sb_on_line_width,
                 dp2pxInt(1f));//dp2pxInt(1.0f);
 
         onLineLength = dp2px(6);
 
         int buttonColor = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_button_color,
+                R.styleable.SwitchButton_sb_button_color,
                 Color.WHITE);//Color.WHITE;
 
         int effectDuration = optInt(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_effect_duration,
+                R.styleable.SwitchButton_sb_effect_duration,
                 300);//300;
 
         isOn = optBoolean(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_on,
+                R.styleable.SwitchButton_sb_on,
                 false);
 
         showIndicator = optBoolean(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_show_indicator,
+                R.styleable.SwitchButton_sb_show_indicator,
                 true);
 
         background = optColor(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_background,
+                R.styleable.SwitchButton_sb_background,
                 Color.WHITE);//Color.WHITE;
 
         enableEffect = optBoolean(typedArray,
-                R.styleable.SwitchButtonAttrs_sb_enable_effect,
+                R.styleable.SwitchButton_sb_enable_effect,
                 true);
 
         if (typedArray != null) {

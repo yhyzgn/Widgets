@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yhy.widget.titb.TextTitleBar
+    <com.yhy.widget.titb.TitleBar
         android:id="@+id/ttb_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titb_bg_color="#f20"
-        app:ttb_text="Widgets"/>
+        android:background="#7ad"
+        android:elevation="8dp"
+        app:tb_title="Widget" />
 
     <ListView
         android:id="@+id/lv_widget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent" />
 </LinearLayout>

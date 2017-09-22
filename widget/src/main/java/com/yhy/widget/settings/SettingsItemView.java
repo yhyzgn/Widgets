@@ -91,35 +91,35 @@ public class SettingsItemView extends LinearLayout {
         etText = (EditText) view.findViewById(R.id.et_settings_text);
         sbSwitch = (SwitchButton) view.findViewById(R.id.sb_switch);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemViewAttrs);
-        mIcon = ta.getDrawable(R.styleable.SettingsItemViewAttrs_siv_icon);
-        mArrow = ta.getDrawable(R.styleable.SettingsItemViewAttrs_siv_arrow);
-        mShowIcon = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_show_icon, false);
-        mShowArrow = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_show_arrow, false);
-        mName = ta.getString(R.styleable.SettingsItemViewAttrs_siv_name);
-        mText = ta.getString(R.styleable.SettingsItemViewAttrs_siv_text);
-        mHint = ta.getString(R.styleable.SettingsItemViewAttrs_siv_hint);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemView);
+        mIcon = ta.getDrawable(R.styleable.SettingsItemView_siv_icon);
+        mArrow = ta.getDrawable(R.styleable.SettingsItemView_siv_arrow);
+        mShowIcon = ta.getBoolean(R.styleable.SettingsItemView_siv_show_icon, false);
+        mShowArrow = ta.getBoolean(R.styleable.SettingsItemView_siv_show_arrow, false);
+        mName = ta.getString(R.styleable.SettingsItemView_siv_name);
+        mText = ta.getString(R.styleable.SettingsItemView_siv_text);
+        mHint = ta.getString(R.styleable.SettingsItemView_siv_hint);
         //获取到字体大小，单位是px
-        mNameSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_name_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
-        mTextSize = ta.getDimension(R.styleable.SettingsItemViewAttrs_siv_text_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
-        mNameColor = ta.getColor(R.styleable.SettingsItemViewAttrs_siv_name_color, Color.BLACK);
-        mTextColor = ta.getColor(R.styleable.SettingsItemViewAttrs_siv_text_color, Color.BLACK);
-        mNameWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_name_width, 0);
-        mSwitchOn = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_switch_on, false);
+        mNameSize = ta.getDimension(R.styleable.SettingsItemView_siv_name_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
+        mTextSize = ta.getDimension(R.styleable.SettingsItemView_siv_text_size, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEF_FONT_SIZE, getResources().getDisplayMetrics()));
+        mNameColor = ta.getColor(R.styleable.SettingsItemView_siv_name_color, Color.BLACK);
+        mTextColor = ta.getColor(R.styleable.SettingsItemView_siv_text_color, Color.BLACK);
+        mNameWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemView_siv_name_width, 0);
+        mSwitchOn = ta.getBoolean(R.styleable.SettingsItemView_siv_switch_on, false);
         //获取开关控件宽高
-        mSwitchWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_switch_width, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_WIDTH, getResources().getDisplayMetrics()));
-        mSwitchHeight = ta.getDimensionPixelSize(R.styleable.SettingsItemViewAttrs_siv_switch_height, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_HEIGHT, getResources().getDisplayMetrics()));
-        mShowSwitch = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_show_switch, false);
+        mSwitchWidth = ta.getDimensionPixelSize(R.styleable.SettingsItemView_siv_switch_width, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_WIDTH, getResources().getDisplayMetrics()));
+        mSwitchHeight = ta.getDimensionPixelSize(R.styleable.SettingsItemView_siv_switch_height, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEF_SWITCH_HEIGHT, getResources().getDisplayMetrics()));
+        mShowSwitch = ta.getBoolean(R.styleable.SettingsItemView_siv_show_switch, false);
 
-        mEditable = ta.getBoolean(R.styleable.SettingsItemViewAttrs_siv_editable, false);
+        mEditable = ta.getBoolean(R.styleable.SettingsItemView_siv_editable, false);
 
-        mCursorDrawableRes = ta.getResourceId(R.styleable.SettingsItemViewAttrs_siv_cursor_drawable, -1);
+        mCursorDrawableRes = ta.getResourceId(R.styleable.SettingsItemView_siv_cursor_drawable, -1);
 
-        int nameGravity = ta.getInt(R.styleable.SettingsItemViewAttrs_siv_name_gravity, 0);
+        int nameGravity = ta.getInt(R.styleable.SettingsItemView_siv_name_gravity, 0);
         mNameGravity = nameGravity == 0 ? Gravity.LEFT : nameGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
         mNameGravity |= Gravity.CENTER_VERTICAL;
 
-        int textGravity = ta.getInt(R.styleable.SettingsItemViewAttrs_siv_text_gravity, 2);
+        int textGravity = ta.getInt(R.styleable.SettingsItemView_siv_text_gravity, 2);
         mTextGravity = textGravity == 0 ? Gravity.LEFT : textGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
         mTextGravity |= Gravity.CENTER_VERTICAL;
 

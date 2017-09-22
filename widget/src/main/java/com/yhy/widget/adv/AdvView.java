@@ -2,7 +2,6 @@ package com.yhy.widget.adv;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -43,13 +42,13 @@ public class AdvView extends ViewFlipper implements View.OnClickListener {
     private void init(Context context, AttributeSet attrs) {
         this.mContext = context;
 
-        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AdvViewAttrs);
-        mInterval = ta.getInteger(R.styleable.AdvViewAttrs_av_interval, DEFAULT_INTERVAL);
-        mAnimDuration = ta.getInteger(R.styleable.AdvViewAttrs_av_anim_duration,
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AdvView);
+        mInterval = ta.getInteger(R.styleable.AdvView_av_interval, DEFAULT_INTERVAL);
+        mAnimDuration = ta.getInteger(R.styleable.AdvView_av_anim_duration,
                 DEFAULT_CURATION);
-        mAnimInResId = ta.getResourceId(R.styleable.AdvViewAttrs_av_anim_in,
+        mAnimInResId = ta.getResourceId(R.styleable.AdvView_av_anim_in,
                 DEFAULT_IN_ANIM);
-        mAnimOutResId = ta.getResourceId(R.styleable.AdvViewAttrs_av_anim_out,
+        mAnimOutResId = ta.getResourceId(R.styleable.AdvView_av_anim_out,
                 DEFAULT_OUT_ANIM);
         ta.recycle();
 

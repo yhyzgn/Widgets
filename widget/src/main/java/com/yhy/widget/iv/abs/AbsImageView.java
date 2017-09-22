@@ -75,12 +75,12 @@ public abstract class AbsImageView extends AppCompatImageView {
     public AbsImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AbsImageViewAttrs, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AbsImageView, defStyle, 0);
 
-        mBorderWidth = a.getDimensionPixelSize(R.styleable.AbsImageViewAttrs_civ_border_width, DEFAULT_BORDER_WIDTH);
-        mBorderColor = a.getColor(R.styleable.AbsImageViewAttrs_civ_border_color, DEFAULT_BORDER_COLOR);
-        mBorderOverlay = a.getBoolean(R.styleable.AbsImageViewAttrs_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
-        mFillColor = a.getColor(R.styleable.AbsImageViewAttrs_civ_fill_color, DEFAULT_FILL_COLOR);
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.AbsImageView_civ_border_width, DEFAULT_BORDER_WIDTH);
+        mBorderColor = a.getColor(R.styleable.AbsImageView_civ_border_color, DEFAULT_BORDER_COLOR);
+        mBorderOverlay = a.getBoolean(R.styleable.AbsImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
+        mFillColor = a.getColor(R.styleable.AbsImageView_civ_fill_color, DEFAULT_FILL_COLOR);
 
         a.recycle();
 

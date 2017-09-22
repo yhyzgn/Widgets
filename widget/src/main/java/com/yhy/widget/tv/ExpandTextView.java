@@ -272,10 +272,10 @@ public class ExpandTextView extends LinearLayout implements View.OnClickListener
     }
 
     private void init(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ExpandTextViewAttrs);
-        mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandTextViewAttrs_etv_max_collapsed_lines, MAX_COLLAPSED_LINES);
-        mAnimationDuration = typedArray.getInt(R.styleable.ExpandTextViewAttrs_etv_anim_duration, DEFAULT_ANIM_DURATION);
-        mAnimAlphaStart = typedArray.getFloat(R.styleable.ExpandTextViewAttrs_etv_anim_alpha_start, DEFAULT_ANIM_ALPHA_START);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ExpandTextView);
+        mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandTextView_etv_max_collapsed_lines, MAX_COLLAPSED_LINES);
+        mAnimationDuration = typedArray.getInt(R.styleable.ExpandTextView_etv_anim_duration, DEFAULT_ANIM_DURATION);
+        mAnimAlphaStart = typedArray.getFloat(R.styleable.ExpandTextView_etv_anim_alpha_start, DEFAULT_ANIM_ALPHA_START);
 
         typedArray.recycle();
 

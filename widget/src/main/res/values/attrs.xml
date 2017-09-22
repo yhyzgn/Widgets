@@ -1,128 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--广告控件基类-->
-    <declare-styleable name="AdvViewAttrs">
+    <declare-styleable name="AdvView">
         <!--动画定时，默认3000ms-->
-        <attr name="av_interval" format="integer|reference"/>
+        <attr name="av_interval" format="integer|reference" />
         <!--动画执行时间，默认800ms-->
-        <attr name="av_anim_duration" format="integer|reference"/>
+        <attr name="av_anim_duration" format="integer|reference" />
         <!--入场动画-->
-        <attr name="av_anim_in" format="reference"/>
+        <attr name="av_anim_in" format="reference" />
         <!--出场动画-->
-        <attr name="av_anim_out" format="reference"/>
-    </declare-styleable>
-
-    <!--普通标题栏控件-->
-    <declare-styleable name="AbsNormalTitleBarAttrs">
-        <!--左侧按钮文字-->
-        <attr name="titb_left_text" format="string|reference"/>
-        <!--右侧按钮文字-->
-        <attr name="titb_right_text" format="string|reference"/>
-        <!--左侧按钮图标资源id-->
-        <attr name="titb_left_icon" format="reference"/>
-        <!--右侧按钮图标资源id-->
-        <attr name="titb_right_icon" format="reference"/>
-        <!--背景颜色-->
-        <attr name="titb_bg_color" format="color"/>
-        <!--状态栏背景颜色-->
-        <attr name="titb_status_bar_color" format="color"/>
-        <!--左右侧内边距-->
-        <attr name="titb_left_right_padding" format="dimension"/>
-        <!--上内边距-->
-        <attr name="titb_padding_top" format="dimension"/>
+        <attr name="av_anim_out" format="reference" />
     </declare-styleable>
 
     <!--文字标题栏控件-->
-    <declare-styleable name="TextTitleBarAttrs">
+    <declare-styleable name="TitleBar">
+        <!--标题文本-->
+        <attr name="tb_title" format="string|reference" />
+        <!--左边文本-->
+        <attr name="tb_left_text" format="string|reference" />
+        <!--右边文本-->
+        <attr name="tb_right_text" format="string|reference" />
+        <!--左边图标-->
+        <attr name="tb_left_icon" format="reference" />
+        <!--右边图标-->
+        <attr name="tb_right_icon" format="reference" />
         <!--字体颜色-->
-        <attr name="ttb_text_color" format="color"/>
-        <!--字体大小-->
-        <attr name="ttb_text_size" format="dimension"/>
-        <!--文本内容-->
-        <attr name="ttb_text" format="string"/>
+        <attr name="tb_font_color" format="color" />
     </declare-styleable>
 
     <!--文字标题栏控件-->
-    <declare-styleable name="ExpandTextViewAttrs">
+    <declare-styleable name="ExpandTextView">
         <!--收缩时显示的最大行数-->
-        <attr name="etv_max_collapsed_lines" format="integer"/>
+        <attr name="etv_max_collapsed_lines" format="integer" />
         <!--动画执行时间-->
-        <attr name="etv_anim_duration" format="integer"/>
+        <attr name="etv_anim_duration" format="integer" />
         <!--透明度动画开始时的值-->
-        <attr name="etv_anim_alpha_start" format="float"/>
+        <attr name="etv_anim_alpha_start" format="float" />
     </declare-styleable>
 
     <!--圆形ImageView属性-->
-    <declare-styleable name="AbsImageViewAttrs">
+    <declare-styleable name="AbsImageView">
         <!--边框宽度-->
-        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_width" format="dimension" />
         <!--边框颜色-->
-        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_color" format="color" />
         <!--是否允许边框覆盖在图层上-->
-        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_border_overlay" format="boolean" />
         <!--填充颜色-->
-        <attr name="civ_fill_color" format="color"/>
+        <attr name="civ_fill_color" format="color" />
         <!--控件四周圆角半径-->
-        <attr name="riv_radius" format="dimension"/>
+        <attr name="riv_radius" format="dimension" />
     </declare-styleable>
 
     <!--加载控件属性-->
-    <declare-styleable name="LoadingViewAttrs">
+    <declare-styleable name="LoadingView">
         <!--加载控件颜色，默认：#FF4400-->
-        <attr name="loading_color" format="color"/>
+        <attr name="loading_color" format="color" />
     </declare-styleable>
 
     <!--SwitchButton属性-->
-    <declare-styleable name="SwitchButtonAttrs">
-        <attr name="sb_shadow_radius" format="reference|dimension"/>
-        <attr name="sb_shadow_offset" format="reference|dimension"/>
-        <attr name="sb_shadow_color" format="reference|color"/>
-        <attr name="sb_off_color" format="reference|color"/>
-        <attr name="sb_on_color" format="reference|color"/>
-        <attr name="sb_border_width" format="reference|dimension"/>
-        <attr name="sb_on_line_color" format="reference|color"/>
-        <attr name="sb_on_line_width" format="reference|dimension"/>
-        <attr name="sb_off_circle_color" format="reference|color"/>
-        <attr name="sb_off_circle_width" format="reference|dimension"/>
-        <attr name="sb_off_circle_radius" format="reference|dimension"/>
-        <attr name="sb_on" format="reference|boolean"/>
-        <attr name="sb_shadow_effect" format="reference|boolean"/>
-        <attr name="sb_effect_duration" format="reference|integer"/>
-        <attr name="sb_button_color" format="reference|color"/>
-        <attr name="sb_show_indicator" format="reference|boolean"/>
-        <attr name="sb_background" format="reference|color"/>
-        <attr name="sb_enable_effect" format="reference|boolean"/>
+    <declare-styleable name="SwitchButton">
+        <attr name="sb_shadow_radius" format="reference|dimension" />
+        <attr name="sb_shadow_offset" format="reference|dimension" />
+        <attr name="sb_shadow_color" format="reference|color" />
+        <attr name="sb_off_color" format="reference|color" />
+        <attr name="sb_on_color" format="reference|color" />
+        <attr name="sb_border_width" format="reference|dimension" />
+        <attr name="sb_on_line_color" format="reference|color" />
+        <attr name="sb_on_line_width" format="reference|dimension" />
+        <attr name="sb_off_circle_color" format="reference|color" />
+        <attr name="sb_off_circle_width" format="reference|dimension" />
+        <attr name="sb_off_circle_radius" format="reference|dimension" />
+        <attr name="sb_on" format="reference|boolean" />
+        <attr name="sb_shadow_effect" format="reference|boolean" />
+        <attr name="sb_effect_duration" format="reference|integer" />
+        <attr name="sb_button_color" format="reference|color" />
+        <attr name="sb_show_indicator" format="reference|boolean" />
+        <attr name="sb_background" format="reference|color" />
+        <attr name="sb_enable_effect" format="reference|boolean" />
     </declare-styleable>
 
     <!--SettingsItemView属性-->
-    <declare-styleable name="SettingsItemViewAttrs">
-        <attr name="siv_icon" format="reference"/>
-        <attr name="siv_show_icon" format="boolean"/>
-        <attr name="siv_arrow" format="reference"/>
-        <attr name="siv_show_arrow" format="boolean"/>
-        <attr name="siv_name" format="reference|string"/>
-        <attr name="siv_name_width" format="reference|dimension"/>
+    <declare-styleable name="SettingsItemView">
+        <attr name="siv_icon" format="reference" />
+        <attr name="siv_show_icon" format="boolean" />
+        <attr name="siv_arrow" format="reference" />
+        <attr name="siv_show_arrow" format="boolean" />
+        <attr name="siv_name" format="reference|string" />
+        <attr name="siv_name_width" format="reference|dimension" />
         <attr name="siv_name_gravity" format="integer">
-            <enum name="left" value="0"/>
-            <enum name="center" value="1"/>
-            <enum name="right" value="2"/>
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
         </attr>
-        <attr name="siv_name_size" format="reference|dimension"/>
-        <attr name="siv_name_color" format="reference|color"/>
-        <attr name="siv_text" format="reference|string"/>
+        <attr name="siv_name_size" format="reference|dimension" />
+        <attr name="siv_name_color" format="reference|color" />
+        <attr name="siv_text" format="reference|string" />
         <attr name="siv_text_gravity" format="integer">
-            <enum name="left" value="0"/>
-            <enum name="center" value="1"/>
-            <enum name="right" value="2"/>
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
         </attr>
-        <attr name="siv_hint" format="reference|string"/>
-        <attr name="siv_text_size" format="reference|dimension"/>
-        <attr name="siv_text_color" format="reference|color"/>
-        <attr name="siv_switch_on" format="boolean"/>
-        <attr name="siv_switch_width" format="reference|dimension"/>
-        <attr name="siv_switch_height" format="reference|dimension"/>
-        <attr name="siv_show_switch" format="boolean"/>
-        <attr name="siv_editable" format="boolean"/>
-        <attr name="siv_cursor_drawable" format="reference"/>
+        <attr name="siv_hint" format="reference|string" />
+        <attr name="siv_text_size" format="reference|dimension" />
+        <attr name="siv_text_color" format="reference|color" />
+        <attr name="siv_switch_on" format="boolean" />
+        <attr name="siv_switch_width" format="reference|dimension" />
+        <attr name="siv_switch_height" format="reference|dimension" />
+        <attr name="siv_show_switch" format="boolean" />
+        <attr name="siv_editable" format="boolean" />
+        <attr name="siv_cursor_drawable" format="reference" />
     </declare-styleable>
 </resources>

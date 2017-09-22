@@ -12,8 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.yhy.widget.titb.TextTitleBar;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private static final List<String> WIDGET_NAME_LIST = new ArrayList<>();
     private static final List<Class> WIDGET_CLASS_LIST = new ArrayList<>();
 
-    private TextTitleBar ttbTitle;
     private ListView lvWidget;
 
     @Override
@@ -31,10 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ttbTitle = (TextTitleBar) findViewById(R.id.ttb_title);
         lvWidget = (ListView) findViewById(R.id.lv_widget);
 
-        ttbTitle.support(this);
 
         initData();
 
