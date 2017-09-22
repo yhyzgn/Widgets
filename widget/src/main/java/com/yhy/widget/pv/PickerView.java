@@ -95,7 +95,7 @@ public class PickerView<T> extends View {
         super(context, attrs);
         if (!isInEditMode()) {
             // 从布局文件获取字体大小，如果想自动调整字体大小，就必须在布局文件给定0sp的字体大小
-            TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PickerViewAttrs);
+            TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PickerView);
 
             mMaxTextSize = ta.getDimensionPixelSize(R.styleable.PickerView_pv_max_text_size, (int) mMaxTextSize);
             mMinTextSize = ta.getDimensionPixelSize(R.styleable.PickerView_pv_min_text_size, (int) mMinTextSize);
