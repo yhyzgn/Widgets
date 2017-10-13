@@ -32,8 +32,8 @@ public class HelperActivity extends AppCompatActivity {
 
         final StatusLayout slContent = (StatusLayout) findViewById(R.id.sl_content);
 
-        StaLayoutHelper helper = new StaLayoutHelper(this);
-        helper.setEmptyLayout(getLoadingView());
+        StaLayoutHelper helper = new StaLayoutHelper(slContent);
+        helper.setLoadingLayout(getLoadingView());
         slContent.setHelper(helper);
 
         findViewById(R.id.btn_loading).setOnClickListener(new View.OnClickListener() {
@@ -86,6 +86,7 @@ public class HelperActivity extends AppCompatActivity {
         tv.setGravity(Gravity.CENTER);
         tv.setTextSize(18);
         tv.setTextColor(Color.RED);
+        tv.setTag(StatusLayout.Status.LOADING.getStatus());
         return tv;
     }
 }

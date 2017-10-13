@@ -13,7 +13,7 @@ import com.yhy.widget.R;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-10-13 16:28
  * version: 1.0.0
- * desc   :
+ * desc   : 默认[错误]界面
  */
 public class StaErrorView extends LinearLayout {
     public StaErrorView(Context context) {

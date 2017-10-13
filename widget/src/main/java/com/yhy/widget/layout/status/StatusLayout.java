@@ -13,6 +13,7 @@ import com.yhy.widget.layout.status.handler.StaHandler;
 import com.yhy.widget.layout.status.helper.DefLayoutHelper;
 import com.yhy.widget.layout.status.helper.StaLayoutHelper;
 import com.yhy.widget.layout.status.listener.OnStatusRetryListener;
+import com.yhy.widget.utils.ViewUtils;
 
 /**
  * author : 颜洪毅
@@ -32,27 +33,35 @@ public class StatusLayout extends FrameLayout {
         点击重试按钮的tag值：
             retry   -> 点击重试
      */
-    private static final String STATUS_LOADING = "loading";
-    private static final String STATUS_SUCCESS = "success";
-    private static final String STATUS_ERROR = "error";
-    private static final String STATUS_EMPTY = "empty";
 
+    // 加载中
+    private static final String STATUS_LOADING = "loading";
+    // 成功
+    private static final String STATUS_SUCCESS = "success";
+    // 错误
+    private static final String STATUS_ERROR = "error";
+    // 无数据
+    private static final String STATUS_EMPTY = "empty";
+    // 点击重试
     public static final String TAG_RETRY = "retry";
 
+    // 各状态界面
     private View vLoading;
     private View vSuccess;
     private View vError;
     private View vEmpty;
 
-    private View vErrorRetry;
-    private View vEmptyRetry;
-
+    // 页面助手
     private StaLayoutHelper mHelper;
+    // 默认的页面助手
     private StaLayoutHelper mDefHelper;
 
+    // 点击重试事件
     private OnStatusRetryListener mListener;
 
+    // 页面当前状态
     private Status mStatus;
+    // 用于更新页面的Handler
     private StaHandler mHandler;
 
     public StatusLayout(@NonNull Context context) {
@@ -67,7 +76,7 @@ public class StatusLayout extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
         // 创建默认的状态布局
-        mDefHelper = DefLayoutHelper.getInstance().init(this).getHelper();
+        mDefHelper = DefLayoutHelper.create(this);
 
         // 默认为加载中状态
         mStatus = Status.LOADING;
@@ -81,7 +90,7 @@ public class StatusLayout extends FrameLayout {
         int childCount = getChildCount();
         // childCount必须在1-4之间
         if (childCount < 1 || childCount > 4) {
-            throw new IllegalStateException("StateLayout must has one child for success status at least or four children at most.");
+            throw new IllegalStateException("StateLayout must has one child for success status at least and four children at most.");
         }
 
         if (childCount == 1) {
@@ -104,33 +113,13 @@ public class StatusLayout extends FrameLayout {
                     } else if (TextUtils.equals(Status.ERROR.getStatus(), tag)) {
                         // 错误
                         vError = temp;
-                        vErrorRetry = vError.findViewWithTag(TAG_RETRY);
-                        if (null != vErrorRetry) {
-                            vErrorRetry.setOnClickListener(new OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    if (null != mListener) {
-                                        showLoading();
-                                        mListener.onRetry();
-                                    }
-                                }
-                            });
-                        }
+                        // 设置点击重试事件
+                        setRetryListener(vError);
                     } else if (TextUtils.equals(Status.EMPTY.getStatus(), tag)) {
                         // 无数据
                         vEmpty = temp;
-                        vEmptyRetry = vEmpty.findViewWithTag(TAG_RETRY);
-                        if (null != vEmptyRetry) {
-                            vEmptyRetry.setOnClickListener(new OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    if (null != mListener) {
-                                        showLoading();
-                                        mListener.onRetry();
-                                    }
-                                }
-                            });
-                        }
+                        // 设置点击重试事件
+                        setRetryListener(vEmpty);
                     } else {
                         throw new IllegalStateException("No value matched to tag of " + temp.getClass().getSimpleName());
                     }
@@ -138,14 +127,20 @@ public class StatusLayout extends FrameLayout {
             }
         }
 
-        mHandler.setLayout(this);
+        // 刷新界面
+        refreshUI();
     }
 
+    /**
+     * 设置状态页面助手
+     *
+     * @param helper 状态页面助手
+     * @return 当前对象
+     */
     public StatusLayout setHelper(StaLayoutHelper helper) {
+        // 从助手中获取各个状态的界面
         if (null != helper) {
             mHelper = helper;
-
-            mHelper.setStaLayout(this);
 
             if (null == vLoading) {
                 vLoading = mHelper.getLoadingView();
@@ -158,6 +153,143 @@ public class StatusLayout extends FrameLayout {
             }
         }
 
+        // 刷新界面
+        refreshUI();
+        return this;
+    }
+
+    /**
+     * 设置重试点击事件
+     *
+     * @param listener 重试点击事件
+     * @return 当前对象
+     */
+    public StatusLayout setOnStatusRetryListener(OnStatusRetryListener listener) {
+        mListener = listener;
+        return this;
+    }
+
+    /**
+     * 获取重试点击事件
+     *
+     * @return 重试点击事件
+     */
+    public OnStatusRetryListener getOnStatusRetryListener() {
+        return mListener;
+    }
+
+    /**
+     * 获取当前页面状态
+     *
+     * @return 当前页面状态
+     */
+    public Status getCurrentStatus() {
+        return mStatus;
+    }
+
+    /**
+     * 获取[加载中]状态界面
+     *
+     * @return [加载中]状态界面
+     */
+    public View getLoadingView() {
+        return vLoading;
+    }
+
+    /**
+     * 获取[成功]状态界面
+     *
+     * @return [成功]状态界面
+     */
+    public View getSuccessView() {
+        return vSuccess;
+    }
+
+    /**
+     * 获取[错误]状态界面
+     *
+     * @return [错误]状态界面
+     */
+    public View getErrorView() {
+        return vError;
+    }
+
+    /**
+     * 获取[无数据]状态界面
+     *
+     * @return [无数据]状态界面
+     */
+    public View getEmptyView() {
+        return vEmpty;
+    }
+
+    /**
+     * 显示[加载中]界面
+     */
+    public void showLoading() {
+        mStatus = mHandler.showLoading();
+    }
+
+    /**
+     * 显示[成功]界面
+     */
+    public void showSuccess() {
+        mStatus = mHandler.showSuccess();
+    }
+
+    /**
+     * 显示[错误]界面
+     */
+    public void showError() {
+        mStatus = mHandler.showError();
+    }
+
+    /**
+     * 显示[无数据]界面
+     */
+    public void showEmpty() {
+        mStatus = mHandler.showEmpty();
+    }
+
+    /**
+     * 设置各状态点击重试事件
+     *
+     * @param statusView 状态界面
+     */
+    private void setRetryListener(View statusView) {
+        View retry = statusView.findViewWithTag(TAG_RETRY);
+        if (null != retry) {
+            retry.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (null != mListener) {
+                        showLoading();
+                        mListener.onRetry();
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * 刷新界面
+     * <p>
+     * 自动检查各状态界面设置情况，并设置使用默认的界面
+     */
+    private void refreshUI() {
+        // 检查并设置默认的界面
+        loadDefView();
+        // 将界面添加到整个页面中
+        addViews();
+        // 刷新改变页面状态的Handler
+        mHandler.setLayout(this);
+    }
+
+    /**
+     * 检查并设置默认的界面
+     */
+    private void loadDefView() {
+        // 如果页面不全并且没有默认页面的话，直接抛出异常
         if ((null == vLoading || null == vError || null == vEmpty) && null == mDefHelper) {
             throw new IllegalStateException("Must set views of loading, error and empty status.");
         } else {
@@ -171,71 +303,54 @@ public class StatusLayout extends FrameLayout {
                 vEmpty = mDefHelper.getEmptyView();
             }
         }
-
-        mHandler.setLayout(this);
-        return this;
     }
 
-    public StatusLayout setOnStatusRetryListener(OnStatusRetryListener listener) {
-        mListener = listener;
-        return this;
+    /**
+     * 添加各状态界面到整个页面中
+     */
+    private void addViews() {
+        // 添加之前需要移除各view对应的parent
+        addView(ViewUtils.removeParent(vLoading));
+        addView(ViewUtils.removeParent(vError));
+        addView(ViewUtils.removeParent(vEmpty));
     }
 
-    public OnStatusRetryListener getOnStatusRetryListener() {
-        return mListener;
-    }
-
-    public Status getCurrentStatus() {
-        return mStatus;
-    }
-
-    public View getLoadingView() {
-        return vLoading;
-    }
-
-    public View getSuccessView() {
-        return vSuccess;
-    }
-
-    public View getErrorView() {
-        return vError;
-    }
-
-    public View getEmptyView() {
-        return vEmpty;
-    }
-
-    public void showLoading() {
-        mStatus = mHandler.showLoading();
-    }
-
-    public void showSuccess() {
-        mStatus = mHandler.showSuccess();
-    }
-
-    public void showError() {
-        mStatus = mHandler.showError();
-    }
-
-    public void showEmpty() {
-        mStatus = mHandler.showEmpty();
-    }
-
+    /**
+     * 四种页面状态的枚举类型
+     */
     public enum Status {
         LOADING(2001, STATUS_LOADING), SUCCESS(2002, STATUS_SUCCESS), ERROR(2003, STATUS_ERROR), EMPTY(2004, STATUS_EMPTY);
 
+        // 状态码，当更新界面状态时，作为Handler中msg的what值
         int code;
+        // 状态信息，所有状态的页面均有该字段识别
         String status;
 
+        /**
+         * 构造函数
+         *
+         * @param code   状态码
+         * @param status 状态信息
+         */
         Status(int code, String status) {
             this.code = code;
             this.status = status;
         }
 
+        /**
+         * 获取状态码
+         *
+         * @return 状态码
+         */
         public int getCode() {
             return code;
         }
 
+        /**
+         * 获取状态信息
+         *
+         * @return 状态信息
+         */
         public String getStatus() {
             return status;
         }

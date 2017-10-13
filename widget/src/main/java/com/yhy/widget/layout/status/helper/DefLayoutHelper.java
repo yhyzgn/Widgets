@@ -15,68 +15,71 @@ import com.yhy.widget.layout.status.view.StaLoadingView;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-10-13 17:42
  * version: 1.0.0
- * desc   :
+ * desc   : 默认的状态布局助手构造器
  */
 public class DefLayoutHelper {
+    // 布局参数
+    private static ViewGroup.LayoutParams mParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-    private volatile static DefLayoutHelper instance;
-
-    private StatusLayout mLayout;
-    private Context mCtx;
-
-    private StaLayoutHelper mHelper;
-
-    private ViewGroup.LayoutParams mParams;
-
+    // 私有化构造方法
     private DefLayoutHelper() {
-        if (null != instance) {
-            throw new IllegalStateException("Can not be instantiate of singleton class.");
-        }
-        mParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        throw new IllegalStateException("Can not be instantiated.");
     }
 
-    public static DefLayoutHelper getInstance() {
-        if (null == instance) {
-            synchronized (DefLayoutHelper.class) {
-                if (null == instance) {
-                    instance = new DefLayoutHelper();
-                }
-            }
-        }
-        return instance;
+    /**
+     * 创建默认助手
+     *
+     * @param layout 当前状态布局
+     * @return 默认助手
+     */
+    public static StaLayoutHelper create(StatusLayout layout) {
+        Context ctx = layout.getContext();
+        // 创建助手
+        StaLayoutHelper helper = new StaLayoutHelper(layout);
+        // 配置助手各状态页面
+        helper.setLoadingLayout(createLoadingView(ctx)).setErrorLayout(createErrorView(ctx)).setEmptyLayout(createEmptyView(ctx));
+        return helper;
     }
 
-    public DefLayoutHelper init(StatusLayout layout) {
-        mLayout = layout;
-        mCtx = mLayout.getContext();
-        mHelper = new StaLayoutHelper(mCtx);
-        mHelper.setStaLayout(mLayout);
-        mHelper.setLoadingLayout(createLoadingView()).setErrorLayout(createErrorView()).setEmptyLayout(createEmptyView());
-        return this;
-    }
-
-    private View createLoadingView() {
-        StaLoadingView slv = new StaLoadingView(mCtx);
+    /**
+     * 创建[加载中]界面
+     *
+     * @param ctx 上下文对象
+     * @return [加载中]界面
+     */
+    private static View createLoadingView(Context ctx) {
+        StaLoadingView slv = new StaLoadingView(ctx);
         slv.setLayoutParams(mParams);
+        // 配置tag
         slv.setTag(StatusLayout.Status.LOADING.getStatus());
         return slv;
     }
 
-    private View createErrorView() {
-        StaErrorView sev = new StaErrorView(mCtx);
+    /**
+     * 创建[错误]界面
+     *
+     * @param ctx 上下文对象
+     * @return [错误]界面
+     */
+    private static View createErrorView(Context ctx) {
+        StaErrorView sev = new StaErrorView(ctx);
         sev.setLayoutParams(mParams);
+        // 配置tag
         sev.setTag(StatusLayout.Status.ERROR.getStatus());
         return sev;
     }
 
-    private View createEmptyView() {
-        StaEmptyView sev = new StaEmptyView(mCtx);
+    /**
+     * 创建[无数据]界面
+     *
+     * @param ctx 上下文对象
+     * @return [无数据]界面
+     */
+    private static View createEmptyView(Context ctx) {
+        StaEmptyView sev = new StaEmptyView(ctx);
         sev.setLayoutParams(mParams);
+        // 配置tag
         sev.setTag(StatusLayout.Status.EMPTY.getStatus());
         return sev;
-    }
-
-    public StaLayoutHelper getHelper() {
-        return mHelper;
     }
 }

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Android-SpinKit-1.1.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/021cfdc16edf8755e88a1ae0f5e0a72db71d689f/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/021cfdc16edf8755e88a1ae0f5e0a72db71d689f/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/0ae948ae24e6b5a9ea9f30afa2e19ae932c4f622/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/0ae948ae24e6b5a9ea9f30afa2e19ae932c4f622/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

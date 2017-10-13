@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,25 +15,25 @@
             android:id="@+id/btn_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="loading" />
+            android:text="loading"/>
 
         <Button
             android:id="@+id/btn_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="success" />
+            android:text="success"/>
 
         <Button
             android:id="@+id/btn_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="error" />
+            android:text="error"/>
 
         <Button
             android:id="@+id/btn_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="empty" />
+            android:text="empty"/>
     </LinearLayout>
 
     <com.yhy.widget.layout.status.StatusLayout
@@ -47,6 +47,23 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
+            android:tag="error">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:tag="retry"
+                android:text="出事啦..."
+                android:textColor="#246854"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
             android:tag="success">
 
             <TextView
@@ -54,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="Success"
                 android:textColor="#2f0"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
         </LinearLayout>
     </com.yhy.widget.layout.status.StatusLayout>
 

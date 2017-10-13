@@ -42,6 +42,7 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
+        <!--当只有一个子控件时，该子控件会被当作[成功]状态的界面，此时无需指定tag为success-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
