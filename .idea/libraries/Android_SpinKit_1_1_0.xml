@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Android-SpinKit-1.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/021cfdc16edf8755e88a1ae0f5e0a72db71d689f/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/021cfdc16edf8755e88a1ae0f5e0a72db71d689f/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

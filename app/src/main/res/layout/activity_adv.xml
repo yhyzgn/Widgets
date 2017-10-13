@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yhy.widget.adv.AdvView
+    <com.yhy.widget.core.adv.AdvView
         android:id="@+id/av_view_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         app:av_anim_duration="1000"
         app:av_interval="4000" />
 
-    <com.yhy.widget.adv.AdvView
+    <com.yhy.widget.core.adv.AdvView
         android:id="@+id/av_view_multiple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

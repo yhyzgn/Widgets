@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.yhy.widget.exptext.ExpandTextView
+    <com.yhy.widget.core.exptext.ExpandTextView
         android:id="@+id/etv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +33,6 @@
             android:layout_gravity="end|bottom"
             android:padding="16dp"
             android:text="窝草"/>
-    </com.yhy.widget.exptext.ExpandTextView>
+    </com.yhy.widget.core.exptext.ExpandTextView>
 
 </LinearLayout>

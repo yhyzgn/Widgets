@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.yhy.widgetdemo">
+    package="com.yhy.widgetdemo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -14,29 +14,25 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdvActivity"/>
-        <activity android:name=".TitleActivity"/>
-        <activity android:name=".RvActivity">
-        </activity>
-        <activity android:name=".ETVActivity">
-        </activity>
-        <activity android:name=".RIVActivity">
-        </activity>
-        <activity android:name=".LoadingActivity">
-        </activity>
-        <activity android:name=".SwitchButtonActivity">
-        </activity>
-        <activity android:name=".SettingsActivity">
-        </activity>
-        <activity android:name=".PreviewImageActivity">
-        </activity>
-        <activity android:name=".PickViewActivity">
-        </activity>
+        <activity android:name=".AdvActivity" />
+        <activity android:name=".TitleActivity" />
+        <activity android:name=".RvActivity" />
+        <activity android:name=".ETVActivity" />
+        <activity android:name=".RIVActivity" />
+        <activity android:name=".LoadingActivity" />
+        <activity android:name=".SwitchButtonActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".PreviewImageActivity" />
+        <activity android:name=".PickViewActivity" />
+        <activity android:name=".status.StatusActivity" />
+        <activity android:name=".status.LayoutActivity" />
+        <activity android:name=".status.HelperActivity" />
+        <activity android:name=".status.DefActivity" />
     </application>
 
 </manifest>

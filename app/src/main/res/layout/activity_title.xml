@@ -6,7 +6,7 @@
     android:background="#0f0"
     android:orientation="vertical">
 
-    <com.yhy.widget.title.TitleBar
+    <com.yhy.widget.core.title.TitleBar
         android:id="@+id/tb_test_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:elevation="8dp"
         app:tb_title="测试标题" />
 
-    <com.yhy.widget.title.TitleBar
+    <com.yhy.widget.core.title.TitleBar
         android:id="@+id/tb_test_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

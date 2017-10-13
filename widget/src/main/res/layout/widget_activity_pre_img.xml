@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.yhy.widget.pager.HackyViewPager
+    <com.yhy.widget.core.pager.HackyViewPager
         android:id="@+id/vp_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

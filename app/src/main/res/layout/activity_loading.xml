@@ -8,12 +8,12 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <com.yhy.widget.loading.LoadingView
+    <com.yhy.widget.core.loading.LoadingView
         android:layout_width="24dp"
         android:layout_height="24dp"
         app:loading_color="#18a4aa"/>
 
-    <com.yhy.widget.loading.LoadingView
+    <com.yhy.widget.core.loading.LoadingView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"/>

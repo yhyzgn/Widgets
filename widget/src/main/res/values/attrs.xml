@@ -118,4 +118,14 @@
         <attr name="pv_min_text_size" format="reference|dimension"/>
         <attr name="pv_text_color" format="reference|color"/>
     </declare-styleable>
+
+    <!--侧边栏布局控件自定义属性-->
+    <declare-styleable name="SlideLayout">
+        <!--滑动过程中背景渐变的颜色，默认：#000000-->
+        <attr name="sl_anim_alpha_color" format="color|reference"/>
+        <!--是否开启边缘滑动，默认：true-->
+        <attr name="sl_edge_enable" format="boolean"/>
+        <!--主面板是否可透明，默认：false-->
+        <attr name="sl_main_alpha_enable" format="boolean"/>
+    </declare-styleable>
 </resources>

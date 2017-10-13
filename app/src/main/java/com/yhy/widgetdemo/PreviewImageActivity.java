@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.yhy.widget.activity.ImgPreCfg;
-import com.yhy.widget.activity.PreImgActivity;
+import com.yhy.widget.core.activity.ImgPreCfg;
+import com.yhy.widget.core.activity.PreImgActivity;
 
 import java.util.ArrayList;
 import java.util.List;

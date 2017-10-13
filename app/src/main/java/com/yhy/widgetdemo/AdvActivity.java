@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yhy.widget.adv.AdvView;
-import com.yhy.widget.adv.adapter.SimpleAdvAdapter;
-import com.yhy.widget.adv.adapter.TextAdvAdapter;
+import com.yhy.widget.core.adv.AdvView;
+import com.yhy.widget.core.adv.adapter.SimpleAdvAdapter;
+import com.yhy.widget.core.adv.adapter.TextAdvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

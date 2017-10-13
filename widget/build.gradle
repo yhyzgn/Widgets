@@ -38,6 +38,8 @@ dependencies {
 
     compile 'com.android.support:design:26.+'
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
 }
 
 publish {

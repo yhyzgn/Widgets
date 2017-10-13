@@ -6,7 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.yhy.widget.recycler.div.RvDivider;
+import com.yhy.widget.core.recycler.div.RvDivider;
 import com.yhy.widgetdemo.adapter.RvTestAdapter;
 
 import java.util.ArrayList;
