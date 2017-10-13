@@ -1,4 +1,4 @@
-package com.yhy.widget.rv;
+package com.yhy.widget.recycler;
 
 import android.content.Context;
 import android.util.AttributeSet;

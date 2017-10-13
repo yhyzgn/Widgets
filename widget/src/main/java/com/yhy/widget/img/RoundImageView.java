@@ -1,4 +1,4 @@
-package com.yhy.widget.iv;
+package com.yhy.widget.img;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
-import com.yhy.widget.iv.abs.AbsImageView;
+import com.yhy.widget.img.abs.AbsImageView;
 
 /**
  * author : 颜洪毅

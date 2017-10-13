@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yhy.widget.tv.ExpandTextView;
+import com.yhy.widget.exptext.ExpandTextView;
 
 public class ETVActivity extends AppCompatActivity {
 

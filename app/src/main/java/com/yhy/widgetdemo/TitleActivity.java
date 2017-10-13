@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.yhy.widget.titb.TitleBar;
+import com.yhy.widget.title.TitleBar;
 
 /**
  * Created by HongYi Yan on 2017/4/6 23:54.

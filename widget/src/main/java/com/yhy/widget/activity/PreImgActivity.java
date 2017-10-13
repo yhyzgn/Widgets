@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yhy.widget.R;
-import com.yhy.widget.vp.HackyViewPager;
+import com.yhy.widget.pager.HackyViewPager;
 
 /**
  * author : 颜洪毅

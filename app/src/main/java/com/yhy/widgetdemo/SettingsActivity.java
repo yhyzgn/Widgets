@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.yhy.widget.sb.SwitchButton;
+import com.yhy.widget.toggle.SwitchButton;
 import com.yhy.widget.settings.SettingsItemView;
 
 public class SettingsActivity extends AppCompatActivity {

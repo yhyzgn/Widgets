@@ -1,4 +1,4 @@
-package com.yhy.widget.rv.div;
+package com.yhy.widget.recycler.div;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.yhy.widget.sb.SwitchButton;
+import com.yhy.widget.toggle.SwitchButton;
 
 public class SwitchButtonActivity extends AppCompatActivity {
 

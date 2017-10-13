@@ -1,4 +1,4 @@
-package com.yhy.widget.tv;
+package com.yhy.widget.exptext;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

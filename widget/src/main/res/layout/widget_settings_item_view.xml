@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp">
 
-        <com.yhy.widget.sb.SwitchButton
+        <com.yhy.widget.toggle.SwitchButton
             android:id="@+id/sb_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

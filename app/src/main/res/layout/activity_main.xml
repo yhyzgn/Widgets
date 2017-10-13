@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yhy.widget.titb.TitleBar
+    <com.yhy.widget.title.TitleBar
         android:id="@+id/ttb_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

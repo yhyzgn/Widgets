@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhy.widget.R;
-import com.yhy.widget.sb.SwitchButton;
+import com.yhy.widget.toggle.SwitchButton;
 import com.yhy.widget.utils.DensityUtils;
 
 import java.lang.reflect.Field;

@@ -1,4 +1,4 @@
-package com.yhy.widget.titb;
+package com.yhy.widget.title;
 
 import android.content.Context;
 import android.content.res.TypedArray;

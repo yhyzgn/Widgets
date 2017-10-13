@@ -1,4 +1,4 @@
-package com.yhy.widget.sb;
+package com.yhy.widget.toggle;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

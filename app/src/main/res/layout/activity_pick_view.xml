@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.yhy.widget.pv.PickerView
+    <com.yhy.widget.picker.PickerView
         android:id="@+id/pv_test"
         android:layout_width="match_parent"
         android:layout_height="200dp"

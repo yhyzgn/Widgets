@@ -1,4 +1,4 @@
-package com.yhy.widget.iv.abs;
+package com.yhy.widget.img.abs;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -6,33 +6,33 @@
               android:orientation="vertical"
               android:padding="20dp">
 
-    <com.yhy.widget.sb.SwitchButton
+    <com.yhy.widget.toggle.SwitchButton
         android:id="@+id/switch_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"/>
 
-    <com.yhy.widget.sb.SwitchButton
+    <com.yhy.widget.toggle.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:sb_on="true"/>
 
-    <com.yhy.widget.sb.SwitchButton
+    <com.yhy.widget.toggle.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:sb_on="true"
         app:sb_show_indicator="false"/>
 
-    <com.yhy.widget.sb.SwitchButton
+    <com.yhy.widget.toggle.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:sb_on="true"
         app:sb_on_color="#fdc951"/>
 
-    <com.yhy.widget.sb.SwitchButton
+    <com.yhy.widget.toggle.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -43,7 +43,7 @@
         app:sb_on_line_color="#a5dc88"
         app:sb_shadow_color="#A36F95"/>
 
-    <com.yhy.widget.sb.SwitchButton
+    <com.yhy.widget.toggle.SwitchButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
