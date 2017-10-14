@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,25 +15,29 @@
             android:id="@+id/btn_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="loading"/>
+            android:text="loading"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="success"/>
+            android:text="success"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="error"/>
+            android:text="error"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="empty"/>
+            android:text="empty"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <com.yhy.widget.layout.status.StatusLayout
@@ -54,9 +58,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:tag="retry"
-                android:text="出事啦..."
+                android:text="布局中定义的错误页面"
                 android:textColor="#246854"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="Success"
                 android:textColor="#2f0"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
     </com.yhy.widget.layout.status.StatusLayout>
 

@@ -15,25 +15,29 @@
             android:id="@+id/btn_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="loading" />
+            android:text="loading"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="success" />
+            android:text="success"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="error" />
+            android:text="error"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="empty" />
+            android:text="empty"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <com.yhy.widget.layout.status.StatusLayout

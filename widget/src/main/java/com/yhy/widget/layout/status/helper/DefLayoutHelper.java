@@ -34,11 +34,9 @@ public class DefLayoutHelper {
      */
     public static StaLayoutHelper create(StatusLayout layout) {
         Context ctx = layout.getContext();
-        // 创建助手
-        StaLayoutHelper helper = new StaLayoutHelper(layout);
-        // 配置助手各状态页面
-        helper.setLoadingLayout(createLoadingView(ctx)).setErrorLayout(createErrorView(ctx)).setEmptyLayout(createEmptyView(ctx));
-        return helper;
+        // 创建助手，并配置助手各状态页面
+        StaLayoutHelperBuilder builder = new StaLayoutHelperBuilder.Builder(layout).setLoadingLayout(createLoadingView(ctx)).setErrorLayout(createErrorView(ctx)).setEmptyLayout(createEmptyView(ctx)).build();
+        return builder.getHelper();
     }
 
     /**

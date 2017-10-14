@@ -51,6 +51,16 @@ public class StatusLayout extends FrameLayout {
     private View vError;
     private View vEmpty;
 
+    // 各状态在布局文件中的界面
+    private View vLayoutLoading;
+    private View vLayoutError;
+    private View vLayoutEmpty;
+
+    // 各状态默认的界面
+    private View vDefLoading;
+    private View vDefError;
+    private View vDefEmpty;
+
     // 页面助手
     private StaLayoutHelper mHelper;
     // 默认的页面助手
@@ -106,20 +116,20 @@ public class StatusLayout extends FrameLayout {
                     tag = (String) temp.getTag();
                     if (TextUtils.equals(Status.LOADING.getStatus(), tag)) {
                         // 加载中
-                        vLoading = temp;
+                        vLayoutLoading = temp;
                     } else if (TextUtils.equals(Status.SUCCESS.getStatus(), tag)) {
                         // 成功
                         vSuccess = temp;
                     } else if (TextUtils.equals(Status.ERROR.getStatus(), tag)) {
                         // 错误
-                        vError = temp;
+                        vLayoutError = temp;
                         // 设置点击重试事件
-                        setRetryListener(vError);
+                        setRetryListener(vLayoutError);
                     } else if (TextUtils.equals(Status.EMPTY.getStatus(), tag)) {
                         // 无数据
-                        vEmpty = temp;
+                        vLayoutEmpty = temp;
                         // 设置点击重试事件
-                        setRetryListener(vEmpty);
+                        setRetryListener(vLayoutEmpty);
                     } else {
                         throw new IllegalStateException("No value matched to tag of " + temp.getClass().getSimpleName());
                     }
@@ -138,21 +148,7 @@ public class StatusLayout extends FrameLayout {
      * @return 当前对象
      */
     public StatusLayout setHelper(StaLayoutHelper helper) {
-        // 从助手中获取各个状态的界面
-        if (null != helper) {
-            mHelper = helper;
-
-            if (null == vLoading) {
-                vLoading = mHelper.getLoadingView();
-            }
-            if (null == vError) {
-                vError = mHelper.getErrorView();
-            }
-            if (null == vEmpty) {
-                vEmpty = mHelper.getEmptyView();
-            }
-        }
-
+        mHelper = helper;
         // 刷新界面
         refreshUI();
         return this;
@@ -278,7 +274,7 @@ public class StatusLayout extends FrameLayout {
      */
     private void refreshUI() {
         // 检查并设置默认的界面
-        loadDefView();
+        loadViews();
         // 将界面添加到整个页面中
         addViews();
         // 刷新改变页面状态的Handler
@@ -288,19 +284,61 @@ public class StatusLayout extends FrameLayout {
     /**
      * 检查并设置默认的界面
      */
-    private void loadDefView() {
+    private void loadViews() {
+        /*
+            页面加载的优先级：
+                布局 > mHelper > 默认mDefHelper
+            给方法可能会被触发两次：
+                第一次：
+                    onFinishInflate()方法中调用，此时mHelper为空，没有在布局中设置的状态界面将从默认mDefHelper中获取
+                第二次：
+                    如果外界手动设置了mHelper，将会再次触发该方法，此时就需要判断是否第一次触发时状态是否设置了对应的默认页面，如果设置了，就替换为mHelper中对应的页面，最后再检查页面设置情况，mHelper中也没设置的还是从默认mDefHelper中获取
+         */
+
+        // 布局文件中的界面优先使用
+        if (null != vLayoutLoading) {
+            vLoading = vLayoutLoading;
+        }
+        if (null != vLayoutError) {
+            vError = vLayoutError;
+        }
+        if (null != vLayoutEmpty) {
+            vEmpty = vLayoutEmpty;
+        }
+
+        // 再检查并从助手中获取各个状态的界面
+        if (null != mHelper) {
+            if (null != vDefLoading) {
+                // 先将原来的设置的默认页面移除
+                removeView(vLoading);
+                vLoading = mHelper.getLoadingView();
+            }
+            if (null != vDefError) {
+                removeView(vError);
+                vError = mHelper.getErrorView();
+            }
+            if (null != vDefEmpty) {
+                removeView(vEmpty);
+                vEmpty = mHelper.getEmptyView();
+            }
+        }
+
+        // 最后使用默认界面
         // 如果页面不全并且没有默认页面的话，直接抛出异常
         if ((null == vLoading || null == vError || null == vEmpty) && null == mDefHelper) {
             throw new IllegalStateException("Must set views of loading, error and empty status.");
         } else {
             if (null == vLoading) {
-                vLoading = mDefHelper.getLoadingView();
+                vDefLoading = mDefHelper.getLoadingView();
+                vLoading = vDefLoading;
             }
             if (null == vError) {
-                vError = mDefHelper.getErrorView();
+                vDefError = mDefHelper.getErrorView();
+                vError = vDefError;
             }
             if (null == vEmpty) {
-                vEmpty = mDefHelper.getEmptyView();
+                vDefEmpty = mDefHelper.getEmptyView();
+                vEmpty = vDefEmpty;
             }
         }
     }

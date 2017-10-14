@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.yhy.widget.layout.status.StatusLayout;
 import com.yhy.widget.layout.status.helper.StaLayoutHelper;
+import com.yhy.widget.layout.status.helper.StaLayoutHelperBuilder;
 import com.yhy.widget.layout.status.listener.OnStatusRetryListener;
 import com.yhy.widgetdemo.R;
 
@@ -32,9 +33,12 @@ public class HelperActivity extends AppCompatActivity {
 
         final StatusLayout slContent = (StatusLayout) findViewById(R.id.sl_content);
 
-        StaLayoutHelper helper = new StaLayoutHelper(slContent);
-        helper.setLoadingLayout(getLoadingView());
-        slContent.setHelper(helper);
+//        StaLayoutHelper helper = new StaLayoutHelper(slContent);
+//        helper.setLoadingLayout(getLoadingView());
+//        slContent.setHelper(helper);
+
+        StaLayoutHelperBuilder builder = new StaLayoutHelperBuilder.Builder(slContent).setLoadingLayout(getLoadingView()).build();
+        slContent.setHelper(builder.getHelper());
 
         findViewById(R.id.btn_loading).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +86,11 @@ public class HelperActivity extends AppCompatActivity {
     private View getLoadingView() {
         TextView tv = new TextView(this);
         tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        tv.setText("自定义加载中");
+        tv.setText("Helper中定义的加载中");
         tv.setGravity(Gravity.CENTER);
         tv.setTextSize(18);
         tv.setTextColor(Color.RED);
+        // 设置tag为loading
         tv.setTag(StatusLayout.Status.LOADING.getStatus());
         return tv;
     }
