@@ -33,6 +33,7 @@
         <activity android:name=".status.LayoutActivity" />
         <activity android:name=".status.HelperActivity" />
         <activity android:name=".status.DefActivity" />
+        <activity android:name=".SliderActivity" />
     </application>
 
 </manifest>

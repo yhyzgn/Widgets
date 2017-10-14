@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_NAME_LIST.add("PreImgActivity");
         WIDGET_NAME_LIST.add("PickViewActivity");
         WIDGET_NAME_LIST.add("StatusActivity");
+        WIDGET_NAME_LIST.add("SliderActivity");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
@@ -107,5 +108,6 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_CLASS_LIST.add(PreviewImageActivity.class);
         WIDGET_CLASS_LIST.add(PickViewActivity.class);
         WIDGET_CLASS_LIST.add(StatusActivity.class);
+        WIDGET_CLASS_LIST.add(SliderActivity.class);
     }
 }
