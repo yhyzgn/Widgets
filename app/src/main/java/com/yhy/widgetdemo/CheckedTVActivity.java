@@ -46,7 +46,7 @@ public class CheckedTVActivity extends AppCompatActivity {
         ctvDef.setOnCheckedChangeListener(new CheckedTextView.OnCheckedChangeListener() {
             @Override
             public void onChanged(CheckedTextView ctv, boolean isChecked) {
-                toast(ctv.getText() + "" + isChecked);
+                toast("isChecked = " + isChecked);
             }
         });
 
@@ -68,7 +68,7 @@ public class CheckedTVActivity extends AppCompatActivity {
         ctvPrev.setOnCheckedChangeListener(new CheckedTextView.OnCheckedChangeListener() {
             @Override
             public void onChanged(CheckedTextView ctv, boolean isChecked) {
-                toast(ctv.getText() + "" + isChecked);
+                toast("isChecked = " + isChecked);
             }
         });
     }

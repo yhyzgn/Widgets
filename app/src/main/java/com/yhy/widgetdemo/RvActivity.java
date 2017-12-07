@@ -22,7 +22,7 @@ public class RvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rv);
 
-        rvContent = (RecyclerView) findViewById(R.id.rv_content);
+        rvContent = findViewById(R.id.rv_content);
 
         TEST_STR_LIST.add("Test 1");
         TEST_STR_LIST.add("Test 2");

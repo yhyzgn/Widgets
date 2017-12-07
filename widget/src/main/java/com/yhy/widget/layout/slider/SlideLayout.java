@@ -306,6 +306,11 @@ public class SlideLayout extends FrameLayout {
 
     /**
      * 估值器
+     *
+     * @param fraction   当前比例
+     * @param startValue 开始值
+     * @param endValue   结束值
+     * @return 计算结果
      */
     public Float evaluate(float fraction, Number startValue, Number endValue) {
         float startFloat = startValue.floatValue();
@@ -314,6 +319,11 @@ public class SlideLayout extends FrameLayout {
 
     /**
      * 颜色变化过度估值器
+     *
+     * @param fraction   当前比例
+     * @param startValue 开始值
+     * @param endValue   结束值
+     * @return 计算结果
      */
     public Object evaluateColor(float fraction, Object startValue, Object endValue) {
         int startInt = (Integer) startValue;
@@ -590,6 +600,8 @@ public class SlideLayout extends FrameLayout {
          * 正在拖动
          *
          * @param percent 当前拖动的比例
+         * @param dx      水平方向位移量
+         * @param total   总位移量
          */
         void onDragging(float percent, int dx, int total);
     }
@@ -600,7 +612,8 @@ public class SlideLayout extends FrameLayout {
     public interface OnSlideEnableWatcher {
         /**
          * 返回当前侧边栏是否可滑动
-         * true -> 可用 false -> 不可用
+         * <p>
+         * true：可用  false：不可用
          *
          * @return 当前侧边栏是否可滑动
          */

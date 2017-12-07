@@ -143,5 +143,7 @@
         <attr name="siv_btn_size" format="reference|dimension" />
         <!--右上角按钮颜色，默认：透明 -->
         <attr name="siv_btn_color" format="reference|color" />
+        <!--右上角按钮内边距，默认：2dp -->
+        <attr name="siv_btn_padding" format="reference|dimension" />
     </declare-styleable>
 </resources>
