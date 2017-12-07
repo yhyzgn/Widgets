@@ -263,17 +263,19 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
     private void calculateIvSize(ImageView ivImg) {
         // 获取真实大小
         Drawable drawable = ivImg.getDrawable();
-        int intrinsicWidth = drawable.getIntrinsicWidth();
-        int intrinsicHeight = drawable.getIntrinsicHeight();
-        // 计算出与屏幕的比例，用于比较以宽的比例为准还是高的比例为准，因为很多时候不是高度没充满，就是宽度没充满
-        float w = mScreenWidth * 1.0f / intrinsicWidth;
-        float h = mScreenHeight * 1.0f / intrinsicHeight;
-        if (h > w) h = w;
-        else w = h;
+        if (null != drawable) {
+            int intrinsicWidth = drawable.getIntrinsicWidth();
+            int intrinsicHeight = drawable.getIntrinsicHeight();
+            // 计算出与屏幕的比例，用于比较以宽的比例为准还是高的比例为准，因为很多时候不是高度没充满，就是宽度没充满
+            float w = mScreenWidth * 1.0f / intrinsicWidth;
+            float h = mScreenHeight * 1.0f / intrinsicHeight;
+            if (h > w) h = w;
+            else w = h;
 
-        // 得出当宽高至少有一个充满的时候图片对应的宽高
-        mImgWidth = (int) (intrinsicWidth * w);
-        mImgHeight = (int) (intrinsicHeight * h);
+            // 得出当宽高至少有一个充满的时候图片对应的宽高
+            mImgWidth = (int) (intrinsicWidth * w);
+            mImgHeight = (int) (intrinsicHeight * h);
+        }
     }
 
     private void calculateScreenSize() {

@@ -34,6 +34,8 @@
         <activity android:name=".status.HelperActivity" />
         <activity android:name=".status.DefActivity" />
         <activity android:name=".SliderActivity" />
+        <activity android:name=".CheckedTVActivity" />
+        <activity android:name=".SquareIVActivity" />
     </application>
 
 </manifest>

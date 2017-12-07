@@ -1,4 +1,4 @@
-package com.yhy.widget.core.img.abs;
+package com.yhy.widget.core.img.corner.abs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 
 import com.yhy.widget.R;
 
-public abstract class AbsImageView extends AppCompatImageView {
+public abstract class AbsCornerImageView extends AppCompatImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 
@@ -62,25 +62,25 @@ public abstract class AbsImageView extends AppCompatImageView {
     protected boolean mBorderOverlay;
     protected boolean mDisableCircularTransformation;
 
-    public AbsImageView(Context context) {
+    public AbsCornerImageView(Context context) {
         super(context);
 
         init();
     }
 
-    public AbsImageView(Context context, AttributeSet attrs) {
+    public AbsCornerImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AbsImageView(Context context, AttributeSet attrs, int defStyle) {
+    public AbsCornerImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AbsImageView, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AbsCornerImageView, defStyle, 0);
 
-        mBorderWidth = a.getDimensionPixelSize(R.styleable.AbsImageView_civ_border_width, DEFAULT_BORDER_WIDTH);
-        mBorderColor = a.getColor(R.styleable.AbsImageView_civ_border_color, DEFAULT_BORDER_COLOR);
-        mBorderOverlay = a.getBoolean(R.styleable.AbsImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
-        mFillColor = a.getColor(R.styleable.AbsImageView_civ_fill_color, DEFAULT_FILL_COLOR);
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.AbsCornerImageView_civ_border_width, DEFAULT_BORDER_WIDTH);
+        mBorderColor = a.getColor(R.styleable.AbsCornerImageView_civ_border_color, DEFAULT_BORDER_COLOR);
+        mBorderOverlay = a.getBoolean(R.styleable.AbsCornerImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
+        mFillColor = a.getColor(R.styleable.AbsCornerImageView_civ_fill_color, DEFAULT_FILL_COLOR);
 
         a.recycle();
 

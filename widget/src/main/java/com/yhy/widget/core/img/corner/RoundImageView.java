@@ -1,4 +1,4 @@
-package com.yhy.widget.core.img;
+package com.yhy.widget.core.img.corner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
-import com.yhy.widget.core.img.abs.AbsImageView;
+import com.yhy.widget.core.img.corner.abs.AbsCornerImageView;
 
 /**
  * author : 颜洪毅
@@ -16,7 +16,7 @@ import com.yhy.widget.core.img.abs.AbsImageView;
  * version: 1.0.0
  * desc   :
  */
-public class RoundImageView extends AbsImageView {
+public class RoundImageView extends AbsCornerImageView {
 
     private float mRadius;
 
@@ -31,8 +31,8 @@ public class RoundImageView extends AbsImageView {
     public RoundImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AbsImageView);
-        mRadius = ta.getDimension(R.styleable.AbsImageView_riv_radius, 0f);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AbsCornerImageView);
+        mRadius = ta.getDimension(R.styleable.AbsCornerImageView_riv_radius, 0f);
         ta.recycle();
     }
 

@@ -39,7 +39,7 @@
     </declare-styleable>
 
     <!--圆形ImageView属性-->
-    <declare-styleable name="AbsImageView">
+    <declare-styleable name="AbsCornerImageView">
         <!--边框宽度-->
         <attr name="civ_border_width" format="dimension" />
         <!--边框颜色-->
@@ -114,18 +114,34 @@
 
     <!--PickerView属性-->
     <declare-styleable name="PickerView">
-        <attr name="pv_max_text_size" format="reference|dimension"/>
-        <attr name="pv_min_text_size" format="reference|dimension"/>
-        <attr name="pv_text_color" format="reference|color"/>
+        <attr name="pv_max_text_size" format="reference|dimension" />
+        <attr name="pv_min_text_size" format="reference|dimension" />
+        <attr name="pv_text_color" format="reference|color" />
     </declare-styleable>
 
     <!--侧边栏布局控件自定义属性-->
     <declare-styleable name="SlideLayout">
         <!--滑动过程中背景渐变的颜色，默认：#000000-->
-        <attr name="sl_anim_alpha_color" format="color|reference"/>
+        <attr name="sl_anim_alpha_color" format="color|reference" />
         <!--是否开启边缘滑动，默认：true-->
-        <attr name="sl_edge_enable" format="boolean"/>
+        <attr name="sl_edge_enable" format="boolean" />
         <!--主面板是否可透明，默认：false-->
-        <attr name="sl_main_alpha_enable" format="boolean"/>
+        <attr name="sl_main_alpha_enable" format="boolean" />
+    </declare-styleable>
+
+    <!--可选中TextVIew自定义属性-->
+    <declare-styleable name="CheckedTextView">
+        <!--是否阻止默认的click和longClick事件，默认：true，阻止-->
+        <attr name="ctv_prevent" format="boolean" />
+    </declare-styleable>
+
+    <!--方形ImageView自定义属性-->
+    <declare-styleable name="SquareImageView">
+        <!--右上角按钮图片，默认：空-->
+        <attr name="siv_btn_img" format="reference" />
+        <!--右上角按钮大小，默认：控件大小 * 1 / 6 -->
+        <attr name="siv_btn_size" format="reference|dimension" />
+        <!--右上角按钮颜色，默认：透明 -->
+        <attr name="siv_btn_color" format="reference|color" />
     </declare-styleable>
 </resources>
