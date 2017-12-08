@@ -36,6 +36,8 @@
         <activity android:name=".SliderActivity" />
         <activity android:name=".CheckedTVActivity" />
         <activity android:name=".SquareIVActivity" />
+        <activity android:name=".activity.CheckedRLActivity" />
+        <activity android:name=".activity.FlowLayoutActivity" />
     </application>
 
 </manifest>

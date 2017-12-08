@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.yhy.widgetdemo.activity.CheckedRLActivity;
+import com.yhy.widgetdemo.activity.FlowLayoutActivity;
 import com.yhy.widgetdemo.status.StatusActivity;
 
 import java.util.ArrayList;
@@ -98,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_NAME_LIST.add("SliderActivity");
         WIDGET_NAME_LIST.add("CheckedTextViewActivity");
         WIDGET_NAME_LIST.add("SquareImageViewActivity");
+        WIDGET_NAME_LIST.add("CheckedRelativeActivity");
+        WIDGET_NAME_LIST.add("FlowLayoutActivity");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
@@ -113,5 +117,7 @@ public class MainActivity extends AppCompatActivity {
         WIDGET_CLASS_LIST.add(SliderActivity.class);
         WIDGET_CLASS_LIST.add(CheckedTVActivity.class);
         WIDGET_CLASS_LIST.add(SquareIVActivity.class);
+        WIDGET_CLASS_LIST.add(CheckedRLActivity.class);
+        WIDGET_CLASS_LIST.add(FlowLayoutActivity.class);
     }
 }

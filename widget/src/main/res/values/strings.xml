@@ -3,7 +3,7 @@
 
     <string name="pre_img_current_item" formatted="false">%d / %d</string>
 
-    <string name="sta_status_loading">正在加载...</string>
+    <string name="sta_status_loading">正在加载 ...</string>
     <string name="sta_status_error">出错啦，点击重试</string>
     <string name="sta_status_empty">数据被外星人绑架啦</string>
 </resources>

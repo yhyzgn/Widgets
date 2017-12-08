@@ -12,6 +12,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.yhy.widget.core.activity.ImgPreCfg;
 import com.yhy.widgetdemo.utils.ImgUtils;
+import com.yhy.widgetdemo.utils.ToastUtils;
 
 /**
  * Created by HongYi Yan on 2017/4/10 19:40.
@@ -57,5 +58,7 @@ public class App extends Application {
                 Glide.with(iv.getContext()).load(model).into(iv);
             }
         });
+
+        ToastUtils.init(this);
     }
 }

@@ -146,4 +146,14 @@
         <!--右上角按钮内边距，默认：2dp -->
         <attr name="siv_btn_padding" format="reference|dimension" />
     </declare-styleable>
+
+    <!--可选中TextVIew自定义属性-->
+    <declare-styleable name="FlowLayout">
+        <!--是否阻止默认的click和longClick事件，默认：true，阻止-->
+        <attr name="fl_gravity" format="enum">
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

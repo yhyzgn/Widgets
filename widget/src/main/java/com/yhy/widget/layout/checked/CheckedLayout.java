@@ -1,40 +1,38 @@
-package com.yhy.widget.core.checked;
+package com.yhy.widget.layout.checked;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Checkable;
-
-import com.yhy.widget.R;
 
 /**
  * author : 颜洪毅
  * e-mail : yhyzgn@gmail.com
- * time   : 2017-12-06 14:57
+ * time   : 2017-12-08 9:44
  * version: 1.0.0
- * desc   : 可选中的TextView
+ * desc   : 可选中的ViewGroup
  */
-public class CheckedTextView extends AppCompatTextView implements Checkable {
+public abstract class CheckedLayout extends ViewGroup implements Checkable {
     // 指示控件已经选中时的状态，如果给控件指定这个属性，就代表控件就已经选中，会调用selector里的android:state_checked="true"来加载它的显示图片
     private final static int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
     // 选中状态，默认为false
     private boolean mIsChecked;
-    // 是否阻止click和longClick事件，默认为true
-    private boolean mIsPrevent;
     // 选中状态改变事件监听器
     private OnCheckedChangeListener mListener;
+    // 记录点击事件按下时的坐标
+    private float mDownX, mDownY;
 
-    public CheckedTextView(Context context) {
+    public CheckedLayout(Context context) {
         this(context, null);
     }
 
-    public CheckedTextView(Context context, AttributeSet attrs) {
+    public CheckedLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CheckedTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CheckedLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -46,9 +44,6 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
      * @param attrs   属性集
      */
     private void init(Context context, AttributeSet attrs) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CheckedTextView);
-        mIsPrevent = ta.getBoolean(R.styleable.CheckedTextView_ctv_prevent, true);
-        ta.recycle();
     }
 
     /**
@@ -64,7 +59,12 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
         mIsChecked = checked;
         // 刷新状态样式
         refreshDrawableState();
-        // 如果设置了监听器，就触发状态改变事件
+        // 刷新子控件状态样式
+        for (int i = 0; i < getChildCount(); i++) {
+            getChildAt(i).refreshDrawableState();
+        }
+
+        // 回调状态改变事件
         if (null != mListener) {
             mListener.onChanged(this, mIsChecked);
         }
@@ -105,26 +105,55 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
     }
 
     /**
-     * 触摸事件
+     * 事件分发处理
      *
      * @param event 当前事件
-     * @return 事件是否被消费
+     * @return 是否拦截事件
      */
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // 如果设置了监听器并且阻止事件的话，就阻止事件。这里主要阻止longClick事件
-                return null != mListener && mIsPrevent || super.onTouchEvent(event);
+                break;
             case MotionEvent.ACTION_UP:
                 // 切换状态
                 toggle();
-                // 如果设置了监听器，并且阻止事件，就阻止，这里主要阻止click事件
-                return null != mListener && (mIsPrevent || super.onTouchEvent(event));
+                break;
             default:
                 break;
         }
-        return super.onTouchEvent(event);
+        // return true 拦截事件，不然子控件触发触摸事件
+        return true;
+    }
+
+    /**
+     * 大小改变回调
+     *
+     * @param w    宽度
+     * @param h    高度
+     * @param oldw 原始宽度
+     * @param oldh 原始高度
+     */
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        // 子视图与父控件perssed 等状态保持一致
+        dispatchChildren(this);
+    }
+
+    /**
+     * 设置子视图与父控件perssed 等状态保持一致
+     *
+     * @param view 各级子控件
+     */
+    private void dispatchChildren(View view) {
+        // 子视图与父控件perssed 等状态保持一致
+        view.setDuplicateParentStateEnabled(true);
+        if (view instanceof ViewGroup && ((ViewGroup) view).getChildCount() > 0) {
+            for (int i = 0; i < getChildCount(); i++) {
+                dispatchChildren(((ViewGroup) view).getChildAt(i));
+            }
+        }
     }
 
     /**
@@ -143,9 +172,9 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
         /**
          * 状态改变回调
          *
-         * @param ctv       当前控件
+         * @param cl        当前控件
          * @param isChecked 是否被选中
          */
-        void onChanged(CheckedTextView ctv, boolean isChecked);
+        void onChanged(CheckedLayout cl, boolean isChecked);
     }
 }

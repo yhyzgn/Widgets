@@ -11,7 +11,15 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
+        android:visibility="gone"
         app:SpinKit_Color="#06C1AE" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        style="@style/AVLoadingIndicatorView.Small"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:indicatorColor="#06C1AE"
+        app:indicatorName="PacmanIndicator" />
 
     <TextView
         android:layout_width="wrap_content"
