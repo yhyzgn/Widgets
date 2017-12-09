@@ -180,6 +180,7 @@ public class CheckedFrameLayout extends FrameLayout implements Checkable {
          *
          * @param cfl       当前控件
          * @param isChecked 是否将要被选中
+         * @return 是否可被选中
          */
         boolean beforeChange(CheckedFrameLayout cfl, boolean isChecked);
     }

@@ -162,6 +162,7 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
          *
          * @param ctv       当前控件
          * @param isChecked 是否将要被选中
+         * @return 是否可被选中
          */
         boolean beforeChange(CheckedTextView ctv, boolean isChecked);
     }
