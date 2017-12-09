@@ -1,4 +1,4 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.yhy.widget.core.picker.PickerView;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 import com.yhy.widgetdemo.emtity.TestEntity;
 
 import java.util.ArrayList;
@@ -18,15 +20,22 @@ import java.util.List;
  * version: 1.0.0
  * desc   :
  */
-public class PickViewActivity extends AppCompatActivity {
+public class PickViewActivity extends BaseActivity {
+
+    private PickerView<TestEntity> pvTest;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pick_view);
+    protected int getLayout() {
+        return R.layout.activity_pick_view;
+    }
 
-        PickerView<TestEntity> pvTest = (PickerView<TestEntity>) findViewById(R.id.pv_test);
+    @Override
+    protected void initView() {
+        pvTest = findViewById(R.id.pv_test);
+    }
 
+    @Override
+    protected void initData() {
         List<TestEntity> testList = new ArrayList<>();
         for (int i = 1; i <= 40; i++) {
             testList.add(new TestEntity(i, "Data " + i));
@@ -40,8 +49,13 @@ public class PickViewActivity extends AppCompatActivity {
         }).setOnSelectListener(new PickerView.OnSelectListener<TestEntity>() {
             @Override
             public void onSelect(TestEntity data) {
-                Toast.makeText(PickViewActivity.this, data.name, Toast.LENGTH_SHORT).show();
+                toast(data.name);
             }
         });
+    }
+
+    @Override
+    protected void initEvent() {
+
     }
 }

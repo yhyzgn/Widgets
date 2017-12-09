@@ -22,8 +22,8 @@ public class CheckedRelativeLayout extends RelativeLayout implements Checkable {
     private boolean mIsChecked;
     // 选中状态改变事件监听器
     private OnCheckedChangeListener mListener;
-    // 记录点击事件按下时的坐标
-    private float mDownX, mDownY;
+    // 状态改变前观察者
+    private BeforeCheckWatcher mWatcher;
 
     public CheckedRelativeLayout(Context context) {
         this(context, null);
@@ -35,16 +35,6 @@ public class CheckedRelativeLayout extends RelativeLayout implements Checkable {
 
     public CheckedRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
-
-    /**
-     * 初始化
-     *
-     * @param context 上下文对象
-     * @param attrs   属性集
-     */
-    private void init(Context context, AttributeSet attrs) {
     }
 
     /**
@@ -57,6 +47,12 @@ public class CheckedRelativeLayout extends RelativeLayout implements Checkable {
         if (mIsChecked == checked) {
             return;
         }
+
+        if (null != mWatcher && !mWatcher.beforeChange(this, checked)) {
+            // 状态改变前阻止改变
+            return;
+        }
+
         mIsChecked = checked;
         // 刷新状态样式
         refreshDrawableState();
@@ -164,6 +160,28 @@ public class CheckedRelativeLayout extends RelativeLayout implements Checkable {
      */
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         mListener = listener;
+    }
+
+    /**
+     * 设置状态改变前观察者
+     *
+     * @param watcher 状态改变前观察者
+     */
+    public void setBeforeCheckWatcher(BeforeCheckWatcher watcher) {
+        mWatcher = watcher;
+    }
+
+    /**
+     * 状态改变前观察者
+     */
+    public interface BeforeCheckWatcher {
+        /**
+         * 状态改变前回调
+         *
+         * @param crl       当前控件
+         * @param isChecked 是否将要被选中
+         */
+        boolean beforeChange(CheckedRelativeLayout crl, boolean isChecked);
     }
 
     /**

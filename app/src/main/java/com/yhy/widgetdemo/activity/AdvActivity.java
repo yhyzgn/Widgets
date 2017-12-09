@@ -1,19 +1,17 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yhy.widget.core.adv.AdvView;
 import com.yhy.widget.core.adv.adapter.SimpleAdvAdapter;
 import com.yhy.widget.core.adv.adapter.TextAdvAdapter;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +19,25 @@ import java.util.List;
 /**
  * Created by HongYi Yan onOrOff 2017/4/6 20:24.
  */
-public class AdvActivity extends AppCompatActivity {
+public class AdvActivity extends BaseActivity {
 
     private AdvView avSingle;
     private AdvView avMultiple;
     private List<String> mItems;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adv);
+    protected int getLayout() {
+        return R.layout.activity_adv;
+    }
 
+    @Override
+    protected void initView() {
         avSingle = (AdvView) findViewById(R.id.av_view_single);
         avMultiple = (AdvView) findViewById(R.id.av_view_multiple);
+    }
 
+    @Override
+    protected void initData() {
         //设置集合
         mItems = new ArrayList<>();
         mItems.add("这是第1个");
@@ -52,6 +55,11 @@ public class AdvActivity extends AppCompatActivity {
         initMultiple();
     }
 
+    @Override
+    protected void initEvent() {
+
+    }
+
     private void initSingle() {
         avSingle.setAdapter(new TextAdvAdapter(this, mItems));
 
@@ -59,7 +67,7 @@ public class AdvActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 TextView tv = (TextView) view;
-                Toast.makeText(AdvActivity.this, tv.getText() + "::" + position, Toast.LENGTH_SHORT).show();
+                toast(tv.getText() + "::" + position);
             }
         });
         avSingle.setCurrentItem(2);
@@ -84,7 +92,7 @@ public class AdvActivity extends AppCompatActivity {
         avAdapter.setOnItemClickListener(new SimpleAdvAdapter.OnItemClickListener<String>() {
             @Override
             public void onItemClick(SimpleAdvAdapter adapter, int position, String data) {
-                Toast.makeText(AdvActivity.this, "position = " + position + ", " + data, Toast.LENGTH_SHORT).show();
+                toast("position = " + position + ", " + data);
             }
         });
         avMultiple.setAdapter(avAdapter);

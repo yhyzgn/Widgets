@@ -1,4 +1,4 @@
-package com.yhy.widget.layout.checked;
+package com.yhy.widget.layout.flow.tag;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,29 +11,25 @@ import android.widget.FrameLayout;
 /**
  * author : 颜洪毅
  * e-mail : yhyzgn@gmail.com
- * time   : 2017-12-08 9:44
+ * time   : 2017-12-09 9:05
  * version: 1.0.0
- * desc   : 可选中的FrameLayout
+ * desc   : TagFlowLayout中的Tag容器
  */
-public class CheckedFrameLayout extends FrameLayout implements Checkable {
+public class TagContainer extends FrameLayout implements Checkable {
     // 指示控件已经选中时的状态，如果给控件指定这个属性，就代表控件就已经选中，会调用selector里的android:state_checked="true"来加载它的显示图片
     private final static int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
     // 选中状态，默认为false
     private boolean mIsChecked;
-    // 选中状态改变事件监听器
-    private OnCheckedChangeListener mListener;
-    // 状态改变前观察者
-    private BeforeCheckWatcher mWatcher;
 
-    public CheckedFrameLayout(Context context) {
+    public TagContainer(Context context) {
         this(context, null);
     }
 
-    public CheckedFrameLayout(Context context, AttributeSet attrs) {
+    public TagContainer(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CheckedFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TagContainer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -48,22 +44,12 @@ public class CheckedFrameLayout extends FrameLayout implements Checkable {
             return;
         }
 
-        if (null != mWatcher && !mWatcher.beforeChange(this, checked)) {
-            // 状态改变前阻止改变
-            return;
-        }
-
         mIsChecked = checked;
         // 刷新状态样式
         refreshDrawableState();
         // 刷新子控件状态样式
         for (int i = 0; i < getChildCount(); i++) {
             getChildAt(i).refreshDrawableState();
-        }
-
-        // 回调状态改变事件
-        if (null != mListener) {
-            mListener.onChanged(this, mIsChecked);
         }
     }
 
@@ -102,28 +88,6 @@ public class CheckedFrameLayout extends FrameLayout implements Checkable {
     }
 
     /**
-     * 事件分发处理
-     *
-     * @param event 当前事件
-     * @return 是否拦截事件
-     */
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                break;
-            case MotionEvent.ACTION_UP:
-                // 切换状态
-                toggle();
-                break;
-            default:
-                break;
-        }
-        // return true 拦截事件，不然子控件触发触摸事件
-        return true;
-    }
-
-    /**
      * 大小改变回调
      *
      * @param w    宽度
@@ -154,47 +118,11 @@ public class CheckedFrameLayout extends FrameLayout implements Checkable {
     }
 
     /**
-     * 设置选中状态改变事件监听器
+     * 获取真正的TagView
      *
-     * @param listener 选中状态改变事件监听器
+     * @return 真正的TagView
      */
-    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
-        mListener = listener;
-    }
-
-    /**
-     * 设置状态改变前观察者
-     *
-     * @param watcher 状态改变前观察者
-     */
-    public void setBeforeCheckWatcher(BeforeCheckWatcher watcher) {
-        mWatcher = watcher;
-    }
-
-    /**
-     * 状态改变前观察者
-     */
-    public interface BeforeCheckWatcher {
-        /**
-         * 状态改变前回调
-         *
-         * @param cfl       当前控件
-         * @param isChecked 是否将要被选中
-         */
-        boolean beforeChange(CheckedFrameLayout cfl, boolean isChecked);
-    }
-
-    /**
-     * 选中状态改变事件监听器
-     */
-    public interface OnCheckedChangeListener {
-
-        /**
-         * 状态改变回调
-         *
-         * @param cfl       当前控件
-         * @param isChecked 是否被选中
-         */
-        void onChanged(CheckedFrameLayout cfl, boolean isChecked);
+    public View getTagView() {
+        return getChildAt(0);
     }
 }

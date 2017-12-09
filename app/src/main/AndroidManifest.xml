@@ -19,25 +19,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdvActivity" />
-        <activity android:name=".TitleActivity" />
-        <activity android:name=".RvActivity" />
-        <activity android:name=".ETVActivity" />
-        <activity android:name=".RIVActivity" />
-        <activity android:name=".LoadingActivity" />
-        <activity android:name=".SwitchButtonActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".PreviewImageActivity" />
-        <activity android:name=".PickViewActivity" />
+        <activity android:name=".activity.AdvActivity" />
+        <activity android:name=".activity.TitleActivity" />
+        <activity android:name=".activity.RvActivity" />
+        <activity android:name=".activity.ETVActivity" />
+        <activity android:name=".activity.RIVActivity" />
+        <activity android:name=".activity.LoadingActivity" />
+        <activity android:name=".activity.SwitchButtonActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.PreviewImageActivity" />
+        <activity android:name=".activity.PickViewActivity" />
         <activity android:name=".status.StatusActivity" />
         <activity android:name=".status.LayoutActivity" />
         <activity android:name=".status.HelperActivity" />
         <activity android:name=".status.DefActivity" />
-        <activity android:name=".SliderActivity" />
-        <activity android:name=".CheckedTVActivity" />
-        <activity android:name=".SquareIVActivity" />
+        <activity android:name=".activity.SliderActivity" />
+        <activity android:name=".activity.CheckedTVActivity" />
+        <activity android:name=".activity.SquareIVActivity" />
         <activity android:name=".activity.CheckedRLActivity" />
         <activity android:name=".activity.FlowLayoutActivity" />
+        <activity android:name=".activity.TagFlowActivity" />
     </application>
 
 </manifest>

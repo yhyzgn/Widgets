@@ -1,33 +1,38 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yhy.widget.core.exptext.ExpandTextView;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
-public class ETVActivity extends AppCompatActivity {
+public class ETVActivity extends BaseActivity {
 
     private ExpandTextView etvContent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_etv);
+    protected int getLayout() {
+        return R.layout.activity_etv;
+    }
 
+    @Override
+    protected void initView() {
         etvContent = (ExpandTextView) findViewById(R.id.etv_content);
-
         etvContent.mapViewId(R.id.tv_content, R.id.tv_expand);
+    }
 
+    @Override
+    protected void initData() {
         etvContent.setText("哈哈哈哈哈哈啊哈哈哈哈");
-
         etvContent.setText("测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本");
+    }
 
+    @Override
+    protected void initEvent() {
         etvContent.setOnExpandStateChangeListener(new ExpandTextView.OnExpandStateChangeListener() {
             @Override
             public void onExpandStateChanged(TextView textView, boolean isExpanded) {
-                Toast.makeText(ETVActivity.this, isExpanded ? "展开了" : "收起了", Toast.LENGTH_SHORT).show();
+                toast(isExpanded ? "展开了" : "收起了");
             }
         });
     }

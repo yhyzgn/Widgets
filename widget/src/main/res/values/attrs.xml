@@ -147,7 +147,7 @@
         <attr name="siv_btn_padding" format="reference|dimension" />
     </declare-styleable>
 
-    <!--可选中TextVIew自定义属性-->
+    <!--流式布局自定义属性-->
     <declare-styleable name="FlowLayout">
         <!--是否阻止默认的click和longClick事件，默认：true，阻止-->
         <attr name="fl_gravity" format="enum">
@@ -155,5 +155,13 @@
             <enum name="center" value="0" />
             <enum name="right" value="1" />
         </attr>
+    </declare-styleable>
+
+    <!--标签流式布局自定义属性-->
+    <declare-styleable name="TagFlowLayout">
+        <!--允许选中的最大数量，默认值：-1，无限-->
+        <attr name="tfl_max_count" format="integer" />
+        <!--是否是单选，默认：false-->
+        <attr name="tfl_is_single" format="boolean" />
     </declare-styleable>
 </resources>

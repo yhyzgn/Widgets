@@ -1,26 +1,36 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yhy.widget.core.title.TitleBar;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
 /**
  * Created by HongYi Yan on 2017/4/6 23:54.
  */
-public class TitleActivity extends AppCompatActivity {
+public class TitleActivity extends BaseActivity {
+
+    private TitleBar tbTest1;
+    private TitleBar tbTest2;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_title);
+    protected int getLayout() {
+        return R.layout.activity_title;
+    }
 
-        TitleBar tbTest1 = $(R.id.tb_test_1);
-        TitleBar tbTest2 = $(R.id.tb_test_2);
+    @Override
+    protected void initView() {
+        tbTest1 = $(R.id.tb_test_1);
+        tbTest2 = $(R.id.tb_test_2);
+    }
 
+    @Override
+    protected void initData() {
+    }
+
+    @Override
+    protected void initEvent() {
         tbTest2.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
             @Override
             public void titleClick(View view) {
@@ -48,13 +58,5 @@ public class TitleActivity extends AppCompatActivity {
                 toast("右边文本");
             }
         });
-    }
-
-    public <T extends View> T $(int resId) {
-        return (T) findViewById(resId);
-    }
-
-    public void toast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yhy.widgetdemo.R;
 
@@ -21,6 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         initView();
+        initData();
         initEvent();
     }
 
@@ -28,9 +30,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initView();
 
+    protected abstract void initData();
+
     protected abstract void initEvent();
 
     public <T extends View> T $(int id) {
         return findViewById(id);
+    }
+
+    public void toast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

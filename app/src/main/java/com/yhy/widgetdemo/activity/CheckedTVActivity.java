@@ -1,12 +1,10 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yhy.widget.core.checked.CheckedTextView;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
 /**
  * author : 颜洪毅
@@ -15,19 +13,28 @@ import com.yhy.widget.core.checked.CheckedTextView;
  * version: 1.0.0
  * desc   :
  */
-public class CheckedTVActivity extends AppCompatActivity {
+public class CheckedTVActivity extends BaseActivity {
 
     private CheckedTextView ctvDef;
     private CheckedTextView ctvPrev;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checked_textview);
+    protected int getLayout() {
+        return R.layout.activity_checked_textview;
+    }
 
+    @Override
+    protected void initView() {
         ctvDef = findViewById(R.id.ctv_def);
         ctvPrev = findViewById(R.id.ctv_prev);
+    }
 
+    @Override
+    protected void initData() {
+    }
+
+    @Override
+    protected void initEvent() {
         ctvDef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,9 +78,5 @@ public class CheckedTVActivity extends AppCompatActivity {
                 toast("isChecked = " + isChecked);
             }
         });
-    }
-
-    private void toast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,29 +1,38 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.yhy.widget.core.activity.ImgPreCfg;
 import com.yhy.widget.core.activity.PreImgActivity;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreviewImageActivity extends AppCompatActivity {
+public class PreviewImageActivity extends BaseActivity {
 
     private ImageView ivA;
     private ImageView ivB;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preview_image);
+    protected int getLayout() {
+        return R.layout.activity_preview_image;
+    }
 
+    @Override
+    protected void initView() {
         ivA = (ImageView) findViewById(R.id.iv_a);
         ivB = (ImageView) findViewById(R.id.iv_b);
+    }
 
+    @Override
+    protected void initData() {
+    }
+
+    @Override
+    protected void initEvent() {
         ivA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

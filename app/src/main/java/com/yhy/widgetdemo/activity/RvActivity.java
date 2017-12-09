@@ -1,29 +1,34 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.yhy.widget.core.recycler.div.RvDivider;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 import com.yhy.widgetdemo.adapter.RvTestAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RvActivity extends AppCompatActivity {
+public class RvActivity extends BaseActivity {
     private final List<String> TEST_STR_LIST = new ArrayList<>();
     private RecyclerView rvContent;
     private RvDivider mDivider;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rv);
+    protected int getLayout() {
+        return R.layout.activity_rv;
+    }
 
+    @Override
+    protected void initView() {
         rvContent = findViewById(R.id.rv_content);
+    }
 
+    @Override
+    protected void initData() {
         TEST_STR_LIST.add("Test 1");
         TEST_STR_LIST.add("Test 2");
         TEST_STR_LIST.add("Test 3");
@@ -43,6 +48,11 @@ public class RvActivity extends AppCompatActivity {
 //        vertical();
 
         gridview();
+    }
+
+    @Override
+    protected void initEvent() {
+
     }
 
     private void gridview() {

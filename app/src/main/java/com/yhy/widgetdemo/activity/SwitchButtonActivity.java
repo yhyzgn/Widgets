@@ -1,19 +1,21 @@
-package com.yhy.widgetdemo;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Toast;
+package com.yhy.widgetdemo.activity;
 
 import com.yhy.widget.core.toggle.SwitchButton;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
-public class SwitchButtonActivity extends AppCompatActivity {
+public class SwitchButtonActivity extends BaseActivity {
+
+    private SwitchButton switchButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_switch_button);
+    protected int getLayout() {
+        return R.layout.activity_switch_button;
+    }
 
-        SwitchButton switchButton = (SwitchButton) findViewById(R.id.switch_button);
+    @Override
+    protected void initView() {
+        switchButton = (SwitchButton) findViewById(R.id.switch_button);
 
         switchButton.onOrOff(true);
         switchButton.isOn();
@@ -22,10 +24,19 @@ public class SwitchButtonActivity extends AppCompatActivity {
         switchButton.setShadowEffect(true);//disable shadow effect
         switchButton.setEnabled(true);//disable button
         switchButton.setEnableEffect(false);//disable the switch animation
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initEvent() {
         switchButton.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isOn) {
-                Toast.makeText(SwitchButtonActivity.this, "isOn = " + isOn, Toast.LENGTH_SHORT).show();
+                toast("isOn = " + isOn);
             }
         });
     }

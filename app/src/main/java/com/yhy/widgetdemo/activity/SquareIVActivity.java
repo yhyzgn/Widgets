@@ -1,4 +1,4 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import com.yhy.widget.core.activity.ImgPreCfg;
 import com.yhy.widget.core.activity.PreImgActivity;
 import com.yhy.widget.core.img.SquareImageView;
 import com.yhy.widget.core.recycler.div.RvDivider;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 import com.yhy.widgetdemo.utils.ImgUtils;
 
 /**
@@ -25,24 +27,38 @@ import com.yhy.widgetdemo.utils.ImgUtils;
  * version: 1.0.0
  * desc   :
  */
-public class SquareIVActivity extends AppCompatActivity {
+public class SquareIVActivity extends BaseActivity {
     private final String mUrl = "http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg";
     private SquareImageView sivDef;
     private SquareImageView sivAttrs;
     private RecyclerView rvCiv;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_square_imageview);
+    protected int getLayout() {
+        return R.layout.activity_square_imageview;
+    }
 
+    @Override
+    protected void initView() {
         sivDef = findViewById(R.id.siv_def);
         sivAttrs = findViewById(R.id.siv_attrs);
         rvCiv = findViewById(R.id.rv_civ);
 
         rvCiv.setLayoutManager(new GridLayoutManager(this, 4));
+    }
 
+    @Override
+    protected void initData() {
         ImgUtils.load(this, sivDef, mUrl);
+
+        ImgUtils.load(this, sivAttrs, mUrl);
+
+        rvCiv.setAdapter(new RvAdapter());
+        rvCiv.addItemDecoration(new RvDivider.Builder(this).color(Color.TRANSPARENT).widthDp(2.0f).build());
+    }
+
+    @Override
+    protected void initEvent() {
         sivDef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +67,6 @@ public class SquareIVActivity extends AppCompatActivity {
             }
         });
 
-        ImgUtils.load(this, sivAttrs, mUrl);
         sivAttrs.setOnBtnClickListener(new SquareImageView.OnBtnClickListener() {
             @Override
             public void onClick(SquareImageView siv) {
@@ -65,9 +80,6 @@ public class SquareIVActivity extends AppCompatActivity {
                 PreImgActivity.preview(SquareIVActivity.this, cfg);
             }
         });
-
-        rvCiv.setAdapter(new RvAdapter());
-        rvCiv.addItemDecoration(new RvDivider.Builder(this).color(Color.TRANSPARENT).widthDp(2.0f).build());
     }
 
     private class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {

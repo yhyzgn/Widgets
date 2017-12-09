@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.yhy.widget.layout.checked.CheckedRelativeLayout;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
-import com.yhy.widgetdemo.utils.ToastUtils;
 
 /**
  * author : 颜洪毅
@@ -34,18 +33,30 @@ public class CheckedRLActivity extends BaseActivity {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     protected void initEvent() {
-//        tvTest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ToastUtils.shortT("点击了TextView");
-//            }
-//        });
+        tvTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toast("点击了TextView");
+            }
+        });
+
+        crlTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toast("点击");
+            }
+        });
 
         crlTest.setOnCheckedChangeListener(new CheckedRelativeLayout.OnCheckedChangeListener() {
             @Override
             public void onChanged(CheckedRelativeLayout crl, boolean isChecked) {
-                ToastUtils.shortT("isChecked = " + isChecked);
+                toast("isChecked = " + isChecked);
             }
         });
     }

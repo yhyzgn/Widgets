@@ -25,6 +25,8 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
     private boolean mIsPrevent;
     // 选中状态改变事件监听器
     private OnCheckedChangeListener mListener;
+    // 状态改变前观察者
+    private BeforeCheckWatcher mWatcher;
 
     public CheckedTextView(Context context) {
         this(context, null);
@@ -61,6 +63,12 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
         if (mIsChecked == checked) {
             return;
         }
+
+        if (null != mWatcher && !mWatcher.beforeChange(this, checked)) {
+            // 状态改变前阻止改变
+            return;
+        }
+
         mIsChecked = checked;
         // 刷新状态样式
         refreshDrawableState();
@@ -134,6 +142,28 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
      */
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         mListener = listener;
+    }
+
+    /**
+     * 设置状态改变前观察者
+     *
+     * @param watcher 状态改变前观察者
+     */
+    public void setBeforeCheckWatcher(BeforeCheckWatcher watcher) {
+        mWatcher = watcher;
+    }
+
+    /**
+     * 状态改变前观察者
+     */
+    public interface BeforeCheckWatcher {
+        /**
+         * 状态改变前回调
+         *
+         * @param ctv       当前控件
+         * @param isChecked 是否将要被选中
+         */
+        boolean beforeChange(CheckedTextView ctv, boolean isChecked);
     }
 
     /**

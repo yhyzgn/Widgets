@@ -1,17 +1,15 @@
-package com.yhy.widgetdemo;
+package com.yhy.widgetdemo.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yhy.widget.layout.slider.SlideLayout;
+import com.yhy.widgetdemo.R;
+import com.yhy.widgetdemo.activity.base.BaseActivity;
 
 /**
  * author : 颜洪毅
@@ -20,21 +18,26 @@ import com.yhy.widget.layout.slider.SlideLayout;
  * version: 1.0.0
  * desc   :
  */
-public class SliderActivity extends AppCompatActivity {
+public class SliderActivity extends BaseActivity {
 
     private SlideLayout slSlide;
     private TextView tvMenu;
     private ViewPager vpContent;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_slider);
+    protected int getLayout() {
+        return R.layout.activity_slider;
+    }
 
+    @Override
+    protected void initView() {
         slSlide = (SlideLayout) findViewById(R.id.sl_slide);
         tvMenu = (TextView) findViewById(R.id.tv_menu);
         vpContent = (ViewPager) findViewById(R.id.vp_content);
+    }
 
+    @Override
+    protected void initData() {
         vpContent.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -69,7 +72,10 @@ public class SliderActivity extends AppCompatActivity {
                 container.removeView((View) object);
             }
         });
+    }
 
+    @Override
+    protected void initEvent() {
         tvMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,9 +107,5 @@ public class SliderActivity extends AppCompatActivity {
                 tvMenu.setText("比例：" + percent);
             }
         });
-    }
-
-    private void toast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }
