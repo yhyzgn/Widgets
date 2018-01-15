@@ -13,22 +13,23 @@ import android.widget.ScrollView;
  * version: 1.0.0
  * desc   :
  */
-public class RecycleScrollView extends ScrollView {
+public class RecyclerScrollView extends ScrollView {
     private int downX;
     private int downY;
     private int mTouchSlop;
+    private OnScrollListener mListener;
 
-    public RecycleScrollView(Context context) {
+    public RecyclerScrollView(Context context) {
         super(context);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
-    public RecycleScrollView(Context context, AttributeSet attrs) {
+    public RecyclerScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
-    public RecycleScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RecyclerScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
@@ -48,5 +49,39 @@ public class RecycleScrollView extends ScrollView {
                 }
         }
         return super.onInterceptTouchEvent(e);
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (null != mListener) {
+            mListener.onScroll(this, l, t, oldl, oldt);
+        }
+    }
+
+    /**
+     * 设置滚动监听器
+     *
+     * @param listener 滚动监听器
+     */
+    public void setOnScrollListener(OnScrollListener listener) {
+        mListener = listener;
+    }
+
+    /**
+     * 滚动监听器
+     */
+    public interface OnScrollListener {
+
+        /**
+         * 当ScrollView发生滚动时回调
+         *
+         * @param view 当前控件
+         * @param x    x方向当前值
+         * @param y    y方向当前值
+         * @param oldX x方向前一次值
+         * @param oldY y方向前一次值
+         */
+        void onScroll(RecyclerScrollView view, int x, int y, int oldX, int oldY);
     }
 }
