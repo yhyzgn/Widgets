@@ -193,6 +193,7 @@ public class CheckedLinearLayout extends LinearLayout implements Checkable {
          *
          * @param cll       当前控件
          * @param isChecked 是否被选中
+         * @return 是否可被选中
          */
         void onChanged(CheckedLinearLayout cll, boolean isChecked);
     }

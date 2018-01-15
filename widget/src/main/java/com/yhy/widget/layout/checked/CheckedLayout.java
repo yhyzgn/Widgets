@@ -177,8 +177,9 @@ public abstract class CheckedLayout extends ViewGroup implements Checkable {
         /**
          * 状态改变前回调
          *
-         * @param cl       当前控件
+         * @param cl        当前控件
          * @param isChecked 是否将要被选中
+         * @return 是否可被选中
          */
         boolean beforeChange(CheckedLayout cl, boolean isChecked);
     }
