@@ -23,7 +23,6 @@
         <activity android:name=".activity.RvActivity" />
         <activity android:name=".activity.ETVActivity" />
         <activity android:name=".activity.RIVActivity" />
-        <activity android:name=".activity.LoadingActivity" />
         <activity android:name=".activity.SwitchButtonActivity" />
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.PreviewImageActivity" />

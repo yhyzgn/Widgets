@@ -40,15 +40,15 @@
 
     <!--圆形ImageView属性-->
     <declare-styleable name="AbsCornerImageView">
-        <!--边框宽度-->
+        <!--边框宽度，默认0dp-->
         <attr name="civ_border_width" format="dimension" />
-        <!--边框颜色-->
+        <!--边框颜色，默认黑色-->
         <attr name="civ_border_color" format="color" />
-        <!--是否允许边框覆盖在图层上-->
+        <!--是否允许边框覆盖在图层上，默认false-->
         <attr name="civ_border_overlay" format="boolean" />
-        <!--填充颜色-->
+        <!--填充颜色，默认透明-->
         <attr name="civ_fill_color" format="color" />
-        <!--控件四周圆角半径-->
+        <!--控件四周圆角半径，默认0dp-->
         <attr name="riv_radius" format="dimension" />
     </declare-styleable>
 
@@ -82,40 +82,63 @@
 
     <!--SettingsItemView属性-->
     <declare-styleable name="SettingsItemView">
+        <!--左边图标，默认空-->
         <attr name="siv_icon" format="reference" />
+        <!--是否显示左边图标，默认false-->
         <attr name="siv_show_icon" format="boolean" />
+        <!--右边箭头，默认空-->
         <attr name="siv_arrow" format="reference" />
+        <!--是否显示右边箭头，默认false-->
         <attr name="siv_show_arrow" format="boolean" />
+        <!--左边文本，默认空-->
         <attr name="siv_name" format="reference|string" />
+        <!--左边文本宽度，单位dp，默认自适应-->
         <attr name="siv_name_width" format="reference|dimension" />
+        <!--左边文本对其方式【left|center|right】，默认left-->
         <attr name="siv_name_gravity" format="integer">
             <enum name="left" value="0" />
             <enum name="center" value="1" />
             <enum name="right" value="2" />
         </attr>
+        <!--左边文本大小，单位sp，默认14sp-->
         <attr name="siv_name_size" format="reference|dimension" />
+        <!--左边文本颜色，默认#000000-->
         <attr name="siv_name_color" format="reference|color" />
+        <!--右边内容，默认空-->
         <attr name="siv_text" format="reference|string" />
+        <!--右边内容对齐方式【left|center|right】，默认right-->
         <attr name="siv_text_gravity" format="integer">
             <enum name="left" value="0" />
             <enum name="center" value="1" />
             <enum name="right" value="2" />
         </attr>
+        <!--右边提示文本，默认空-->
         <attr name="siv_hint" format="reference|string" />
+        <!--右边字体大小，单位sp，默认14sp-->
         <attr name="siv_text_size" format="reference|dimension" />
+        <!--右边字体颜色，默认#000000-->
         <attr name="siv_text_color" format="reference|color" />
+        <!--是否打开开关，默认false-->
         <attr name="siv_switch_on" format="boolean" />
+        <!--开关控件宽度，单位dp，默认48dp-->
         <attr name="siv_switch_width" format="reference|dimension" />
+        <!--开关控件高度，单位dp，默认28dp-->
         <attr name="siv_switch_height" format="reference|dimension" />
+        <!--是否显示开关控件，默认false-->
         <attr name="siv_show_switch" format="boolean" />
+        <!--是否可编辑，默认false-->
         <attr name="siv_editable" format="boolean" />
+        <!--光标颜色资源，默认为系统默认-->
         <attr name="siv_cursor_drawable" format="reference" />
     </declare-styleable>
 
     <!--PickerView属性-->
     <declare-styleable name="PickerView">
+        <!--字体最大尺寸，默认20sp-->
         <attr name="pv_max_text_size" format="reference|dimension" />
+        <!--字体最小尺寸，默认14sp-->
         <attr name="pv_min_text_size" format="reference|dimension" />
+        <!--字体颜色，默认#e84c3d-->
         <attr name="pv_text_color" format="reference|color" />
     </declare-styleable>
 

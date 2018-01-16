@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -68,6 +69,7 @@ public class PickerView<T> extends View {
     private ItemProvider<T> mItemProvider;
     private OnSelectListener<T> mSelectListener;
 
+    @SuppressLint("HandlerLeak")
     Handler updateHandler = new Handler() {
 
         @Override

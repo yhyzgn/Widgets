@@ -44,38 +44,37 @@
 
   > 核心控件，即各种独立使用的控件
 
-  |                 名称                  |               描述                |
-  | :---------------------------------: | :-----------------------------: |
-  | [`PreImgActivity`](#PreImgActivity) |           点击图片查看大图控件            |
-  |              `AdvView`              |            滚动广告轮播控件             |
-  |          `CheckedTextView`          |         可选中的`TextView`          |
-  |          `ExpandTextView`           |        可展开收起的`TextView`         |
-  |          `SquareImageView`          |  正方形`ImageView`，右上角可设置按钮及点击事件   |
-  |          `CircleImageView`          |              圆形图片               |
-  |          `RoundImageView`           |              圆角图片               |
-  |            `LoadingView`            |             加载状态控件              |
-  |          `HackyViewPager`           |       防止内存溢出的`ViewPager`        |
-  |            `PickerView`             |           上下滚动数据选取控件            |
-  |        `RecyclerScrollView`         | 用来嵌套`RecyclerView`的`ScrollView` |
-  |             `RvDivider`             |       `RecyclerView`的分割线        |
-  |         `SettingsItemView`          |          常用设置布局中的条目控件           |
-  |             `TitleBar`              |             常用标题栏控件             |
-  |           `SwitchButton`            |              开关控件               |
+  |                    名称                    |               描述                |
+  | :--------------------------------------: | :-----------------------------: |
+  |   [`PreImgActivity`](#PreImgActivity)    |           点击图片查看大图控件            |
+  |          [`AdvView`](#AdvView)           |            滚动广告轮播控件             |
+  |  [`CheckedTextView`](#CheckedTextView)   |         可选中的`TextView`          |
+  |   [`ExpandTextView`](#ExpandTextView)    |        可展开收起的`TextView`         |
+  |  [`SquareImageView`](#SquareImageView)   |  正方形`ImageView`，右上角可设置按钮及点击事件   |
+  |  [`CircleImageView`](#CircleImageView)   |              圆形图片               |
+  |   [`RoundImageView`](#RoundImageView)    |              圆角图片               |
+  |   [`HackyViewPager`](#HackyViewPager)    |    多点触摸滑动时防止内存溢出的`ViewPager`    |
+  |       [`PickerView`](#PickerView)        |           上下滚动数据选取控件            |
+  | [`RecyclerScrollView`](#RecyclerScrollView) | 用来嵌套`RecyclerView`的`ScrollView` |
+  |        [`RvDivider`](#RvDivider)         |       `RecyclerView`的分割线        |
+  | [`SettingsItemView`](#SettingsItemView)  |          常用设置布局中的条目控件           |
+  |         [`TitleBar`](#TitleBar)          |             常用标题栏控件             |
+  |     [`SwitchButton`](#SwitchButton)      |              开关控件               |
 
 * `layout`控件
 
   > 布局控件
 
-  |           名称            |          描述           |
-  | :---------------------: | :-------------------: |
-  |  `CheckedFrameLayout`   |   可选中的`FrameLayout`   |
-  |     `CheckedLayout`     |    可选中的`ViewGroup`    |
-  |  `CheckedLinearLayout`  |  可选中的`LinearLayout`   |
-  | `CheckedRelativeLayout` | 可选中的`RelativeLayout`  |
-  |      `FlowLayout`       |    流式布局，标签流式布局的基类     |
-  |     `TagFlowLayout`     |        标签流式布局         |
-  |      `SlideLayout`      |         侧滑布局          |
-  |     `StatusLayout`      | 状态页面布局【加载中，空数据，错误，成功】 |
+  |                    名称                    |          描述           |
+  | :--------------------------------------: | :-------------------: |
+  | [`CheckedFrameLayout`](#CheckedFrameLayout) |   可选中的`FrameLayout`   |
+  |    [`CheckedLayout`](#CheckedLayout)     |    可选中的`ViewGroup`    |
+  | [`CheckedLinearLayout`](#CheckedLinearLayout) |  可选中的`LinearLayout`   |
+  | [`CheckedRelativeLayout`](#CheckedRelativeLayout) | 可选中的`RelativeLayout`  |
+  |       [`FlowLayout`](#FlowLayout)        |    流式布局，标签流式布局的基类     |
+  |    [`TagFlowLayout`](#TagFlowLayout)     |        标签流式布局         |
+  |      [`SlideLayout`](#SlideLayout)       |         侧滑布局          |
+  |     [`StatusLayout`](#StatusLayout)      | 状态页面布局【加载中，空数据，错误，成功】 |
 
 ## 使用说明
 
@@ -109,7 +108,7 @@
     PreImgActivity.preview(this, cfg);
     ```
 
-* `AdvView`
+* <a name = "AdvView">`AdvView`</a>
 
   > 广告轮播展示栏
 
@@ -186,7 +185,7 @@
     |    `av_anim_in`    |    入场动画资源     | `R.anim.adv_in`  |
     |   `av_anim_out`    |    出场动画资源     | `R.anim.adv_out` |
 
-* `CheckedTextView`
+* <a name = "CheckedTextView">`CheckedTextView`</a>
 
   > 可选中的`TextView`
 
@@ -265,7 +264,7 @@
     | :-----------: | :-----------------------: | :----: |
     | `ctv_prevent` | 是否阻止`click`和`longClick`事件 | `true` |
 
-* `ExpandTextView`
+* <a name = "ExpandTextView">`ExpandTextView`</a>
 
   > 可展开收起的`TextView`
 
@@ -338,35 +337,334 @@
     |    `etv_anim_duration`    | 动画执行时间，单位`ms` | `400m` |
     |  `etv_anim_alpha_start`   |  透明度动画开始时的值   | `0.6`  |
 
-* `SquareImageView`
+* <a name = "SquareImageView">`SquareImageView`</a>
 
-* `CircleImageView`
+  > 正方形`ImageView`
 
-* `RoundImageView`
+  * 布局文件
 
-* `LoadingView`
+    ```xml
+    <com.yhy.widget.core.img.SquareImageView 
+      android:id="@+id/siv_test"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:siv_btn_color="#f20"
+      app:siv_btn_img="@drawable/ic_delete_white" />
+    ```
 
-* `HackyViewPager`
+  * 获取控件
 
-* `PickerView`
+    ```java
+    SquareImageView sivTest = findViewById(R.id.siv_test);
+    ```
 
-* `RecyclerScrollView`
+  * 设置数据
 
-* `RvDivider`
+    ```java
+    Glide.with(ctx).load(url).into(sivTest);
+    ```
 
-* `SettingsItemView`
+  * 设置事件
 
-* `TitleBar`
+    ```java
+    sivTest.setOnBtnClickListener(new SquareImageView.OnBtnClickListener() {
+      @Override
+      public void onClick(SquareImageView siv) {
+        Toast.makeText(SquareIVActivity.this, "删除第" + position + "张图片", Toast.LENGTH_SHORT).show();
+      }
+    });
+    ```
 
-* `SwitchButton`
+  * 自定义属性
+
+    |        属性         |       说明        |    默认值     |
+    | :---------------: | :-------------: | :--------: |
+    |   `siv_btn_img`   |     右上角按钮图片     |     无      |
+    |  `siv_btn_size`   | 右上角按钮大小，单位`dp`  | 控件大小的`1/6` |
+    |  `siv_btn_color`  |     右上角按钮颜色     |     透明     |
+    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` |    `2`     |
+
+* <a name = "CircleImageView">`CircleImageView`</a>
+
+  > 圆形图片
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.img.corner.CircleImageView
+      android:id="@+id/civ_test"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:src="@mipmap/ic_avatar"
+      app:civ_border_color="#f40"
+      app:civ_border_overlay="true"
+      app:civ_border_width="2dp"
+      app:civ_fill_color="#0f0"/>
+    ```
+
+  * 获取控件
+
+    ```java
+    CircleImageView civTest = findViewById(R.id.civ_test);
+    ```
+
+  * 设置数据
+
+    ```java
+    Glide.with(ctx).load(url).into(civTest);
+    ```
+
+  * 自定义属性
+
+    |          属性          |     说明      |    默认值    |
+    | :------------------: | :---------: | :-------: |
+    |  `civ_border_width`  | 边框宽度，单位`dp` |    `0`    |
+    |  `civ_border_color`  |    边框颜色     | `#000000` |
+    | `civ_border_overlay` |   是否悬浮边框    |  `false`  |
+    |   `civ_fill_color`   |    填充颜色     |    透明     |
+
+* <a name = "RoundImageView">`RoundImageView`</a>
+
+  > 圆角图片
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.img.corner.RoundImageView
+      android:id="@+id/riv_test"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_marginTop="24dp"
+      android:src="@mipmap/ic_avatar"
+      app:civ_border_color="#f40"
+      app:civ_border_overlay="true"
+      app:civ_border_width="2dp"
+      app:civ_fill_color="#0f0"
+      app:riv_radius="6dp"/>
+    ```
+
+  * 获取控件
+
+    ```java
+    CircleImageView rivTest = findViewById(R.id.riv_test);
+    ```
+
+  * 设置数据
+
+    ```java
+    Glide.with(ctx).load(url).into(rivTest);
+    ```
+
+  * 自定义属性
+
+    |          属性          |     说明      |    默认值    |
+    | :------------------: | :---------: | :-------: |
+    |  `civ_border_width`  | 边框宽度，单位`dp` |    `0`    |
+    |  `civ_border_color`  |    边框颜色     | `#000000` |
+    | `civ_border_overlay` |   是否悬浮边框    |  `false`  |
+    |   `civ_fill_color`   |    填充颜色     |    透明     |
+    |     `riv_radius`     | 圆角半径，单位`dp` |    `0`    |
+
+* <a name = "HackyViewPager">`HackyViewPager`</a>
+
+  > 多点触摸滑动时防止内存溢出的`ViewPager`
+  >
+  > 当成普通`ViewPager`使用即可
+
+* <a name = "PickerView">`PickerView`</a>
+
+  > 上下滚动数据选取控件
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.picker.PickerView
+      android:id="@+id/pv_test"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      app:pv_text_color="#f20"/>
+    ```
+
+  * 获取控件
+
+    ```java
+    PickerView pvText = findViewById(R.id.pv_test);
+    ```
+
+  * 设置数据及事件
+
+    ```java
+    List<TestEntity> testList = new ArrayList<>();
+    for (int i = 1; i <= 40; i++) {
+      testList.add(new TestEntity(i, "Data " + i));
+    }
+
+    pvTest.setData(testList, new PickerView.ItemProvider<TestEntity>() {
+      @Override
+      public String getItem(TestEntity data, int position) {
+        return data.name;
+      }
+    }).setOnSelectListener(new PickerView.OnSelectListener<TestEntity>() {
+      @Override
+      public void onSelect(TestEntity data) {
+        toast(data.name);
+      }
+    });
+    ```
+
+  * 自定义属性
+
+    |         属性         |      说明       |    默认值    |
+    | :----------------: | :-----------: | :-------: |
+    | `pv_max_text_size` | 字体最大尺寸，单位`dp` |   `20`    |
+    | `pv_min_text_size` | 字体最小尺寸，单位`dp` |   `14`    |
+    |  `pv_text_color`   |     字体颜色      | `#e84c3d` |
+
+* <a name = "RecyclerScrollView">`RecyclerScrollView`</a>
+
+  > 用来嵌套`RecyclerView`的`ScrollView`
+  >
+  > 当成普通`ScrollView`使用即可
+
+  * 设置滚动监听事件
+
+    ```java
+    rsvTest.setOnScrollListener(new OnScrollListener() {
+      @Override
+      public void onScroll(RecyclerScrollView view, int x, int y, int oldX, int oldY){
+        toast("当前滚动条y坐标为：" + y);
+      }
+    });
+    ```
+
+* <a name = "RvDivider">`RvDivider`</a>
+
+  > `RecyclerView`的分割线
+  >
+  > 目前只针对`LinearLayoutManager`和`GridLayoutManager`两种布局
+  >
+  > 注意：一定要在设置适配器后添加分割线
+
+  * 创建分割线
+
+    ```java
+    RvDivider mDivider = new RvDivider.Builder(this)
+      .widthDp(30)
+      .color(getResources().getColor(R.color.colorPrimary))
+      .type(RvDivider.DividerType.TYPE_WITH_START_END)
+      .build();
+    ```
+
+
+  * `LinearLayoutManager`
+
+    ```java
+    rvContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    // 先设置适配器，再添加分割线
+    rvContent.addItemDecoration(mDivider);
+    ```
+
+  * `GridLayoutManager`
+
+    ```java
+    rvContent.setLayoutManager(new GridLayoutManager(this, 4));
+    // 先设置适配器，再添加分割线
+    rvContent.addItemDecoration(mDivider);
+    ```
+
+* <a name = "SettingsItemView">`SettingsItemView`</a>
+
+  > 常用设置布局中的条目控件
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.settings.SettingsItemView
+      android:id="@+id/siv_test"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:background="#fff"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      app:siv_name="设置1"
+      app:siv_text="值1" />
+    ```
+
+  * 获取控件
+
+    ```java
+    SettingsItemView sivTest = findViewById(R.id.siv_test);
+    ```
+
+  * 设置数据
+
+    ```java
+    sivTest.setName("左边文字").setText("右边文字");
+    // ... 还有设置图标之类的各种方法，如下
+    sivTest.setIcon(mIcon)
+      .showIcon(mShowIcon)
+      .setArrow(mArrow)
+      .showArrow(mShowArrow)
+      .setName(mName)
+      .setNameWidth(mNameWidth)
+      .setNameColor(mNameColor)
+      .setNameSize(mNameSize)
+      .setText(mText)
+      .setHint(mHint)
+      .setEditable(mEditable)
+      .setTextColor(mTextColor)
+      .setTextSize(mTextSize)
+      .onSwitch(mSwitchOn)
+      .showSwitch(mShowSwitch)
+      .setNameGravity(mNameGravity)
+      .setTextGravity(mTextGravity)
+      .setCursorDrawableRes(mCursorDrawableRes);
+
+    // 如果有开关控件，还需要设置开关监听事件
+    sivTest.setOnSwitchStateChangeListener(new SettingsItemView.OnSwitchStateChangeListener() {
+      @Override
+      public void onStateChanged(SettingsItemView siv, SwitchButton sb, boolean isOn) {
+        toast(siv.getName() + " :: isOn = " + isOn);
+      }
+    });
+    ```
+
+  * 自定义属性
+
+    |          属性           |                说明                 |    默认值    |
+    | :-------------------: | :-------------------------------: | :-------: |
+    |      `siv_icon`       |               左边图标                |     无     |
+    |    `siv_show_icon`    |             是否显示左边图标              |  `false`  |
+    |      `siv_arrow`      |               右边箭头                |     无     |
+    |   `siv_show_arrow`    |             是否显示右边箭头              |  `false`  |
+    |      `siv_name`       |               左边文本                |     空     |
+    |   `siv_name_width`    |           左边文本宽度，单位`dp`           |    自适应    |
+    |  `siv_name_gravity`   | 左边文本对其方式【`left`|`center`|`right`】 |  `left`   |
+    |    `siv_name_size`    |           左边文本大小，单位`sp`           |   `14`    |
+    |   `siv_name_color`    |              左边文本颜色               | `#000000` |
+    |      `siv_text`       |               右边内容                |     空     |
+    |  `siv_text_gravity`   | 右边内容对齐方式【`left`|`center`|`right`】 |  `right`  |
+    |      `siv_hint`       |              右边提示文本               |     空     |
+    |    `siv_text_size`    |           右边字体大小，单位`sp`           |   `14`    |
+    |   `siv_text_color`    |              右边字体颜色               | `#000000` |
+    |    `siv_switch_on`    |              是否打开开关               |  `false`  |
+    |  `siv_switch_width`   |           开关控件宽度，单位`dp`           |   `48`    |
+    |  `siv_switch_height`  |           开关控件高度，单位`dp`           |   `28`    |
+    |   `siv_show_switch`   |             是否显示开关控件              |  `false`  |
+    |    `siv_editable`     |               是否可编辑               |  `false`  |
+    | `siv_cursor_drawable` |              光标颜色资源               |   系统默认    |
+
+* <a name = "TitleBar">`TitleBar`</a>
+
+* <a name = "SwitchButton">`SwitchButton`</a>
 
 #### `layout`控件
 
-* `CheckedFrameLayout`
-* `CheckedLayout`
-* `CheckedLinearLayout`
-* `CheckedRelativeLayout`
-* `FlowLayout`
-* `TagFlowLayout`
-* `SlideLayout`
-* `StatusLayout`
+* <a name = "CheckedFrameLayout">`CheckedFrameLayout`</a>
+* <a name = "CheckedLayout">`CheckedLayout`</a>
+* <a name = "CheckedLinearLayout">`CheckedLinearLayout`</a>
+* <a name = "CheckedRelativeLayout">`CheckedRelativeLayout`</a>
+* <a name = "FlowLayout">`FlowLayout`</a>
+* <a name = "TagFlowLayout">`TagFlowLayout`</a>
+* <a name = "SlideLayout">`SlideLayout`</a>
+* <a name = "StatusLayout">`StatusLayout`</a>

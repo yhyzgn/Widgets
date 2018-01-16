@@ -15,7 +15,6 @@ import com.yhy.widgetdemo.activity.CheckedRLActivity;
 import com.yhy.widgetdemo.activity.CheckedTVActivity;
 import com.yhy.widgetdemo.activity.ETVActivity;
 import com.yhy.widgetdemo.activity.FlowLayoutActivity;
-import com.yhy.widgetdemo.activity.LoadingActivity;
 import com.yhy.widgetdemo.activity.PickViewActivity;
 import com.yhy.widgetdemo.activity.PreviewImageActivity;
 import com.yhy.widgetdemo.activity.RIVActivity;
@@ -59,7 +58,6 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("RvDivider");
         WIDGET_NAME_LIST.add("ExpandTextView");
         WIDGET_NAME_LIST.add("RoundCircleImageView");
-        WIDGET_NAME_LIST.add("LoadingView");
         WIDGET_NAME_LIST.add("SwitchButton");
         WIDGET_NAME_LIST.add("SettingsItemView");
         WIDGET_NAME_LIST.add("PreImgActivity");
@@ -77,7 +75,6 @@ public class MainActivity extends BaseActivity {
         WIDGET_CLASS_LIST.add(RvActivity.class);
         WIDGET_CLASS_LIST.add(ETVActivity.class);
         WIDGET_CLASS_LIST.add(RIVActivity.class);
-        WIDGET_CLASS_LIST.add(LoadingActivity.class);
         WIDGET_CLASS_LIST.add(SwitchButtonActivity.class);
         WIDGET_CLASS_LIST.add(SettingsActivity.class);
         WIDGET_CLASS_LIST.add(PreviewImageActivity.class);
