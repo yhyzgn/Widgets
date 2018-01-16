@@ -81,7 +81,7 @@
 
 #### `core`控件
 
-* <span id = "PreImgActivity">`PreImgActivity`</span>
+* <a name = "PreImgActivity">`PreImgActivity`</a>
 
   > 点击查看大图功能
 
