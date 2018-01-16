@@ -204,8 +204,7 @@ public class SwitchButton extends View {
         }
     };
 
-    private ValueAnimator.AnimatorUpdateListener animatorUpdateListener
-            = new ValueAnimator.AnimatorUpdateListener() {
+    private ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             float value = (Float) animation.getAnimatedValue();
@@ -268,8 +267,7 @@ public class SwitchButton extends View {
         }
     };
 
-    private Animator.AnimatorListener animatorListener
-            = new Animator.AnimatorListener() {
+    private Animator.AnimatorListener animatorListener = new Animator.AnimatorListener() {
         @Override
         public void onAnimationStart(Animator animation) {
         }
@@ -358,101 +356,60 @@ public class SwitchButton extends View {
             typedArray = context.obtainStyledAttributes(attrs, R.styleable.SwitchButton);
         }
 
-        shadowEffect = optBoolean(typedArray,
-                R.styleable.SwitchButton_sb_shadow_effect,
-                true);
+        shadowEffect = optBoolean(typedArray, R.styleable.SwitchButton_sb_shadow_effect, true);
 
-        offCircleColor = optColor(typedArray,
-                R.styleable.SwitchButton_sb_off_circle_color,
-                0XffAAAAAA);//0XffAAAAAA;
+        offCircleColor = optColor(typedArray, R.styleable.SwitchButton_sb_off_circle_color, 0XffAAAAAA);//0XffAAAAAA;
 
-        offCircleWidth = optPixelSize(typedArray,
-                R.styleable.SwitchButton_sb_off_circle_width,
-                dp2pxInt(1.5f));//dp2pxInt(1.5f);
+        offCircleWidth = optPixelSize(typedArray, R.styleable.SwitchButton_sb_off_circle_width, dp2pxInt(1.5f));//dp2pxInt(1.5f);
 
         offCircleOffsetX = dp2px(10);
 
-        offCircleRadius = optPixelSize(typedArray,
-                R.styleable.SwitchButton_sb_off_circle_radius,
-                dp2px(4));//dp2px(4);
+        offCircleRadius = optPixelSize(typedArray, R.styleable.SwitchButton_sb_off_circle_radius, dp2px(4));//dp2px(4);
 
         onLineOffsetX = dp2px(4);
         onLineOffsetY = dp2px(4);
 
-        shadowRadius = optPixelSize(typedArray,
-                R.styleable.SwitchButton_sb_shadow_radius,
-                dp2pxInt(2.5f));//dp2pxInt(2.5f);
+        shadowRadius = optPixelSize(typedArray, R.styleable.SwitchButton_sb_shadow_radius, dp2pxInt(2.5f));//dp2pxInt(2.5f);
 
-        shadowOffset = optPixelSize(typedArray,
-                R.styleable.SwitchButton_sb_shadow_offset,
-                dp2pxInt(1.5f));//dp2pxInt(1.5f);
+        shadowOffset = optPixelSize(typedArray, R.styleable.SwitchButton_sb_shadow_offset, dp2pxInt(1.5f));//dp2pxInt(1.5f);
 
-        shadowColor = optColor(typedArray,
-                R.styleable.SwitchButton_sb_shadow_color,
-                0X33000000);//0X33000000;
+        shadowColor = optColor(typedArray, R.styleable.SwitchButton_sb_shadow_color, 0X33000000);//0X33000000;
 
-        offColor = optColor(typedArray,
-                R.styleable.SwitchButton_sb_off_color,
-                0XffDDDDDD);//0XffDDDDDD;
+        offColor = optColor(typedArray, R.styleable.SwitchButton_sb_off_color, 0XffDDDDDD);//0XffDDDDDD;
 
-        onColor = optColor(typedArray,
-                R.styleable.SwitchButton_sb_on_color,
-                0Xff51d367);//0Xff51d367;
+        onColor = optColor(typedArray, R.styleable.SwitchButton_sb_on_color, 0Xff51d367);//0Xff51d367;
 
-        borderWidth = optPixelSize(typedArray,
-                R.styleable.SwitchButton_sb_border_width,
-                dp2pxInt(1));//dp2pxInt(1);
+        borderWidth = optPixelSize(typedArray, R.styleable.SwitchButton_sb_border_width, dp2pxInt(1));//dp2pxInt(1);
 
-        onLineColor = optColor(typedArray,
-                R.styleable.SwitchButton_sb_on_line_color,
-                Color.WHITE);//Color.WHITE;
+        onLineColor = optColor(typedArray, R.styleable.SwitchButton_sb_on_line_color, Color.WHITE);//Color.WHITE;
 
-        onLineWidth = optPixelSize(typedArray,
-                R.styleable.SwitchButton_sb_on_line_width,
-                dp2pxInt(1f));//dp2pxInt(1.0f);
+        onLineWidth = optPixelSize(typedArray, R.styleable.SwitchButton_sb_on_line_width, dp2pxInt(1f));//dp2pxInt(1.0f);
 
         onLineLength = dp2px(6);
 
-        int buttonColor = optColor(typedArray,
-                R.styleable.SwitchButton_sb_button_color,
-                Color.WHITE);//Color.WHITE;
+        int buttonColor = optColor(typedArray, R.styleable.SwitchButton_sb_button_color, Color.WHITE);//Color.WHITE;
 
-        int effectDuration = optInt(typedArray,
-                R.styleable.SwitchButton_sb_effect_duration,
-                300);//300;
+        int effectDuration = optInt(typedArray, R.styleable.SwitchButton_sb_effect_duration, 300);//300;
 
-        isOn = optBoolean(typedArray,
-                R.styleable.SwitchButton_sb_on,
-                false);
+        isOn = optBoolean(typedArray, R.styleable.SwitchButton_sb_on, false);
 
-        showIndicator = optBoolean(typedArray,
-                R.styleable.SwitchButton_sb_show_indicator,
-                true);
+        showIndicator = optBoolean(typedArray, R.styleable.SwitchButton_sb_show_indicator, true);
 
-        background = optColor(typedArray,
-                R.styleable.SwitchButton_sb_background,
-                Color.WHITE);//Color.WHITE;
+        background = optColor(typedArray, R.styleable.SwitchButton_sb_background, Color.WHITE);//Color.WHITE;
 
-        enableEffect = optBoolean(typedArray,
-                R.styleable.SwitchButton_sb_enable_effect,
-                true);
+        enableEffect = optBoolean(typedArray, R.styleable.SwitchButton_sb_enable_effect, true);
 
         if (typedArray != null) {
             typedArray.recycle();
         }
-
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         buttonPaint.setColor(buttonColor);
 
         if (shadowEffect) {
-            buttonPaint.setShadowLayer(
-                    shadowRadius,
-                    0, shadowOffset,
-                    shadowColor);
+            buttonPaint.setShadowLayer(shadowRadius, 0, shadowOffset, shadowColor);
         }
-
 
         viewState = new ViewState();
         beforeState = new ViewState();
@@ -477,12 +434,10 @@ public class SwitchButton extends View {
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        if (widthMode == MeasureSpec.UNSPECIFIED
-                || widthMode == MeasureSpec.AT_MOST) {
+        if (widthMode == MeasureSpec.UNSPECIFIED || widthMode == MeasureSpec.AT_MOST) {
             widthMeasureSpec = MeasureSpec.makeMeasureSpec(DEFAULT_WIDTH, MeasureSpec.EXACTLY);
         }
-        if (heightMode == MeasureSpec.UNSPECIFIED
-                || heightMode == MeasureSpec.AT_MOST) {
+        if (heightMode == MeasureSpec.UNSPECIFIED || heightMode == MeasureSpec.AT_MOST) {
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(DEFAULT_HEIGHT, MeasureSpec.EXACTLY);
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -555,15 +510,11 @@ public class SwitchButton extends View {
         paint.setStyle(Paint.Style.FILL);
         //绘制白色背景
         paint.setColor(background);
-        drawRoundRect(canvas,
-                left, top, right, bottom,
-                viewRadius, paint);
+        drawRoundRect(canvas, left, top, right, bottom, viewRadius, paint);
         //绘制关闭状态的边框
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(offColor);
-        drawRoundRect(canvas,
-                left, top, right, bottom,
-                viewRadius, paint);
+        drawRoundRect(canvas, left, top, right, bottom, viewRadius, paint);
 
         //绘制小圆圈
         if (showIndicator) {
@@ -575,21 +526,13 @@ public class SwitchButton extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(viewState.onStateColor);
         paint.setStrokeWidth(borderWidth + des * 2f);
-        drawRoundRect(canvas,
-                left + des, top + des, right - des, bottom - des,
-                viewRadius, paint);
+        drawRoundRect(canvas, left + des, top + des, right - des, bottom - des, viewRadius, paint);
 
         //绘制按钮左边绿色长条遮挡
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(1);
-        drawArc(canvas,
-                left, top,
-                left + 2 * viewRadius, top + 2 * viewRadius,
-                90, 180, paint);
-        canvas.drawRect(
-                left + viewRadius, top,
-                viewState.buttonX, top + 2 * viewRadius,
-                paint);
+        drawArc(canvas, left, top, left + 2 * viewRadius, top + 2 * viewRadius, 90, 180, paint);
+        canvas.drawRect(left + viewRadius, top, viewState.buttonX, top + 2 * viewRadius, paint);
 
         //绘制小线条
         if (showIndicator) {
@@ -606,12 +549,7 @@ public class SwitchButton extends View {
      * @param canvas 画布
      */
     protected void drawOnIndicator(Canvas canvas) {
-        drawOnIndicator(canvas,
-                viewState.onLineColor,
-                onLineWidth,
-                left + viewRadius - onLineOffsetX, centerY - onLineLength,
-                left + viewRadius - onLineOffsetY, centerY + onLineLength,
-                paint);
+        drawOnIndicator(canvas, viewState.onLineColor, onLineWidth, left + viewRadius - onLineOffsetX, centerY - onLineLength, left + viewRadius - onLineOffsetY, centerY + onLineLength, paint);
     }
 
     /**
@@ -626,17 +564,11 @@ public class SwitchButton extends View {
      * @param ey        结束点y坐标
      * @param paint     画笔
      */
-    protected void drawOnIndicator(Canvas canvas,
-                                   int color,
-                                   float lineWidth,
-                                   float sx, float sy, float ex, float ey,
-                                   Paint paint) {
+    protected void drawOnIndicator(Canvas canvas, int color, float lineWidth, float sx, float sy, float ex, float ey, Paint paint) {
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(color);
         paint.setStrokeWidth(lineWidth);
-        canvas.drawLine(
-                sx, sy, ex, ey,
-                paint);
+        canvas.drawLine(sx, sy, ex, ey, paint);
     }
 
     /**
@@ -645,12 +577,7 @@ public class SwitchButton extends View {
      * @param canvas 画布
      */
     private void drawOffIndicator(Canvas canvas) {
-        drawOffIndicator(canvas,
-                offCircleColor,
-                offCircleWidth,
-                right - offCircleOffsetX, centerY,
-                offCircleRadius,
-                paint);
+        drawOffIndicator(canvas, offCircleColor, offCircleWidth, right - offCircleOffsetX, centerY, offCircleRadius, paint);
     }
 
     /**
@@ -664,45 +591,28 @@ public class SwitchButton extends View {
      * @param radius    半径
      * @param paint     画笔
      */
-    protected void drawOffIndicator(Canvas canvas,
-                                    int color,
-                                    float lineWidth,
-                                    float centerX, float centerY,
-                                    float radius,
-                                    Paint paint) {
+    protected void drawOffIndicator(Canvas canvas, int color, float lineWidth, float centerX, float centerY, float radius, Paint paint) {
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(color);
         paint.setStrokeWidth(lineWidth);
         canvas.drawCircle(centerX, centerY, radius, paint);
     }
 
-    private void drawArc(Canvas canvas,
-                         float left, float top,
-                         float right, float bottom,
-                         float startAngle, float sweepAngle,
-                         Paint paint) {
+    private void drawArc(Canvas canvas, float left, float top, float right, float bottom, float startAngle, float sweepAngle, Paint paint) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawArc(left, top, right, bottom,
-                    startAngle, sweepAngle, true, paint);
+            canvas.drawArc(left, top, right, bottom, startAngle, sweepAngle, true, paint);
         } else {
             rect.set(left, top, right, bottom);
-            canvas.drawArc(rect,
-                    startAngle, sweepAngle, true, paint);
+            canvas.drawArc(rect, startAngle, sweepAngle, true, paint);
         }
     }
 
-    private void drawRoundRect(Canvas canvas,
-                               float left, float top,
-                               float right, float bottom,
-                               float backgroundRadius,
-                               Paint paint) {
+    private void drawRoundRect(Canvas canvas, float left, float top, float right, float bottom, float backgroundRadius, Paint paint) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawRoundRect(left, top, right, bottom,
-                    backgroundRadius, backgroundRadius, paint);
+            canvas.drawRoundRect(left, top, right, bottom, backgroundRadius, backgroundRadius, paint);
         } else {
             rect.set(left, top, right, bottom);
-            canvas.drawRoundRect(rect,
-                    backgroundRadius, backgroundRadius, paint);
+            canvas.drawRoundRect(rect, backgroundRadius, backgroundRadius, paint);
         }
     }
 
@@ -821,26 +731,16 @@ public class SwitchButton extends View {
                     float fraction = eventX / getWidth();
                     fraction = Math.max(0f, Math.min(1f, fraction));
 
-                    viewState.buttonX = buttonMinX
-                            + (buttonMaxX - buttonMinX)
-                            * fraction;
-
+                    viewState.buttonX = buttonMinX + (buttonMaxX - buttonMinX) * fraction;
                 } else if (isDragState()) {
                     //拖动按钮位置，同时改变对应的背景颜色
                     float fraction = eventX / getWidth();
                     fraction = Math.max(0f, Math.min(1f, fraction));
 
-                    viewState.buttonX = buttonMinX
-                            + (buttonMaxX - buttonMinX)
-                            * fraction;
+                    viewState.buttonX = buttonMinX + (buttonMaxX - buttonMinX) * fraction;
 
-                    viewState.onStateColor = (int) argbEvaluator.evaluate(
-                            fraction,
-                            offColor,
-                            onColor
-                    );
+                    viewState.onStateColor = (int) argbEvaluator.evaluate(fraction, offColor, onColor);
                     postInvalidate();
-
                 }
                 break;
             }
@@ -926,15 +826,9 @@ public class SwitchButton extends View {
         this.shadowEffect = shadowEffect;
 
         if (this.shadowEffect) {
-            buttonPaint.setShadowLayer(
-                    shadowRadius,
-                    0, shadowOffset,
-                    shadowColor);
+            buttonPaint.setShadowLayer(shadowRadius, 0, shadowOffset, shadowColor);
         } else {
-            buttonPaint.setShadowLayer(
-                    0,
-                    0, 0,
-                    0);
+            buttonPaint.setShadowLayer(0, 0, 0, 0);
         }
     }
 

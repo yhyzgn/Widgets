@@ -8,8 +8,7 @@ import com.yhy.widget.layout.flow.tag.TagFlowAdapter;
 import com.yhy.widget.layout.flow.tag.TagFlowLayout;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
-import com.yhy.widgetdemo.emtity.TestEntity;
-import com.yhy.widgetdemo.utils.ToastUtils;
+import com.yhy.widgetdemo.entity.TestEntity;
 
 import java.util.ArrayList;
 import java.util.List;

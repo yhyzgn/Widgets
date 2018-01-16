@@ -61,14 +61,14 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("SwitchButton");
         WIDGET_NAME_LIST.add("SettingsItemView");
         WIDGET_NAME_LIST.add("PreImgActivity");
-        WIDGET_NAME_LIST.add("PickViewActivity");
-        WIDGET_NAME_LIST.add("StatusActivity");
-        WIDGET_NAME_LIST.add("SliderActivity");
-        WIDGET_NAME_LIST.add("CheckedTextViewActivity");
-        WIDGET_NAME_LIST.add("SquareImageViewActivity");
-        WIDGET_NAME_LIST.add("CheckedRelativeActivity");
-        WIDGET_NAME_LIST.add("FlowLayoutActivity");
-        WIDGET_NAME_LIST.add("TagFlowActivity");
+        WIDGET_NAME_LIST.add("PickView");
+        WIDGET_NAME_LIST.add("StatusLayout");
+        WIDGET_NAME_LIST.add("SliderLayout");
+        WIDGET_NAME_LIST.add("CheckedTextView");
+        WIDGET_NAME_LIST.add("SquareImageView");
+        WIDGET_NAME_LIST.add("CheckedRelativeLayout");
+        WIDGET_NAME_LIST.add("FlowLayout");
+        WIDGET_NAME_LIST.add("TagFlowLayout");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);

@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.0.16-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.0.17-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -65,16 +65,16 @@
 
   > 布局控件
 
-  |                    名称                    |          描述           |
-  | :--------------------------------------: | :-------------------: |
-  | [`CheckedFrameLayout`](#CheckedFrameLayout) |   可选中的`FrameLayout`   |
-  |    [`CheckedLayout`](#CheckedLayout)     |    可选中的`ViewGroup`    |
-  | [`CheckedLinearLayout`](#CheckedLinearLayout) |  可选中的`LinearLayout`   |
-  | [`CheckedRelativeLayout`](#CheckedRelativeLayout) | 可选中的`RelativeLayout`  |
-  |       [`FlowLayout`](#FlowLayout)        |    流式布局，标签流式布局的基类     |
-  |    [`TagFlowLayout`](#TagFlowLayout)     |        标签流式布局         |
-  |      [`SlideLayout`](#SlideLayout)       |         侧滑布局          |
-  |     [`StatusLayout`](#StatusLayout)      | 状态页面布局【加载中，空数据，错误，成功】 |
+  |                    名称                    |           描述            |
+  | :--------------------------------------: | :---------------------: |
+  | [`CheckedFrameLayout`](#CheckedFrameLayout) |    可选中的`FrameLayout`    |
+  |    [`CheckedLayout`](#CheckedLayout)     |     可选中的`ViewGroup`     |
+  | [`CheckedLinearLayout`](#CheckedLinearLayout) |   可选中的`LinearLayout`    |
+  | [`CheckedRelativeLayout`](#CheckedRelativeLayout) |  可选中的`RelativeLayout`   |
+  |       [`FlowLayout`](#FlowLayout)        |     流式布局，标签流式布局的基类      |
+  |    [`TagFlowLayout`](#TagFlowLayout)     |         标签流式布局          |
+  |      [`SlideLayout`](#SlideLayout)       |          侧滑布局           |
+  |     [`StatusLayout`](#StatusLayout)      | 状态管理页面布局【加载中，空数据，错误，成功】 |
 
 ## 使用说明
 
@@ -90,7 +90,11 @@
 
     ```java
     // 多张图
-    List<String> urlList = new ArrayList<>();      urlList.add("http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");      urlList.add("http://img.youguoquan.com/uploads/magazine/content/7b2a0fdbb23c9e63586b7ff6798dbebb_magazine_web_m.jpg");      urlList.add("http://img.youguoquan.com/uploads/magazine/content/c9c47160b46fceab5afd24dea7f216e6_magazine_web_m.jpg");      urlList.add("http://img.youguoquan.com/uploads/magazine/content/fd986a6e0d5fa3a4485e5ce28f40b2ad_magazine_web_m.jpg");
+    List<String> urlList = new ArrayList<>();
+    urlList.add("http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");
+    urlList.add("http://img.youguoquan.com/uploads/magazine/content/7b2a0fdbb23c9e63586b7ff6798dbebb_magazine_web_m.jpg");
+    urlList.add("http://img.youguoquan.com/uploads/magazine/content/c9c47160b46fceab5afd24dea7f216e6_magazine_web_m.jpg");
+    urlList.add("http://img.youguoquan.com/uploads/magazine/content/fd986a6e0d5fa3a4485e5ce28f40b2ad_magazine_web_m.jpg");
     // 参数1为点击的ImageView；参数3为当前要预览的图片索引。
     ImgPreCfg cfg = new ImgPreCfg(iv, urlList, 1);
     ```
@@ -215,15 +219,15 @@
 
     ```xml
     <com.yhy.widget.core.checked.CheckedTextView
-       android:id="@+id/ctv_def"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:background="@drawable/bg_checked_ctv_selector"
-       android:padding="8dp"
-       android:text="阻止了Click和LongClick事件"
-       android:textColor="#fff"
-       android:textSize="14sp" />
-    <!-- 默认阻止了click和longClick事件，如果需要添加这些事件，请添加属性：app:ctv_prevent="false" -->
+      android:id="@+id/ctv_def"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/bg_checked_ctv_selector"
+      android:padding="8dp"
+      android:text="阻止了Click和LongClick事件"
+      android:textColor="#fff"
+      android:textSize="14sp" />
+      <!-- 默认阻止了click和longClick事件，如果需要添加这些事件，请添加属性：app:ctv_prevent="false" -->
     ```
 
   * 获取控件
@@ -281,26 +285,26 @@
       app:etv_anim_duration="800"
       app:etv_max_collapsed_lines="4">
 
-      	<!-- 显示文本内容的TextView -->
-        <TextView
-          android:id="@+id/tv_content"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginTop="8dp"
-          android:ellipsize="end"
-          android:textColor="#666666"
-          android:textSize="16sp"/>
-    	
-      	<!--展开和收起的点击按钮-->
-        <TextView
-          android:id="@+id/tv_expand"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end|bottom"
-          android:padding="16dp"
-          android:text="窝草"/>
+      <!-- 显示文本内容的TextView -->
+      <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:textColor="#666666"
+        android:textSize="16sp"/>
+
+      <!--展开和收起的点击按钮-->
+      <TextView
+        android:id="@+id/tv_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:padding="16dp"
+        android:text="窝草"/>
     </com.yhy.widget.core.exptext.ExpandTextView>
     ```
 
@@ -488,7 +492,8 @@
   * 获取控件
 
     ```java
-    PickerView pvText = findViewById(R.id.pv_test);
+    // // 泛型表示该控件中数据源的数据类型
+    PickerView<TestEntity> pvText = findViewById(R.id.pv_test);
     ```
 
   * 设置数据及事件
@@ -656,15 +661,666 @@
 
 * <a name = "TitleBar">`TitleBar`</a>
 
+  > 常用标题栏控件
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.title.TitleBar
+      android:id="@+id/tb_test"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#7ad"
+      android:elevation="8dp"
+      app:tb_title="测试标题" />
+    ```
+
+  * 获取控件
+
+    ```java
+    TitleBar tbTest = findViewById(R.id.tb_test);
+    ```
+
+  * 设置数据及事件
+
+    ```java
+    tbTest.setTitle("标题");
+
+    // 事件，该监听器不是接口或者抽象类，只需要重写对应的方法即可
+    tbTest2.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
+      @Override
+      public void titleClick(View view) {
+        toast("点击了标题");
+      }
+
+      @Override
+      public void leftIconClick(View view) {
+        toast("返回");
+        finish();
+      }
+
+      @Override
+      public void leftTextClick(View view) {
+        toast("左边文本");
+      }
+
+      @Override
+      public void rightIconClick(View view) {
+        toast("右边图标");
+      }
+
+      @Override
+      public void rightTextClick(View view) {
+        toast("右边文本");
+      }
+    });
+    }
+    ```
+
+  * 自定义属性
+
+    |       属性        |  说明  |    默认值    |
+    | :-------------: | :--: | :-------: |
+    |   `tb_title`    |      |     空     |
+    | `tb_left_text`  |      |     空     |
+    | `tb_right_text` |      |     空     |
+    | `tb_left_icon`  |      |     无     |
+    | `tb_right_icon` |      |     无     |
+    | `tb_font_color` |      | `#ffffff` |
+
 * <a name = "SwitchButton">`SwitchButton`</a>
+
+  > 常用开关控件
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.toggle.SwitchButton
+      android:id="@+id/switch_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"/>
+    ```
+
+  * 获取控件
+
+    ```java
+    SwitchButton switchButton = findViewById(R.id.switch_button);
+    ```
+
+  * 设置数据事件
+
+    ```java
+    switchButton.onOrOff(true);
+    switchButton.isOn();
+    switchButton.toggle();     //switch state
+    switchButton.toggle(false);//switch without animation
+    switchButton.setShadowEffect(true);//disable shadow effect
+    switchButton.setEnabled(true);//disable button
+    switchButton.setEnableEffect(false);//disable the switch animation
+
+    switchButton.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
+      @Override
+      public void onCheckedChanged(SwitchButton view, boolean isOn) {
+        toast("isOn = " + isOn);
+      }
+    });
+    ```
+
+  * 自定义属性
+
+    |           属性           |        说明         |     默认值     |
+    | :--------------------: | :---------------: | :---------: |
+    |   `sb_shadow_radius`   |    阴影半径，单位`dp`    |    `2.5`    |
+    |   `sb_shadow_offset`   |   阴影偏移值，单位`dp`    |    `1.5`    |
+    |   `sb_shadow_color`    |       阴影颜色        | `#33000000` |
+    |     `sb_off_color`     |       关闭时颜色       |  `#dddddd`  |
+    |     `sb_on_color`      |       打开时颜色       |  `#51d367`  |
+    |   `sb_border_width`    |    边框宽度，单位`dp`    |     `1`     |
+    |   `sb_on_line_color`   |    打开状态中短竖线颜色     |  `#ffffff`  |
+    |   `sb_on_line_width`   | 打开状态中短竖线宽度，单位`dp` |     `1`     |
+    | `sb_off_circle_color`  |     关闭状态中圆圈颜色     |  `#aaaaaa`  |
+    | `sb_off_circle_width`  | 关闭状态中圆圈宽度，单位`dp`  |    `1.5`    |
+    | `sb_off_circle_radius` | 关闭状态中圆圈半径，单位`dp`  |     `4`     |
+    |        `sb_on`         |       是否打开        |   `false`   |
+    |   `sb_shadow_effect`   |     是否支持阴影效果      |   `true`    |
+    |  `sb_effect_duration`  |   效果显示时间，单位`ms`   |    `300`    |
+    |   `sb_button_color`    |       按钮颜色        |  `#ffffff`  |
+    |  `sb_show_indicator`   |      是否显示指示器      |   `true`    |
+    |    `sb_background`     |       背景颜色        |  `#ffffff`  |
+    |   `sb_enable_effect`   |      是否开启特效       |   `true`    |
 
 #### `layout`控件
 
 * <a name = "CheckedFrameLayout">`CheckedFrameLayout`</a>
+
+  > 可选中的`FrameLayout`
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.layout.checked.CheckedRelativeLayout
+      android:id="@+id/crl_test"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_checked_ctv_selector"
+        android:padding="8dp"
+        android:text="CheckedRelativeLayout"
+        android:textColor="#fff"
+        android:textSize="14sp" />
+
+      <TextView
+        android:layout_below="@id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_checked_ctv_selector"
+        android:padding="8dp"
+        android:text="CheckedRelativeLayout"
+        android:textColor="#fff"
+        android:textSize="14sp" />
+    </com.yhy.widget.layout.checked.CheckedRelativeLayout>
+    ```
+
+  * 获取控件
+
+    ```java
+    CheckedRelativeLayout crlTest = $(R.id.crl_test);
+    CheckedRelativeLayout tvTest = $(R.id.tv_test);
+    ```
+
+  * 设置事件
+
+    ```java
+    tvTest.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        toast("点击了TextView");
+      }
+    });
+
+    crlTest.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        toast("点击");
+      }
+    });
+
+    crlTest.setOnCheckedChangeListener(new CheckedRelativeLayout.OnCheckedChangeListener() {
+      @Override
+      public void onChanged(CheckedRelativeLayout crl, boolean isChecked) {
+        toast("isChecked = " + isChecked);
+      }
+    });
+    ```
+
 * <a name = "CheckedLayout">`CheckedLayout`</a>
+
+  > 可选中的`ViewGroup`
+  >
+  > 用法同[`CheckedFrameLayout`](#CheckedFrameLayout)
+
 * <a name = "CheckedLinearLayout">`CheckedLinearLayout`</a>
+
+  > 可选中的`LinearLayout`
+  >
+  > 用法同[`CheckedFrameLayout`](#CheckedFrameLayout)
+
 * <a name = "CheckedRelativeLayout">`CheckedRelativeLayout`</a>
+
+  > 可选中的`RelativeLayout`
+  >
+  > 用法同[`CheckedFrameLayout`](#CheckedFrameLayout)
+
 * <a name = "FlowLayout">`FlowLayout`</a>
+
+  > 流式布局
+  >
+  > 一般不用这个布局，只在定义其他流式布局时使用，继承`FlowLayout`即可，详情请参照[`TagFlowLayout`](#TagFlowLayout)源码
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.layout.flow.FlowLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="#666"
+        android:padding="4dp"
+        android:text="哈哈哈哈"
+        android:textColor="#fff"
+        android:textSize="14sp" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="#666"
+        android:padding="4dp"
+        android:text="呵哈呵"
+        android:textColor="#fff"
+        android:textSize="14sp" />
+
+      <!-- 多个子控件... -->
+    </com.yhy.widget.layout.flow.FlowLayout>
+    ```
+
+  * 自定义属性
+
+    |      属性      |   说明   |  默认值   |
+    | :----------: | :----: | :----: |
+    | `fl_gravity` | 布局对齐方式 | `left` |
+
 * <a name = "TagFlowLayout">`TagFlowLayout`</a>
+
+  > 标签流式布局
+  >
+  > 继承于[`FlowLayout`](#FlowLayout)
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.layout.flow.tag.TagFlowLayout
+      android:id="@+id/tfl_def"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+    ```
+
+  * 获取控件
+
+    ```java
+    // 泛型表示该控件中数据源的数据类型
+    TagFlowLayout<TestEntity> tflDef = findViewById(R.id.tfl_def);
+    ```
+
+  * 设置数据和事件
+
+    ```java
+    // 模拟数据
+    List<TestEntity> mTestList = new ArrayList<>();
+    mTestList.add(new TestEntity(0, "张三张三张三张三张三"));
+    mTestList.add(new TestEntity(1, "李四"));
+    mTestList.add(new TestEntity(2, "大胖子"));
+    mTestList.add(new TestEntity(3, "尼古拉斯"));
+    mTestList.add(new TestEntity(4, "哈"));
+    mTestList.add(new TestEntity(5, "大胖子"));
+    mTestList.add(new TestEntity(6, "尼古拉斯"));
+    mTestList.add(new TestEntity(7, "哈"));
+
+    // 设置适配器
+    tflDef.setAdapter(new TagFlowAdapter<TestEntity> {
+      public Adapter(List<TestEntity> dataList) {
+        super(dataList);
+      }
+
+      @Override
+      public View getView(TagFlowLayout parent, int position, TestEntity data) {
+        TextView tv = (TextView) LayoutInflater.from(TagFlowActivity.this).inflate(R.layout.item_tag_flow, null);
+        tv.setText(data.name);
+        return tv;
+      }
+    });
+
+    // 设置条目点击事件
+    tflDef.setOnCheckChangedListener(new TagFlowLayout.OnCheckChangedListener<TestEntity>() {
+      @Override
+      public void onChanged(boolean checked, int position, TestEntity data, List<TestEntity> dataList) {
+        toast(dataList);
+        // 动态添加元素
+        mTestList.add(new TestEntity(9, "嘻嘻嘻" + position));
+        mAdapter.notifyDataChanged();
+      }
+    });
+    ```
+
+  * 自定义属性
+
+    |       属性        |         说明         |   默认值   |
+    | :-------------: | :----------------: | :-----: |
+    |  `fl_gravity`   |       布局对齐方式       | `left`  |
+    | `tfl_max_count` | 允许选中的最大数量，`-1`表示无限 |  `-1`   |
+    | `tfl_is_single` |       是否是单选        | `false` |
+
 * <a name = "SlideLayout">`SlideLayout`</a>
+
+  > 侧滑菜单布局
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.layout.slider.SlideLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/sl_slide"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@mipmap/bg_main"
+      app:sl_anim_alpha_color="#f60"
+      app:sl_main_alpha_enable="true">
+
+      <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/tv_menu"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="菜单"
+          android:textColor="#f40"
+          android:textSize="24sp" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+          android:id="@+id/vp_content"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+      </LinearLayout>
+    </com.yhy.widget.layout.slider.SlideLayout>
+    ```
+
+  * 获取控件
+
+    ```java
+    SlideLayout slSlide = findViewById(R.id.sl_slide);
+    TextView tvMenu = findViewById(R.id.tv_menu);
+    ViewPager vpContent = findViewById(R.id.vp_content);
+    ```
+
+  * 设置数据和事件
+
+    ```java
+    // 为ViewPager设置适配器
+    vpContent.setAdapter(new PagerAdapter() {
+      @Override
+      public int getCount() {
+        return 4;
+      }
+
+      @Override
+      public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+      }
+
+      @Override
+      public Object instantiateItem(ViewGroup container, int position) {
+        ImageView iv = new ImageView(SliderActivity.this);
+        iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        if (position == 0) {
+          iv.setImageResource(R.mipmap.img_pager_1);
+        } else if (position == 1) {
+          iv.setImageResource(R.mipmap.img_pager_2);
+        } else if (position == 2) {
+          iv.setImageResource(R.mipmap.img_pager_3);
+        } else {
+          iv.setImageResource(R.mipmap.img_pager_4);
+        }
+        container.addView(iv);
+        return iv;
+      }
+
+      @Override
+      public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+      }
+    });
+
+    // 设置事件
+    // 当菜单按钮点击时关闭菜单
+    tvMenu.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        slSlide.close();
+      }
+    });
+
+    // 监听内容，根据需要改变侧滑菜单的可用性
+    slSlide.setOnSlideEnableWatcher(new SlideLayout.OnSlideEnableWatcher() {
+      @Override
+      public boolean shouldEnable() {
+        //第二页禁用侧边栏
+        return vpContent.getCurrentItem() != 1;
+      }
+    });
+
+    // 菜单滑动状态监听
+    slSlide.setOnStateChangeListener(new SlideLayout.OnStateChangeListener() {
+      @Override
+      public void onOpened() {
+        tvMenu.setText("已打开");
+      }
+
+      @Override
+      public void onClosed() {
+        tvMenu.setText("已关闭");
+      }
+
+      @Override
+      public void onDragging(float percent, int dx, int total) {
+        tvMenu.setText("比例：" + percent);
+      }
+    });
+    ```
+
 * <a name = "StatusLayout">`StatusLayout`</a>
+
+  > 状态管理页面布局【加载中，空数据，错误，成功】
+  >
+  > 共有三种使用方法，分别是【默认，布局文件中配置，使用外部助手配置】
+  >
+  > 多种使用方式的优先级关系为：布局文件中配置 `>` 使用外部助手配置 `>` 默认
+
+  * 注意
+
+    > 四种状态均用`tag`来做区分，所以必须要给各种页面设置对应的`tag`
+
+    |  状态  |  `tag`值   |
+    | :--: | :-------: |
+    | 加载中  | `loading` |
+    | 空数据  |  `empty`  |
+    |  错误  |  `error`  |
+    |  成功  | `success` |
+
+  * 默认方式
+
+    * 布局文件
+
+      ```xml
+      <com.yhy.widget.layout.status.StatusLayout
+        android:id="@+id/sl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <!--当只有一个子控件时，该子控件会被当作[成功]状态的界面，此时无需指定tag为success-->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:tag="success">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Success"
+            android:textColor="#2f0"
+            android:textSize="20sp" />
+        </LinearLayout>
+      </com.yhy.widget.layout.status.StatusLayout>
+      ```
+
+  * 布局文件中配置
+
+    * 布局文件
+
+      ```xml
+      <com.yhy.widget.layout.status.StatusLayout
+        android:id="@+id/sl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <!-- 默认的加载中页面 -->
+        <com.yhy.widget.layout.status.view.StaLoadingView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:tag="loading" />
+
+        <!-- 默认的错误页面 -->
+        <com.yhy.widget.layout.status.view.StaErrorView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:tag="error" />
+
+        <!-- 默认的空数据页面 -->
+        <com.yhy.widget.layout.status.view.StaEmptyView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:tag="empty" />
+
+        <!-- 成功页面 -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:tag="success">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Success"
+            android:textColor="#2f0"
+            android:textSize="20sp" />
+        </LinearLayout>
+      </com.yhy.widget.layout.status.StatusLayout>
+      ```
+
+  * 使用外部助手配置
+
+    * 布局文件
+
+      ```xml
+      <com.yhy.widget.layout.status.StatusLayout
+        android:id="@+id/sl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <!-- 使用外部助手配置时，也可以在布局中配置，布局中优先使用 -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:tag="error">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:tag="retry"
+            android:text="布局中定义的错误页面"
+            android:textColor="#246854"
+            android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- 成功页面 -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:tag="success">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Success"
+            android:textColor="#2f0"
+            android:textSize="20sp" />
+        </LinearLayout>
+      </com.yhy.widget.layout.status.StatusLayout>
+      ```
+
+    * 获取控件
+
+      ```java
+      StatusLayout slContent = findViewById(R.id.sl_content);
+      ```
+
+    * 外部助手配置
+
+      ```java
+      StaLayoutHelperBuilder builder = new StaLayoutHelperBuilder.Builder(slContent).setLoadingLayout(getLoadingView()).build();
+      // builder 还可以设置各种状态的view
+      slContent.setHelper(builder.getHelper());
+
+      // ...
+      private View getLoadingView() {
+        TextView tv = new TextView(this);
+        tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        tv.setText("Helper中定义的加载中");
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextSize(18);
+        tv.setTextColor(Color.RED);
+        // 设置tag为loading
+        tv.setTag(StatusLayout.Status.LOADING.getStatus());
+        return tv;
+      }
+      ```
+
+  * 切换页面状态
+
+    ```java
+    // 加载中
+    slContent.showLoading();
+    // 成功
+    slContent.showSuccess();
+    // 错误
+    slContent.showError();
+    // 空数据
+    slContent.showEmpty();
+    ```
+
+> `That's all, enjoy it !!!`
+
+_______________
+
+## License
+
+```tex
+Copyright 2018 yhyzgn
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+

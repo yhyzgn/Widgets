@@ -1,4 +1,4 @@
-package com.yhy.widgetdemo.emtity;
+package com.yhy.widgetdemo.entity;
 
 /**
  * author : 颜洪毅

@@ -14,17 +14,17 @@
 
     <!--文字标题栏控件-->
     <declare-styleable name="TitleBar">
-        <!--标题文本-->
+        <!--标题文本，默认空-->
         <attr name="tb_title" format="string|reference" />
-        <!--左边文本-->
+        <!--左边文本，默认空-->
         <attr name="tb_left_text" format="string|reference" />
-        <!--右边文本-->
+        <!--右边文本，默认空-->
         <attr name="tb_right_text" format="string|reference" />
-        <!--左边图标-->
+        <!--左边图标，默认空-->
         <attr name="tb_left_icon" format="reference" />
-        <!--右边图标-->
+        <!--右边图标，默认空-->
         <attr name="tb_right_icon" format="reference" />
-        <!--字体颜色-->
+        <!--字体颜色，默认#ffffff-->
         <attr name="tb_font_color" format="color" />
     </declare-styleable>
 
@@ -60,23 +60,41 @@
 
     <!--SwitchButton属性-->
     <declare-styleable name="SwitchButton">
+        <!--阴影半径，单位dp，默认2.5-->
         <attr name="sb_shadow_radius" format="reference|dimension" />
+        <!--阴影偏移值，单位dp，默认1.5-->
         <attr name="sb_shadow_offset" format="reference|dimension" />
+        <!--阴影颜色，默认#33000000-->
         <attr name="sb_shadow_color" format="reference|color" />
+        <!--关闭时颜色，默认#dddddd-->
         <attr name="sb_off_color" format="reference|color" />
+        <!--打开时颜色，默认#51d367-->
         <attr name="sb_on_color" format="reference|color" />
+        <!--边框宽度，单位dp，默认1-->
         <attr name="sb_border_width" format="reference|dimension" />
+        <!--打开状态中短竖线颜色，默认#ffffff-->
         <attr name="sb_on_line_color" format="reference|color" />
+        <!--打开状态中短竖线宽度，单位dp，默认1-->
         <attr name="sb_on_line_width" format="reference|dimension" />
+        <!--关闭状态中圆圈颜色，默认#aaaaaa-->
         <attr name="sb_off_circle_color" format="reference|color" />
+        <!--关闭状态中圆圈宽度，单位dp，默认1.5-->
         <attr name="sb_off_circle_width" format="reference|dimension" />
+        <!--关闭状态中圆圈半径，单位dp，默认4-->
         <attr name="sb_off_circle_radius" format="reference|dimension" />
+        <!--是否打开，默认false-->
         <attr name="sb_on" format="reference|boolean" />
+        <!--是否支持阴影效果，默认true-->
         <attr name="sb_shadow_effect" format="reference|boolean" />
+        <!--效果显示时间，单位ms，默认300-->
         <attr name="sb_effect_duration" format="reference|integer" />
+        <!--按钮颜色，默认#ffffff-->
         <attr name="sb_button_color" format="reference|color" />
+        <!--是否显示指示器，默认true-->
         <attr name="sb_show_indicator" format="reference|boolean" />
+        <!--背景颜色，默认#ffffff-->
         <attr name="sb_background" format="reference|color" />
+        <!--是否开启特效，默认true-->
         <attr name="sb_enable_effect" format="reference|boolean" />
     </declare-styleable>
 
@@ -172,7 +190,7 @@
 
     <!--流式布局自定义属性-->
     <declare-styleable name="FlowLayout">
-        <!--是否阻止默认的click和longClick事件，默认：true，阻止-->
+        <!--布局对齐方式，默认left-->
         <attr name="fl_gravity" format="enum">
             <enum name="left" value="-1" />
             <enum name="center" value="0" />

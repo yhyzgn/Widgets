@@ -1,14 +1,9 @@
 package com.yhy.widgetdemo.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
-
 import com.yhy.widget.core.picker.PickerView;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
-import com.yhy.widgetdemo.emtity.TestEntity;
+import com.yhy.widgetdemo.entity.TestEntity;
 
 import java.util.ArrayList;
 import java.util.List;
