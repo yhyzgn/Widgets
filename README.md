@@ -721,12 +721,12 @@
 
     |       属性        |  说明  |    默认值    |
     | :-------------: | :--: | :-------: |
-    |   `tb_title`    |      |     空     |
-    | `tb_left_text`  |      |     空     |
-    | `tb_right_text` |      |     空     |
-    | `tb_left_icon`  |      |     无     |
-    | `tb_right_icon` |      |     无     |
-    | `tb_font_color` |      | `#ffffff` |
+    |   `tb_title`    | 标题文本 |     空     |
+    | `tb_left_text`  | 左边文本 |     空     |
+    | `tb_right_text` | 右边文本 |     空     |
+    | `tb_left_icon`  | 左边图标 |     无     |
+    | `tb_right_icon` | 右边图标 |     无     |
+    | `tb_font_color` | 字体颜色 | `#ffffff` |
 
 * <a name = "SwitchButton">`SwitchButton`</a>
 
