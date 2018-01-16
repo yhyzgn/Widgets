@@ -30,11 +30,11 @@
 
     <!--文字标题栏控件-->
     <declare-styleable name="ExpandTextView">
-        <!--收缩时显示的最大行数-->
+        <!--收缩时显示的最大行数，默认2-->
         <attr name="etv_max_collapsed_lines" format="integer" />
-        <!--动画执行时间-->
+        <!--动画执行时间，默认400-->
         <attr name="etv_anim_duration" format="integer" />
-        <!--透明度动画开始时的值-->
+        <!--透明度动画开始时的值，默认0.6f-->
         <attr name="etv_anim_alpha_start" format="float" />
     </declare-styleable>
 

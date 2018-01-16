@@ -20,7 +20,7 @@ import com.yhy.widget.core.adv.adapter.AdvAdapter;
  */
 public class AdvView extends ViewFlipper implements View.OnClickListener {
     private static final int DEFAULT_INTERVAL = 3000; // 默认轮播间隔 3 秒
-    private static final int DEFAULT_CURATION = 800; // 默认动画执行 0.8 秒
+    private static final int DEFAULT_DURATION = 800; // 默认动画执行 0.8 秒
     private static final int DEFAULT_IN_ANIM = R.anim.adv_in; // 默认进入动画 平移加渐变
     private static final int DEFAULT_OUT_ANIM = R.anim.adv_out; // 默认离开动画 平移加渐变
 
@@ -45,7 +45,7 @@ public class AdvView extends ViewFlipper implements View.OnClickListener {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AdvView);
         mInterval = ta.getInteger(R.styleable.AdvView_av_interval, DEFAULT_INTERVAL);
         mAnimDuration = ta.getInteger(R.styleable.AdvView_av_anim_duration,
-                DEFAULT_CURATION);
+                DEFAULT_DURATION);
         mAnimInResId = ta.getResourceId(R.styleable.AdvView_av_anim_in,
                 DEFAULT_IN_ANIM);
         mAnimOutResId = ta.getResourceId(R.styleable.AdvView_av_anim_out,

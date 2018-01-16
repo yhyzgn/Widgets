@@ -51,6 +51,8 @@
   |  `CheckedTextView`   |         可选中的`TextView`          |
   |   `ExpandTextView`   |        可展开收起的`TextView`         |
   |  `SquareImageView`   |  正方形`ImageView`，右上角可设置按钮及点击事件   |
+  |  `CircleImageView`   |              圆形图片               |
+  |   `RoundImageView`   |              圆角图片               |
   |    `LoadingView`     |             加载状态控件              |
   |   `HackyViewPager`   |       防止内存溢出的`ViewPager`        |
   |     `PickerView`     |           上下滚动数据选取控件            |
@@ -89,7 +91,7 @@
 
     ```java
     // 多张图
-    List<String> urlList = new ArrayList<>();       urlList.add("http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");       urlList.add("http://img.youguoquan.com/uploads/magazine/content/7b2a0fdbb23c9e63586b7ff6798dbebb_magazine_web_m.jpg");       urlList.add("http://img.youguoquan.com/uploads/magazine/content/c9c47160b46fceab5afd24dea7f216e6_magazine_web_m.jpg");       urlList.add("http://img.youguoquan.com/uploads/magazine/content/fd986a6e0d5fa3a4485e5ce28f40b2ad_magazine_web_m.jpg");
+    List<String> urlList = new ArrayList<>();      urlList.add("http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");      urlList.add("http://img.youguoquan.com/uploads/magazine/content/7b2a0fdbb23c9e63586b7ff6798dbebb_magazine_web_m.jpg");      urlList.add("http://img.youguoquan.com/uploads/magazine/content/c9c47160b46fceab5afd24dea7f216e6_magazine_web_m.jpg");      urlList.add("http://img.youguoquan.com/uploads/magazine/content/fd986a6e0d5fa3a4485e5ce28f40b2ad_magazine_web_m.jpg");
     // 参数1为点击的ImageView；参数3为当前要预览的图片索引。
     ImgPreCfg cfg = new ImgPreCfg(iv, urlList, 1);
     ```
@@ -122,6 +124,12 @@
       android:background="#ac0"
       app:av_anim_duration="1000"
       app:av_interval="4000" />
+    ```
+
+  * 获取控件
+
+    ```java
+    AdvView avMultiple = findViewById(R.id.av_view_multiple);
     ```
 
   * 设置数据和事件
@@ -169,16 +177,172 @@
     });
     ```
 
+  * 自定义属性
+
+    |         属性         |      说明       |       默认值        |
+    | :----------------: | :-----------: | :--------------: |
+    |   `av_interval`    |  动画定时，单位`ms`  |     `3000ms`     |
+    | `av_anim_duration` | 动画执行时间，单位`ms` |     `800ms`      |
+    |    `av_anim_in`    |    入场动画资源     | `R.anim.adv_in`  |
+    |   `av_anim_out`    |    出场动画资源     | `R.anim.adv_out` |
+
 * `CheckedTextView`
 
   > 可选中的`TextView`
 
   * 布局文件
+
+    > 背景选择器`bg_checked_ctv_selector`
+
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+      <item android:state_checked="true">
+        <shape android:shape="rectangle">
+          <solid android:color="@color/colorAccent" />
+          <corners android:radius="4dp" />
+        </shape>
+      </item>
+      <item>
+        <shape android:shape="rectangle">
+          <solid android:color="#666" />
+          <corners android:radius="4dp" />
+        </shape>
+      </item>
+    </selector>
+    ```
+
+    > 布局
+
+    ```xml
+    <com.yhy.widget.core.checked.CheckedTextView
+       android:id="@+id/ctv_def"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:background="@drawable/bg_checked_ctv_selector"
+       android:padding="8dp"
+       android:text="阻止了Click和LongClick事件"
+       android:textColor="#fff"
+       android:textSize="14sp" />
+    <!-- 默认阻止了click和longClick事件，如果需要添加这些事件，请添加属性：app:ctv_prevent="false" -->
+    ```
+
+  * 获取控件
+
+    ```java
+    CheckedTextView ctvDef = findViewById(R.id.ctv_def);
+    ```
+
   * 设置事件
+
+    ```java
+    ctvDef.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        toast("我的click被阻止了");
+      }
+    });
+
+    ctvDef.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override
+      public boolean onLongClick(View v) {
+        toast("我的longClick被阻止了");
+        return true;
+      }
+    });
+
+    ctvDef.setOnCheckedChangeListener(new CheckedTextView.OnCheckedChangeListener() {
+      @Override
+      public void onChanged(CheckedTextView ctv, boolean isChecked) {
+        toast("isChecked = " + isChecked);
+      }
+    });
+    ```
+
+  * 自定义属性
+
+    |      属性       |            说明             |  默认值   |
+    | :-----------: | :-----------------------: | :----: |
+    | `ctv_prevent` | 是否阻止`click`和`longClick`事件 | `true` |
 
 * `ExpandTextView`
 
+  > 可展开收起的`TextView`
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.exptext.ExpandTextView
+      android:id="@+id/etv_content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#fff"
+      android:orientation="vertical"
+      app:etv_anim_alpha_start="0.2"
+      app:etv_anim_duration="800"
+      app:etv_max_collapsed_lines="4">
+
+      	<!-- 显示文本内容的TextView -->
+        <TextView
+          android:id="@+id/tv_content"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginTop="8dp"
+          android:ellipsize="end"
+          android:textColor="#666666"
+          android:textSize="16sp"/>
+    	
+      	<!--展开和收起的点击按钮-->
+        <TextView
+          android:id="@+id/tv_expand"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="end|bottom"
+          android:padding="16dp"
+          android:text="窝草"/>
+    </com.yhy.widget.core.exptext.ExpandTextView>
+    ```
+
+  * 获取控件
+
+    ```java
+    ExpandTextView etvContent = findViewById(R.id.etv_content);
+    // 配置内容控件和按钮控件
+    etvContent.mapViewId(R.id.tv_content, R.id.tv_expand);
+    ```
+
+  * 设置数据
+
+    ```java
+    etvContent.setText("哈哈哈哈哈哈啊哈哈哈哈");
+    ```
+
+  * 设置事件
+
+    ```java
+    etvContent.setOnExpandStateChangeListener(new ExpandTextView.OnExpandStateChangeListener() {
+      @Override
+      public void onExpandStateChanged(TextView textView, boolean isExpanded) {
+        toast(isExpanded ? "展开了" : "收起了");
+      }
+    });
+    ```
+
+  * 自定义属性
+
+    |            属性             |      说明       |   默认值   |
+    | :-----------------------: | :-----------: | :-----: |
+    | `etv_max_collapsed_lines` |  收缩时显示的最大行数   |   `2`   |
+    |    `etv_anim_duration`    | 动画执行时间，单位`ms` | `400ms` |
+    |  `etv_anim_alpha_start`   |  透明度动画开始时的值   | `0.6f`  |
+
 * `SquareImageView`
+
+* `CircleImageView`
+
+* `RoundImageView`
 
 * `LoadingView`
 
