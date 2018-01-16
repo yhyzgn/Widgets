@@ -44,23 +44,23 @@
 
   > 核心控件，即各种独立使用的控件
 
-  |          名称          |               描述                |
-  | :------------------: | :-----------------------------: |
-  |   `PreImgActivity`   |           点击图片查看大图控件            |
-  |      `AdvView`       |            滚动广告轮播控件             |
-  |  `CheckedTextView`   |         可选中的`TextView`          |
-  |   `ExpandTextView`   |        可展开收起的`TextView`         |
-  |  `SquareImageView`   |  正方形`ImageView`，右上角可设置按钮及点击事件   |
-  |  `CircleImageView`   |              圆形图片               |
-  |   `RoundImageView`   |              圆角图片               |
-  |    `LoadingView`     |             加载状态控件              |
-  |   `HackyViewPager`   |       防止内存溢出的`ViewPager`        |
-  |     `PickerView`     |           上下滚动数据选取控件            |
-  | `RecyclerScrollView` | 用来嵌套`RecyclerView`的`ScrollView` |
-  |     `RvDivider`      |       `RecyclerView`的分割线        |
-  |  `SettingsItemView`  |          常用设置布局中的条目控件           |
-  |      `TitleBar`      |             常用标题栏控件             |
-  |    `SwitchButton`    |              开关控件               |
+  |                 名称                  |               描述                |
+  | :---------------------------------: | :-----------------------------: |
+  | [`PreImgActivity`](#PreImgActivity) |           点击图片查看大图控件            |
+  |              `AdvView`              |            滚动广告轮播控件             |
+  |          `CheckedTextView`          |         可选中的`TextView`          |
+  |          `ExpandTextView`           |        可展开收起的`TextView`         |
+  |          `SquareImageView`          |  正方形`ImageView`，右上角可设置按钮及点击事件   |
+  |          `CircleImageView`          |              圆形图片               |
+  |          `RoundImageView`           |              圆角图片               |
+  |            `LoadingView`            |             加载状态控件              |
+  |          `HackyViewPager`           |       防止内存溢出的`ViewPager`        |
+  |            `PickerView`             |           上下滚动数据选取控件            |
+  |        `RecyclerScrollView`         | 用来嵌套`RecyclerView`的`ScrollView` |
+  |             `RvDivider`             |       `RecyclerView`的分割线        |
+  |         `SettingsItemView`          |          常用设置布局中的条目控件           |
+  |             `TitleBar`              |             常用标题栏控件             |
+  |           `SwitchButton`            |              开关控件               |
 
 * `layout`控件
 
@@ -81,7 +81,7 @@
 
 #### `core`控件
 
-* `PreImgActivity`
+* <span id = "PreImgActivity">`PreImgActivity`</span>
 
   > 点击查看大图功能
 
@@ -181,8 +181,8 @@
 
     |         属性         |      说明       |       默认值        |
     | :----------------: | :-----------: | :--------------: |
-    |   `av_interval`    |  动画定时，单位`ms`  |     `3000ms`     |
-    | `av_anim_duration` | 动画执行时间，单位`ms` |     `800ms`      |
+    |   `av_interval`    |  动画定时，单位`ms`  |      `3000`      |
+    | `av_anim_duration` | 动画执行时间，单位`ms` |      `800`       |
     |    `av_anim_in`    |    入场动画资源     | `R.anim.adv_in`  |
     |   `av_anim_out`    |    出场动画资源     | `R.anim.adv_out` |
 
@@ -332,11 +332,11 @@
 
   * 自定义属性
 
-    |            属性             |      说明       |   默认值   |
-    | :-----------------------: | :-----------: | :-----: |
-    | `etv_max_collapsed_lines` |  收缩时显示的最大行数   |   `2`   |
-    |    `etv_anim_duration`    | 动画执行时间，单位`ms` | `400ms` |
-    |  `etv_anim_alpha_start`   |  透明度动画开始时的值   | `0.6f`  |
+    |            属性             |      说明       |  默认值   |
+    | :-----------------------: | :-----------: | :----: |
+    | `etv_max_collapsed_lines` |  收缩时显示的最大行数   |  `2`   |
+    |    `etv_anim_duration`    | 动画执行时间，单位`ms` | `400m` |
+    |  `etv_anim_alpha_start`   |  透明度动画开始时的值   | `0.6`  |
 
 * `SquareImageView`
 
