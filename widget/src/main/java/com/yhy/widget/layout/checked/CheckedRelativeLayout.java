@@ -180,6 +180,7 @@ public class CheckedRelativeLayout extends RelativeLayout implements Checkable {
          *
          * @param crl       当前控件
          * @param isChecked 是否将要被选中
+         * @return 是否可被选中
          */
         boolean beforeChange(CheckedRelativeLayout crl, boolean isChecked);
     }

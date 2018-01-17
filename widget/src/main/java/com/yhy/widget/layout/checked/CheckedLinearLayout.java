@@ -180,6 +180,7 @@ public class CheckedLinearLayout extends LinearLayout implements Checkable {
          *
          * @param cll       当前控件
          * @param isChecked 是否将要被选中
+         * @return 是否可被选中
          */
         boolean beforeChange(CheckedLinearLayout cll, boolean isChecked);
     }
