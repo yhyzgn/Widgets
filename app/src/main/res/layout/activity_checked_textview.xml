@@ -27,4 +27,14 @@
         android:textColor="#fff"
         android:textSize="14sp"
         app:ctv_prevent="false" />
+
+    <com.yhy.widget.core.checked.CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_checked_ctv_selector"
+        android:padding="8dp"
+        android:text="默认"
+        android:textColor="#fff"
+        android:textSize="14sp" />
 </LinearLayout>

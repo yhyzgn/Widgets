@@ -122,13 +122,13 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // 如果设置了监听器并且阻止事件的话，就阻止事件。这里主要阻止longClick事件
-                return null != mListener && mIsPrevent || super.onTouchEvent(event);
+                // 如果阻止事件的话，就阻止事件。这里主要阻止longClick事件
+                return mIsPrevent || super.onTouchEvent(event);
             case MotionEvent.ACTION_UP:
                 // 切换状态
                 toggle();
-                // 如果设置了监听器，并且阻止事件，就阻止，这里主要阻止click事件
-                return null != mListener && (mIsPrevent || super.onTouchEvent(event));
+                // 如果阻止事件，就阻止，这里主要阻止click事件
+                return mIsPrevent || super.onTouchEvent(event);
             default:
                 break;
         }
