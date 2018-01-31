@@ -180,8 +180,10 @@ public class PickerView<T> extends View {
      * @return 当前实例
      */
     public PickerView<T> setSelected(String selectItem) {
+        String temp;
         for (int i = 0; i < mDataList.size(); i++) {
-            if (mDataList.get(i).equals(selectItem)) {
+            temp = mItemProvider.getItem(mDataList.get(i), i);
+            if (temp.equals(selectItem)) {
                 setSelected(i);
                 return this;
             }
