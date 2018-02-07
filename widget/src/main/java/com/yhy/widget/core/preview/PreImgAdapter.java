@@ -1,4 +1,4 @@
-package com.yhy.widget.core.activity;
+package com.yhy.widget.core.preview;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -17,7 +17,7 @@ import com.yhy.widget.R;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-09-21 14:01
  * version: 1.0.0
- * desc   :
+ * desc   : 图片适配器
  */
 public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
     private Context mCtx;
@@ -72,14 +72,17 @@ public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(mCtx).inflate(R.layout.widget_item_pager_per_img, null);
-        PhotoView pvImg = (PhotoView) view.findViewById(R.id.pv_img);
-        ProgressBar pbLoading = (ProgressBar) view.findViewById(R.id.pb_loading);
+        PhotoView pvImg = view.findViewById(R.id.pv_img);
+        ProgressBar pbLoading = view.findViewById(R.id.pb_loading);
 
         //设置点击事件
         pvImg.setOnPhotoTapListener(this);
 
         //加载图片
-        mCfg.getLoader().load(pvImg, mCfg.getModelList().get(position), pbLoading);
+        if (null == ImgPreHelper.getInstance().getLoader()) {
+            throw new IllegalStateException("Must set ImgLoader at first.");
+        }
+        ImgPreHelper.getInstance().getLoader().load(pvImg, mCfg.getModelList().get(position), pbLoading);
 
         container.addView(view);
         return view;

@@ -1,13 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.yhy.widget">
+    package="com.yhy.widget">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
 
         <activity
-            android:name=".core.activity.PreImgActivity"
-            android:theme="@style/Theme.Transparent"/>
+            android:name=".core.preview.PreImgActivity"
+            android:theme="@style/Theme.Transparent" />
     </application>
 
 </manifest>

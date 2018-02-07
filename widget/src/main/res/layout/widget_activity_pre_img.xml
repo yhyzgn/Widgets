@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000">
 
     <com.yhy.widget.core.pager.HackyViewPager
         android:id="@+id/vp_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/tv_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:visibility="gone"/>
+        android:layout_marginBottom="32dp">
 
+        <TextView
+            android:id="@+id/tv_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="1/2"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/iv_download"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_def_download" />
+    </RelativeLayout>
 </RelativeLayout>

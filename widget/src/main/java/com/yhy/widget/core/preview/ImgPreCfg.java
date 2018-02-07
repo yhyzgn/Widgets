@@ -1,7 +1,6 @@
-package com.yhy.widget.core.activity;
+package com.yhy.widget.core.preview;
 
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,10 +11,14 @@ import java.util.List;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-09-21 14:01
  * version: 1.0.0
- * desc   :
+ * desc   : 图片预览器配置参数
  */
 public class ImgPreCfg<T> implements Serializable {
-    private static ImgLoader loader;
+    private static final long serialVersionUID = 671615371513873774L;
+
+    private boolean mDownloadable = ImgPreHelper.getInstance().isDownloadable();
+    private int mDownloadIconId = ImgPreHelper.getInstance().getDownloadIconId();
+
     private int mIvX;
     private int mIvY;
     private int mIvWidth;
@@ -34,8 +37,8 @@ public class ImgPreCfg<T> implements Serializable {
         temp.add(model);
 
         this.mModelList = temp;
-        this.mCurrent = 0;
         calculateIv(imgView);
+        this.mCurrent = 0;
     }
 
     /**
@@ -57,17 +60,102 @@ public class ImgPreCfg<T> implements Serializable {
      */
     public ImgPreCfg(ImageView imgView, List<T> modelList, int current) {
         this.mModelList = modelList;
-        this.mCurrent = current;
         calculateIv(imgView);
+        this.mCurrent = current;
     }
 
     /**
-     * 获取图片加载器
+     * 构造函数
      *
-     * @return 图片加载器
+     * @param ivX      图片x坐标
+     * @param ivY      图片y坐标
+     * @param ivWidth  图片宽度
+     * @param ivHeight 图片高度
+     * @param model    图片路径
      */
-    public ImgLoader getLoader() {
-        return loader;
+    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, T model) {
+        List<T> temp = new ArrayList<>();
+        temp.add(model);
+
+        this.mModelList = temp;
+        this.mIvX = ivX;
+        this.mIvY = ivY;
+        this.mIvWidth = ivWidth;
+        this.mIvHeight = ivHeight;
+        this.mCurrent = 0;
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param ivX       图片x坐标
+     * @param ivY       图片y坐标
+     * @param ivWidth   图片宽度
+     * @param ivHeight  图片高度
+     * @param modelList 图片路径集合
+     */
+    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, List<T> modelList) {
+        this(ivX, ivY, ivWidth, ivHeight, modelList, 0);
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param ivX       图片x坐标
+     * @param ivY       图片y坐标
+     * @param ivWidth   图片宽度
+     * @param ivHeight  图片高度
+     * @param modelList 图片路径集合
+     * @param current   当前选中的索引
+     */
+    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, List<T> modelList, int current) {
+        this.mModelList = modelList;
+        this.mCurrent = 0;
+        this.mIvX = ivX;
+        this.mIvY = ivY;
+        this.mIvWidth = ivWidth;
+        this.mIvHeight = ivHeight;
+        this.mCurrent = current;
+    }
+
+    /**
+     * 是否可以下载图片
+     *
+     * @param enable 是否可下载
+     * @return 当前对象
+     */
+    public ImgPreCfg<T> setDownloadable(boolean enable) {
+        this.mDownloadable = enable;
+        return this;
+    }
+
+    /**
+     * 下载按钮图标
+     *
+     * @param iconId 图标id
+     * @return 当前对象
+     */
+    public ImgPreCfg<T> setDownloadIconId(int iconId) {
+        this.mDownloadIconId = iconId;
+        return this;
+    }
+
+    /**
+     * 获取是否可下载
+     *
+     * @return 是否可下载
+     */
+    public boolean isDownloadable() {
+        return mDownloadable;
+    }
+
+    /**
+     * 获取下载按钮图标id
+     *
+     * @return 图标id
+     */
+    public int getDownloadIconId() {
+        return mDownloadIconId;
     }
 
     /**
@@ -134,15 +222,6 @@ public class ImgPreCfg<T> implements Serializable {
     }
 
     /**
-     * 初始化，建议在Application中
-     *
-     * @param loader 图片加载器
-     */
-    public static void init(ImgLoader loader) {
-        ImgPreCfg.loader = loader;
-    }
-
-    /**
      * 计算点击的ImageView的大小
      *
      * @param iv 点击的ImageView
@@ -165,21 +244,5 @@ public class ImgPreCfg<T> implements Serializable {
             mIvX = 0;
             mIvY = 0;
         }
-    }
-
-    /**
-     * 图片加载器
-     */
-    public interface ImgLoader {
-
-        /**
-         * 加载图片的方法
-         *
-         * @param iv        图片控件
-         * @param model     图片路径
-         * @param pbLoading 加载进度条，默认不显示
-         * @param <T>       路径泛型参数
-         */
-        <T> void load(ImageView iv, T model, ProgressBar pbLoading);
     }
 }

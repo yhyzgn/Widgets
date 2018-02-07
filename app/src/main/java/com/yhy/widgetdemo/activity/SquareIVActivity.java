@@ -1,9 +1,6 @@
 package com.yhy.widgetdemo.activity;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yhy.widget.core.activity.ImgPreCfg;
-import com.yhy.widget.core.activity.PreImgActivity;
+import com.yhy.widget.core.preview.ImgPreCfg;
+import com.yhy.widget.core.preview.PreImgActivity;
 import com.yhy.widget.core.img.SquareImageView;
 import com.yhy.widget.core.recycler.div.RvDivider;
 import com.yhy.widgetdemo.R;

@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.0.19-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.0.20-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -84,6 +84,36 @@
 
   > 点击查看大图功能
 
+  * `Application`中初始化
+
+    > 需要在`Application`中初始化，并通过`ImgPreHelper`设置图片加载器、图片下载器等相关配置
+
+    ```java
+    ImgPreHelper.getInstance().init(this).setLoader(new ImgPreHelper.ImgLoader() {
+        @Override
+        public <T> void load(ImageView iv, T model, ProgressBar pbLoading) {
+            Glide.with(iv.getContext()).load(model).into(iv);
+        }
+    }).setOnDownloadListener(new ImgPreHelper.OnDownloadListener() {
+        @Override
+        public void onProgress(float progress, long current, long total) {
+            Log.i("ImgDownloader", "下载进度：" + (progress * 100F) + "%，总大小：" + total + " bytes, 已下载：" + current + " bytes.");
+        }
+
+        @Override
+        public void onSuccess(File img, String msg) {
+            ToastUtils.shortT(msg);
+        }
+
+        @Override
+        public void onError(String error) {
+            ToastUtils.shortT(error);
+        }
+    });
+    ```
+
+    ​
+
   * 设置`ImgPreCfg`参数
 
     > 多张图
@@ -104,6 +134,9 @@
     ```java
     // 参数1为点击的ImageView；参数2为当前要预览的图片地址。
     ImgPreCfg cfg = new ImgPreCfg(iv, url);
+
+    // x, y, width, height 分别为图片x, y坐标和宽高度。
+    ImgPreCfg cfg = new ImgPreCfg(x, y, width, height, url);
     ```
 
   * 开始预览

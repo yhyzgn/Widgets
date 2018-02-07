@@ -1,15 +1,20 @@
-package com.yhy.widget.core.activity;
+package com.yhy.widget.core.preview;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -27,14 +32,15 @@ import com.yhy.widget.core.pager.HackyViewPager;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-09-21 14:01
  * version: 1.0.0
- * desc   :
+ * desc   : 图片预览页面
  */
 public class PreImgActivity extends AppCompatActivity implements ViewTreeObserver.OnPreDrawListener {
-    private static final long ANIMATE_DURATION = 400;
+    private static final long ANIMATE_DURATION = 200;
     private ImgPreCfg mCfg;
     private RelativeLayout rlRoot;
     private HackyViewPager vpImg;
     private TextView tvItem;
+    private ImageView ivDownload;
     private int mScreenWidth;
     private int mScreenHeight;
     private PreImgAdapter mAdapter;
@@ -63,15 +69,15 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //设置透明状态栏
         setStatusBar();
 
         setContentView(R.layout.widget_activity_pre_img);
 
-        rlRoot = (RelativeLayout) findViewById(R.id.rl_root);
-        vpImg = (HackyViewPager) findViewById(R.id.vp_img);
-        tvItem = (TextView) findViewById(R.id.tv_item);
+        rlRoot = findViewById(R.id.rl_root);
+        vpImg = findViewById(R.id.vp_img);
+        tvItem = findViewById(R.id.tv_item);
+        ivDownload = findViewById(R.id.iv_download);
 
         calculateScreenSize();
 
@@ -91,6 +97,46 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         });
 
         tvItem.setText(String.format(getString(R.string.pre_img_current_item), mCfg.getCurrent() + 1, mCfg.getModelList().size()));
+        tvItem.setVisibility(mCfg.getModelList().size() > 1 ? View.VISIBLE : View.GONE);
+
+        // 只有预览网络图片时才显示下载按钮
+        ivDownload.setVisibility(mCfg.isDownloadable() && isNetImg() ? View.VISIBLE : View.GONE);
+        ivDownload.setImageResource(mCfg.getDownloadIconId());
+        ivDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 检查SD卡读取权限
+                if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PreImgActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                } else if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PreImgActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                } else {
+                    // 已授权
+                    ImgPreHelper.ImgDownloader downloader = ImgPreHelper.getInstance().getDownloader();
+                    if (isNetImg() && null != downloader) {
+                        // 只有预览网络图片时才能下载
+                        Object model = mCfg.getModelList().get(vpImg.getCurrentItem());
+                        downloader.download(PreImgActivity.this, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 是否是网络图片
+     *
+     * @return 是否是网络图片
+     */
+    private boolean isNetImg() {
+        if (null != mCfg && null != mCfg.getModelList() && !mCfg.getModelList().isEmpty()) {
+            Object model = mCfg.getModelList().get(0);
+            if (model instanceof String) {
+                String url = (String) model;
+                return url.startsWith("http:") || url.startsWith("https:");
+            }
+        }
+        return false;
     }
 
     /**
@@ -132,6 +178,7 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         });
         addIntoListener(animator);
         animator.setDuration(ANIMATE_DURATION);
+        animator.setInterpolator(new FastOutSlowInInterpolator());
         animator.start();
 
         //返回true，表示第一帧就开始绘制，否则会被跳过

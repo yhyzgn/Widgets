@@ -146,7 +146,7 @@ public class SettingsItemView extends LinearLayout {
                 .setEditable(mEditable)
                 .setTextColor(mTextColor)
                 .setTextSize(mTextSize)
-                .onSwitch(mSwitchOn)
+                .setSwitchOn(mSwitchOn)
                 .showSwitch(mShowSwitch)
                 .setNameGravity(mNameGravity)
                 .setTextGravity(mTextGravity)
@@ -309,10 +309,19 @@ public class SettingsItemView extends LinearLayout {
         return this;
     }
 
-    public SettingsItemView onSwitch(boolean checked) {
+    public SettingsItemView setInputType(int inputType) {
+        etText.setInputType(inputType);
+        return this;
+    }
+
+    public SettingsItemView setSwitchOn(boolean checked) {
         mSwitchOn = checked;
         sbSwitch.onOrOff(mSwitchOn);
         return this;
+    }
+
+    public boolean isSwitchOn() {
+        return mSwitchOn;
     }
 
     public SettingsItemView showSwitch(boolean show) {
