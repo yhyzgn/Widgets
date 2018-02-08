@@ -23,8 +23,8 @@ public class PreviewImageActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ivA = (ImageView) findViewById(R.id.iv_a);
-        ivB = (ImageView) findViewById(R.id.iv_b);
+        ivA = findViewById(R.id.iv_a);
+        ivB = findViewById(R.id.iv_b);
     }
 
     @Override
@@ -43,7 +43,8 @@ public class PreviewImageActivity extends BaseActivity {
         ivB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preview(ivB);
+                ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) v, "http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");
+                PreImgActivity.preview(PreviewImageActivity.this, cfg);
             }
         });
     }

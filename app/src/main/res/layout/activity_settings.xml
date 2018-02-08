@@ -158,4 +158,22 @@
         app:siv_show_icon="true"
         app:siv_text_gravity="left" />
 
+    <com.yhy.widget.core.settings.SettingsItemView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#fff"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:siv_arrow="@mipmap/ic_arrow_right"
+        app:siv_cursor_drawable="@drawable/cursor_bg_shape"
+        app:siv_editable="true"
+        app:siv_hint="请输入电话号码"
+        app:siv_icon="@mipmap/ic_notice"
+        app:siv_input_type="phone"
+        app:siv_max_length="11"
+        app:siv_name="设置12"
+        app:siv_name_width="100dp"
+        app:siv_show_arrow="true"
+        app:siv_show_icon="true"
+        app:siv_text_gravity="left" />
 </LinearLayout>

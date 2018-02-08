@@ -148,6 +148,15 @@
         <attr name="siv_editable" format="boolean" />
         <!--光标颜色资源，默认为系统默认-->
         <attr name="siv_cursor_drawable" format="reference" />
+        <!--输入类型，默认为text-->
+        <attr name="siv_input_type" format="integer">
+            <enum name="text" value="1" />
+            <enum name="phone" value="2" />
+            <enum name="email" value="3" />
+            <enum name="password" value="4" />
+        </attr>
+        <!--输入最大长度-->
+        <attr name="siv_max_length" format="integer" />
     </declare-styleable>
 
     <!--PickerView属性-->

@@ -39,6 +39,7 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
     private ImgPreCfg mCfg;
     private RelativeLayout rlRoot;
     private HackyViewPager vpImg;
+    private RelativeLayout rlFooter;
     private TextView tvItem;
     private ImageView ivDownload;
     private int mScreenWidth;
@@ -76,6 +77,7 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
         rlRoot = findViewById(R.id.rl_root);
         vpImg = findViewById(R.id.vp_img);
+        rlFooter = findViewById(R.id.rl_footer);
         tvItem = findViewById(R.id.tv_item);
         ivDownload = findViewById(R.id.iv_download);
 
@@ -97,10 +99,8 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         });
 
         tvItem.setText(String.format(getString(R.string.pre_img_current_item), mCfg.getCurrent() + 1, mCfg.getModelList().size()));
-        tvItem.setVisibility(mCfg.getModelList().size() > 1 ? View.VISIBLE : View.GONE);
 
         // 只有预览网络图片时才显示下载按钮
-        ivDownload.setVisibility(mCfg.isDownloadable() && isNetImg() ? View.VISIBLE : View.GONE);
         ivDownload.setImageResource(mCfg.getDownloadIconId());
         ivDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +242,14 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                tvItem.setVisibility(View.VISIBLE);
+                if (mCfg.getModelList().size() > 1) {
+                    tvItem.setVisibility(View.VISIBLE);
+                    rlFooter.setVisibility(View.VISIBLE);
+                }
+                if (mCfg.isDownloadable()) {
+                    ivDownload.setVisibility(View.VISIBLE);
+                    rlFooter.setVisibility(View.VISIBLE);
+                }
                 isAnimating = false;
             }
 
@@ -264,7 +271,9 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
             @Override
             public void onAnimationStart(Animator animation) {
                 rlRoot.setBackgroundColor(0x0);
+                rlFooter.setVisibility(View.GONE);
                 tvItem.setVisibility(View.GONE);
+                ivDownload.setVisibility(View.GONE);
                 isAnimating = true;
             }
 

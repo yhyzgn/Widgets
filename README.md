@@ -675,11 +675,11 @@
     |   `siv_show_arrow`    |             是否显示右边箭头              |  `false`  |
     |      `siv_name`       |               左边文本                |     空     |
     |   `siv_name_width`    |           左边文本宽度，单位`dp`           |    自适应    |
-    |  `siv_name_gravity`   | 左边文本对其方式【`left`|`center`|`right`】 |  `left`   |
+    |  `siv_name_gravity`   | 左边文本对其方式【`left`、`center`、`right`】 |`center`|
     |    `siv_name_size`    |           左边文本大小，单位`sp`           |   `14`    |
     |   `siv_name_color`    |              左边文本颜色               | `#000000` |
     |      `siv_text`       |               右边内容                |     空     |
-    |  `siv_text_gravity`   | 右边内容对齐方式【`left`|`center`|`right`】 |  `right`  |
+    |  `siv_text_gravity`   | 右边内容对齐方式【`left`、`center`、`right`】 |`center`|
     |      `siv_hint`       |              右边提示文本               |     空     |
     |    `siv_text_size`    |           右边字体大小，单位`sp`           |   `14`    |
     |   `siv_text_color`    |              右边字体颜色               | `#000000` |
@@ -689,6 +689,8 @@
     |   `siv_show_switch`   |             是否显示开关控件              |  `false`  |
     |    `siv_editable`     |               是否可编辑               |  `false`  |
     | `siv_cursor_drawable` |              光标颜色资源               |   系统默认    |
+    | `siv_input_type` | 输入类型【`text`、`phone`、`email`、`password`】 | `text` |
+    | `siv_max_length` | 可输入最大长度 | 不限 |
 
 * <a name = "TitleBar">`TitleBar`</a>
 

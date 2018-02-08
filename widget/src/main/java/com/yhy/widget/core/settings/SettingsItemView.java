@@ -9,6 +9,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -84,12 +86,12 @@ public class SettingsItemView extends LinearLayout {
 
     private void init(Context context, AttributeSet attrs) {
         View view = LayoutInflater.from(context).inflate(R.layout.widget_settings_item_view, this);
-        ivIcon = (ImageView) view.findViewById(R.id.iv_settings_icon);
-        ivArrow = (ImageView) view.findViewById(R.id.iv_settings_arrow);
-        tvName = (TextView) view.findViewById(R.id.tv_settings_name);
-        tvText = (TextView) view.findViewById(R.id.tv_settings_text);
-        etText = (EditText) view.findViewById(R.id.et_settings_text);
-        sbSwitch = (SwitchButton) view.findViewById(R.id.sb_switch);
+        ivIcon = view.findViewById(R.id.iv_settings_icon);
+        ivArrow = view.findViewById(R.id.iv_settings_arrow);
+        tvName = view.findViewById(R.id.tv_settings_name);
+        tvText = view.findViewById(R.id.tv_settings_text);
+        etText = view.findViewById(R.id.et_settings_text);
+        sbSwitch = view.findViewById(R.id.sb_switch);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingsItemView);
         mIcon = ta.getDrawable(R.styleable.SettingsItemView_siv_icon);
@@ -123,6 +125,11 @@ public class SettingsItemView extends LinearLayout {
         mTextGravity = textGravity == 0 ? Gravity.LEFT : textGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
         mTextGravity |= Gravity.CENTER_VERTICAL;
 
+        int tempInputType = ta.getInt(R.styleable.SettingsItemView_siv_input_type, 1);
+        int inputType = tempInputType == 1 ? InputType.TYPE_CLASS_TEXT : tempInputType == 2 ? InputType.TYPE_CLASS_PHONE : tempInputType == 3 ? InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS : tempInputType == 4 ? InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT;
+
+        int maxLength = ta.getInt(R.styleable.SettingsItemView_siv_max_length, -1);
+
         ta.recycle();
 
         //将字体大小单位转换为sp
@@ -151,6 +158,13 @@ public class SettingsItemView extends LinearLayout {
                 .setNameGravity(mNameGravity)
                 .setTextGravity(mTextGravity)
                 .setCursorDrawableRes(mCursorDrawableRes);
+
+        if (mEditable) {
+            setInputType(inputType);
+            if (maxLength > -1) {
+                setMaxLength(maxLength);
+            }
+        }
 
         sbSwitch.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
             @Override
@@ -311,6 +325,16 @@ public class SettingsItemView extends LinearLayout {
 
     public SettingsItemView setInputType(int inputType) {
         etText.setInputType(inputType);
+        return this;
+    }
+
+    public SettingsItemView setMaxLength(int length) {
+        InputFilter[] temp = etText.getFilters();
+        InputFilter[] filters = new InputFilter[temp.length + 1];
+        System.arraycopy(temp, 0, filters, 0, temp.length);
+        InputFilter lengthFilter = new InputFilter.LengthFilter(length);
+        filters[filters.length - 1] = lengthFilter;
+        etText.setFilters(filters);
         return this;
     }
 
