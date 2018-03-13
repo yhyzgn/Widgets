@@ -31,11 +31,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:recyclerview-v7:27.1.0'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:design:27.1.0'
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
@@ -46,7 +46,7 @@ publish {
     userOrg = 'yhyzgn'
     groupId = 'com.yhy.widget'
     artifactId = 'view-core'
-    publishVersion = '1.0.21'
+    publishVersion = '1.0.22'
     desc = 'Some custom view.'
     website = 'https://github.com/yhyzgn/Widgets'
 }

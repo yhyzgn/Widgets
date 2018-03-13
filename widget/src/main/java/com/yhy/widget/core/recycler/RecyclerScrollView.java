@@ -41,6 +41,8 @@ public class RecyclerScrollView extends ScrollView {
             case MotionEvent.ACTION_DOWN:
                 downX = (int) e.getRawX();
                 downY = (int) e.getRawY();
+                // 调用一下父类方法，解决“Invalid pointerId=-1 in onTouchEvent”问题
+                super.onInterceptTouchEvent(e);
                 break;
             case MotionEvent.ACTION_MOVE:
                 int moveY = (int) e.getRawY();
@@ -49,6 +51,12 @@ public class RecyclerScrollView extends ScrollView {
                 }
         }
         return super.onInterceptTouchEvent(e);
+    }
+
+    @Override
+    public boolean canScrollVertically(int direction) {
+        // 不让super.onInterceptTouchEvent(event);调用的时候直接返回false
+        return true;
     }
 
     @Override
