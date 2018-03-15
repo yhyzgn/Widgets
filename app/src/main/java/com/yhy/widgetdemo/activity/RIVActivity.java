@@ -2,8 +2,8 @@ package com.yhy.widgetdemo.activity;
 
 import android.widget.ImageView;
 
-import com.yhy.widget.core.img.corner.CircleImageView;
-import com.yhy.widget.core.img.corner.RoundImageView;
+import com.yhy.widget.core.img.round.CircleImageView;
+import com.yhy.widget.core.img.round.RoundImageView;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
 import com.yhy.widgetdemo.entity.ImgUrls;

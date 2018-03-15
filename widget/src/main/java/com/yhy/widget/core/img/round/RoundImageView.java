@@ -1,4 +1,4 @@
-package com.yhy.widget.core.img.corner;
+package com.yhy.widget.core.img.round;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
-import com.yhy.widget.core.img.corner.abs.AbsCornerImageView;
+import com.yhy.widget.core.img.round.abs.AbsRoundImageView;
 
 /**
  * author : 颜洪毅
@@ -16,7 +16,7 @@ import com.yhy.widget.core.img.corner.abs.AbsCornerImageView;
  * version: 1.0.0
  * desc   : 圆角图片
  */
-public class RoundImageView extends AbsCornerImageView {
+public class RoundImageView extends AbsRoundImageView {
 
     private float mRadius;
 

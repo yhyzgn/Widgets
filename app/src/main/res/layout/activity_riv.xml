@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yhy.widget.core.img.corner.CircleImageView
+    <com.yhy.widget.core.img.round.CircleImageView
         android:id="@+id/civ_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        app:civ_border_color="#8c9eff"
-        app:civ_border_width="2dp" />
+        app:riv_border_color="#8c9eff"
+        app:riv_border_width="2dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,23 +24,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.yhy.widget.core.img.corner.RoundImageView
+            <com.yhy.widget.core.img.round.RoundImageView
                 android:id="@+id/riv_a"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:civ_border_color="#8c9eff"
-                app:civ_border_width="2dp"
+                app:riv_border_color="#8c9eff"
+                app:riv_border_width="2dp"
                 app:riv_radius_left_bottom="30dp"
                 app:riv_radius_right_top="30dp" />
 
-            <com.yhy.widget.core.img.corner.RoundImageView
+            <com.yhy.widget.core.img.round.RoundImageView
                 android:id="@+id/riv_b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
-                app:civ_border_color="#8c9eff"
-                app:civ_border_width="2dp"
+                app:riv_border_color="#8c9eff"
+                app:riv_border_width="2dp"
                 app:riv_radius_left_top="30dp"
                 app:riv_radius_right_bottom="30dp" />
         </LinearLayout>
@@ -51,38 +51,38 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <com.yhy.widget.core.img.corner.RoundImageView
+            <com.yhy.widget.core.img.round.RoundImageView
                 android:id="@+id/riv_c"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                app:civ_border_color="#8c9eff"
-                app:civ_border_width="2dp"
+                app:riv_border_color="#8c9eff"
+                app:riv_border_width="2dp"
                 app:riv_radius_left_top="30dp"
                 app:riv_radius_right_bottom="30dp" />
 
-            <com.yhy.widget.core.img.corner.RoundImageView
+            <com.yhy.widget.core.img.round.RoundImageView
                 android:id="@+id/riv_d"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
-                app:civ_border_color="#8c9eff"
-                app:civ_border_width="2dp"
+                app:riv_border_color="#8c9eff"
+                app:riv_border_width="2dp"
                 app:riv_radius_left_bottom="30dp"
                 app:riv_radius_right_top="30dp" />
         </LinearLayout>
     </LinearLayout>
 
-    <com.yhy.widget.core.img.corner.RoundImageView
+    <com.yhy.widget.core.img.round.RoundImageView
         android:id="@+id/riv_test"
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        app:civ_border_color="#8c9eff"
-        app:civ_border_width="2dp"
+        app:riv_border_color="#8c9eff"
+        app:riv_border_width="2dp"
         app:riv_radius="12dp" />
 
     <ImageView

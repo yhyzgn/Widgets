@@ -1,26 +1,16 @@
-package com.yhy.widget.core.img.corner.abs;
+package com.yhy.widget.core.img.round.abs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
@@ -33,7 +23,7 @@ import com.yhy.widget.R;
  * version: 1.0.0
  * desc   : 圆角图片抽象类
  */
-public abstract class AbsCornerImageView extends AppCompatImageView {
+public abstract class AbsRoundImageView extends AppCompatImageView {
 
     private static final PorterDuffXfermode xFermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
 
@@ -61,15 +51,15 @@ public abstract class AbsCornerImageView extends AppCompatImageView {
 
     private Paint borderPaint;
 
-    public AbsCornerImageView(Context context) {
+    public AbsRoundImageView(Context context) {
         this(context, null, 0);
     }
 
-    public AbsCornerImageView(Context context, AttributeSet attrs) {
+    public AbsRoundImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AbsCornerImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AbsRoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(attrs);
         init();
@@ -82,9 +72,9 @@ public abstract class AbsCornerImageView extends AppCompatImageView {
      */
     protected void initAttrs(AttributeSet attrs) {
         if (attrs != null) {
-            TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AbsCornerImageView);
-            borderWidth = ta.getDimension(R.styleable.AbsCornerImageView_civ_border_width, 0);
-            borderColor = ta.getColor(R.styleable.AbsCornerImageView_civ_border_color, 0);
+            TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AbsRoundImageView);
+            borderWidth = ta.getDimension(R.styleable.AbsRoundImageView_riv_border_width, 0);
+            borderColor = ta.getColor(R.styleable.AbsRoundImageView_riv_border_color, 0);
             ta.recycle();
         }
     }

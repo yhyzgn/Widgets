@@ -1,12 +1,10 @@
-package com.yhy.widget.core.img.corner;
+package com.yhy.widget.core.img.round;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
-import com.yhy.widget.core.img.corner.abs.AbsCornerImageView;
+import com.yhy.widget.core.img.round.abs.AbsRoundImageView;
 
 /**
  * author : 颜洪毅
@@ -15,7 +13,7 @@ import com.yhy.widget.core.img.corner.abs.AbsCornerImageView;
  * version: 1.0.0
  * desc   : 圆形图片
  */
-public class CircleImageView extends AbsCornerImageView {
+public class CircleImageView extends AbsRoundImageView {
 
     public CircleImageView(Context context) {
         this(context, null, 0);

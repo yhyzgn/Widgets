@@ -38,17 +38,25 @@
         <attr name="etv_anim_alpha_start" format="float" />
     </declare-styleable>
 
-    <!--圆形ImageView属性-->
-    <declare-styleable name="AbsCornerImageView">
-        <attr name="civ_border_width" format="dimension|reference" />
-        <attr name="civ_border_color" format="color|reference" />
+    <!--圆角ImageView属性-->
+    <declare-styleable name="AbsRoundImageView">
+        <!--边框宽度，默认：0dp-->
+        <attr name="riv_border_width" format="dimension|reference" />
+        <!--边框颜色；默认：#000000-->
+        <attr name="riv_border_color" format="color|reference" />
     </declare-styleable>
 
+    <!--圆角ImageView属性-->
     <declare-styleable name="RoundImageView">
+        <!--四个角半径，默认：0dp-->
         <attr name="riv_radius" format="dimension|reference" />
+        <!--左上角半径，默认：0dp-->
         <attr name="riv_radius_left_top" format="dimension|reference" />
+        <!--右上角半径，默认：0dp-->
         <attr name="riv_radius_right_top" format="dimension|reference" />
+        <!--右下角半径，默认：0dp-->
         <attr name="riv_radius_right_bottom" format="dimension|reference" />
+        <!--左下角半径，默认：0dp-->
         <attr name="riv_radius_left_bottom" format="dimension|reference" />
     </declare-styleable>
 

@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.0.22-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.0.24-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -412,12 +412,12 @@
 
   * 自定义属性
 
-    |        属性         |       说明        |    默认值     |
-    | :---------------: | :-------------: | :--------: |
-    |   `siv_btn_img`   |     右上角按钮图片     |     无      |
-    |  `siv_btn_size`   | 右上角按钮大小，单位`dp`  | 控件大小的`1/6` |
-    |  `siv_btn_color`  |     右上角按钮颜色     |     透明     |
-    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` |    `2`     |
+    |       属性        |            说明            |      默认值       |
+    | :---------------: | :------------------------: | :---------------: |
+    |   `siv_btn_img`   |       右上角按钮图片       |        无         |
+    |  `siv_btn_size`   |  右上角按钮大小，单位`dp`  | `siv_btn_img`大小 |
+    |  `siv_btn_color`  |       右上角按钮颜色       |       透明        |
+    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` |        `2`        |
 
 * <a name = "CircleImageView">`CircleImageView`</a>
 
@@ -426,13 +426,13 @@
   * 布局文件
 
     ```xml
-    <com.yhy.widget.core.img.corner.CircleImageView
+    <com.yhy.widget.core.img.round.CircleImageView
       android:id="@+id/civ_avatar"
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:scaleType="centerCrop"
-      app:civ_border_color="#8c9eff"
-      app:civ_border_width="2dp" />
+      app:riv_border_color="#8c9eff"
+      app:riv_border_width="2dp" />
     ```
 
   * 获取控件
@@ -461,14 +461,14 @@
   * 布局文件
 
     ```xml
-    <com.yhy.widget.core.img.corner.RoundImageView
+    <com.yhy.widget.core.img.round.RoundImageView
       android:id="@+id/riv_d"
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:layout_marginLeft="10dp"
       android:scaleType="centerCrop"
-      app:civ_border_color="#8c9eff"
-      app:civ_border_width="2dp"
+      app:riv_border_color="#8c9eff"
+      app:riv_border_width="2dp"
       app:riv_radius_left_top="30dp"
       app:riv_radius_right_top="30dp"
       app:riv_radius_right_bottom="30dp"
