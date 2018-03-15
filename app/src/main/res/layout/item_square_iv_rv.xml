@@ -4,4 +4,5 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:siv_btn_color="#f20"
-    app:siv_btn_img="@drawable/ic_delete_white" />
+    app:siv_btn_img="@drawable/ic_delete_white"
+    app:siv_btn_size="24dp" />

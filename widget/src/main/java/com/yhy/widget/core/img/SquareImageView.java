@@ -29,7 +29,7 @@ public class SquareImageView extends AppCompatImageView {
     private int mSize;
     // 右上角按钮图片，默认为空
     private Bitmap mBtnImg;
-    // 右上角按钮大小，默认为实际大小的1/6
+    // 右上角按钮大小，默认为右上角按钮图片的大小
     private int mBtnSize;
     // 右上角按钮背景颜色，默认为透明
     private int mBtnColor;
@@ -70,7 +70,7 @@ public class SquareImageView extends AppCompatImageView {
         mBtnColor = ta.getColor(R.styleable.SquareImageView_siv_btn_color, Color.TRANSPARENT);
         ta.recycle();
 
-        // 强制使用 CENTER_CROP 模式显示图片
+        // 默认使用 CENTER_CROP 模式显示图片
         setScaleType(ScaleType.CENTER_CROP);
     }
 
@@ -120,6 +120,36 @@ public class SquareImageView extends AppCompatImageView {
     }
 
     /**
+     * 设置右上角图片
+     *
+     * @param bitmap 图片
+     */
+    public void setBtn(Bitmap bitmap) {
+        mBtnImg = bitmap;
+        postInvalidate();
+    }
+
+    /**
+     * 设置右上角图片
+     *
+     * @param drawable 图片
+     */
+    public void setBtn(Drawable drawable) {
+        mBtnImg = null == drawable ? null : d2b(drawable);
+        postInvalidate();
+    }
+
+    /**
+     * 设置右上角图片
+     *
+     * @param resId 图片资源id
+     */
+    public void setBtn(int resId) {
+        mBtnImg = resId <= 0 ? null : d2b(getResources().getDrawable(resId));
+        postInvalidate();
+    }
+
+    /**
      * 触摸事件处理
      *
      * @param event 具体事件
@@ -136,7 +166,7 @@ public class SquareImageView extends AppCompatImageView {
                 int upX = (int) event.getX();
                 int upY = (int) event.getY();
                 // 判断按钮点击有效范围
-                if (upX >= mSize - mBtnSize && upX <= mSize && upY >= 0 && upY <= mBtnSize && Math.abs(upX - mDownX) < mBtnSize / 2 && Math.abs(upY - mDownY) < mBtnSize / 2) {
+                if (null != mBtnImg && upX >= mSize - mBtnSize && upX <= mSize && upY >= 0 && upY <= mBtnSize && Math.abs(upX - mDownX) < mBtnSize / 2 && Math.abs(upY - mDownY) < mBtnSize / 2) {
                     // 点击了删除按钮
                     if (null != mListener) {
                         mListener.onClick(this);
@@ -163,9 +193,9 @@ public class SquareImageView extends AppCompatImageView {
         super.onSizeChanged(w, h, oldw, oldh);
         // 由于宽高相等，所以任意一个值都行，这里以宽度为准
         mSize = getMeasuredWidth();
-        // 检查并设置按钮默认宽度，默认为实际大小的1/6
+        // 检查并设置按钮默认宽度
         if (null != mBtnImg && mBtnSize == 0) {
-            mBtnSize = mSize / 6;
+            mBtnSize = Math.max(mBtnImg.getWidth(), mBtnImg.getHeight());
         }
         // 内边距最大不能超过整体大小的1/4
         if (mBtnPadding >= mBtnSize / 2) {

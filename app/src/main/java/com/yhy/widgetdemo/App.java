@@ -2,15 +2,12 @@ package com.yhy.widgetdemo;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.yhy.widget.core.preview.ImgPreHelper;
 import com.yhy.widgetdemo.utils.ImgUtils;
 import com.yhy.widgetdemo.utils.ToastUtils;
@@ -18,7 +15,11 @@ import com.yhy.widgetdemo.utils.ToastUtils;
 import java.io.File;
 
 /**
- * Created by HongYi Yan on 2017/4/10 19:40.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2018-03-15 13:38
+ * version: 1.0.0
+ * desc   :
  */
 public class App extends Application {
 
@@ -38,22 +39,20 @@ public class App extends Application {
             public <T> void load(Context ctx, final ImageView iv, T model) {
                 Glide.with(ctx)
                         .load(model)
-                        .asBitmap()
                         .placeholder(R.mipmap.ic_launcher)
                         .error(R.mipmap.ic_launcher)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)//使用磁盘缓存
                         .skipMemoryCache(true)//跳过内存缓存
                         .animate(R.anim.anim_alpha_image_load)
-//                        .crossFade()//渐变切换
-//                        .dontAnimate()
-//                        .into(iv);
-                        .into(new SimpleTarget<Bitmap>() {
-                            @Override
-                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super
-                                    Bitmap> glideAnimation) {
-                                iv.setImageBitmap(bitmap);
-                            }
-                        });
+                        .crossFade()//渐变切换
+                        .into(iv);
+//                        .into(new SimpleTarget<Bitmap>() {
+//                            @Override
+//                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super
+//                                    Bitmap> glideAnimation) {
+//                                iv.setImageBitmap(bitmap);
+//                            }
+//                        });
             }
         });
 

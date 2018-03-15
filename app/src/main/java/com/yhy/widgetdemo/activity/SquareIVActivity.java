@@ -91,6 +91,10 @@ public class SquareIVActivity extends BaseActivity {
         public void onBindViewHolder(RvAdapter.ViewHolder holder, final int position) {
             ImgUtils.load(holder.itemView.getContext(), (SquareImageView) holder.itemView, mUrl);
 
+            if (position == 1) {
+                ((SquareImageView) holder.itemView).setBtn(0);
+            }
+
             ((SquareImageView) holder.itemView).setOnBtnClickListener(new SquareImageView.OnBtnClickListener() {
                 @Override
                 public void onClick(SquareImageView siv) {

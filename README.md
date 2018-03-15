@@ -427,14 +427,12 @@
 
     ```xml
     <com.yhy.widget.core.img.corner.CircleImageView
-      android:id="@+id/civ_test"
+      android:id="@+id/civ_avatar"
       android:layout_width="100dp"
       android:layout_height="100dp"
-      android:src="@mipmap/ic_avatar"
-      app:civ_border_color="#f40"
-      app:civ_border_overlay="true"
-      app:civ_border_width="2dp"
-      app:civ_fill_color="#0f0"/>
+      android:scaleType="centerCrop"
+      app:civ_border_color="#8c9eff"
+      app:civ_border_width="2dp" />
     ```
 
   * 获取控件
@@ -451,31 +449,31 @@
 
   * 自定义属性
 
-    |          属性          |     说明      |    默认值    |
-    | :------------------: | :---------: | :-------: |
-    |  `civ_border_width`  | 边框宽度，单位`dp` |    `0`    |
-    |  `civ_border_color`  |    边框颜色     | `#000000` |
-    | `civ_border_overlay` |   是否悬浮边框    |  `false`  |
-    |   `civ_fill_color`   |    填充颜色     |    透明     |
+    |        属性        |        说明        |  默认值   |
+    | :----------------: | :----------------: | :-------: |
+    | `civ_border_width` | 边框宽度，单位`dp` |    `0`    |
+    | `civ_border_color` |      边框颜色      | `#000000` |
 
 * <a name = "RoundImageView">`RoundImageView`</a>
 
-  > 圆角图片
+  > 圆角图片，如果四个角半径都相等的话，直接使用`riv_radius`即可
 
   * 布局文件
 
     ```xml
     <com.yhy.widget.core.img.corner.RoundImageView
-      android:id="@+id/riv_test"
+      android:id="@+id/riv_d"
       android:layout_width="100dp"
       android:layout_height="100dp"
-      android:layout_marginTop="24dp"
-      android:src="@mipmap/ic_avatar"
-      app:civ_border_color="#f40"
-      app:civ_border_overlay="true"
+      android:layout_marginLeft="10dp"
+      android:scaleType="centerCrop"
+      app:civ_border_color="#8c9eff"
       app:civ_border_width="2dp"
-      app:civ_fill_color="#0f0"
-      app:riv_radius="6dp"/>
+      app:riv_radius_left_top="30dp"
+      app:riv_radius_right_top="30dp"
+      app:riv_radius_right_bottom="30dp"
+      app:riv_radius_left_bottom="30dp"
+      app:riv_radius="12dp" />
     ```
 
   * 获取控件
@@ -492,13 +490,15 @@
 
   * 自定义属性
 
-    |          属性          |     说明      |    默认值    |
-    | :------------------: | :---------: | :-------: |
-    |  `civ_border_width`  | 边框宽度，单位`dp` |    `0`    |
-    |  `civ_border_color`  |    边框颜色     | `#000000` |
-    | `civ_border_overlay` |   是否悬浮边框    |  `false`  |
-    |   `civ_fill_color`   |    填充颜色     |    透明     |
-    |     `riv_radius`     | 圆角半径，单位`dp` |    `0`    |
+    |           属性            |        说明        |    默认值    |
+    | :-----------------------: | :----------------: | :----------: |
+    |    `civ_border_width`     | 边框宽度，单位`dp` |     `0`      |
+    |    `civ_border_color`     |      边框颜色      |  `#000000`   |
+    |       `riv_radius`        | 圆角半径，单位`dp` |     `0`      |
+    |   `riv_radius_left_top`   |   左上角圆角半径   | `riv_radius` |
+    |  `riv_radius_right_top`   |   右上角圆角半径   | `riv_radius` |
+    | `riv_radius_right_bottom` |   右下角圆角半径   | `riv_radius` |
+    | `riv_radius_left_bottom`  |   左下角圆角半径   | `riv_radius` |
 
 * <a name = "HackyViewPager">`HackyViewPager`</a>
 

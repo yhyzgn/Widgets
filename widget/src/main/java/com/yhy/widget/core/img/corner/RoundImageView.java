@@ -2,8 +2,8 @@ package com.yhy.widget.core.img.corner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.Path;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
@@ -14,61 +14,87 @@ import com.yhy.widget.core.img.corner.abs.AbsCornerImageView;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-09-21 14:18
  * version: 1.0.0
- * desc   :
+ * desc   : 圆角图片
  */
 public class RoundImageView extends AbsCornerImageView {
 
     private float mRadius;
 
+    private float mRadiusLeftTop;
+
+    private float mRadiusRightTop;
+
+    private float mRadiusRightBottom;
+
+    private float mRadiusLeftBottom;
+
     public RoundImageView(Context context) {
-        this(context, null);
+        this(context, null, 0);
     }
 
     public RoundImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RoundImageView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public RoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initAttrs(attrs);
+    }
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AbsCornerImageView);
-        mRadius = ta.getDimension(R.styleable.AbsCornerImageView_riv_radius, 0f);
-        ta.recycle();
+    /**
+     * 初始化属性集
+     *
+     * @param attrs 属性集
+     */
+    protected void initAttrs(AttributeSet attrs) {
+        super.initAttrs(attrs);
+        if (attrs != null) {
+            TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.RoundImageView);
+            mRadius = ta.getDimension(R.styleable.RoundImageView_riv_radius, 0);
+            mRadiusLeftTop = ta.getDimension(R.styleable.RoundImageView_riv_radius_left_top, mRadius);
+            mRadiusRightTop = ta.getDimension(R.styleable.RoundImageView_riv_radius_right_top, mRadius);
+            mRadiusRightBottom = ta.getDimension(R.styleable.RoundImageView_riv_radius_right_bottom, mRadius);
+            mRadiusLeftBottom = ta.getDimension(R.styleable.RoundImageView_riv_radius_left_bottom, mRadius);
+            ta.recycle();
+        }
     }
 
     @Override
-    protected void drawView(Canvas canvas) {
-        //设置圆角半径
-        mBorderRadius = mRadius;
+    protected void initRoundPath() {
+        roundPath.reset();
+        final int width = getWidth();
+        final int height = getHeight();
+        mRadiusLeftTop = Math.min(mRadiusLeftTop, Math.min(width, height) * 0.5f);
+        mRadiusRightTop = Math.min(mRadiusRightTop, Math.min(width, height) * 0.5f);
+        mRadiusRightBottom = Math.min(mRadiusRightBottom, Math.min(width, height) * 0.5f);
+        mRadiusLeftBottom = Math.min(mRadiusLeftBottom, Math.min(width, height) * 0.5f);
 
-        //设置边框绘制区域
-        /*
-        left/top需要加上边框宽度
-        right/bottom需要减去边框宽度
-        这样才能保证边框能完全显示
+        RectF rect = new RectF(0, 0, width, height);
+        roundPath.addRoundRect(rect,
+                new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop,
+                        mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom},
+                Path.Direction.CW);
+    }
+
+    @Override
+    protected void initBorderPath() {
+        borderPath.reset();
+        /**
+         * 乘以0.5会导致border在圆角处不能包裹原图
          */
-        mBorderRect.left += mBorderWidth;
-        mBorderRect.top += mBorderWidth;
-        mBorderRect.right -= mBorderWidth;
-        mBorderRect.bottom -= mBorderWidth;
+        final float halfBorderWidth = borderWidth * 0.35f;
+        final int width = getWidth();
+        final int height = getHeight();
+        mRadiusLeftTop = Math.min(mRadiusLeftTop, Math.min(width, height) * 0.5f);
+        mRadiusRightTop = Math.min(mRadiusRightTop, Math.min(width, height) * 0.5f);
+        mRadiusRightBottom = Math.min(mRadiusRightBottom, Math.min(width, height) * 0.5f);
+        mRadiusLeftBottom = Math.min(mRadiusLeftBottom, Math.min(width, height) * 0.5f);
 
-        //将绘制图片区域设置为和边框区域一致
-        mDrawableRect.set(mBorderRect);
-
-        //如果不允许边框覆盖，就将图片与边框隔开，间隔宽度为边框宽度
-        if (!mBorderOverlay && mBorderWidth > 0) {
-            mDrawableRect.inset(mBorderWidth, mBorderWidth);
-        }
-
-        //绘制图片
-        if (mFillColor != Color.TRANSPARENT) {
-            canvas.drawRoundRect(mDrawableRect, mRadius, mRadius, mFillPaint);
-        }
-        canvas.drawRoundRect(mDrawableRect, mRadius, mRadius, mBitmapPaint);
-
-        //绘制边框
-        if (mBorderWidth > 0) {
-            canvas.drawRoundRect(mBorderRect, mBorderRadius, mBorderRadius, mBorderPaint);
-        }
+        RectF rect = new RectF(halfBorderWidth, halfBorderWidth,
+                width - halfBorderWidth, height - halfBorderWidth);
+        borderPath.addRoundRect(rect,
+                new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop,
+                        mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom},
+                Path.Direction.CW);
     }
 }

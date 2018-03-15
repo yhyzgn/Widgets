@@ -1,48 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
     <com.yhy.widget.core.img.corner.CircleImageView
+        android:id="@+id/civ_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@mipmap/ic_avatar"
-        app:civ_border_color="#f40"
-        app:civ_border_overlay="true"
-        app:civ_border_width="2dp"
-        app:civ_fill_color="#0f0"/>
+        android:scaleType="centerCrop"
+        app:civ_border_color="#8c9eff"
+        app:civ_border_width="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.yhy.widget.core.img.corner.RoundImageView
+                android:id="@+id/riv_a"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:civ_border_color="#8c9eff"
+                app:civ_border_width="2dp"
+                app:riv_radius_left_bottom="30dp"
+                app:riv_radius_right_top="30dp" />
+
+            <com.yhy.widget.core.img.corner.RoundImageView
+                android:id="@+id/riv_b"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                app:civ_border_color="#8c9eff"
+                app:civ_border_width="2dp"
+                app:riv_radius_left_top="30dp"
+                app:riv_radius_right_bottom="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.yhy.widget.core.img.corner.RoundImageView
+                android:id="@+id/riv_c"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                app:civ_border_color="#8c9eff"
+                app:civ_border_width="2dp"
+                app:riv_radius_left_top="30dp"
+                app:riv_radius_right_bottom="30dp" />
+
+            <com.yhy.widget.core.img.corner.RoundImageView
+                android:id="@+id/riv_d"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                app:civ_border_color="#8c9eff"
+                app:civ_border_width="2dp"
+                app:riv_radius_left_bottom="30dp"
+                app:riv_radius_right_top="30dp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <com.yhy.widget.core.img.corner.RoundImageView
-        android:layout_width="100dp"
+        android:id="@+id/riv_test"
+        android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:src="@mipmap/ic_avatar"
-        app:civ_border_color="#f40"
-        app:civ_border_overlay="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="#8c9eff"
         app:civ_border_width="2dp"
-        app:civ_fill_color="#0f0"
-        app:riv_radius="6dp"/>
+        app:riv_radius="12dp" />
 
-    <com.yhy.widget.core.img.corner.RoundImageView
-        android:layout_width="100dp"
+    <ImageView
+        android:id="@+id/iv_test"
+        android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:src="@mipmap/ic_avatar"
-        app:civ_border_color="#f40"
-        app:civ_border_overlay="false"
-        app:civ_border_width="2dp"
-        app:civ_fill_color="#0f0"
-        app:riv_radius="6dp"/>
-
-    <com.yhy.widget.core.img.corner.RoundImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:src="@mipmap/ic_avatar"
-        app:riv_radius="6dp"/>
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop" />
 </LinearLayout>

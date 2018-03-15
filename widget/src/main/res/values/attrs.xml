@@ -40,16 +40,16 @@
 
     <!--圆形ImageView属性-->
     <declare-styleable name="AbsCornerImageView">
-        <!--边框宽度，默认0dp-->
-        <attr name="civ_border_width" format="dimension" />
-        <!--边框颜色，默认黑色-->
-        <attr name="civ_border_color" format="color" />
-        <!--是否允许边框覆盖在图层上，默认false-->
-        <attr name="civ_border_overlay" format="boolean" />
-        <!--填充颜色，默认透明-->
-        <attr name="civ_fill_color" format="color" />
-        <!--控件四周圆角半径，默认0dp-->
-        <attr name="riv_radius" format="dimension" />
+        <attr name="civ_border_width" format="dimension|reference" />
+        <attr name="civ_border_color" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="riv_radius" format="dimension|reference" />
+        <attr name="riv_radius_left_top" format="dimension|reference" />
+        <attr name="riv_radius_right_top" format="dimension|reference" />
+        <attr name="riv_radius_right_bottom" format="dimension|reference" />
+        <attr name="riv_radius_left_bottom" format="dimension|reference" />
     </declare-styleable>
 
     <!--加载控件属性-->
