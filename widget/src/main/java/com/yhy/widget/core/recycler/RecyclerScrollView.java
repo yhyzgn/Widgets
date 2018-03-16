@@ -54,12 +54,6 @@ public class RecyclerScrollView extends ScrollView {
     }
 
     @Override
-    public boolean canScrollVertically(int direction) {
-        // 不让super.onInterceptTouchEvent(event);调用的时候直接返回false
-        return true;
-    }
-
-    @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         if (null != mListener) {
