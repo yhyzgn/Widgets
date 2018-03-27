@@ -38,7 +38,7 @@ public class RoundImageView extends AbsRoundImageView {
 
     public RoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initAttrs(attrs);
+        init(attrs);
     }
 
     /**
@@ -46,8 +46,8 @@ public class RoundImageView extends AbsRoundImageView {
      *
      * @param attrs 属性集
      */
-    protected void initAttrs(AttributeSet attrs) {
-        super.initAttrs(attrs);
+    protected void init(AttributeSet attrs) {
+        super.init(attrs);
         if (attrs != null) {
             TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.RoundImageView);
             mRadius = ta.getDimension(R.styleable.RoundImageView_riv_radius, 0);
@@ -61,7 +61,7 @@ public class RoundImageView extends AbsRoundImageView {
 
     @Override
     protected void initRoundPath() {
-        roundPath.reset();
+        mRoundPath.reset();
         final int width = getWidth();
         final int height = getHeight();
         mRadiusLeftTop = Math.min(mRadiusLeftTop, Math.min(width, height) * 0.5f);
@@ -70,7 +70,7 @@ public class RoundImageView extends AbsRoundImageView {
         mRadiusLeftBottom = Math.min(mRadiusLeftBottom, Math.min(width, height) * 0.5f);
 
         RectF rect = new RectF(0, 0, width, height);
-        roundPath.addRoundRect(rect,
+        mRoundPath.addRoundRect(rect,
                 new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop,
                         mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom},
                 Path.Direction.CW);
@@ -78,11 +78,11 @@ public class RoundImageView extends AbsRoundImageView {
 
     @Override
     protected void initBorderPath() {
-        borderPath.reset();
+        mBorderPath.reset();
         /**
          * 乘以0.5会导致border在圆角处不能包裹原图
          */
-        final float halfBorderWidth = borderWidth * 0.35f;
+        final float halfBorderWidth = mBorderWidth * 0.35f;
         final int width = getWidth();
         final int height = getHeight();
         mRadiusLeftTop = Math.min(mRadiusLeftTop, Math.min(width, height) * 0.5f);
@@ -92,7 +92,7 @@ public class RoundImageView extends AbsRoundImageView {
 
         RectF rect = new RectF(halfBorderWidth, halfBorderWidth,
                 width - halfBorderWidth, height - halfBorderWidth);
-        borderPath.addRoundRect(rect,
+        mBorderPath.addRoundRect(rect,
                 new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop,
                         mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom},
                 Path.Direction.CW);

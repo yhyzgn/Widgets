@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.0.25-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.0.26-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -383,7 +383,6 @@
       android:id="@+id/siv_test"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:siv_btn_color="#f20"
       app:siv_btn_img="@drawable/ic_delete_white" />
     ```
 
@@ -412,12 +411,11 @@
 
   * 自定义属性
 
-    |       属性        |            说明            |      默认值       |
-    | :---------------: | :------------------------: | :---------------: |
-    |   `siv_btn_img`   |       右上角按钮图片       |        无         |
-    |  `siv_btn_size`   |  右上角按钮大小，单位`dp`  | `siv_btn_img`大小 |
-    |  `siv_btn_color`  |       右上角按钮颜色       |       透明        |
-    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` |        `2`        |
+    |       属性        |            说明            | 默认值 |
+    | :---------------: | :------------------------: | :----: |
+    |   `siv_btn_img`   |       右上角按钮图片       |   无   |
+    |  `siv_btn_size`   |  右上角按钮大小，单位`dp`  |  `0`   |
+    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` |  `2`   |
 
 * <a name = "CircleImageView">`CircleImageView`</a>
 
@@ -451,8 +449,8 @@
 
     |        属性        |        说明        |  默认值   |
     | :----------------: | :----------------: | :-------: |
-    | `civ_border_width` | 边框宽度，单位`dp` |    `0`    |
-    | `civ_border_color` |      边框颜色      | `#000000` |
+    | `riv_border_width` | 边框宽度，单位`dp` |    `0`    |
+    | `riv_border_color` |      边框颜色      | `#000000` |
 
 * <a name = "RoundImageView">`RoundImageView`</a>
 

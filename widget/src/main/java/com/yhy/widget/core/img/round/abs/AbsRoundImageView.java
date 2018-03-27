@@ -9,8 +9,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
@@ -24,32 +22,18 @@ import com.yhy.widget.R;
  * desc   : 圆角图片抽象类
  */
 public abstract class AbsRoundImageView extends AppCompatImageView {
-
-    private static final PorterDuffXfermode xFermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
-
-    private Paint mBitmapPaint;
-
-    /**
-     * 图片可视区
-     */
-    protected Path roundPath;
-
-    /**
-     * 图片边框
-     */
-    protected Path borderPath;
-
-    /**
-     * 边框宽度
-     */
-    protected float borderWidth;
-
-    /**
-     * 边框颜色
-     */
-    protected int borderColor;
-
-    private Paint borderPaint;
+    // 图片可视区
+    protected Path mRoundPath;
+    // 用来帮助clipPath方法消除锯齿
+    protected Paint mClipPaint;
+    // 图片边框
+    protected Path mBorderPath;
+    // 边框宽度
+    protected float mBorderWidth;
+    // 边框颜色
+    protected int mBorderColor;
+    // 边框画笔
+    private Paint mBorderPaint;
 
     public AbsRoundImageView(Context context) {
         this(context, null, 0);
@@ -61,8 +45,7 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
 
     public AbsRoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initAttrs(attrs);
-        init();
+        init(attrs);
     }
 
     /**
@@ -70,23 +53,27 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      *
      * @param attrs 属性集
      */
-    protected void initAttrs(AttributeSet attrs) {
+    protected void init(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AbsRoundImageView);
-            borderWidth = ta.getDimension(R.styleable.AbsRoundImageView_riv_border_width, 0);
-            borderColor = ta.getColor(R.styleable.AbsRoundImageView_riv_border_color, 0);
+            mBorderWidth = ta.getDimension(R.styleable.AbsRoundImageView_riv_border_width, 0);
+            mBorderColor = ta.getColor(R.styleable.AbsRoundImageView_riv_border_color, 0);
             ta.recycle();
         }
-    }
 
-    private void init() {
-        mBitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mRoundPath = new Path();
+        mBorderPath = new Path();
 
-        roundPath = new Path();
-        borderPath = new Path();
+        mClipPaint = new Paint();
+        mClipPaint.setStyle(Paint.Style.STROKE);
+        mClipPaint.setColor(Color.TRANSPARENT);
+        mClipPaint.setStrokeWidth(0.1f);
+        mClipPaint.setAntiAlias(true);
+        mClipPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 
-        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        borderPaint.setStrokeWidth(borderWidth);
+        mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBorderPaint.setStrokeWidth(mBorderWidth);
+
 
         setScaleType(ScaleType.CENTER_CROP);
     }
@@ -100,7 +87,6 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
         }
     }
 
-
     /**
      * 初始化边框Path
      */
@@ -110,7 +96,6 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      * 初始化图片区域Path
      */
     protected abstract void initRoundPath();
-
 
     /**
      * 获取图片区域纯颜色Bitmap
@@ -122,8 +107,18 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.WHITE);
-        canvas.drawPath(roundPath, paint);
+        canvas.drawPath(mRoundPath, paint);
         return bitmap;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        // 绘制图片路径
+        drawImagePath(canvas);
+        // 调用父类onDraw方法，将图片绘制到画布上
+        super.onDraw(canvas);
+        // 绘制边框
+        drawBorder(canvas);
     }
 
     /**
@@ -132,15 +127,9 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      * @param canvas 画布
      */
     private void drawBorder(Canvas canvas) {
-        borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setColor(borderColor);
-        canvas.drawPath(borderPath, borderPaint);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        drawImage(canvas);
-        drawBorder(canvas);
+        mBorderPaint.setStyle(Paint.Style.STROKE);
+        mBorderPaint.setColor(mBorderColor);
+        canvas.drawPath(mBorderPath, mBorderPaint);
     }
 
     /**
@@ -148,30 +137,11 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      *
      * @param canvas 画布
      */
-    private void drawImage(Canvas canvas) {
-        Drawable drawable = getDrawable();
-        if (!isInEditMode() && drawable != null) {
-            try {
-                Bitmap bitmap;
-                if (drawable instanceof ColorDrawable) {
-                    bitmap = Bitmap.createBitmap(2, 2, Bitmap.Config.ARGB_8888);
-                } else {
-                    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                }
-                Canvas drawCanvas = new Canvas(bitmap);
-                drawable.setBounds(0, 0, drawCanvas.getWidth(), drawCanvas.getHeight());
-                drawable.draw(drawCanvas);
-
-                Bitmap roundBm = getRoundBitmap();
-                mBitmapPaint.reset();
-                mBitmapPaint.setFilterBitmap(false);
-                mBitmapPaint.setXfermode(xFermode);
-                drawCanvas.drawBitmap(roundBm, 0, 0, mBitmapPaint);
-                mBitmapPaint.setXfermode(null);
-                canvas.drawBitmap(bitmap, 0, 0, mBitmapPaint);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private void drawImagePath(Canvas canvas) {
+        if (null != mRoundPath) {
+            canvas.clipPath(mRoundPath);
+            // 消除锯齿
+            canvas.drawPath(mRoundPath, mClipPaint);
         }
     }
 }

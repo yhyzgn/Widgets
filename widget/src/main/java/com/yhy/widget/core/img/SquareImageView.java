@@ -29,13 +29,12 @@ public class SquareImageView extends AppCompatImageView {
     private int mSize;
     // 右上角按钮图片，默认为空
     private Bitmap mBtnImg;
-    // 右上角按钮大小，默认为右上角按钮图片的大小
-    private int mBtnSize;
-    // 右上角按钮背景颜色，默认为透明
-    private int mBtnColor;
+    // 右上角按钮宽度
+    private int mBtnWidth;
+    // 右上角按钮高度
+    private int mBtnHeight;
     // 右上角按钮内边距，默认为2dp
     private int mBtnPadding;
-
     // 鼠标按下时的坐标
     private int mDownX, mDownY;
     // 右上角按钮点击事件
@@ -65,10 +64,16 @@ public class SquareImageView extends AppCompatImageView {
         if (ta.hasValue(R.styleable.SquareImageView_siv_btn_img)) {
             mBtnImg = d2b(ta.getDrawable(R.styleable.SquareImageView_siv_btn_img));
         }
-        mBtnSize = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_size, 0);
+        int size = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_size, 0);
         mBtnPadding = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_padding, DensityUtils.dp2px(context, 2.0f));
-        mBtnColor = ta.getColor(R.styleable.SquareImageView_siv_btn_color, Color.TRANSPARENT);
         ta.recycle();
+
+        if (size == 0 && null != mBtnImg) {
+            mBtnWidth = mBtnImg.getWidth();
+            mBtnHeight = mBtnImg.getHeight();
+        } else {
+            mBtnWidth = mBtnHeight = size;
+        }
 
         // 默认使用 CENTER_CROP 模式显示图片
         setScaleType(ScaleType.CENTER_CROP);
@@ -82,8 +87,8 @@ public class SquareImageView extends AppCompatImageView {
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // 设置参考值长宽相等，都设置为宽度
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        int size = Math.min(widthMeasureSpec, widthMeasureSpec);
+        super.onMeasure(size, size);
     }
 
     /**
@@ -106,17 +111,10 @@ public class SquareImageView extends AppCompatImageView {
      * @param canvas 画布
      */
     private void drawBtn(Canvas canvas) {
-        // 绘制背景
-        Rect bg = new Rect(mSize - mBtnSize, 0, mSize, mBtnSize);
-        Paint paint = new Paint();
-        paint.setColor(mBtnColor);
-        paint.setAntiAlias(true);
-        canvas.drawRect(bg, paint);
-
         // 绘制按钮图片，包含内边距
         Rect src = new Rect(0, 0, mBtnImg.getWidth(), mBtnImg.getHeight());
-        Rect dst = new Rect(mSize - mBtnSize + mBtnPadding, mBtnPadding, mSize - mBtnPadding, mBtnSize - mBtnPadding);
-        canvas.drawBitmap(mBtnImg, src, dst, paint);
+        Rect dst = new Rect(mSize - mBtnWidth + mBtnPadding, mBtnPadding, mSize - mBtnPadding, mBtnHeight - mBtnPadding);
+        canvas.drawBitmap(mBtnImg, src, dst, null);
     }
 
     /**
@@ -166,7 +164,7 @@ public class SquareImageView extends AppCompatImageView {
                 int upX = (int) event.getX();
                 int upY = (int) event.getY();
                 // 判断按钮点击有效范围
-                if (null != mBtnImg && upX >= mSize - mBtnSize && upX <= mSize && upY >= 0 && upY <= mBtnSize && Math.abs(upX - mDownX) < mBtnSize / 2 && Math.abs(upY - mDownY) < mBtnSize / 2) {
+                if (null != mBtnImg && upX >= mSize - mBtnWidth && upX <= mSize && upY >= 0 && upY <= mBtnHeight && Math.abs(upX - mDownX) < mBtnWidth / 2 && Math.abs(upY - mDownY) < mBtnHeight / 2) {
                     // 点击了删除按钮
                     if (null != mListener) {
                         mListener.onClick(this);
@@ -193,14 +191,6 @@ public class SquareImageView extends AppCompatImageView {
         super.onSizeChanged(w, h, oldw, oldh);
         // 由于宽高相等，所以任意一个值都行，这里以宽度为准
         mSize = getMeasuredWidth();
-        // 检查并设置按钮默认宽度
-        if (null != mBtnImg && mBtnSize == 0) {
-            mBtnSize = Math.max(mBtnImg.getWidth(), mBtnImg.getHeight());
-        }
-        // 内边距最大不能超过整体大小的1/4
-        if (mBtnPadding >= mBtnSize / 2) {
-            mBtnPadding = mBtnSize / 2;
-        }
     }
 
     /**

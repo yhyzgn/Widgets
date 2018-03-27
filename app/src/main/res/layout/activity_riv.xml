@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <com.yhy.widget.core.img.round.CircleImageView
@@ -10,11 +11,12 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
+        android:src="@mipmap/ic_avatar"
         app:riv_border_color="#8c9eff"
         app:riv_border_width="2dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
@@ -28,6 +30,7 @@
                 android:id="@+id/riv_a"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:src="@mipmap/ic_avatar"
                 app:riv_border_color="#8c9eff"
                 app:riv_border_width="2dp"
                 app:riv_radius_left_bottom="30dp"
@@ -79,6 +82,7 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
+        android:src="@mipmap/ic_avatar"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
         app:riv_border_color="#8c9eff"
@@ -91,5 +95,6 @@
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
+        android:src="@mipmap/ic_avatar"
         android:scaleType="centerCrop" />
 </LinearLayout>

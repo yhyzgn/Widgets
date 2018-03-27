@@ -2,12 +2,16 @@ package com.yhy.widgetdemo;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 import com.yhy.widget.core.preview.ImgPreHelper;
 import com.yhy.widgetdemo.utils.ImgUtils;
 import com.yhy.widgetdemo.utils.ToastUtils;
@@ -37,29 +41,32 @@ public class App extends Application {
         ImgUtils.init(new ImgUtils.ImgLoader() {
             @Override
             public <T> void load(Context ctx, final ImageView iv, T model) {
-                Glide.with(ctx)
-                        .load(model)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .error(R.mipmap.ic_launcher)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)//使用磁盘缓存
-                        .skipMemoryCache(true)//跳过内存缓存
-                        .animate(R.anim.anim_alpha_image_load)
-                        .crossFade()//渐变切换
-                        .into(iv);
-//                        .into(new SimpleTarget<Bitmap>() {
-//                            @Override
-//                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super
-//                                    Bitmap> glideAnimation) {
-//                                iv.setImageBitmap(bitmap);
-//                            }
-//                        });
+                loadImgByPicasso(ctx, iv, model);
+
+//                Glide.with(ctx)
+//                        .load(model)
+//                        .placeholder(R.mipmap.ic_launcher)
+//                        .error(R.mipmap.ic_launcher)
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//使用磁盘缓存
+//                        .skipMemoryCache(true)//跳过内存缓存
+//                        .animate(R.anim.anim_alpha_image_load)
+//                        .crossFade()//渐变切换
+//                        .into(iv);
+////                        .into(new SimpleTarget<Bitmap>() {
+////                            @Override
+////                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super
+////                                    Bitmap> glideAnimation) {
+////                                iv.setImageBitmap(bitmap);
+////                            }
+////                        });
             }
         });
 
         ImgPreHelper.getInstance().init(this).setLoader(new ImgPreHelper.ImgLoader() {
             @Override
             public <T> void load(ImageView iv, T model, ProgressBar pbLoading) {
-                Glide.with(iv.getContext()).load(model).into(iv);
+//                Glide.with(iv.getContext()).load(model).into(iv);
+                loadImgByPicasso(iv.getContext(), iv, model);
             }
         }).setOnDownloadListener(new ImgPreHelper.OnDownloadListener() {
             @Override
@@ -77,5 +84,35 @@ public class App extends Application {
                 ToastUtils.shortT(error);
             }
         });
+    }
+
+
+    private <T> void loadImgByPicasso(Context ctx, ImageView iv, T model) {
+        if (null == model) {
+            return;
+        }
+
+        Picasso picasso = Picasso.with(ctx);
+        RequestCreator rc = null;
+        if (model instanceof String) {
+            rc = picasso.load((String) model);
+        } else if (model instanceof Integer) {
+            rc = picasso.load((Integer) model);
+        } else if (model instanceof Uri) {
+            rc = picasso.load((Uri) model);
+        } else if (model instanceof File) {
+            rc = picasso.load((File) model);
+        } else {
+            throw new IllegalArgumentException("Unknown model [ " + model + " ] of image resource.");
+        }
+
+        Drawable drawable = iv.getDrawable();
+        if (null == drawable) {
+            rc.placeholder(R.mipmap.img_def_loading).error(R.mipmap.img_def_loading);
+        } else {
+            rc.placeholder(drawable).error(drawable);
+        }
+
+        rc.into(iv);
     }
 }

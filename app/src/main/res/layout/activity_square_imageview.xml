@@ -16,10 +16,9 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        app:siv_btn_color="#f20"
-        app:siv_btn_img="@drawable/ic_delete_white"
+        app:siv_btn_img="@drawable/ic_delete"
         app:siv_btn_padding="4dp"
-        app:siv_btn_size="24dp" />
+        app:siv_btn_size="32dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_civ"
