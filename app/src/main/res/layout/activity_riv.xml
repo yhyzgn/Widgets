@@ -72,6 +72,7 @@
                 android:scaleType="centerCrop"
                 app:riv_border_color="#8c9eff"
                 app:riv_border_width="2dp"
+                android:src="@mipmap/ic_avatar"
                 app:riv_radius_left_bottom="30dp"
                 app:riv_radius_right_top="30dp" />
         </LinearLayout>
@@ -82,10 +83,9 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
-        android:src="@mipmap/ic_avatar"
         android:layout_marginTop="16dp"
-        android:scaleType="centerCrop"
         app:riv_border_color="#8c9eff"
+        android:src="@mipmap/ic_avatar"
         app:riv_border_width="2dp"
         app:riv_radius="12dp" />
 

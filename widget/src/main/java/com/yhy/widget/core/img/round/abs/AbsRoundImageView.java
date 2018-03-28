@@ -3,12 +3,15 @@ package com.yhy.widget.core.img.round.abs;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
@@ -24,8 +27,6 @@ import com.yhy.widget.R;
 public abstract class AbsRoundImageView extends AppCompatImageView {
     // 图片可视区
     protected Path mRoundPath;
-    // 用来帮助clipPath方法消除锯齿
-    protected Paint mClipPaint;
     // 图片边框
     protected Path mBorderPath;
     // 边框宽度
@@ -34,6 +35,12 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     protected int mBorderColor;
     // 边框画笔
     private Paint mBorderPaint;
+    // 图片
+    protected Bitmap mBitmap;
+    // 变换矩阵
+    private Matrix mShaderMatrix;
+    // 图片画笔
+    private Paint mPaint;
 
     public AbsRoundImageView(Context context) {
         this(context, null, 0);
@@ -63,17 +70,12 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
 
         mRoundPath = new Path();
         mBorderPath = new Path();
-
-        mClipPaint = new Paint();
-        mClipPaint.setStyle(Paint.Style.STROKE);
-        mClipPaint.setColor(Color.TRANSPARENT);
-        mClipPaint.setStrokeWidth(0.1f);
-        mClipPaint.setAntiAlias(true);
-        mClipPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-
         mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBorderPaint.setStrokeWidth(mBorderWidth);
 
+        mShaderMatrix = new Matrix();
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
 
         setScaleType(ScaleType.CENTER_CROP);
     }
@@ -98,25 +100,16 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     protected abstract void initRoundPath();
 
     /**
-     * 获取图片区域纯颜色Bitmap
+     * 获取缩放比例
      *
-     * @return 图片区域纯颜色Bitmap
+     * @return 缩放比例
      */
-    protected Bitmap getRoundBitmap() {
-        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.WHITE);
-        canvas.drawPath(mRoundPath, paint);
-        return bitmap;
-    }
+    protected abstract float getScale();
 
     @Override
     protected void onDraw(Canvas canvas) {
         // 绘制图片路径
         drawImagePath(canvas);
-        // 调用父类onDraw方法，将图片绘制到画布上
-        super.onDraw(canvas);
         // 绘制边框
         drawBorder(canvas);
     }
@@ -139,9 +132,66 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      */
     private void drawImagePath(Canvas canvas) {
         if (null != mRoundPath) {
-            canvas.clipPath(mRoundPath);
-            // 消除锯齿
-            canvas.drawPath(mRoundPath, mClipPaint);
+            if (null == getDrawable()) {
+                return;
+            }
+            transform();
+            canvas.drawPath(mRoundPath, mPaint);
         }
+    }
+
+    /**
+     * 将Drawable转换为Bitmap
+     *
+     * @param drawable 原始drawable
+     * @return bitmap
+     */
+    private Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable == null) {
+            return null;
+        }
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        Bitmap bitmap;
+        if (drawable instanceof ColorDrawable) {
+            bitmap = Bitmap.createBitmap(2, 2, Bitmap.Config.ARGB_8888);
+        } else {
+            int width = drawable.getIntrinsicWidth();
+            int height = drawable.getIntrinsicHeight();
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        // 设置显示区域
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    /**
+     * 变换图片
+     */
+    private void transform() {
+        if (getWidth() == 0 && getHeight() == 0 || null == getDrawable()) {
+            return;
+        }
+        mBitmap = drawableToBitmap(getDrawable());
+        if (mBitmap == null) {
+            invalidate();
+            return;
+        }
+
+        BitmapShader mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        float scale = getScale();
+        // shader的变换矩阵，我们这里主要用于放大或者缩小
+        mShaderMatrix.setScale(scale, scale);
+        // 将放大后的图片向上移动，达到中心位置
+        mShaderMatrix.postTranslate(-(mBitmap.getWidth() * scale - getWidth()) / 2.0f, -(mBitmap.getHeight() * scale - getHeight()) / 2.0f);
+        // 设置变换矩阵
+        mBitmapShader.setLocalMatrix(mShaderMatrix);
+        // 设置shader
+        mPaint.setShader(mBitmapShader);
     }
 }
