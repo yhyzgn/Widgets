@@ -32,6 +32,8 @@ public class TagFlowLayout<T> extends FlowLayout implements TagFlowAdapter.OnDat
     private int mMaxCount;
     // 是否单选，默认false，多选
     private boolean mIsSingle;
+    // 单选模式，默认radio，选中后不能点击取消
+    private int mSingleMode;
     // 适配器
     private TagFlowAdapter<T> mAdapter;
     // 所有tag包装后的集合
@@ -64,6 +66,7 @@ public class TagFlowLayout<T> extends FlowLayout implements TagFlowAdapter.OnDat
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TagFlowLayout);
         mMaxCount = ta.getInt(R.styleable.TagFlowLayout_tfl_max_count, -1);
         mIsSingle = ta.getBoolean(R.styleable.TagFlowLayout_tfl_is_single, false);
+        mSingleMode = ta.getInt(R.styleable.TagFlowLayout_tfl_single_mode, 0);
         ta.recycle();
 
         mTagContainerList = new ArrayList<>();
@@ -169,11 +172,26 @@ public class TagFlowLayout<T> extends FlowLayout implements TagFlowAdapter.OnDat
                                     if (tc != tagView) {
                                         // 把其它tagView设置为未选中
                                         tc.setChecked(false);
-                                    } else if (!tagView.isChecked()) {
-                                        // 如果当前点击的tagView不是已经选中的tagView，才改变状态
-                                        tc.setChecked(true);
-                                        mAdapter.getCheckedList().add(data);
-                                        mCheckedList.add(position);
+                                    } else if (mSingleMode == 0) {
+                                        // 如果是radio风格的单选，并且当前点击的tagView不是已经选中的tagView，才改变状态
+                                        if (!tagView.isChecked()) {
+                                            tc.setChecked(true);
+                                            mAdapter.getCheckedList().add(data);
+                                            mCheckedList.add(position);
+                                            // 回调外部接口
+                                            if (null != mListener) {
+                                                mListener.onChanged(tagView.isChecked(), position, data, mAdapter.getCheckedList());
+                                            }
+                                        }
+                                    } else {
+                                        tc.setChecked(!tagView.isChecked());
+                                        if (tagView.isChecked()) {
+                                            mAdapter.getCheckedList().add(data);
+                                            mCheckedList.add(position);
+                                        } else {
+                                            mAdapter.getCheckedList().remove(data);
+                                            mCheckedList.remove((Integer) position);
+                                        }
                                         // 回调外部接口
                                         if (null != mListener) {
                                             mListener.onChanged(tagView.isChecked(), position, data, mAdapter.getCheckedList());

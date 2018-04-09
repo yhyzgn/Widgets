@@ -219,5 +219,10 @@
         <attr name="tfl_max_count" format="integer" />
         <!--是否是单选，默认：false-->
         <attr name="tfl_is_single" format="boolean" />
+        <!--单选模式，默认：radio-->
+        <attr name="tfl_single_mode" format="enum">
+            <enum name="radio" value="0" />
+            <enum name="check" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

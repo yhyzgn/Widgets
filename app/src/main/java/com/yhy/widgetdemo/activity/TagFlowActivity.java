@@ -25,7 +25,8 @@ public class TagFlowActivity extends BaseActivity {
 
     private TagFlowLayout<TestEntity> tflDef;
     private TagFlowLayout<TestEntity> tflLimit;
-    private TagFlowLayout<TestEntity> tflSingle;
+    private TagFlowLayout<TestEntity> tflSingleRadio;
+    private TagFlowLayout<TestEntity> tflSingleCheck;
     private Adapter mAdapter;
 
     @Override
@@ -37,7 +38,8 @@ public class TagFlowActivity extends BaseActivity {
     protected void initView() {
         tflDef = $(R.id.tfl_def);
         tflLimit = $(R.id.tfl_limit);
-        tflSingle = $(R.id.tfl_single);
+        tflSingleRadio = $(R.id.tfl_single_radio);
+        tflSingleCheck = $(R.id.tfl_single_check);
     }
 
     @Override
@@ -52,10 +54,12 @@ public class TagFlowActivity extends BaseActivity {
         mTestList.add(new TestEntity(7, "哈"));
 
         mAdapter = new Adapter(mTestList);
+        mAdapter.setChecked(0);
         tflDef.setAdapter(mAdapter);
 
         tflLimit.setAdapter(new Adapter(mTestList));
-        tflSingle.setAdapter(new Adapter(mTestList));
+        tflSingleRadio.setAdapter(new Adapter(mTestList).setChecked(1));
+        tflSingleCheck.setAdapter(new Adapter(mTestList).setChecked(2));
     }
 
     @Override
@@ -76,7 +80,14 @@ public class TagFlowActivity extends BaseActivity {
             }
         });
 
-        tflSingle.setOnCheckChangedListener(new TagFlowLayout.OnCheckChangedListener<TestEntity>() {
+        tflSingleRadio.setOnCheckChangedListener(new TagFlowLayout.OnCheckChangedListener<TestEntity>() {
+            @Override
+            public void onChanged(boolean checked, int position, TestEntity data, List<TestEntity> dataList) {
+                toast(dataList);
+            }
+        });
+
+        tflSingleCheck.setOnCheckChangedListener(new TagFlowLayout.OnCheckChangedListener<TestEntity>() {
             @Override
             public void onChanged(boolean checked, int position, TestEntity data, List<TestEntity> dataList) {
                 toast(dataList);

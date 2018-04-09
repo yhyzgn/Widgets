@@ -18,9 +18,17 @@
         app:tfl_max_count="4" />
 
     <com.yhy.widget.layout.flow.tag.TagFlowLayout
-        android:id="@+id/tfl_single"
+        android:id="@+id/tfl_single_radio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         app:tfl_is_single="true" />
+
+    <com.yhy.widget.layout.flow.tag.TagFlowLayout
+        android:id="@+id/tfl_single_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        app:tfl_is_single="true"
+        app:tfl_single_mode="check" />
 </LinearLayout>

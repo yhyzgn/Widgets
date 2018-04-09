@@ -14,9 +14,9 @@ import java.util.List;
  */
 public abstract class TagFlowAdapter<T> {
     // 数据源
-    private List<T> mDataList;
+    private final List<T> mDataList;
     // 当前选中的数据集合
-    private List<T> mCheckedList;
+    private final List<T> mCheckedList;
     // 数据改变监听器
     private OnDataChangedListener mListener;
 
@@ -81,29 +81,37 @@ public abstract class TagFlowAdapter<T> {
      * 设置默认选中数据列表
      *
      * @param dataList 选中的列表
+     * @return 当前对象
      */
-    public void setCheckedList(List<T> dataList) {
+    public TagFlowAdapter<T> setCheckedList(List<T> dataList) {
         if (null == dataList) {
-            return;
+            return this;
         }
         mCheckedList.clear();
         mCheckedList.addAll(dataList);
+
+        notifyDataChanged();
+        return this;
     }
 
     /**
      * 按索引设置默认选中
      *
      * @param position 索引
+     * @return 当前对象
      */
-    public void setChecked(int... position) {
+    public TagFlowAdapter<T> setChecked(int... position) {
         if (null == position) {
-            return;
+            return this;
         }
 
         mCheckedList.clear();
         for (int index : position) {
             mCheckedList.add(getItem(index));
         }
+
+        notifyDataChanged();
+        return this;
     }
 
     /**
@@ -114,7 +122,7 @@ public abstract class TagFlowAdapter<T> {
      * @return 是否应该选中
      */
     public boolean isChecked(int position, T data) {
-        return false;
+        return mCheckedList.contains(data);
     }
 
     /**
