@@ -37,6 +37,7 @@
         <activity android:name=".activity.CheckedRLActivity" />
         <activity android:name=".activity.FlowLayoutActivity" />
         <activity android:name=".activity.TagFlowActivity" />
+        <activity android:name=".activity.VerticalStepActivity" />
     </application>
 
 </manifest>
