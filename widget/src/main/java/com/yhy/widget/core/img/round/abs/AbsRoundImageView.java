@@ -16,6 +16,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
+import com.yhy.widget.utils.ViewUtils;
 
 /**
  * author : 颜洪毅
@@ -141,43 +142,13 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     }
 
     /**
-     * 将Drawable转换为Bitmap
-     *
-     * @param drawable 原始drawable
-     * @return bitmap
-     */
-    private Bitmap drawableToBitmap(Drawable drawable) {
-        if (drawable == null) {
-            return null;
-        }
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-
-        Bitmap bitmap;
-        if (drawable instanceof ColorDrawable) {
-            bitmap = Bitmap.createBitmap(2, 2, Bitmap.Config.ARGB_8888);
-        } else {
-            int width = drawable.getIntrinsicWidth();
-            int height = drawable.getIntrinsicHeight();
-            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        // 设置显示区域
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
-    }
-
-    /**
      * 变换图片
      */
     private void transform() {
         if (getWidth() == 0 && getHeight() == 0 || null == getDrawable()) {
             return;
         }
-        mBitmap = drawableToBitmap(getDrawable());
+        mBitmap = ViewUtils.drawableToBitmap(getDrawable());
         if (mBitmap == null) {
             invalidate();
             return;

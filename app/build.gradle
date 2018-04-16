@@ -23,6 +23,12 @@ android {
         abortOnError false
     }
 
+    // 打包apk自动生成名称
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "Widget.apk"
+        }
+    }
 }
 
 dependencies {

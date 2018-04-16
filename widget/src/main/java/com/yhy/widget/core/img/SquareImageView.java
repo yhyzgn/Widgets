@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 
 import com.yhy.widget.R;
 import com.yhy.widget.utils.DensityUtils;
+import com.yhy.widget.utils.ViewUtils;
 
 /**
  * author : 颜洪毅
@@ -62,7 +63,7 @@ public class SquareImageView extends AppCompatImageView {
     private void init(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SquareImageView);
         if (ta.hasValue(R.styleable.SquareImageView_siv_btn_img)) {
-            mBtnImg = d2b(ta.getDrawable(R.styleable.SquareImageView_siv_btn_img));
+            mBtnImg = ViewUtils.drawableToBitmap(ta.getDrawable(R.styleable.SquareImageView_siv_btn_img));
         }
         int size = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_size, 0);
         mBtnPadding = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_padding, DensityUtils.dp2px(context, 2.0f));
@@ -133,7 +134,7 @@ public class SquareImageView extends AppCompatImageView {
      * @param drawable 图片
      */
     public void setBtn(Drawable drawable) {
-        mBtnImg = null == drawable ? null : d2b(drawable);
+        mBtnImg = null == drawable ? null : ViewUtils.drawableToBitmap(drawable);
         postInvalidate();
     }
 
@@ -143,7 +144,7 @@ public class SquareImageView extends AppCompatImageView {
      * @param resId 图片资源id
      */
     public void setBtn(int resId) {
-        mBtnImg = resId <= 0 ? null : d2b(getResources().getDrawable(resId));
+        mBtnImg = resId <= 0 ? null : ViewUtils.drawableToBitmap(getResources().getDrawable(resId));
         postInvalidate();
     }
 
@@ -191,27 +192,6 @@ public class SquareImageView extends AppCompatImageView {
         super.onSizeChanged(w, h, oldw, oldh);
         // 由于宽高相等，所以任意一个值都行，这里以宽度为准
         mSize = getMeasuredWidth();
-    }
-
-    /**
-     * 将Drawable转换为Bitmap
-     *
-     * @param drawable 要转换的Drawable
-     * @return 转换后的Bitmap
-     */
-    private Bitmap d2b(Drawable drawable) {
-        if (null != drawable) {
-            if (drawable instanceof BitmapDrawable) {
-                return ((BitmapDrawable) drawable).getBitmap();
-            } else {
-                Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
-                Canvas canvas = new Canvas(bitmap);
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-                drawable.draw(canvas);
-                return bitmap;
-            }
-        }
-        return null;
     }
 
     /**

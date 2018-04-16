@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.0.28-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.1.0-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -44,22 +44,23 @@
 
   > 核心控件，即各种独立使用的控件
 
-  |                    名称                    |               描述                |
-  | :--------------------------------------: | :-----------------------------: |
-  |   [`PreImgActivity`](#PreImgActivity)    |           点击图片查看大图控件            |
-  |          [`AdvView`](#AdvView)           |            滚动广告轮播控件             |
-  |  [`CheckedTextView`](#CheckedTextView)   |         可选中的`TextView`          |
-  |   [`ExpandTextView`](#ExpandTextView)    |        可展开收起的`TextView`         |
-  |  [`SquareImageView`](#SquareImageView)   |  正方形`ImageView`，右上角可设置按钮及点击事件   |
-  |  [`CircleImageView`](#CircleImageView)   |              圆形图片               |
-  |   [`RoundImageView`](#RoundImageView)    |              圆角图片               |
-  |   [`HackyViewPager`](#HackyViewPager)    |    多点触摸滑动时防止内存溢出的`ViewPager`    |
-  |       [`PickerView`](#PickerView)        |           上下滚动数据选取控件            |
-  | [`RecyclerScrollView`](#RecyclerScrollView) | 用来嵌套`RecyclerView`的`ScrollView` |
-  |        [`RvDivider`](#RvDivider)         |       `RecyclerView`的分割线        |
-  | [`SettingsItemView`](#SettingsItemView)  |          常用设置布局中的条目控件           |
-  |         [`TitleBar`](#TitleBar)          |             常用标题栏控件             |
-  |     [`SwitchButton`](#SwitchButton)      |              开关控件               |
+  |                    名称                     |                     描述                      |
+  | :-----------------------------------------: | :-------------------------------------------: |
+  |     [`PreImgActivity`](#PreImgActivity)     |             点击图片查看大图控件              |
+  |            [`AdvView`](#AdvView)            |               滚动广告轮播控件                |
+  |    [`CheckedTextView`](#CheckedTextView)    |              可选中的`TextView`               |
+  |     [`ExpandTextView`](#ExpandTextView)     |            可展开收起的`TextView`             |
+  |    [`SquareImageView`](#SquareImageView)    | 正方形`ImageView`，右上角可设置按钮及点击事件 |
+  |    [`CircleImageView`](#CircleImageView)    |                   圆形图片                    |
+  |     [`RoundImageView`](#RoundImageView)     |                   圆角图片                    |
+  |     [`HackyViewPager`](#HackyViewPager)     |    多点触摸滑动时防止内存溢出的`ViewPager`    |
+  |         [`PickerView`](#PickerView)         |             上下滚动数据选取控件              |
+  | [`RecyclerScrollView`](#RecyclerScrollView) |     用来嵌套`RecyclerView`的`ScrollView`      |
+  |          [`RvDivider`](#RvDivider)          |            `RecyclerView`的分割线             |
+  |   [`SettingsItemView`](#SettingsItemView)   |           常用设置布局中的条目控件            |
+  |           [`TitleBar`](#TitleBar)           |                常用标题栏控件                 |
+  |       [`SwitchButton`](#SwitchButton)       |                   开关控件                    |
+  |           [`StepView`](#StepView)           |                  步骤化控件                   |
 
 * `layout`控件
 
@@ -800,26 +801,142 @@
 
   * 自定义属性
 
-    |           属性           |        说明         |     默认值     |
-    | :--------------------: | :---------------: | :---------: |
-    |   `sb_shadow_radius`   |    阴影半径，单位`dp`    |    `2.5`    |
-    |   `sb_shadow_offset`   |   阴影偏移值，单位`dp`    |    `1.5`    |
-    |   `sb_shadow_color`    |       阴影颜色        | `#33000000` |
-    |     `sb_off_color`     |       关闭时颜色       |  `#dddddd`  |
-    |     `sb_on_color`      |       打开时颜色       |  `#51d367`  |
-    |   `sb_border_width`    |    边框宽度，单位`dp`    |     `1`     |
-    |   `sb_on_line_color`   |    打开状态中短竖线颜色     |  `#ffffff`  |
+    |          属性          |              说明              |   默认值    |
+    | :--------------------: | :----------------------------: | :---------: |
+    |   `sb_shadow_radius`   |       阴影半径，单位`dp`       |    `2.5`    |
+    |   `sb_shadow_offset`   |      阴影偏移值，单位`dp`      |    `1.5`    |
+    |   `sb_shadow_color`    |            阴影颜色            | `#33000000` |
+    |     `sb_off_color`     |           关闭时颜色           |  `#dddddd`  |
+    |     `sb_on_color`      |           打开时颜色           |  `#51d367`  |
+    |   `sb_border_width`    |       边框宽度，单位`dp`       |     `1`     |
+    |   `sb_on_line_color`   |      打开状态中短竖线颜色      |  `#ffffff`  |
     |   `sb_on_line_width`   | 打开状态中短竖线宽度，单位`dp` |     `1`     |
-    | `sb_off_circle_color`  |     关闭状态中圆圈颜色     |  `#aaaaaa`  |
-    | `sb_off_circle_width`  | 关闭状态中圆圈宽度，单位`dp`  |    `1.5`    |
-    | `sb_off_circle_radius` | 关闭状态中圆圈半径，单位`dp`  |     `4`     |
-    |        `sb_on`         |       是否打开        |   `false`   |
-    |   `sb_shadow_effect`   |     是否支持阴影效果      |   `true`    |
-    |  `sb_effect_duration`  |   效果显示时间，单位`ms`   |    `300`    |
-    |   `sb_button_color`    |       按钮颜色        |  `#ffffff`  |
-    |  `sb_show_indicator`   |      是否显示指示器      |   `true`    |
-    |    `sb_background`     |       背景颜色        |  `#ffffff`  |
-    |   `sb_enable_effect`   |      是否开启特效       |   `true`    |
+    | `sb_off_circle_color`  |       关闭状态中圆圈颜色       |  `#aaaaaa`  |
+    | `sb_off_circle_width`  |  关闭状态中圆圈宽度，单位`dp`  |    `1.5`    |
+    | `sb_off_circle_radius` |  关闭状态中圆圈半径，单位`dp`  |     `4`     |
+    |        `sb_on`         |            是否打开            |   `false`   |
+    |   `sb_shadow_effect`   |        是否支持阴影效果        |   `true`    |
+    |  `sb_effect_duration`  |     效果显示时间，单位`ms`     |    `300`    |
+    |   `sb_button_color`    |            按钮颜色            |  `#ffffff`  |
+    |  `sb_show_indicator`   |         是否显示指示器         |   `true`    |
+    |    `sb_background`     |            背景颜色            |  `#ffffff`  |
+    |   `sb_enable_effect`   |          是否开启特效          |   `true`    |
+
+* <a name = "StepView">`StepView`</a>
+
+  > 可步骤化控件，包括垂直方向和水平方向
+
+  * 布局文件
+
+    ```xml
+    <ScrollView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scrollbars="none">
+
+      <com.yhy.widget.core.step.StepView
+        android:id="@+id/sv_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:sv_complete_icon="@mipmap/ic_step_finished" />
+    </ScrollView>
+    ```
+
+  * 获取控件
+
+    ```java
+    StepView<TestStep> svVertical = $(R.id.sv_vertical);
+    ```
+
+  * 设置数据事件
+
+    > 模拟数据
+
+    ```java
+    private final List<TestStep> mStepVerticalList = new ArrayList<>();
+
+    // ...
+
+    mStepVerticalList.clear();
+    mStepVerticalList.add(new TestStep("您已提交定单，等待系统确认"));
+    mStepVerticalList.add(new TestStep("您的商品需要从外地调拨，我们会尽快处理，请耐心等待"));
+    mStepVerticalList.add(new TestStep("您的订单已经进入亚洲第一仓储中心1号库准备出库"));
+    mStepVerticalList.add(new TestStep("您的订单预计6月23日送达您的手中，618期间促销火爆，可能影响送货时间，请您谅解，我们会第一时间送到您的手中"));
+    mStepVerticalList.add(new TestStep("您的订单已打印完毕"));
+    mStepVerticalList.add(new TestStep("您的订单已拣货完成"));
+    mStepVerticalList.add(new TestStep("扫描员已经扫描"));
+    mStepVerticalList.add(new TestStep("打包成功"));
+    mStepVerticalList.add(new TestStep("您的订单在京东【华东外单分拣中心】发货完成，准备送往京东【北京通州分拣中心】"));
+    mStepVerticalList.add(new TestStep("您的订单在京东【北京通州分拣中心】分拣完成"));
+    mStepVerticalList.add(new TestStep("您的订单在京东【北京通州分拣中心】发货完成，准备送往京东【北京中关村大厦站】"));
+    mStepVerticalList.add(new TestStep("您的订单在京东【北京中关村大厦站】验货完成，正在分配配送员"));
+    // 当前状态
+    mStepVerticalList.add(new TestStep("配送员【哈哈哈】已出发，联系电话【130-0000-0000】，感谢您的耐心等待，参加评价还能赢取好多礼物哦", StepAble.Status.CURRENT));
+    // 默认状态
+    mStepVerticalList.add(new TestStep("感谢你在京东购物，欢迎你下次光临！", StepAble.Status.DEFAULT));
+
+    // 反转数据
+    Collections.reverse(mStepVerticalList);
+    ```
+
+    > 设置适配器
+
+    ```java
+    private class VerticalAdapter extends StepAdapter<TestStep> {
+        public VerticalAdapter() {
+            super(mStepVerticalList);
+        }
+    mVerticalAdapter = new VerticalAdapter();
+            svVertical.setAdapter(mVerticalAdapter);
+        @Override
+        public View getItem(StepView<TestStep> stepView, int position, TestStep data) {
+            View view = LayoutInflater.from(StepActivity.this).inflate(R.layout.item_step_vertical, null);
+            TextView tvTest = view.findViewById(R.id.tv_test);
+            tvTest.setText(data.text);
+            if (data.getStatus() == StepAble.Status.COMPLETE) {
+                tvTest.setTextColor(Color.parseColor("#00beaf"));
+            } else if (data.getStatus() == StepAble.Status.CURRENT) {
+                tvTest.setTextColor(Color.parseColor("#ff7500"));
+            } else {
+                tvTest.setTextColor(Color.parseColor("#dcdcdc"));
+            }
+            return view;
+        }
+    }
+
+    // 设置适配器
+    mVerticalAdapter = new VerticalAdapter();
+    svVertical.setAdapter(mVerticalAdapter);
+    ```
+
+    > 设置条目点击事件
+
+    ```java
+    svVertical.setOnItemClickListener(new StepView.OnItemClickListener<TestStep>() {
+        @Override
+        public void onItemClick(StepView<TestStep> parent, int position, TestStep data) {
+            toast(data.text);
+        }
+    });
+    ```
+
+  * 自定义属性
+
+    |         属性          |                             说明                             |   默认值   |
+    | :-------------------: | :----------------------------------------------------------: | :--------: |
+    |   `sv_orientation`    |             显示方向【`vertical`，`horizontal`】             | `vertical` |
+    |  `sv_complete_color`  |                     完成状态节点圆的颜色                     | `#00beaf`  |
+    |  `sv_current_color`   |                     当前状态节点圆的颜色                     | `#ff7500`  |
+    |  `sv_default_color`   |                     默认状态节点圆的颜色                     | `#dcdcdc`  |
+    | `sv_solid_line_color` |                           实线颜色                           | `#00beaf`  |
+    | `sv_solid_line_width` |                           实线宽度                           |   `2dp`    |
+    | `sv_dash_line_color`  |                           虚线颜色                           | `#00beaf`  |
+    | `sv_dash_line_width`  |                           虚线宽度                           |   `1dp`    |
+    |      `sv_radius`      |                         节点圆的半径                         |   `8dp`    |
+    |  `sv_complete_icon`   |                      完成状态节点的图标                      |     无     |
+    |   `sv_current_icon`   |                      当前状态节点的图标                      |     无     |
+    |   `sv_default_icon`   |                      默认状态节点的图标                      |     无     |
+    |   `sv_align_middle`   | 是否将节点圆与`itemView`的中间位置对齐，不对齐则对齐`itemView`的左边或者上边 |   `true`   |
 
 #### `layout`控件
 

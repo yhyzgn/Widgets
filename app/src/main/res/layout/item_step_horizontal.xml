@@ -8,12 +8,12 @@
         android:id="@+id/tv_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:letterSpacing="0.1"
         android:lineSpacingExtra="2dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:text="物流信息"
         android:textColor="#666" />
 </LinearLayout>

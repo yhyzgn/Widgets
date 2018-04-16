@@ -225,4 +225,37 @@
             <enum name="check" value="1" />
         </attr>
     </declare-styleable>
+
+    <!--步骤控件自定义属性-->
+    <declare-styleable name="StepView">
+        <!--显示方向，默认：vertical-->
+        <attr name="sv_orientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
+        <!--完成状态节点圆的颜色，默认：#00beaf-->
+        <attr name="sv_complete_color" format="color|reference" />
+        <!--当前状态节点圆的颜色，默认：#ff7500-->
+        <attr name="sv_current_color" format="color|reference" />
+        <!--默认状态节点圆的颜色，默认：#dcdcdc-->
+        <attr name="sv_default_color" format="color|reference" />
+        <!--实线颜色，默认：#00beaf-->
+        <attr name="sv_solid_line_color" format="color|reference" />
+        <!--实线宽度，默认：2dp-->
+        <attr name="sv_solid_line_width" format="dimension|reference" />
+        <!--虚线颜色，默认：#00beaf-->
+        <attr name="sv_dash_line_color" format="color|reference" />
+        <!--虚线宽度，默认：1dp-->
+        <attr name="sv_dash_line_width" format="dimension|reference" />
+        <!--节点圆的半径，默认：8dp-->
+        <attr name="sv_radius" format="dimension|reference" />
+        <!--完成状态节点的图标-->
+        <attr name="sv_complete_icon" format="reference" />
+        <!--当前状态节点的图标-->
+        <attr name="sv_current_icon" format="reference" />
+        <!--默认状态节点的图标-->
+        <attr name="sv_default_icon" format="reference" />
+        <!--是否将节点圆与itemView的中间位置对齐，不对齐则对齐itemView的左边或者上边，默认：true-->
+        <attr name="sv_align_middle" format="boolean" />
+    </declare-styleable>
 </resources>

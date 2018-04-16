@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_step_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.yhy.widget.core.step.indicator.VerticalIndicator
-        android:id="@+id/vi_indicator"
+    <com.yhy.widget.core.step.indicator.StepIndicator
+        android:id="@+id/si_step_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:id="@+id/ll_step"
-        android:layout_width="match_parent"
+        android:id="@+id/ll_step_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" />
 </LinearLayout>

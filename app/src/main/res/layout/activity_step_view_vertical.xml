@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".MainActivity">
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <com.yhy.widget.core.step.VerticalStepView
-        android:id="@+id/vsv_test"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</ScrollView>
+        android:layout_height="wrap_content"
+        android:text="水平方向" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.yhy.widget.core.step.StepView
+            android:id="@+id/sv_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sv_complete_icon="@mipmap/ic_step_finished"
+            app:sv_orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="垂直方向" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.yhy.widget.core.step.StepView
+            android:id="@+id/sv_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sv_complete_icon="@mipmap/ic_step_finished" />
+    </ScrollView>
+</LinearLayout>
