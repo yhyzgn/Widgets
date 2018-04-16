@@ -886,8 +886,7 @@
         public VerticalAdapter() {
             super(mStepVerticalList);
         }
-    mVerticalAdapter = new VerticalAdapter();
-            svVertical.setAdapter(mVerticalAdapter);
+
         @Override
         public View getItem(StepView<TestStep> stepView, int position, TestStep data) {
             View view = LayoutInflater.from(StepActivity.this).inflate(R.layout.item_step_vertical, null);

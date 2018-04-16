@@ -26,6 +26,7 @@ public class ViewUtils {
      * 移除view的父控件
      *
      * @param view view
+     * @return 当前view
      */
     public static View removeParent(View view) {
         if (null != view && null != view.getParent() && view.getParent() instanceof ViewGroup) {
