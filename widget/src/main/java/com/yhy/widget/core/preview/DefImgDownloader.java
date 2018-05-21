@@ -11,6 +11,7 @@ import android.util.Log;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -88,8 +89,14 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
                                     @Override
                                     public void run() {
                                         listener.onProgress((float) current / (float) total, current, total);
-                                        if (current == total) {
+                                        if (current >= total) {
                                             listener.onSuccess(img, "图片下载成功");
+                                            // 刷新媒体库
+                                            try {
+                                                ImgPreHelper.getInstance().refreshMediaStore(img);
+                                            } catch (FileNotFoundException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
                                     }
                                 });

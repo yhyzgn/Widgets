@@ -1,12 +1,16 @@
 package com.yhy.widget.core.preview;
 
 import android.app.Application;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.yhy.widget.R;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * author : 颜洪毅
@@ -164,6 +168,19 @@ public class ImgPreHelper {
      */
     public OnDownloadListener getOnDownloadListener() {
         return mOnDownloadListener;
+    }
+
+    /**
+     * 刷新媒体库
+     *
+     * @param file 已下载的图片文件
+     * @throws FileNotFoundException 未找到文件异常
+     */
+    public void refreshMediaStore(File file) throws FileNotFoundException {
+        // 把文件插入图库
+        MediaStore.Images.Media.insertImage(mApp.getContentResolver(), file.getAbsolutePath(), file.getName(), null);
+        // 通知图库刷新
+        mApp.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
     }
 
     /**
