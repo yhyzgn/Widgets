@@ -7,6 +7,7 @@ import com.yhy.widget.core.preview.ImgPreCfg;
 import com.yhy.widget.core.preview.PreImgActivity;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
+import com.yhy.widgetdemo.entity.ImgUrls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class PreviewImageActivity extends BaseActivity {
         ivB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) v, "http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");
+                ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) v, ImgUrls.getAImgUrl());
                 PreImgActivity.preview(PreviewImageActivity.this, cfg);
             }
         });
@@ -51,10 +52,9 @@ public class PreviewImageActivity extends BaseActivity {
 
     private void preview(ImageView iv) {
         List<String> urlList = new ArrayList<>();
-        urlList.add("http://img.youguoquan.com/uploads/magazine/content/a811c176420a20f8e035fc3679f19a10_magazine_web_m.jpg");
-        urlList.add("http://img.youguoquan.com/uploads/magazine/content/7b2a0fdbb23c9e63586b7ff6798dbebb_magazine_web_m.jpg");
-        urlList.add("http://img.youguoquan.com/uploads/magazine/content/c9c47160b46fceab5afd24dea7f216e6_magazine_web_m.jpg");
-        urlList.add("http://img.youguoquan.com/uploads/magazine/content/fd986a6e0d5fa3a4485e5ce28f40b2ad_magazine_web_m.jpg");
+        for (int i = 0; i < 4; i++) {
+            urlList.add(ImgUrls.getAImgUrl());
+        }
         ImgPreCfg<String> cfg = new ImgPreCfg<>(iv, urlList, 1);
         PreImgActivity.preview(this, cfg);
     }
