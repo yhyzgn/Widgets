@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        #test {
+            width: 200px;
+            height: 100px;
+            background-color: #ff4400;
+            font-size: 0.75rem;
+            line-height: 100px;
+            text-align: center;
+            color: #ffffff;
+            margin: 100px auto 0px;
+        }
+    </style>
+    <script src="hybrid/hybrid.js"></script>
+    <script>
+        function print(text) {
+            console.log(text);
+        }
+
+        function environment(mobile, android, ios) {
+            if (mobile) {
+                if (android) {
+                    print("Android")
+                } else if (ios) {
+                    print("IOS")
+                } else {
+                    print("Other mobile")
+                }
+            } else {
+                print("PC")
+            }
+        }
+
+        // 以上是一些工具方法。。不重要。。
+
+        /**
+         * 初始化框架（页面是否加载完成都行）
+         *
+         * Hy.init({}, function(){});
+         *
+         * 第一个参数是一些配置，改参数可不传，使用默认配置
+         * @see{Hy.config}
+         * 第二个参数是初始化完成的相关回调
+         * @see{Hy.init}
+         */
+        Hy.init({
+            urlFlagValue: "app"
+        }, function (mobile, android, ios) {
+            environment(mobile, android, ios);
+
+            // 注册函数到js环境，供原生模块调用
+            Hy.register({
+                test: function (args) {
+                    args = "接收到原生传过来的参数‘" + args + "’，我再通过原生窗口弹出！";
+                    alert(args);
+                }
+            });
+
+            let test = document.getElementById("test");
+            Hy.click(test, function () {
+                // 调用原生方法，并传递一些参数过去，并通过回调获取到原生方法的返回值
+                /**
+                 * @see{Hy.native}
+                 */
+                Hy.native("test", {
+                    name: "张三",
+                    age: 24,
+                    desc: "js调用了原生方法"
+                }, function (result) {
+                    test.textContent = result;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="test">点击试试</div>
+</body>
+</html>

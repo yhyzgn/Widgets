@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.1.0-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.2.0-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -61,6 +61,7 @@
   |           [`TitleBar`](#TitleBar)           |                常用标题栏控件                 |
   |       [`SwitchButton`](#SwitchButton)       |                   开关控件                    |
   |           [`StepView`](#StepView)           |                  步骤化控件                   |
+  |       [`HybridBridge`](#HybridBridge)       |         用于混合开发的加强版`WebView`         |
 
 * `layout`控件
 
@@ -936,6 +937,100 @@
     |   `sv_current_icon`   |                      当前状态节点的图标                      |     无     |
     |   `sv_default_icon`   |                      默认状态节点的图标                      |     无     |
     |   `sv_align_middle`   | 是否将节点圆与`itemView`的中间位置对齐，不对齐则对齐`itemView`的左边或者上边 |   `true`   |
+
+* <a name = "HybridBridge">`HybridBridge`</a>
+
+  > 加强版的`WebView`，可以直接和`js`交互
+  >
+  > 这里只是`Android`端说明，**`Web`端说明请参考[`HybridBridge`](https://github.com/yhyzgn/HybridBridge)**
+
+  * 布局文件
+
+    ```xml
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <com.yhy.widget.core.web.HybridWebView
+        android:id="@+id/hwv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+      <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text="点击试试" />
+    </RelativeLayout>
+    ```
+
+  * 获取控件
+
+    ```java
+    HybridWebView hwvContent = $(R.id.hwv_content);
+    Button btnTest = $(R.id.btn_test);
+    ```
+
+  * 设置数据
+
+    ```java
+    // 注册交互桥梁
+    hwvContent.register(new TestBridge());
+    // 加载页面
+    hwvContent.loadUrl("file:///android_asset/index.html");
+
+    // ...
+
+    /**
+     * 交互桥梁，必须是HybridBridge的子类
+     */
+    public class TestBridge extends HybridBridge {
+
+        @JavascriptInterface
+        public String test(String json) {
+            Toast.makeText(WebHybridActivity.this, json, Toast.LENGTH_LONG).show();
+            return "Android接收到数据啦";
+        }
+    }
+    ```
+
+  * 设置事件
+
+    ```java
+    hwvContent.setOnWebEventListener(new SimpleOnWebEventListener() {
+        @Override
+        public boolean onJsAlert(HybridWebView view, String url, String message, final JsResult result) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(WebHybridActivity.this);
+            builder
+                .setTitle("标题")
+                .setMessage(message)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        result.confirm();
+                    }
+                })
+                .show();
+            //返回true表示不再往下传递弹窗事件，即不再使用原本WebView的弹窗，否则会弹出两次弹窗
+            return true;
+        }
+    });
+
+    btnTest.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // 调用js中的test函数
+            hwvContent.js("test", "小姐姐");
+        }
+    });
+    ```
+
+
+
+----
 
 #### `layout`控件
 

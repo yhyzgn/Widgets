@@ -258,4 +258,18 @@
         <!--是否将节点圆与itemView的中间位置对齐，不对齐则对齐itemView的左边或者上边，默认：true-->
         <attr name="sv_align_middle" format="boolean" />
     </declare-styleable>
+
+    <!--加强版WebView-->
+    <declare-styleable name="HybridWebView">
+        <!--URL标识名称，默认：platform-->
+        <attr name="hwv_url_flag_name" format="string" />
+        <!--URL标识值，默认：app-->
+        <attr name="hwv_url_flag_value" format="string" />
+        <!--桥梁名称，默认：app-->
+        <attr name="hwv_bridge_name" format="string" />
+        <!--是否开启缓存：默认：true-->
+        <attr name="hwv_cache_enable" format="boolean" />
+        <!--缓存保存时间，单位：s，默认：一周-->
+        <attr name="hwv_cache_expire" format="integer" />
+    </declare-styleable>
 </resources>

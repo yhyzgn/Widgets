@@ -26,6 +26,7 @@ import com.yhy.widgetdemo.activity.SwitchButtonActivity;
 import com.yhy.widgetdemo.activity.TagFlowActivity;
 import com.yhy.widgetdemo.activity.TitleActivity;
 import com.yhy.widgetdemo.activity.StepActivity;
+import com.yhy.widgetdemo.activity.WebHybridActivity;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
 import com.yhy.widgetdemo.status.StatusActivity;
 
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("FlowLayout");
         WIDGET_NAME_LIST.add("TagFlowLayout");
         WIDGET_NAME_LIST.add("StepView");
+        WIDGET_NAME_LIST.add("HybridBridge");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
@@ -89,6 +91,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_CLASS_LIST.add(FlowLayoutActivity.class);
         WIDGET_CLASS_LIST.add(TagFlowActivity.class);
         WIDGET_CLASS_LIST.add(StepActivity.class);
+        WIDGET_CLASS_LIST.add(WebHybridActivity.class);
 
         lvWidget.setAdapter(new BaseAdapter() {
             @Override

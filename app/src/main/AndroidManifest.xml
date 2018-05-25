@@ -38,6 +38,7 @@
         <activity android:name=".activity.FlowLayoutActivity" />
         <activity android:name=".activity.TagFlowActivity" />
         <activity android:name=".activity.StepActivity" />
+        <activity android:name=".activity.WebHybridActivity" />
     </application>
 
 </manifest>
