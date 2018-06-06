@@ -25,7 +25,10 @@
         android:background="@color/windowBackground"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
         android:visibility="visible">
 
         <LinearLayout
@@ -46,27 +49,30 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:hint="说点什么吧..."
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:letterSpacing="0.1"
                 android:lineSpacingExtra="2dp"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
+                android:singleLine="false"
                 android:textColor="@color/textPrimary"
                 android:textSize="12sp"
                 tools:ignore="HardcodedText,NestedWeights,UnusedAttribute" />
 
             <View
+                android:id="@+id/v_underline"
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@color/colorPrimary" />
+                android:background="@drawable/bg_input_dialog_enable_selector"
+                android:enabled="false" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_publish"
             android:layout_width="48dp"
             android:layout_height="32dp"
-            android:background="@drawable/bg_input_dialog_publish_enable_selector"
-            android:enabled="true"
+            android:background="@drawable/bg_input_dialog_enable_selector"
+            android:enabled="false"
             android:gravity="center"
             android:text="发表"
             android:textColor="@android:color/white"

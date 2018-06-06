@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="navigationBarColor">#000000</color>
 
+    <color name="colorLoading">@color/colorAccent</color>
+
     <color name="red">#ff2200</color>
     <color name="red_light">#ff6600</color>
     <color name="orange">@android:color/holo_orange_dark</color>

@@ -46,7 +46,7 @@ public class SquareIVActivity extends BaseActivity {
         sivAttrs = findViewById(R.id.siv_attrs);
         rvCiv = findViewById(R.id.rv_civ);
 
-        rvCiv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvCiv.setLayoutManager(new GridLayoutManager(this, 4));
     }
 
     @Override
