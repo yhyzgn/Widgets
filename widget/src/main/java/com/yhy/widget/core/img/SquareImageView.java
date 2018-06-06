@@ -4,19 +4,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import com.yhy.widget.R;
-import com.yhy.widget.utils.DensityUtils;
-import com.yhy.widget.utils.ViewUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
  * author : 颜洪毅
@@ -63,10 +58,10 @@ public class SquareImageView extends AppCompatImageView {
     private void init(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SquareImageView);
         if (ta.hasValue(R.styleable.SquareImageView_siv_btn_img)) {
-            mBtnImg = ViewUtils.drawableToBitmap(ta.getDrawable(R.styleable.SquareImageView_siv_btn_img));
+            mBtnImg = WidgetCoreUtils.drawableToBitmap(ta.getDrawable(R.styleable.SquareImageView_siv_btn_img));
         }
         int size = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_size, 0);
-        mBtnPadding = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_padding, DensityUtils.dp2px(context, 2.0f));
+        mBtnPadding = ta.getDimensionPixelSize(R.styleable.SquareImageView_siv_btn_padding, WidgetCoreUtils.dp2px(context, 2.0f));
         ta.recycle();
 
         if (size == 0 && null != mBtnImg) {
@@ -90,6 +85,9 @@ public class SquareImageView extends AppCompatImageView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int size = Math.min(widthMeasureSpec, widthMeasureSpec);
         super.onMeasure(size, size);
+
+        size = Math.min(getMeasuredWidth(), getMeasuredHeight());
+        setMeasuredDimension(size, size);
     }
 
     /**
@@ -134,7 +132,7 @@ public class SquareImageView extends AppCompatImageView {
      * @param drawable 图片
      */
     public void setBtn(Drawable drawable) {
-        mBtnImg = null == drawable ? null : ViewUtils.drawableToBitmap(drawable);
+        mBtnImg = null == drawable ? null : WidgetCoreUtils.drawableToBitmap(drawable);
         postInvalidate();
     }
 
@@ -144,7 +142,7 @@ public class SquareImageView extends AppCompatImageView {
      * @param resId 图片资源id
      */
     public void setBtn(int resId) {
-        mBtnImg = resId <= 0 ? null : ViewUtils.drawableToBitmap(getResources().getDrawable(resId));
+        mBtnImg = resId <= 0 ? null : WidgetCoreUtils.drawableToBitmap(getResources().getDrawable(resId));
         postInvalidate();
     }
 
@@ -176,6 +174,7 @@ public class SquareImageView extends AppCompatImageView {
             default:
                 break;
         }
+
         return super.onTouchEvent(event);
     }
 

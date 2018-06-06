@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.yhy.widget.core.checked.CheckBox
+            android:id="@+id/cb_def"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="默认"
+            android:textColor="@color/textPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.yhy.widget.core.checked.CheckBox
+            android:id="@+id/cb_test"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:cb_color_checked="@color/colorPrimary"
+            app:cb_color_tick="@color/textPrimary"
+            app:cb_color_unchecked="@color/windowBackground"
+            app:cb_color_unchecked_stroke="@color/colorLine"
+            app:cb_duration="1000"
+            app:cb_stroke_width="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="自定义属性"
+            android:textColor="@color/textPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.yhy.widget.core.checked.CheckBox
+            android:id="@+id/cb_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cb_click_cancel_able="false" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="选中后点击我来取消"
+            android:textColor="@color/textPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

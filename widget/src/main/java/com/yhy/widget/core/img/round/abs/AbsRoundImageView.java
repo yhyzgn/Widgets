@@ -9,14 +9,11 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import com.yhy.widget.R;
-import com.yhy.widget.utils.ViewUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
  * author : 颜洪毅
@@ -148,7 +145,7 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
         if (getWidth() == 0 && getHeight() == 0 || null == getDrawable()) {
             return;
         }
-        mBitmap = ViewUtils.drawableToBitmap(getDrawable());
+        mBitmap = WidgetCoreUtils.drawableToBitmap(getDrawable());
         if (mBitmap == null) {
             invalidate();
             return;

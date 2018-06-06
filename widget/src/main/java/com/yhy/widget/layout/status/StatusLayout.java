@@ -13,7 +13,7 @@ import com.yhy.widget.layout.status.handler.StaHandler;
 import com.yhy.widget.layout.status.helper.DefLayoutHelper;
 import com.yhy.widget.layout.status.helper.StaLayoutHelper;
 import com.yhy.widget.layout.status.listener.OnStatusRetryListener;
-import com.yhy.widget.utils.ViewUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
  * author : 颜洪毅
@@ -348,9 +348,9 @@ public class StatusLayout extends FrameLayout {
      */
     private void addViews() {
         // 添加之前需要移除各view对应的parent
-        addView(ViewUtils.removeParent(vLoading));
-        addView(ViewUtils.removeParent(vError));
-        addView(ViewUtils.removeParent(vEmpty));
+        addView(WidgetCoreUtils.removeParent(vLoading));
+        addView(WidgetCoreUtils.removeParent(vError));
+        addView(WidgetCoreUtils.removeParent(vEmpty));
     }
 
     /**

@@ -272,4 +272,62 @@
         <!--缓存保存时间，单位：s，默认：一周-->
         <attr name="hwv_cache_expire" format="integer" />
     </declare-styleable>
+
+    <!--多选框-->
+    <declare-styleable name="CheckBox">
+        <!--动画时长，单位：ms，默认：300-->
+        <attr name="cb_duration" format="integer" />
+        <!--边框宽度，默认：0dp-->
+        <attr name="cb_stroke_width" format="dimension" />
+        <!--打钩图标颜色，默认：#ffffff-->
+        <attr name="cb_color_tick" format="color" />
+        <!--选中时的颜色，默认：#FB4846-->
+        <attr name="cb_color_checked" format="color" />
+        <!--未选中时的颜色，默认：#ffffff-->
+        <attr name="cb_color_unchecked" format="color" />
+        <!--未选中时边框的颜色，默认：#dfdfdf-->
+        <attr name="cb_color_unchecked_stroke" format="color" />
+        <!--是否可点击取消，默认：true-->
+        <attr name="cb_click_cancel_able" format="boolean" />
+    </declare-styleable>
+
+    <!--加线条的TextView-->
+    <declare-styleable name="LineTextView">
+        <!--线条宽度，默认：0dp-->
+        <attr name="ltv_line_size" format="dimension|reference" />
+        <!--线条颜色，默认：#000000-->
+        <attr name="ltv_line_color" format="color|reference" />
+        <!--线条间隔，该属性只在下划线风格中有效，默认：0dp-->
+        <attr name="ltv_line_interval" format="dimension|reference" />
+        <!--线条风格，默认：下划线-->
+        <attr name="ltv_line_style" format="enum">
+            <!--下划线模式-->
+            <enum name="underline" value="1" />
+            <!--中间删除线模式-->
+            <enum name="delete_middle" value="2" />
+            <!--对角删除线模式-->
+            <enum name="delete_oblique" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <!--带动画的渐变TextView-->
+    <declare-styleable name="GradientTextView">
+        <!--渐变颜色资源数组，默认：@array/color_arr_gradient_text_view-->
+        <attr name="gtv_text_color_list" format="reference" />
+        <!--动画刷新时间，单位：ms，默认：300-->
+        <attr name="gtv_speed_millions" format="integer" />
+    </declare-styleable>
+
+    <!--约束宽高比的ImageView-->
+    <declare-styleable name="ConstraintImageView">
+        <!--参考标准，以宽或者高为准，计算另一方向的实际值，默认：宽-->
+        <attr name="civ_reference" format="enum">
+            <!--以宽为准-->
+            <enum name="width" value="0" />
+            <!--以高为准-->
+            <enum name="height" value="1" />
+        </attr>
+        <!--比例字符串，图片实际的宽高即可，格式：“宽:高”-->
+        <attr name="civ_ratio" format="string" />
+    </declare-styleable>
 </resources>

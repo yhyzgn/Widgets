@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="color_arr_test">
+        <!--integer-array，这里不能直接写16进制的颜色代码，否则报错-->
+        <item>@color/red</item>
+        <item>@color/red_light</item>
+        <item>@color/orange</item>
+        <item>@color/red_light</item>
+        <item>@color/red</item>
+    </integer-array>
+</resources>

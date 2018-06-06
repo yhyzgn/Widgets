@@ -20,8 +20,7 @@ import com.yhy.widget.core.step.StepView;
 import com.yhy.widget.core.step.adapter.StepAdapter;
 import com.yhy.widget.core.step.entity.StepAble;
 import com.yhy.widget.core.step.entity.StepNode;
-import com.yhy.widget.utils.DensityUtils;
-import com.yhy.widget.utils.ViewUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +34,9 @@ import java.util.List;
  */
 public class StepIndicator<T extends StepAble> extends View implements StepAdapter.OnDataChangedListener {
     // 指示器宽度，默认48dp
-    private int mWidth = DensityUtils.dp2px(getContext(), 48);
+    private int mWidth = WidgetCoreUtils.dp2px(getContext(), 48);
     // 指示器高度，默认48dp
-    private int mHeight = DensityUtils.dp2px(getContext(), 48);
+    private int mHeight = WidgetCoreUtils.dp2px(getContext(), 48);
     // 指示器中点x坐标
     private float mCenterX;
     // 指示器中点y坐标
@@ -49,11 +48,11 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
     // 是否对齐itemView的中间位置，默认为true；false时则对其itemView的上边或者左边
     private boolean mAlignMiddle = true;
     // 节点圆的半径，默认8dp
-    private float mRadius = DensityUtils.dp2px(getContext(), 8);
+    private float mRadius = WidgetCoreUtils.dp2px(getContext(), 8);
     // 虚线宽度，默认1dp
-    private float mDashLineWidth = DensityUtils.dp2px(getContext(), 1);
+    private float mDashLineWidth = WidgetCoreUtils.dp2px(getContext(), 1);
     // 实线宽度，默认2dp
-    private float mSolidLineWidth = DensityUtils.dp2px(getContext(), 2);
+    private float mSolidLineWidth = WidgetCoreUtils.dp2px(getContext(), 2);
     // 虚线颜色，默认#00beaf
     private int mDashLineColor = Color.parseColor("#00beaf");
     // 实线颜色，默认#00beaf
@@ -307,7 +306,7 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
      * @return 当前对象
      */
     public StepIndicator<T> radius(float dp) {
-        mRadius = DensityUtils.dp2px(getContext(), dp);
+        mRadius = WidgetCoreUtils.dp2px(getContext(), dp);
         return this;
     }
 
@@ -392,7 +391,7 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
      * @return 当前对象
      */
     public StepIndicator<T> completeIcon(Drawable drawable) {
-        return completeIcon(ViewUtils.drawableToBitmap(drawable));
+        return completeIcon(WidgetCoreUtils.drawableToBitmap(drawable));
     }
 
     /**
@@ -423,7 +422,7 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
      * @return 当前对象
      */
     public StepIndicator<T> currentIcon(Drawable drawable) {
-        return currentIcon(ViewUtils.drawableToBitmap(drawable));
+        return currentIcon(WidgetCoreUtils.drawableToBitmap(drawable));
     }
 
     /**
@@ -454,7 +453,7 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
      * @return 当前对象
      */
     public StepIndicator<T> defaultIcon(Drawable drawable) {
-        return defaultIcon(ViewUtils.drawableToBitmap(drawable));
+        return defaultIcon(WidgetCoreUtils.drawableToBitmap(drawable));
     }
 
     /**
@@ -495,7 +494,7 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
      * @return 当前对象
      */
     public StepIndicator<T> dashLineWidth(float dp) {
-        mDashLineWidth = DensityUtils.dp2px(getContext(), dp);
+        mDashLineWidth = WidgetCoreUtils.dp2px(getContext(), dp);
         return this;
     }
 
@@ -527,7 +526,7 @@ public class StepIndicator<T extends StepAble> extends View implements StepAdapt
      * @return 当前对象
      */
     public StepIndicator<T> solidLineWidth(float dp) {
-        mSolidLineWidth = DensityUtils.dp2px(getContext(), dp);
+        mSolidLineWidth = WidgetCoreUtils.dp2px(getContext(), dp);
         return this;
     }
 

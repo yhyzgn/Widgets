@@ -9,10 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.yhy.widget.utils.DensityUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
- * Created by HongYi Yan onOrOff 2017/4/12 12:49.
+ * author : 颜洪毅
+ * e-mail : yhyzgn@gmail.com
+ * time   : 2017-04-12 12:49
+ * version: 1.0.0
+ * desc   : RecyclerView分割线
  */
 public class RvDivider extends RecyclerView.ItemDecoration {
     //绘制方式，默认 只绘制内容区域，边界不绘制
@@ -40,7 +44,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     private RvDivider(Builder builder) {
         mCtx = builder.mCtx;
         mColor = builder.mColor;
-        mWidthPx = DensityUtils.dp2px(mCtx, builder.mWidthDp);
+        mWidthPx = WidgetCoreUtils.dp2px(mCtx, builder.mWidthDp);
         mType = builder.mType;
 
         //创建画笔
@@ -77,7 +81,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
      * @return 线条宽度
      */
     public float getWidthDp() {
-        return DensityUtils.px2dp(mCtx, mWidthPx);
+        return WidgetCoreUtils.px2dp(mCtx, mWidthPx);
     }
 
     /**
@@ -87,7 +91,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
      * @return 当前对象
      */
     public RvDivider setWidthDp(float widthDp) {
-        this.mWidthPx = DensityUtils.dp2px(mCtx, widthDp);
+        this.mWidthPx = WidgetCoreUtils.dp2px(mCtx, widthDp);
         return this;
     }
 

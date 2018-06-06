@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="color_arr_gradient_text_view">
+        <item>@color/colorPrimary</item>
+        <item>@android:color/holo_orange_dark</item>
+        <item>@color/colorPrimary</item>
+    </integer-array>
+</resources>

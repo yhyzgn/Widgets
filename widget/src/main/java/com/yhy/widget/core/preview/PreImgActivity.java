@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -27,6 +28,9 @@ import android.widget.TextView;
 import com.yhy.widget.R;
 import com.yhy.widget.core.pager.HackyViewPager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * author : 颜洪毅
  * e-mail : yhyzgn@gmail.com
@@ -36,6 +40,8 @@ import com.yhy.widget.core.pager.HackyViewPager;
  */
 public class PreImgActivity extends AppCompatActivity implements ViewTreeObserver.OnPreDrawListener {
     private static final long ANIMATE_DURATION = 200;
+    private static final int REQ_CODE_PERMISSION = 1000;
+
     private ImgPreCfg mCfg;
     private RelativeLayout rlRoot;
     private HackyViewPager vpImg;
@@ -105,22 +111,46 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         ivDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 检查SD卡读取权限
-                if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PreImgActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                } else if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PreImgActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-                } else {
-                    // 已授权
-                    ImgPreHelper.ImgDownloader downloader = ImgPreHelper.getInstance().getDownloader();
-                    if (isNetImg() && null != downloader) {
-                        // 只有预览网络图片时才能下载
-                        Object model = mCfg.getModelList().get(vpImg.getCurrentItem());
-                        downloader.download(PreImgActivity.this, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
-                    }
-                }
+                checkPermissionAndDownload();
             }
         });
+    }
+
+    private void checkPermissionAndDownload() {
+        // 检查SD卡读取权限
+        List<String> permissions = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permissions = new ArrayList<>();
+            if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
+            if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+        }
+
+        if (null != permissions && !permissions.isEmpty()) {
+            ActivityCompat.requestPermissions(PreImgActivity.this, permissions.toArray(new String[permissions.size()]), REQ_CODE_PERMISSION);
+        } else {
+            // 已授权
+            ImgPreHelper.ImgDownloader downloader = ImgPreHelper.getInstance().getDownloader();
+            if (null != downloader) {
+                Object model = mCfg.getModelList().get(vpImg.getCurrentItem());
+                // 只有预览网络图片时才能下载
+                if (model instanceof String && isNetImg((String) model)) {
+                    downloader.download(PreImgActivity.this, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
+                }
+                throw new IllegalStateException("Unknown resource : [" + model + "]");
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQ_CODE_PERMISSION) {
+            checkPermissionAndDownload();
+        }
     }
 
     /**
@@ -128,15 +158,8 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
      *
      * @return 是否是网络图片
      */
-    private boolean isNetImg() {
-        if (null != mCfg && null != mCfg.getModelList() && !mCfg.getModelList().isEmpty()) {
-            Object model = mCfg.getModelList().get(0);
-            if (model instanceof String) {
-                String url = (String) model;
-                return url.startsWith("http:") || url.startsWith("https:");
-            }
-        }
-        return false;
+    private boolean isNetImg(String model) {
+        return model.startsWith("http:") || model.startsWith("https:") || model.startsWith("ftp:");
     }
 
     /**
@@ -236,20 +259,15 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         valueAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                rlRoot.setBackgroundColor(0x0);
+                rlRoot.setBackgroundColor(getResources().getColor(R.color.alphaBlack));
                 isAnimating = true;
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (mCfg.getModelList().size() > 1) {
-                    tvItem.setVisibility(View.VISIBLE);
-                    rlFooter.setVisibility(View.VISIBLE);
-                }
-                if (mCfg.isDownloadable()) {
-                    ivDownload.setVisibility(View.VISIBLE);
-                    rlFooter.setVisibility(View.VISIBLE);
-                }
+                tvItem.setVisibility(mCfg.getModelList().size() > 1 ? View.VISIBLE : View.GONE);
+                ivDownload.setVisibility(mCfg.isDownloadable() ? View.VISIBLE : View.GONE);
+                rlFooter.setVisibility(tvItem.getVisibility() == View.VISIBLE || ivDownload.getVisibility() == View.VISIBLE ? View.VISIBLE : View.GONE);
                 isAnimating = false;
             }
 

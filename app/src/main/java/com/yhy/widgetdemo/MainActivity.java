@@ -11,10 +11,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yhy.widgetdemo.activity.AdvActivity;
+import com.yhy.widgetdemo.activity.CheckBoxActivity;
 import com.yhy.widgetdemo.activity.CheckedRLActivity;
 import com.yhy.widgetdemo.activity.CheckedTVActivity;
+import com.yhy.widgetdemo.activity.ConstraintImageActivity;
 import com.yhy.widgetdemo.activity.ETVActivity;
 import com.yhy.widgetdemo.activity.FlowLayoutActivity;
+import com.yhy.widgetdemo.activity.GradientTextViewActivity;
+import com.yhy.widgetdemo.activity.LineTextViewActivity;
+import com.yhy.widgetdemo.activity.LoadingDialogActivity;
 import com.yhy.widgetdemo.activity.PickViewActivity;
 import com.yhy.widgetdemo.activity.PreviewImageActivity;
 import com.yhy.widgetdemo.activity.RIVActivity;
@@ -48,7 +53,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        lvWidget = (ListView) findViewById(R.id.lv_widget);
+        lvWidget = findViewById(R.id.lv_widget);
     }
 
     public void initData() {
@@ -73,6 +78,11 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("TagFlowLayout");
         WIDGET_NAME_LIST.add("StepView");
         WIDGET_NAME_LIST.add("HybridBridge");
+        WIDGET_NAME_LIST.add("ConstraintImageView");
+        WIDGET_NAME_LIST.add("CheckBox");
+        WIDGET_NAME_LIST.add("LineTextView");
+        WIDGET_NAME_LIST.add("GradientTextView");
+        WIDGET_NAME_LIST.add("LoadingDialog");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
@@ -92,6 +102,11 @@ public class MainActivity extends BaseActivity {
         WIDGET_CLASS_LIST.add(TagFlowActivity.class);
         WIDGET_CLASS_LIST.add(StepActivity.class);
         WIDGET_CLASS_LIST.add(WebHybridActivity.class);
+        WIDGET_CLASS_LIST.add(ConstraintImageActivity.class);
+        WIDGET_CLASS_LIST.add(CheckBoxActivity.class);
+        WIDGET_CLASS_LIST.add(LineTextViewActivity.class);
+        WIDGET_CLASS_LIST.add(GradientTextViewActivity.class);
+        WIDGET_CLASS_LIST.add(LoadingDialogActivity.class);
 
         lvWidget.setAdapter(new BaseAdapter() {
             @Override

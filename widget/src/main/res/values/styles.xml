@@ -6,10 +6,10 @@
     </style>
 
     <!--控制头部据AppBar的样式-->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!--用于控制ToolBar溢出菜单的样式-->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- 设置该属性边距为0dp-->
     <style name="TitleBar" parent="Widget.AppCompat.Toolbar">
@@ -27,6 +27,21 @@
     <style name="Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--进度条提示框样式-->
+    <style name="Theme.DialogStyle.Transparent" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

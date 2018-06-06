@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.yhy.widget.R;
 import com.yhy.widget.core.toggle.SwitchButton;
-import com.yhy.widget.utils.DensityUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.lang.reflect.Field;
 
@@ -133,8 +133,8 @@ public class SettingsItemView extends LinearLayout {
         ta.recycle();
 
         //将字体大小单位转换为sp
-        mNameSize = DensityUtils.px2sp(getContext(), mNameSize);
-        mTextSize = DensityUtils.px2sp(getContext(), mTextSize);
+        mNameSize = WidgetCoreUtils.px2sp(getContext(), mNameSize);
+        mTextSize = WidgetCoreUtils.px2sp(getContext(), mTextSize);
 
         //开关控件宽高
         sbSwitch.getLayoutParams().width = mSwitchWidth;

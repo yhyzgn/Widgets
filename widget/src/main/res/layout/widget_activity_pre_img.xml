@@ -16,7 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#66000000"
+        android:background="@color/alphaBlack"
         android:visibility="gone">
 
         <TextView
@@ -33,8 +33,10 @@
             android:id="@+id/iv_download"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:padding="8dp"
             android:scaleType="centerInside"

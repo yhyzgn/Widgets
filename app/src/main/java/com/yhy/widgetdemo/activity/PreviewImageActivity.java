@@ -45,6 +45,7 @@ public class PreviewImageActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) v, ImgUrls.getAImgUrl());
+//                cfg.setDownloadable(false);
                 PreImgActivity.preview(PreviewImageActivity.this, cfg);
             }
         });
@@ -56,6 +57,7 @@ public class PreviewImageActivity extends BaseActivity {
             urlList.add(ImgUrls.getAImgUrl());
         }
         ImgPreCfg<String> cfg = new ImgPreCfg<>(iv, urlList, 1);
+//        cfg.setDownloadable(false);
         PreImgActivity.preview(this, cfg);
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.yhy.widget.core.text.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认长这个样子"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp" />
+
+    <com.yhy.widget.core.text.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="1dp的下划线"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp"
+        app:ltv_line_size="1dp" />
+
+    <com.yhy.widget.core.text.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="1dp的中间删除线"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp"
+        app:ltv_line_size="1dp"
+        app:ltv_line_style="delete_middle" />
+
+    <com.yhy.widget.core.text.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="1dp的对角删除线"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp"
+        app:ltv_line_size="1dp"
+        app:ltv_line_style="delete_oblique" />
+
+    <com.yhy.widget.core.text.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="其他样式【ltv_line_interval】无效"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp"
+        app:ltv_line_color="@color/colorAccent"
+        app:ltv_line_interval="4dp"
+        app:ltv_line_size="2dp"
+        app:ltv_line_style="delete_oblique" />
+
+    <com.yhy.widget.core.text.LineTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="【ltv_line_interval】只在下划线风格中有效"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp"
+        app:ltv_line_color="@color/colorAccent"
+        app:ltv_line_interval="4dp"
+        app:ltv_line_size="2dp" />
+</LinearLayout>

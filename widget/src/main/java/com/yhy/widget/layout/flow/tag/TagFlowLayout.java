@@ -8,16 +8,12 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.yhy.widget.R;
 import com.yhy.widget.layout.flow.FlowLayout;
-import com.yhy.widget.utils.DensityUtils;
-import com.yhy.widget.utils.ViewUtils;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -129,13 +125,13 @@ public class TagFlowLayout<T> extends FlowLayout implements TagFlowAdapter.OnDat
                     container.setLayoutParams(tagView.getLayoutParams());
                 } else {
                     params = new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                    params.setMargins(DensityUtils.dp2px(getContext(), 4), DensityUtils.dp2px(getContext(), 4), DensityUtils.dp2px(getContext(), 4), DensityUtils.dp2px(getContext(), 4));
+                    params.setMargins(WidgetCoreUtils.dp2px(getContext(), 4), WidgetCoreUtils.dp2px(getContext(), 4), WidgetCoreUtils.dp2px(getContext(), 4), WidgetCoreUtils.dp2px(getContext(), 4));
                     container.setLayoutParams(params);
                 }
                 params = new MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
                 tagView.setLayoutParams(params);
                 tagView.setClickable(false);
-                ViewUtils.removeParent(tagView);
+                WidgetCoreUtils.removeParent(tagView);
                 container.addView(tagView);
                 addView(container);
 
@@ -254,7 +250,7 @@ public class TagFlowLayout<T> extends FlowLayout implements TagFlowAdapter.OnDat
      * @return px
      */
     private int dp2px(float dpValue) {
-        return DensityUtils.dp2px(getContext(), dpValue);
+        return WidgetCoreUtils.dp2px(getContext(), dpValue);
     }
 
     /**
