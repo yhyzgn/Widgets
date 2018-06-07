@@ -35,6 +35,7 @@ captures/
 # Intellij
 *.iml
 .idea/workspace.xml
+.idea/caches/build_file_checksums.ser
 
 # Keystore files
 *.jks
