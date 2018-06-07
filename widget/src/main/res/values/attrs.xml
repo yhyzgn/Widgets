@@ -265,7 +265,7 @@
         <attr name="hwv_url_flag_name" format="string" />
         <!--URL标识值，默认：app-->
         <attr name="hwv_url_flag_value" format="string" />
-        <!--桥梁名称，默认：app-->
+        <!--交互桥梁名称，默认：app-->
         <attr name="hwv_bridge_name" format="string" />
         <!--是否开启缓存：默认：true-->
         <attr name="hwv_cache_enable" format="boolean" />

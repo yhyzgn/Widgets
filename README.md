@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.2.0-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.3.0-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -19,10 +19,10 @@
 
   ```groovy
   allprojects {
-    repositories {
-      // ...
-      maven { url "https://jitpack.io" }
-    }
+      repositories {
+          // ...
+          maven { url "https://jitpack.io" }
+      }
   }
   ```
 
@@ -32,7 +32,7 @@
 
   ```groovy
   dependencies {
-    compile 'com.yhy.widget:view-core:latestVersion'
+      compile 'com.yhy.widget:view-core:latestVersion'
   }
   ```
 
@@ -44,24 +44,30 @@
 
   > 核心控件，即各种独立使用的控件
 
-  |                    名称                     |                     描述                      |
-  | :-----------------------------------------: | :-------------------------------------------: |
-  |     [`PreImgActivity`](#PreImgActivity)     |             点击图片查看大图控件              |
-  |            [`AdvView`](#AdvView)            |               滚动广告轮播控件                |
-  |    [`CheckedTextView`](#CheckedTextView)    |              可选中的`TextView`               |
-  |     [`ExpandTextView`](#ExpandTextView)     |            可展开收起的`TextView`             |
-  |    [`SquareImageView`](#SquareImageView)    | 正方形`ImageView`，右上角可设置按钮及点击事件 |
-  |    [`CircleImageView`](#CircleImageView)    |                   圆形图片                    |
-  |     [`RoundImageView`](#RoundImageView)     |                   圆角图片                    |
-  |     [`HackyViewPager`](#HackyViewPager)     |    多点触摸滑动时防止内存溢出的`ViewPager`    |
-  |         [`PickerView`](#PickerView)         |             上下滚动数据选取控件              |
-  | [`RecyclerScrollView`](#RecyclerScrollView) |     用来嵌套`RecyclerView`的`ScrollView`      |
-  |          [`RvDivider`](#RvDivider)          |            `RecyclerView`的分割线             |
-  |   [`SettingsItemView`](#SettingsItemView)   |           常用设置布局中的条目控件            |
-  |           [`TitleBar`](#TitleBar)           |                常用标题栏控件                 |
-  |       [`SwitchButton`](#SwitchButton)       |                   开关控件                    |
-  |           [`StepView`](#StepView)           |                  步骤化控件                   |
-  |       [`HybridBridge`](#HybridBridge)       |         用于混合开发的加强版`WebView`         |
+  |                     名称                      |                     描述                      |
+  | :-------------------------------------------: | :-------------------------------------------: |
+  |      [`PreImgActivity`](#PreImgActivity)      |             点击图片查看大图控件              |
+  |             [`AdvView`](#AdvView)             |               滚动广告轮播控件                |
+  |     [`CheckedTextView`](#CheckedTextView)     |              可选中的`TextView`               |
+  |      [`ExpandTextView`](#ExpandTextView)      |            可展开收起的`TextView`             |
+  |     [`SquareImageView`](#SquareImageView)     | 正方形`ImageView`，右上角可设置按钮及点击事件 |
+  |     [`CircleImageView`](#CircleImageView)     |                   圆形图片                    |
+  |      [`RoundImageView`](#RoundImageView)      |                   圆角图片                    |
+  |      [`HackyViewPager`](#HackyViewPager)      |    多点触摸滑动时防止内存溢出的`ViewPager`    |
+  |          [`PickerView`](#PickerView)          |             上下滚动数据选取控件              |
+  |  [`RecyclerScrollView`](#RecyclerScrollView)  |     用来嵌套`RecyclerView`的`ScrollView`      |
+  |           [`RvDivider`](#RvDivider)           |            `RecyclerView`的分割线             |
+  |    [`SettingsItemView`](#SettingsItemView)    |           常用设置布局中的条目控件            |
+  |            [`TitleBar`](#TitleBar)            |                常用标题栏控件                 |
+  |        [`SwitchButton`](#SwitchButton)        |                   开关控件                    |
+  |            [`StepView`](#StepView)            |                  步骤化控件                   |
+  |        [`HybridBridge`](#HybridBridge)        |         用于混合开发的加强版`WebView`         |
+  |            [`CheckBox`](#CheckBox)            |                带动画的多选框                 |
+  |       [`LoadingDialog`](#LoadingDialog)       |                加载中进度弹窗                 |
+  |     [`InputDialogView`](#InputDialogView)     |                  输入框弹窗                   |
+  | [`ConstraintImageView`](#ConstraintImageView) |          按比例约束宽高的`ImageView`          |
+  |    [`GradientTextView`](#GradientTextView)    |             渐变动画的`TextView`              |
+  |        [`LineTextView`](#LineTextView)        |             添加线条的`TextView`              |
 
 * `layout`控件
 
@@ -134,7 +140,12 @@
     ```java
     // 参数1为点击的ImageView；参数2为当前要预览的图片地址。
     ImgPreCfg cfg = new ImgPreCfg(iv, url);
-
+    
+    // 配置为不可下载
+    cfg.setDownloadable(false);
+    // 设置下载按钮图标
+    cfg.setDownloadIconId(R.mipmap.ic_def_download);
+    
     // x, y, width, height 分别为图片x, y坐标和宽高度。
     ImgPreCfg cfg = new ImgPreCfg(x, y, width, height, url);
     ```
@@ -950,12 +961,12 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
-
+    
       <com.yhy.widget.core.web.HybridWebView
         android:id="@+id/hwv_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+    
       <Button
         android:id="@+id/btn_test"
         android:layout_width="wrap_content"
@@ -981,14 +992,14 @@
     hwvContent.register(new TestBridge());
     // 加载页面
     hwvContent.loadUrl("file:///android_asset/index.html");
-
+    
     // ...
-
+    
     /**
      * 交互桥梁，必须是HybridBridge的子类
      */
     public class TestBridge extends HybridBridge {
-
+    
         @JavascriptInterface
         public String test(String json) {
             Toast.makeText(WebHybridActivity.this, json, Toast.LENGTH_LONG).show();
@@ -1018,7 +1029,7 @@
             return true;
         }
     });
-
+    
     btnTest.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -1027,6 +1038,353 @@
         }
     });
     ```
+
+  * 自定义属性
+
+    |         属性         |          说明           |   默认值   |
+    | :------------------: | :---------------------: | :--------: |
+    | `hwv_url_flag_name`  |      `URL`标识名称      | `platform` |
+    | `hwv_url_flag_value` |       `URL`标识值       |   `app`    |
+    |  `hwv_bridge_name`   |      交互桥梁名称       |   `app`    |
+    |  `hwv_cache_enable`  |      是否开启缓存       |   `true`   |
+    |  `hwv_cache_expire`  | 缓存保存时间，单位：`s` |    一周    |
+
+* <a name = "CheckBox">`CheckBox`</a>
+
+  > 带动画效果的多选框
+
+  * 布局文件
+
+    ```xml
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:gravity="center"
+      android:orientation="horizontal">
+    
+      <com.yhy.widget.core.checked.CheckBox
+        android:id="@+id/cb_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cb_color_checked="@color/colorPrimary"
+        app:cb_color_tick="@color/textPrimary"
+        app:cb_color_unchecked="@color/windowBackground"
+        app:cb_color_unchecked_stroke="@color/colorLine"
+        app:cb_duration="1000"
+        app:cb_stroke_width="4dp"
+        app:cb_click_cancel_able="false" />
+    
+      <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="选中后点击我来取消"
+        android:textColor="@color/textPrimary"
+        android:textSize="14sp" />
+    </nearLayout>
+    ```
+
+  * 获取控件
+
+    ```java
+    CheckBox cbCancel = $(R.id.cb_cancel);
+    TextView tvCancel = $(R.id.tv_cancel);
+    ```
+
+  * 设置事件
+
+    ```java
+    cbCancel.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CheckBox checkBox, boolean isChecked) {
+            toast("是否选中：" + isChecked);
+        }
+    });
+    
+    tvCancel.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // 切换
+            cbCancel.toggle();
+        }
+    });
+    ```
+
+  * 自定义属性
+
+    |            属性             |         说明         |  默认值   |
+    | :-------------------------: | :------------------: | :-------: |
+    |        `cb_duration`        | 动画时长，单位：`ms` |   `300`   |
+    |      `cb_stroke_width`      | 边框宽度，单位：`dp` |    `0`    |
+    |       `cb_color_tick`       |     打钩图标颜色     | `#ffffff` |
+    |     `cb_color_checked`      |     选中时的颜色     | `#fb4846` |
+    |    `cb_color_unchecked`     |    未选中时的颜色    | `#ffffff` |
+    | `cb_color_unchecked_stroke` |  未选中时边框的颜色  | `#dfdfdf` |
+    |   `cb_click_cancel_able`    |    是否可点击取消    |  `true`   |
+
+* <a name = "LoadingDialog">`LoadingDialog`</a>
+
+  > 加载中的进度条弹窗，比如网络加载时的等待提示
+  >
+  > 不用布局文件
+
+  * 进度条颜色
+
+    > 在资源文件`colors.xml`中重新定义`colorLoading`颜色值
+
+    ```xml
+    <color name="colorLoading">@color/colorAccent</color>
+    ```
+
+  * 显示和隐藏进度条
+
+    ```java
+    tvLoading.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mDialog = new LoadingDialog(LoadingDialogActivity.this, "加载中...");
+            mDialog.show();
+    
+            // 3秒后消失
+            tvLoading.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mDialog.dismiss();
+                }
+            }, 3000);
+        }
+    });
+    ```
+
+* <a name = "InputDialogView">`InputDialogView`</a>
+
+  > 输入框弹窗，比如聊天输入框，评论输入框等
+  >
+  > 不用布局文件
+
+  * 显示弹窗
+
+    ```java
+    // 显示输入框弹窗
+    // builder 可配置弹窗的各种颜色和相关字体大小等属性
+    InputDialogView.Builder builder = new InputDialogView.Builder(InputDialogActivity.this);
+    builder.hint(position % 2 != 0 ? "回复" + mDataList.get(position) : "说点儿什么呀...")
+        .contentSize(14)
+        .anchor(itemView) // 弹窗需要参考的view，弹出后回调方法onShow()中传回弹窗与该view的坐标偏移值
+        .listener(new InputDialogView.OnInputDialogListener() {
+            @Override
+            public void onPublish(InputDialogView dialog, CharSequence content) {
+                dialog.dismiss();
+                toast(content);
+            }
+    
+            @Override
+            public void onShow(int offsetX, int offsetY, int[] position) {
+                // 点击某条评论则这条评论刚好在输入框上面，点击评论按钮则输入框刚好挡住按钮
+                rvContent.smoothScrollBy(0, offsetY, new AccelerateDecelerateInterpolator());
+            }
+    
+            @Override
+            public void onDismiss() {
+            }
+        });
+    builder.build().show();
+    ```
+
+* <a name = "ConstraintImageView">`ConstraintImageView`</a>
+
+  > 按宽高比来约束大小的`ImageView`，还可以设置圆角及边框等
+  >
+  > 分为两种模式：以`width`或者`height`为基准，计算另一边大小，默认以`width`为准
+  >
+  > 注意：宽高比直接设置成 **规定图片的宽与高**即可
+
+  * 布局文件
+
+    ```xml
+    <!-- 以width为准，宽高比为：720:300 -->
+    <com.yhy.widget.core.img.ConstraintImageView
+      android:id="@+id/civ_width"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:scaleType="centerCrop"
+      android:src="@mipmap/ic_avatar"
+      app:civ_ratio="720:300"
+      app:civ_reference="width" />
+    
+    <!-- 以height为准，宽高比为：200:300 -->
+    <com.yhy.widget.core.img.ConstraintImageView
+      android:id="@+id/civ_height"
+      android:layout_width="wrap_content"
+      android:layout_height="240dp"
+      android:layout_marginTop="16dp"
+      android:scaleType="centerCrop"
+      android:src="@mipmap/ic_avatar"
+      app:civ_ratio="200:300"
+      app:civ_reference="height" />
+    
+    <!-- 默认以width为准，逐个设置各个角落的圆角半径 -->
+    <com.yhy.widget.core.img.ConstraintImageView
+      android:id="@+id/civ_a"
+      android:layout_width="100dp"
+      android:layout_height="wrap_content"
+      android:src="@mipmap/ic_avatar"
+      app:civ_border_color="#8c9eff"
+      app:civ_border_width="2dp"
+      app:civ_radius_left_bottom="30dp"
+      app:civ_radius_right_top="30dp"
+      app:civ_ratio="150:100" />
+    
+    <!-- 默认以width为准，统一设置各个角落的圆角半径 -->
+    <com.yhy.widget.core.img.ConstraintImageView
+      android:id="@+id/civ_test"
+      android:layout_width="wrap_content"
+      android:layout_height="100dp"
+      android:layout_marginTop="16dp"
+      android:src="@mipmap/ic_avatar"
+      app:civ_radius="12dp"
+      app:civ_ratio="150:100"
+      app:civ_reference="height" />
+    ```
+
+  * 获取控件
+
+    ```java
+    ConstraintImageView civWidth = $(R.id.civ_width);
+    ConstraintImageView civHeight = $(R.id.civ_height);
+    ConstraintImageView civA = $(R.id.civ_a);
+    ConstraintImageView civTest = $(R.id.civ_test);
+    ```
+
+  * 设置数据
+
+    ```java
+    ImgUtils.load(this, civWidth, ImgUrls.getAImgUrl());
+    ImgUtils.load(this, civHeight, ImgUrls.getAImgUrl());
+    ImgUtils.load(this, civA, ImgUrls.getAImgUrl());
+    ImgUtils.load(this, civTest, ImgUrls.getAImgUrl());
+    ```
+
+  * 自定义属性
+
+    |           属性            |                            说明                             |  默认值   |
+    | :-----------------------: | :---------------------------------------------------------: | :-------: |
+    |      `civ_reference`      | 参考标准，以【`width`，`height`】为准，计算另一方向的实际值 |  `width`  |
+    |        `civ_ratio`        |      比例字符串，**图片实际的宽高即可，格式：“宽:高”**      |    无     |
+    |       `civ_radius`        |                   四个角半径，单位：`dp`                    |    `0`    |
+    |   `civ_radius_left_top`   |                   左上角半径，单位：`dp`                    |    `0`    |
+    |  `civ_radius_right_top`   |                   右上角半径，单位：`dp`                    |    `0`    |
+    | `civ_radius_right_bottom` |                   右下角半径，单位：`dp`                    |    `0`    |
+    | `civ_radius_left_bottom`  |                   左下角半径，单位：`dp`                    |    `0`    |
+    |    `civ_border_width`     |                    边框宽度，单位：`dp`                     |    `0`    |
+    |    `civ_border_color`     |                          边框颜色                           | `#000000` |
+
+* <a name = "GradientTextView">`GradientTextView`</a>
+
+  > 文字带渐变动画的`TextView`
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.text.GradientTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="默认样式"
+      android:textSize="16sp" />
+    
+    <com.yhy.widget.core.text.GradientTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="自定义颜色"
+      android:textSize="16sp"
+      app:gtv_text_color_list="@array/color_arr_test" />
+      
+    <com.yhy.widget.core.text.GradientTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="自定义颜色和刷新速度"
+      android:textSize="16sp"
+      app:gtv_speed_millions="100"
+      app:gtv_text_color_list="@array/color_arr_test" />
+    ```
+
+  * 自定义属性
+
+    |         属性          |                说明                |                默认值                 |
+    | :-------------------: | :--------------------------------: | :-----------------------------------: |
+    | `gtv_speed_millions`  | 刷新颜色动画的时间间隔，单位：`ms` |                 `200`                 |
+    | `gtv_text_color_list` |         需要渐变的颜色数组         | `@array/color_arr_gradient_text_view` |
+
+  * 自定义颜色数组`res/values/arrays.xml`
+
+    ```xml
+    <integer-array name="color_arr_test">
+        <!--integer-array，这里不能直接写16进制的颜色代码，否则报错-->
+        <item>@color/red</item>
+        <item>@color/red_light</item>
+        <item>@color/orange</item>
+        <item>@color/red_light</item>
+        <item>@color/red</item>
+    </integer-array>
+    ```
+
+* <a name = "LineTextView">`LineTextView`</a>
+
+  > 加各种线条的`TextView`，比如下划线，删除线等
+
+  * 布局文件
+
+    ```xml
+    <com.yhy.widget.core.text.LineTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="默认长这个样子"
+      android:textColor="@color/textPrimary"
+      android:textSize="16sp" />
+    
+    <com.yhy.widget.core.text.LineTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="1dp的下划线"
+      android:textColor="@color/textPrimary"
+      android:textSize="16sp"
+      app:ltv_line_size="1dp" />
+    
+    <com.yhy.widget.core.text.LineTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="1dp的中间删除线"
+      android:textColor="@color/textPrimary"
+      android:textSize="16sp"
+      app:ltv_line_size="1dp"
+      app:ltv_line_style="delete_middle" />
+    
+    <com.yhy.widget.core.text.LineTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="1dp的对角删除线"
+      android:textColor="@color/textPrimary"
+      android:textSize="16sp"
+      app:ltv_line_size="1dp"
+      app:ltv_line_style="delete_oblique" />
+    ```
+
+  * 自定义属性
+
+    |        属性         |                            说明                            |    默认值     |
+    | :-----------------: | :--------------------------------------------------------: | :-----------: |
+    |   `ltv_line_size`   |                    线条宽度，单位：`dp`                    |      `0`      |
+    |  `ltv_line_color`   |                          线条颜色                          |   `#000000`   |
+    | `ltv_line_interval` |      线条间隔，该属性只在下划线风格中有效，单位：`dp`      |      `0`      |
+    |  `ltv_line_style`   | 线条风格【`underline`，`delete_middle`，`delete_oblique`】 | ``underline`` |
 
 
 
@@ -1544,9 +1902,36 @@
     slContent.showEmpty();
     ```
 
+
+
+----
+
+#### 一些颜色
+
+> 预定义的一些颜色
+
+```xml
+<resources>
+    <color name="colorPrimary">#01aca8</color>
+    <color name="colorAccent">#fe4365</color>
+    <color name="colorLoading">#113e3c</color>
+    <color name="windowBackground">#eeeeee</color>
+    <color name="colorDisabled">#ababab</color>
+    <color name="colorLine">#999999</color>
+    <color name="textPrimary">#1d294c</color>
+    <color name="textAccent">#24211c</color>
+    <color name="alphaBlack">#88000000</color>
+    <color name="alphaWhite">#88ffffff</color>
+</resources>
+```
+
+
+
+----
+
 > `That's all, enjoy it !!!`
 
-_______________
+
 
 ## License
 

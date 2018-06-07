@@ -38,12 +38,12 @@ public class ConstraintImageActivity extends BaseActivity {
     protected void initView() {
         civWidth = $(R.id.civ_width);
         civHeight = $(R.id.civ_height);
-        civA = findViewById(R.id.civ_a);
-        civB = findViewById(R.id.civ_b);
-        civC = findViewById(R.id.civ_c);
-        civD = findViewById(R.id.civ_d);
-        civTest = findViewById(R.id.civ_test);
-        civTestRatio = findViewById(R.id.civ_test_ratio);
+        civA = $(R.id.civ_a);
+        civB = $(R.id.civ_b);
+        civC = $(R.id.civ_c);
+        civD = $(R.id.civ_d);
+        civTest = $(R.id.civ_test);
+        civTestRatio = $(R.id.civ_test_ratio);
     }
 
     @Override
