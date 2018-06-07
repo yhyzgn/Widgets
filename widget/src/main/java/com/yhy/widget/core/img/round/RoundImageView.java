@@ -16,16 +16,17 @@ import com.yhy.widget.core.img.round.abs.AbsRoundImageView;
  * version: 1.0.0
  * desc   : 圆角图片
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class RoundImageView extends AbsRoundImageView {
-
+    // 圆角半径，默认：0dp
     private float mRadius;
-
+    // 左上角圆角半径，默认：0dp
     private float mRadiusLeftTop;
-
+    // 右上角圆角半径，默认：0dp
     private float mRadiusRightTop;
-
+    // 右下角圆角半径，默认：0dp
     private float mRadiusRightBottom;
-
+    // 左下角圆角半径，默认：0dp
     private float mRadiusLeftBottom;
 
     public RoundImageView(Context context) {
@@ -70,10 +71,7 @@ public class RoundImageView extends AbsRoundImageView {
         mRadiusLeftBottom = Math.min(mRadiusLeftBottom, Math.min(width, height) * 0.5f);
 
         RectF rect = new RectF(0, 0, width, height);
-        mRoundPath.addRoundRect(rect,
-                new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop,
-                        mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom},
-                Path.Direction.CW);
+        mRoundPath.addRoundRect(rect, new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop, mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom}, Path.Direction.CW);
     }
 
     /**
@@ -90,10 +88,9 @@ public class RoundImageView extends AbsRoundImageView {
     @Override
     protected void initBorderPath() {
         mBorderPath.reset();
-        /**
-         * 乘以0.5会导致border在圆角处不能包裹原图
-         */
-        final float halfBorderWidth = mBorderWidth * 0.35f;
+
+        // 乘以0.5会导致border在圆角处不能包裹原图
+        final float halfBorderSize = mBorderWidth * 0.35f;
         final int width = getWidth();
         final int height = getHeight();
         mRadiusLeftTop = Math.min(mRadiusLeftTop, Math.min(width, height) * 0.5f);
@@ -101,11 +98,7 @@ public class RoundImageView extends AbsRoundImageView {
         mRadiusRightBottom = Math.min(mRadiusRightBottom, Math.min(width, height) * 0.5f);
         mRadiusLeftBottom = Math.min(mRadiusLeftBottom, Math.min(width, height) * 0.5f);
 
-        RectF rect = new RectF(halfBorderWidth, halfBorderWidth,
-                width - halfBorderWidth, height - halfBorderWidth);
-        mBorderPath.addRoundRect(rect,
-                new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop,
-                        mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom},
-                Path.Direction.CW);
+        RectF rect = new RectF(halfBorderSize, halfBorderSize, width - halfBorderSize, height - halfBorderSize);
+        mBorderPath.addRoundRect(rect, new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop, mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom}, Path.Direction.CW);
     }
 }

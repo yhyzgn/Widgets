@@ -38,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return findViewById(id);
     }
 
-    public void toast(String text) {
+    public void toast(CharSequence text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

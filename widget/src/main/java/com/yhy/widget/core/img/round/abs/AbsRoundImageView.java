@@ -23,14 +23,14 @@ import com.yhy.widget.utils.WidgetCoreUtils;
  * desc   : 圆角图片抽象类
  */
 public abstract class AbsRoundImageView extends AppCompatImageView {
+    // 边框宽度，默认：0dp
+    protected float mBorderWidth;
+    // 边框颜色，默认：#000000
+    protected int mBorderColor;
     // 图片可视区
     protected Path mRoundPath;
     // 图片边框
     protected Path mBorderPath;
-    // 边框宽度
-    protected float mBorderWidth;
-    // 边框颜色
-    protected int mBorderColor;
     // 边框画笔
     private Paint mBorderPaint;
     // 图片

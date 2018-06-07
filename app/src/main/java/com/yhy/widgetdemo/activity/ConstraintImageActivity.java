@@ -1,5 +1,10 @@
 package com.yhy.widgetdemo.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+
 import com.yhy.widget.core.img.ConstraintImageView;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
@@ -17,6 +22,12 @@ public class ConstraintImageActivity extends BaseActivity {
 
     private ConstraintImageView civWidth;
     private ConstraintImageView civHeight;
+    private ConstraintImageView civA;
+    private ConstraintImageView civB;
+    private ConstraintImageView civC;
+    private ConstraintImageView civD;
+    private ConstraintImageView civTest;
+    private ConstraintImageView civTestRatio;
 
     @Override
     protected int getLayout() {
@@ -27,12 +38,24 @@ public class ConstraintImageActivity extends BaseActivity {
     protected void initView() {
         civWidth = $(R.id.civ_width);
         civHeight = $(R.id.civ_height);
+        civA = findViewById(R.id.civ_a);
+        civB = findViewById(R.id.civ_b);
+        civC = findViewById(R.id.civ_c);
+        civD = findViewById(R.id.civ_d);
+        civTest = findViewById(R.id.civ_test);
+        civTestRatio = findViewById(R.id.civ_test_ratio);
     }
 
     @Override
     protected void initData() {
         ImgUtils.load(this, civWidth, ImgUrls.getAImgUrl());
         ImgUtils.load(this, civHeight, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, civA, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, civB, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, civC, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, civD, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, civTest, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, civTestRatio, ImgUrls.getAImgUrl());
     }
 
     @Override

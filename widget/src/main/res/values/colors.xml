@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#01aca8</color>
-    <color name="colorAccent">#01aca8</color>
+    <color name="colorAccent">#fe4365</color>
+    <color name="colorLoading">#113e3c</color>
     <color name="windowBackground">#eeeeee</color>
     <color name="colorDisabled">#ababab</color>
     <color name="colorLine">#999999</color>
-    <color name="textPrimary">#2d2353</color>
+    <color name="textPrimary">#1d294c</color>
+    <color name="textAccent">#24211c</color>
     <color name="alphaBlack">#88000000</color>
     <color name="alphaWhite">#88ffffff</color>
 </resources>

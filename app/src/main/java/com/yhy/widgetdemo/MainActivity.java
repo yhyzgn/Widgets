@@ -18,6 +18,7 @@ import com.yhy.widgetdemo.activity.ConstraintImageActivity;
 import com.yhy.widgetdemo.activity.ETVActivity;
 import com.yhy.widgetdemo.activity.FlowLayoutActivity;
 import com.yhy.widgetdemo.activity.GradientTextViewActivity;
+import com.yhy.widgetdemo.activity.InputDialogActivity;
 import com.yhy.widgetdemo.activity.LineTextViewActivity;
 import com.yhy.widgetdemo.activity.LoadingDialogActivity;
 import com.yhy.widgetdemo.activity.PickViewActivity;
@@ -83,6 +84,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("LineTextView");
         WIDGET_NAME_LIST.add("GradientTextView");
         WIDGET_NAME_LIST.add("LoadingDialog");
+        WIDGET_NAME_LIST.add("InputDialog");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
         WIDGET_CLASS_LIST.add(TitleActivity.class);
@@ -107,6 +109,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_CLASS_LIST.add(LineTextViewActivity.class);
         WIDGET_CLASS_LIST.add(GradientTextViewActivity.class);
         WIDGET_CLASS_LIST.add(LoadingDialogActivity.class);
+        WIDGET_CLASS_LIST.add(InputDialogActivity.class);
 
         lvWidget.setAdapter(new BaseAdapter() {
             @Override

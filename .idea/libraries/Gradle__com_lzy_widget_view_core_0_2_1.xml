@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.lzy.widget:view-core-0.2.1">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/view-core-0.2.1.aar/ced41fa2b984e869ad5ee6fd8be9bf87/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/view-core-0.2.1.aar/ced41fa2b984e869ad5ee6fd8be9bf87/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/view-core-0.2.1.aar/540b89fef9bb3c64f6a2d93eca45e4e7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/view-core-0.2.1.aar/540b89fef9bb3c64f6a2d93eca45e4e7/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
