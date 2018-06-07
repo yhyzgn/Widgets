@@ -28,12 +28,20 @@ public class InputDialogView {
     private Dialog mDialog;
     private int[] mAnchorLocation;
 
+    /**
+     * 构造方法
+     *
+     * @param builder 构造器
+     */
     private InputDialogView(Builder builder) {
         mBuilder = builder;
         mHandler = new Handler();
         mAnchorLocation = new int[2];
     }
 
+    /**
+     * 显示弹窗
+     */
     public void show() {
         mDialog = new Dialog(mBuilder.context, android.R.style.Theme_Translucent_NoTitleBar);
         mDialog.setContentView(R.layout.widget_input_dialog);
@@ -43,6 +51,7 @@ public class InputDialogView {
         final TextView tvPublish = mDialog.findViewById(R.id.tv_publish);
         final View vUnderline = mDialog.findViewById(R.id.v_underline);
 
+        // 先将发表按钮和下划线设置成不可用状态
         tvPublish.setEnabled(false);
         vUnderline.setEnabled(false);
 
@@ -138,26 +147,49 @@ public class InputDialogView {
         }
     }
 
+    /**
+     * 销毁弹窗
+     */
     public void dismiss() {
         if (null != mDialog) {
             mDialog.dismiss();
         }
     }
 
+    /**
+     * 构造器
+     */
     public static class Builder {
+        // 上下文
         private Context context;
+        // 提示文字
         private CharSequence hint;
+        // 文本内容
         private CharSequence content;
+        // 文本颜色，默认：@color/textPrimary
         private int contentColor;
+        // 文本大小，默认：12sp
         private float contentSize;
+        // 发表按钮文本
         private CharSequence publish;
+        // 发表按钮字体颜色，默认：#ffffff
         private int publishColor;
+        // 发表按钮字体大小，默认：14sp
         private float publishSize;
+        // 背景颜色，默认：@color/windowBackground
         private int bgColor;
+        // 发表按钮和下划线选择器，默认：@drawable/bg_input_dialog_enable_selector
         private int stateSelectorRes;
+        // 用来作参考的view，如果弹出后需要显示在某个view的下边，那就传对应的view即可
         private View anchor;
+        // 监听事件
         private OnInputDialogListener listener;
 
+        /**
+         * 构造器
+         *
+         * @param context 上下文
+         */
         public Builder(Context context) {
             this.context = context;
             this
@@ -172,73 +204,162 @@ public class InputDialogView {
                     .stateSelectorRes(R.drawable.bg_input_dialog_enable_selector);
         }
 
+        /**
+         * 提示文字
+         *
+         * @param hint 提示文字
+         * @return 当前构造器对象
+         */
         public Builder hint(CharSequence hint) {
             this.hint = hint;
             return this;
         }
 
+        /**
+         * 文本内容
+         *
+         * @param content 文本内容
+         * @return 当前构造器对象
+         */
         public Builder content(CharSequence content) {
             this.content = content;
             return this;
         }
 
+        /**
+         * 文本颜色
+         *
+         * @param color 文本颜色
+         * @return 当前构造器对象
+         */
         public Builder contentColor(int color) {
             this.contentColor = color;
             return this;
         }
 
+        /**
+         * 文本颜色资源id
+         *
+         * @param res 资源id
+         * @return 当前构造器对象
+         */
         public Builder contentColorRes(int res) {
             return contentColor(context.getResources().getColor(res));
         }
 
+        /**
+         * 文本字体大小，单位：sp
+         *
+         * @param size 字体大小
+         * @return 当前构造器对象
+         */
         public Builder contentSize(float size) {
             this.contentSize = size;
             return this;
         }
 
+        /**
+         * 发表按钮文本
+         *
+         * @param publish 发表按钮文本
+         * @return 当前构造器对象
+         */
         public Builder publish(CharSequence publish) {
             this.publish = publish;
             return this;
         }
 
+        /**
+         * 发表按钮文本颜色
+         *
+         * @param color 文本颜色
+         * @return 当前构造器对象
+         */
         public Builder publishColor(int color) {
             this.publishColor = color;
             return this;
         }
 
+        /**
+         * 发表按钮文本颜色资源id
+         *
+         * @param res 资源id
+         * @return 当前构造器对象
+         */
         public Builder publishColorRes(int res) {
             return publishColor(context.getResources().getColor(res));
         }
 
+        /**
+         * 发表按钮文本字体大小，单位：sp
+         *
+         * @param size 字体带下
+         * @return 当前构造器对象
+         */
         public Builder publishSize(float size) {
             this.publishSize = size;
             return this;
         }
 
+        /**
+         * 背景颜色
+         *
+         * @param color 背景颜色
+         * @return 当前构造器对象
+         */
         public Builder bgColor(int color) {
             this.bgColor = color;
             return this;
         }
 
+        /**
+         * 背景颜色资源id
+         *
+         * @param res 资源id
+         * @return 当前构造器对象
+         */
         public Builder bgColorRes(int res) {
             return bgColor(context.getResources().getColor(res));
         }
 
+        /**
+         * 状态选择器资源id
+         *
+         * @param res 资源id
+         * @return 当前构造器对象
+         */
         public Builder stateSelectorRes(int res) {
             this.stateSelectorRes = res;
             return this;
         }
 
+        /**
+         * 参考view
+         *
+         * @param anchor 用来当作参考对象的view
+         * @return 当前构造器对象
+         */
         public Builder anchor(View anchor) {
             this.anchor = anchor;
             return this;
         }
 
+        /**
+         * 监听器
+         *
+         * @param listener 监听器
+         * @return 当前构造器对象
+         */
         public Builder listener(OnInputDialogListener listener) {
             this.listener = listener;
             return this;
         }
 
+        /**
+         * 构建弹窗对象
+         *
+         * @return 弹窗对象
+         */
         public InputDialogView build() {
             return new InputDialogView(this);
         }

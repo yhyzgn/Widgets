@@ -26,7 +26,7 @@ import com.yhy.widget.utils.WidgetCoreUtils;
  * e-mail : yhyzgn@gmail.com
  * time   : 2018-01-22 11:07
  * version: 1.0.0
- * desc   : 多选框
+ * desc   : 带动画的多选框
  */
 public class CheckBox extends View implements Checkable {
     private static final String KEY_INSTANCE_STATE = "InstanceState";

@@ -58,6 +58,7 @@ public class PreviewImageActivity extends BaseActivity {
         }
         ImgPreCfg<String> cfg = new ImgPreCfg<>(iv, urlList, 1);
 //        cfg.setDownloadable(false);
+//        cfg.setDownloadIconId(R.mipmap.ic_def_download);
         PreImgActivity.preview(this, cfg);
     }
 }

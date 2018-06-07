@@ -61,6 +61,8 @@ public class InputDialogActivity extends BaseActivity {
                 // 显示输入框弹窗
                 InputDialogView.Builder builder = new InputDialogView.Builder(InputDialogActivity.this);
                 builder
+                        .hint(position % 2 != 0 ? "回复" + mDataList.get(position) : "说点儿什么呀...")
+                        .contentSize(14)
                         .anchor(itemView)
                         .listener(new InputDialogView.OnInputDialogListener() {
                             @Override
