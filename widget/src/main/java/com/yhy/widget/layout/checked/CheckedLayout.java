@@ -113,7 +113,9 @@ public abstract class CheckedLayout extends ViewGroup implements Checkable {
                 break;
             case MotionEvent.ACTION_UP:
                 // 切换状态
-                toggle();
+                if(isEnabled()) {
+                    toggle();
+                }
                 break;
             default:
                 break;

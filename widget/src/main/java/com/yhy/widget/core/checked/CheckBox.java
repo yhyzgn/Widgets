@@ -259,8 +259,9 @@ public class CheckBox extends View implements Checkable {
                 if (mChecked && !mClickCancelAble) {
                     return true;
                 }
-
-                toggle();
+                if (isEnabled()) {
+                    toggle();
+                }
                 return true;
         }
         return super.onTouchEvent(event);

@@ -126,7 +126,9 @@ public class CheckedTextView extends AppCompatTextView implements Checkable {
                 return mIsPrevent || super.onTouchEvent(event);
             case MotionEvent.ACTION_UP:
                 // 切换状态
-                toggle();
+                if (isEnabled()) {
+                    toggle();
+                }
                 // 如果阻止事件，就阻止，这里主要阻止click事件
                 return mIsPrevent || super.onTouchEvent(event);
             default:
