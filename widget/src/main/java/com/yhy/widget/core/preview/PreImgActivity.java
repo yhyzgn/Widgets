@@ -139,6 +139,7 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
                 // 只有预览网络图片时才能下载
                 if (model instanceof String && isNetImg((String) model)) {
                     downloader.download(PreImgActivity.this, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
+                    return;
                 }
                 throw new IllegalStateException("Unknown resource : [" + model + "]");
             }
