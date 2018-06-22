@@ -112,7 +112,7 @@ public class HybridWebView extends WebView {
      *
      * @param data 数据
      */
-    private void loadData(String data) {
+    public void loadData(String data) {
         // API提供的标准用法，无法解决乱码问题
         // loadData(data, "text/html", "UTF-8");
         // 这种写法可以正确解码
