@@ -110,6 +110,18 @@ public class HybridWebView extends WebView {
     /**
      * 加载HTML代码
      *
+     * @param data 数据
+     */
+    private void loadData(String data) {
+        // API提供的标准用法，无法解决乱码问题
+        // loadData(data, "text/html", "UTF-8");
+        // 这种写法可以正确解码
+        loadData(data, "text/html; charset=UTF-8", null);
+    }
+
+    /**
+     * 加载HTML代码
+     *
      * @param data     数据
      * @param mimeType 文档类型
      * @param encoding 编码
@@ -117,6 +129,17 @@ public class HybridWebView extends WebView {
     @Override
     public void loadData(String data, @Nullable String mimeType, @Nullable String encoding) {
         mLoader.loadData(data, mimeType, encoding);
+    }
+
+    /**
+     * 加载HTML代码
+     *
+     * @param baseUrl    根url
+     * @param data       数据
+     * @param historyUrl 历史url
+     */
+    public void loadDataWithBaseURL(@Nullable String baseUrl, String data, @Nullable String historyUrl) {
+        mLoader.loadDataWithBaseURL(baseUrl, data, "text/html", "UTF-8", historyUrl);
     }
 
     /**
@@ -332,7 +355,7 @@ public class HybridWebView extends WebView {
     private void initComponent() {
         WebSettings settings = getSettings();
         // 设置编码
-        settings.setDefaultTextEncodingName("utf-8");
+        settings.setDefaultTextEncodingName("UTF-8");
         // 支持js
         settings.setJavaScriptEnabled(true);
         // 禁止横向滑动
