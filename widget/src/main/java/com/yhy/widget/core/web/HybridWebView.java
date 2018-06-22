@@ -362,6 +362,10 @@ public class HybridWebView extends WebView {
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         // 允许js弹出窗口
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        // 特别注意：5.1以上默认禁止了https和http混用，以下方式是开启
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
         // 设置背景颜色 透明
         setBackgroundColor(Color.TRANSPARENT);
         // 部分国产机型开启硬件加速导致奔溃，软件加速则内容过大时不显示，为了兼容要讲加速关闭

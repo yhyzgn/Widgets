@@ -1,6 +1,10 @@
 package com.yhy.widget.core.web.listener;
 
 import android.graphics.Bitmap;
+import android.net.http.SslError;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 
 import com.yhy.widget.core.web.HybridWebView;
 
@@ -30,5 +34,21 @@ public class SimpleOnWebLoadListener implements OnWebLoadListener {
 
     @Override
     public void onReceivedIcon(HybridWebView view, Bitmap icon) {
+    }
+
+    @Override
+    public void onLoadResource(HybridWebView view, String url) {
+    }
+
+    @Override
+    public void onReceivedError(HybridWebView view, int errorCode, String description, String failingUrl) {
+    }
+
+    @Override
+    public void onReceivedHttpError(HybridWebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+    }
+
+    @Override
+    public void onReceivedSslError(HybridWebView view, SslErrorHandler handler, SslError error) {
     }
 }

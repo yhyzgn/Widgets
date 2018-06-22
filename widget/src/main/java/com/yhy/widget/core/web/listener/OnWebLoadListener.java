@@ -1,6 +1,11 @@
 package com.yhy.widget.core.web.listener;
 
 import android.graphics.Bitmap;
+import android.net.http.SslError;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
 
 import com.yhy.widget.core.web.HybridWebView;
 
@@ -53,4 +58,40 @@ public interface OnWebLoadListener {
      * @param icon 图标
      */
     void onReceivedIcon(HybridWebView view, Bitmap icon);
+
+    /**
+     * 加载资源，如加载图片
+     *
+     * @param view 当前HybridWebView
+     * @param url  资源url
+     */
+    void onLoadResource(HybridWebView view, String url);
+
+    /**
+     * 接收到错误
+     *
+     * @param view        当前HybridWebView
+     * @param errorCode   错误码
+     * @param description 错误信息
+     * @param failingUrl  错误url
+     */
+    void onReceivedError(HybridWebView view, int errorCode, String description, String failingUrl);
+
+    /**
+     * 接收到http错误
+     *
+     * @param view          当前HybridWebView
+     * @param request       请求
+     * @param errorResponse 错误
+     */
+    void onReceivedHttpError(HybridWebView view, WebResourceRequest request, WebResourceResponse errorResponse);
+
+    /**
+     * 接收到ssl错误
+     *
+     * @param view    当前HybridWebView
+     * @param handler Handler
+     * @param error   错误信息
+     */
+    void onReceivedSslError(HybridWebView view, SslErrorHandler handler, SslError error);
 }

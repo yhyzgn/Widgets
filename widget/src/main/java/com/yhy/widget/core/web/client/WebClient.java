@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.support.v4.app.ActivityCompat;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -69,6 +72,34 @@ public class WebClient extends WebViewClient {
         super.onPageFinished(view, url);
         if (null != mWebView.getLoadListener()) {
             mWebView.getLoadListener().onFinish((HybridWebView) view, url);
+        }
+    }
+
+    @Override
+    public void onLoadResource(WebView view, String url) {
+        if (null != mWebView.getLoadListener()) {
+            mWebView.getLoadListener().onLoadResource((HybridWebView) view, url);
+        }
+    }
+
+    @Override
+    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        if (null != mWebView.getLoadListener()) {
+            mWebView.getLoadListener().onReceivedError((HybridWebView) view, errorCode, description, failingUrl);
+        }
+    }
+
+    @Override
+    public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+        if (null != mWebView.getLoadListener()) {
+            mWebView.getLoadListener().onReceivedHttpError((HybridWebView) view, request, errorResponse);
+        }
+    }
+
+    @Override
+    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+        if (null != mWebView.getLoadListener()) {
+            mWebView.getLoadListener().onReceivedSslError((HybridWebView) view, handler, error);
         }
     }
 }
