@@ -43,6 +43,7 @@ public class WebHybridActivity extends BaseActivity {
         hwvContent.register(new TestBridge());
         // 加载页面
         hwvContent.loadUrl("file:///android_asset/index.html");
+//        hwvContent.loadUrl("http://huantuo.fnlxlife.com/phone/android/news");
     }
 
     @Override

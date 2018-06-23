@@ -100,41 +100,36 @@ public class StatusLayout extends FrameLayout {
         int childCount = getChildCount();
         // childCount必须在1-4之间
         if (childCount < 1 || childCount > 4) {
-            throw new IllegalStateException("StateLayout must has one child for success status at least and four children at most.");
+            throw new IllegalStateException("StateLayout must has one child for success status at least or four children for all status at most.");
         }
 
         if (childCount == 1) {
             // 只包含一个成功状态的view
             vSuccess = getChildAt(0);
         } else {
-            // 如果不止一个子view，就按tag值来匹配状态类型
-            View temp;
+            // 如果不止一个子view，就按tag值来查找控件
+            // 先检查每个子view的tag合法性
+            View child;
             String tag;
             for (int i = 0; i < childCount; i++) {
-                temp = getChildAt(i);
-                if (null != temp.getTag()) {
-                    tag = (String) temp.getTag();
-                    if (TextUtils.equals(Status.LOADING.getStatus(), tag)) {
-                        // 加载中
-                        vLayoutLoading = temp;
-                    } else if (TextUtils.equals(Status.SUCCESS.getStatus(), tag)) {
-                        // 成功
-                        vSuccess = temp;
-                    } else if (TextUtils.equals(Status.ERROR.getStatus(), tag)) {
-                        // 错误
-                        vLayoutError = temp;
-                        // 设置点击重试事件
-                        setRetryListener(vLayoutError);
-                    } else if (TextUtils.equals(Status.EMPTY.getStatus(), tag)) {
-                        // 无数据
-                        vLayoutEmpty = temp;
-                        // 设置点击重试事件
-                        setRetryListener(vLayoutEmpty);
-                    } else {
-                        throw new IllegalStateException("No value matched to tag of " + temp.getClass().getSimpleName());
-                    }
+                child = getChildAt(i);
+                if (null == child.getTag() || !(child.getTag() instanceof String)) {
+                    throw new IllegalStateException("Illegal tag of child view [ " + child.getClass().getSimpleName() + " ]");
+                }
+                tag = (String) child.getTag();
+                if (!tag.equals(Status.LOADING.getStatus()) && !tag.equals(Status.SUCCESS.getStatus()) && !tag.equals(Status.ERROR.getStatus()) && !tag.equals(Status.EMPTY.getStatus())) {
+                    throw new IllegalStateException("No status matched to tag of [ " + child.getClass().getSimpleName() + " ]");
                 }
             }
+
+            // 加载中
+            vLayoutLoading = findViewWithTag(Status.LOADING.getStatus());
+            // 成功
+            vSuccess = findViewWithTag(Status.SUCCESS.getStatus());
+            // 错误
+            vLayoutError = findViewWithTag(Status.ERROR.getStatus());
+            // 无数据
+            vLayoutEmpty = findViewWithTag(Status.EMPTY.getStatus());
         }
 
         // 刷新界面

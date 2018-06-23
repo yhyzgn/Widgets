@@ -321,6 +321,18 @@ public class HybridWebView extends WebView {
     }
 
     /**
+     * 设置WebViewClient
+     *
+     * @param client WebViewClient
+     * @return 当前对象
+     */
+    public HybridWebView setWebClient(WebClient client) {
+        mWebClient = client;
+        super.setWebViewClient(client);
+        return this;
+    }
+
+    /**
      * 获取当前WebChromeClient
      *
      * @return 当前WebChromeClient
@@ -330,9 +342,22 @@ public class HybridWebView extends WebView {
     }
 
     /**
+     * 设置WebChromeClient
+     *
+     * @param client ChromeClient
+     * @return 当前对象
+     */
+    public HybridWebView setChromeClient(ChromeClient client) {
+        mChromeClient = client;
+        super.setWebChromeClient(client);
+        return this;
+    }
+
+    /**
      * 设置WebViewClient
      *
      * @param client WebViewClient
+     * @see #setWebClient(WebClient)
      */
     @Deprecated
     @Override
@@ -344,6 +369,7 @@ public class HybridWebView extends WebView {
      * 设置WebChromeClient
      *
      * @param client WebChromeClient
+     * @see #setChromeClient(ChromeClient)
      */
     @Deprecated
     @Override
@@ -358,6 +384,9 @@ public class HybridWebView extends WebView {
         settings.setDefaultTextEncodingName("UTF-8");
         // 支持js
         settings.setJavaScriptEnabled(true);
+        // 适应手机屏幕
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
         // 禁止横向滑动
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         // 允许js弹出窗口
@@ -381,8 +410,8 @@ public class HybridWebView extends WebView {
         mWebClient = new WebClient(this);
         mChromeClient = new ChromeClient(this);
 
-        super.setWebViewClient(mWebClient);
-        super.setWebChromeClient(mChromeClient);
+        setWebClient(mWebClient);
+        setChromeClient(mChromeClient);
     }
 
     private void setCacheConfig() {
