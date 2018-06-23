@@ -494,7 +494,9 @@ public class HybridWebView extends WebView {
          */
         private void loadUrl(String url) {
             setCacheConfig();
-            param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
+            if (!url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
+                param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
+            }
             url = joinUrl(url);
             HybridWebView.super.loadUrl(url);
         }
@@ -507,7 +509,9 @@ public class HybridWebView extends WebView {
          */
         private void loadUrl(String url, Map<String, String> additionalHttpHeaders) {
             setCacheConfig();
-            param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
+            if (!url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
+                param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
+            }
             url = joinUrl(url);
             HybridWebView.super.loadUrl(url, additionalHttpHeaders);
         }
