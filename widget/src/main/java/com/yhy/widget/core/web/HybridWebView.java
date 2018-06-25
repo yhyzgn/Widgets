@@ -563,7 +563,8 @@ public class HybridWebView extends WebView {
             if (!url.contains("?") && sbParams.length() > 0) {
                 sbParams.replace(0, 1, "?");
             }
-
+            // 保证参数只有效一次
+            mParams.clear();
             return sbUrl.append(sbParams).toString();
         }
 
