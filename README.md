@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/appveyor/tests/NZSmartie/coap-net-iu0to.svg )
+![widget](https://img.shields.io/badge/jCenter-1.3.9-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
