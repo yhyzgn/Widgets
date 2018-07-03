@@ -24,8 +24,20 @@
         <attr name="tb_left_icon" format="reference" />
         <!--右边图标，默认空-->
         <attr name="tb_right_icon" format="reference" />
-        <!--字体颜色，默认#ffffff-->
-        <attr name="tb_font_color" format="color" />
+        <!--全部字体颜色，默认#ffffff-->
+        <attr name="tb_font_color" format="color|reference" />
+        <!--标题字体颜色，默认#ffffff-->
+        <attr name="tb_title_color" format="color|reference" />
+        <!--左边字体颜色，默认#ffffff-->
+        <attr name="tb_left_text_color" format="color|reference" />
+        <!--右边字体颜色，默认#ffffff-->
+        <attr name="tb_right_text_color" format="color|reference" />
+        <!--标题字体大小，默认18sp-->
+        <attr name="tb_title_size" format="dimension|reference" />
+        <!--左边字体大小，默认14sp-->
+        <attr name="tb_left_text_size" format="dimension|reference" />
+        <!--右边字体大小，默认14sp-->
+        <attr name="tb_right_text_size" format="dimension|reference" />
     </declare-styleable>
 
     <!--文字标题栏控件-->

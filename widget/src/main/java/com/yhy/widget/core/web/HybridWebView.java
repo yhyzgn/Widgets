@@ -547,7 +547,16 @@ public class HybridWebView extends WebView {
          * @return 完整url
          */
         private String joinUrl(String url) {
-            StringBuilder sbUrl = new StringBuilder(url);
+            url = url
+                    .replaceAll("#&", "#")
+                    .replaceAll("\\\\", "\\")
+                    .replaceAll("//", "/");
+
+            String[] temp = new String[]{url, ""};
+            if (url.contains("#")) {
+                temp = url.split("#");
+            }
+            StringBuilder sbUrl = new StringBuilder(temp[0]);
             StringBuilder sbParams = new StringBuilder();
 
             for (Param param : mParams) {
@@ -565,7 +574,8 @@ public class HybridWebView extends WebView {
             }
             // 保证参数只有效一次
             mParams.clear();
-            return sbUrl.append(sbParams).toString();
+            // 考虑锚点
+            return sbUrl.append(sbParams).append(temp.length == 2 && null != temp[1] ? "#" + temp[1] : "").toString();
         }
 
         /**

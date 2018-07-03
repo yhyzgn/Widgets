@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.3.8-brightgreen.svg)
+![widget](https://img.shields.io/badge/widget-1.3.9-brightgreen.svg)
 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
@@ -729,30 +729,30 @@
 
     ```java
     tbTest.setTitle("标题");
-
+    
     // 事件，该监听器不是接口或者抽象类，只需要重写对应的方法即可
     tbTest2.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
       @Override
       public void titleClick(View view) {
         toast("点击了标题");
       }
-
+    
       @Override
       public void leftIconClick(View view) {
         toast("返回");
         finish();
       }
-
+    
       @Override
       public void leftTextClick(View view) {
         toast("左边文本");
       }
-
+    
       @Override
       public void rightIconClick(View view) {
         toast("右边图标");
       }
-
+    
       @Override
       public void rightTextClick(View view) {
         toast("右边文本");
@@ -763,14 +763,20 @@
 
   * 自定义属性
 
-    |       属性        |  说明  |    默认值    |
-    | :-------------: | :--: | :-------: |
-    |   `tb_title`    | 标题文本 |     空     |
-    | `tb_left_text`  | 左边文本 |     空     |
-    | `tb_right_text` | 右边文本 |     空     |
-    | `tb_left_icon`  | 左边图标 |     无     |
-    | `tb_right_icon` | 右边图标 |     无     |
-    | `tb_font_color` | 字体颜色 | `#ffffff` |
+    |         属性          |          说明          |  默认值   |
+    | :-------------------: | :--------------------: | :-------: |
+    |      `tb_title`       |        标题文本        |    空     |
+    |    `tb_left_text`     |        左边文本        |    空     |
+    |    `tb_right_text`    |        右边文本        |    空     |
+    |    `tb_left_icon`     |        左边图标        |    无     |
+    |    `tb_right_icon`    |        右边图标        |    无     |
+    |    `tb_font_color`    |      全部字体颜色      | `#ffffff` |
+    |   `tb_title_color`    |      标题字体颜色      | `#ffffff` |
+    | `tb_left_text_color`  |      左边字体颜色      | `#ffffff` |
+    | `tb_right_text_color` |      右边字体颜色      | `#ffffff` |
+    |    `tb_title_size`    | 标题字体大小，单位`sp` |   `18`    |
+    |  `tb_left_text_size`  | 左边字体大小，单位`sp` |   `18`    |
+    | `tb_right_text_size`  | 右边字体大小，单位`sp` |   `18`    |
 
 * <a name = "SwitchButton">`SwitchButton`</a>
 
