@@ -5,7 +5,7 @@
 
 ## 效果展示
 
-> 控件展示较多，更新也较频繁，不方便录制`gif`图片，请下载`demo`体验
+> 控件展示较多，更新也较频繁，不方便录制`gif`图片，请下载`demo`体验。
 
 * [`Demo`](https://fir.im/zufy)下载
 
@@ -775,8 +775,8 @@
     | `tb_left_text_color`  |      左边字体颜色      | `#ffffff` |
     | `tb_right_text_color` |      右边字体颜色      | `#ffffff` |
     |    `tb_title_size`    | 标题字体大小，单位`sp` |   `18`    |
-    |  `tb_left_text_size`  | 左边字体大小，单位`sp` |   `18`    |
-    | `tb_right_text_size`  | 右边字体大小，单位`sp` |   `18`    |
+    |  `tb_left_text_size`  |      左边字体大小      |   `18`    |
+    | `tb_right_text_size`  |      右边字体大小      |   `18`    |
 
 * <a name = "SwitchButton">`SwitchButton`</a>
 
