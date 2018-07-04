@@ -1,6 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/widget-1.3.9-brightgreen.svg)
-
+![widget](https://img.shields.io/badge/jCenter-1.3.9-brightgreen.svg)
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 ## 效果展示
@@ -775,8 +774,8 @@
     | `tb_left_text_color`  |      左边字体颜色      | `#ffffff` |
     | `tb_right_text_color` |      右边字体颜色      | `#ffffff` |
     |    `tb_title_size`    | 标题字体大小，单位`sp` |   `18`    |
-    |  `tb_left_text_size`  |      左边字体大小      |   `14`    |
-    | `tb_right_text_size`  |      右边字体大小      |   `14`    |
+    |  `tb_left_text_size`  | 左边字体大小，单位`sp` |   `14`    |
+    | `tb_right_text_size`  | 右边字体大小，单位`sp` |   `14`    |
 
 * <a name = "SwitchButton">`SwitchButton`</a>
 
