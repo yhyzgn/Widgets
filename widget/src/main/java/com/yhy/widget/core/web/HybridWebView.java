@@ -178,6 +178,16 @@ public class HybridWebView extends WebView {
     }
 
     /**
+     * 将参数添加到url上
+     *
+     * @param url 原始url
+     * @return 添加参数后的url
+     */
+    public String joinUrl(String url) {
+        return mLoader.joinUrl(url);
+    }
+
+    /**
      * 设置配置参数
      *
      * @param config 配置参数
@@ -560,7 +570,7 @@ public class HybridWebView extends WebView {
             StringBuilder sbParams = new StringBuilder();
 
             for (Param param : mParams) {
-                if (null != param.value) {
+                if (null != param.value && !url.contains(param.key + "=" + param.value) && !sbParams.toString().contains(param.key + "=" + param.value)) {
                     sbParams.append("&").append(param.key).append("=").append(param.value);
                 }
             }
@@ -572,8 +582,6 @@ public class HybridWebView extends WebView {
             if (!url.contains("?") && sbParams.length() > 0) {
                 sbParams.replace(0, 1, "?");
             }
-            // 保证参数只有效一次
-            mParams.clear();
             // 考虑锚点
             return sbUrl.append(sbParams).append(temp.length == 2 && null != temp[1] ? "#" + temp[1] : "").toString();
         }
