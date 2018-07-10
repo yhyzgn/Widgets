@@ -249,33 +249,48 @@ public class HybridWebView extends WebView {
      * 调用js的函数
      *
      * @param name 函数名称
+     * @return 当前对象
+     */
+    public HybridWebView js(final String name) {
+        return js(name, null);
+    }
+
+    /**
+     * 调用js的函数
+     *
+     * @param name 函数名称
      * @param args 要传递的参数
      * @return 当前对象
      */
     public HybridWebView js(final String name, final String args) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                HybridWebView.super.loadUrl("javascript:" + name + "('" + args + "')");
-            }
-        });
-        return this;
+        return js(name, args, null);
     }
 
     /**
-     * Android 4.4+ 调用js函数
+     * 兼容Android 4.4+ 调用js函数
      *
      * @param name     函数名称
      * @param args     要传递的参数
      * @param callback 回调，可以接收函数返回值
      * @return 当前对象
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public HybridWebView js(final String name, final String args, final ValueCallback<String> callback) {
         post(new Runnable() {
             @Override
             public void run() {
-                HybridWebView.this.evaluateJavascript(name + "('" + args + "')", callback);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    if (null == args) {
+                        HybridWebView.this.evaluateJavascript(name + "();", callback);
+                    } else {
+                        HybridWebView.this.evaluateJavascript(name + "('" + args + "');", callback);
+                    }
+                } else {
+                    if (null == args) {
+                        HybridWebView.super.loadUrl("javascript:" + name + "()");
+                    } else {
+                        HybridWebView.super.loadUrl("javascript:" + name + "('" + args + "')");
+                    }
+                }
             }
         });
         return this;
