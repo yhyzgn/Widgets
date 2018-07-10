@@ -71,7 +71,8 @@ public class WebHybridActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // 调用js中的test函数
-                hwvContent.js("test", "小姐姐");
+//                hwvContent.js("test", "小姐姐");
+                hwvContent.js("noArg");
             }
         });
     }

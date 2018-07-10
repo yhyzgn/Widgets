@@ -8,6 +8,8 @@ package com.yhy.widget.core.web.config;
  * desc   : 参数配置类
  */
 public class Config {
+    // 是否需要严格模式
+    private boolean strictMode = false;
     // URL标识的名称
     private String urlFlagName = "platform";
     // URL标识的值
@@ -18,6 +20,26 @@ public class Config {
     private boolean cacheEnable = true;
     // 缓存生命周期，单位：s
     private long cacheExpire = 7 * 24 * 60 * 60;
+
+    /**
+     * 是否处于严格模式
+     *
+     * @return 是否处于严格模式
+     */
+    public boolean isStrictMode() {
+        return strictMode;
+    }
+
+    /**
+     * 是否需要严格模式
+     *
+     * @param strictMode 是否需要严格模式
+     * @return 当前对象
+     */
+    public Config setStrictMode(boolean strictMode) {
+        this.strictMode = strictMode;
+        return this;
+    }
 
     /**
      * 获取URL标识名称

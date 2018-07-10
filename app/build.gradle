@@ -20,6 +20,7 @@ android {
     }
 
     lintOptions {
+        checkReleaseBuilds false
         abortOnError false
     }
 
@@ -42,7 +43,7 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 //    implementation 'com.lzy.widget:view-core:0.2.1'
     //noinspection GradleDependency
     implementation 'com.github.bumptech.glide:glide:3.6.1'

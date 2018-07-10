@@ -28,8 +28,8 @@
      * bridge：Android端与js交互的桥梁，默认是window.app
      */
     config: {
-        // 是否使用严格模式（不仅辨别是否是移动端内核浏览器，还需要判断“config.urlFlagName”参数），默认为true
-        strict: true,
+        // 是否使用严格模式（不仅辨别是否是移动端内核浏览器，还需要判断“config.urlFlagName”参数），默认为false
+        strict: false,
         // URL标识名称
         urlFlagName: "platform",
         // URL标识值
@@ -69,19 +69,18 @@
     init: function (config, callback) {
         let cb = callback;
         let args = arguments;
+
+        if (args.length === 1) {
+            cb = args[0];
+            config = null;
+        }
         if (document.readyState === "interactive" || document.readyState === "complete") {
-            console.log("页面已经加载完成，强制初始化框架！");
             setTimeout(doInit, 1);
         } else {
-            console.log("页面未加载完成，加载完成后初始化框架！");
             Hybrid.event(document, "DOMContentLoaded", doInit);
         }
 
         function doInit() {
-            if (args.length === 1) {
-                callback = args[0];
-                config = null;
-            }
             if (config) {
                 for (let key in config) {
                     Hybrid.config[key] = config[key];
@@ -90,11 +89,16 @@
             Hybrid.environment(function (mobile, android, ios) {
                 // 为所有的a标签加上URL标识
                 let as = null;
-                if (mobile && (as = document.getElementsByTagName("a"))) {
+                if (Hy.config.strict && mobile && (as = document.getElementsByTagName("a"))) {
                     let href = null;
                     for (let i = 0; i < as.length; i++) {
                         href = as[i].getAttribute("href");
-                        if (href && href.length > 0 && href !== "/") {
+                        if (href && href.length > 0 && href !== "/" &&
+                            href.indexOf("javascript:") === -1 &&
+                            href.indexOf("tel:") === -1 &&
+                            href.indexOf("mailto:") === -1 &&
+                            href.indexOf(Hybrid.config.urlFlagName + "=" + Hybrid.config.urlFlagValue) === -1) {
+
                             href = href.replace(/\/$/, "");
                             href += href.indexOf("?") === -1 ? "?" : "&";
                             href += Hybrid.config.urlFlagName + "=" + Hybrid.config.urlFlagValue;
@@ -130,12 +134,24 @@
      * 注册方法到window对象，原生才能调用js的方法
      * @param name 方法名称
      * @param fn 方法体
+     * @param target 方法要将要绑定的对象
      *
      * 当只传入一个参数时，该参数必须是js对象类型
      */
-    register: function (name, fn) {
-        if (arguments.length === 2) {
-            window[name] = fn;
+    register: function (name, fn, target) {
+        if (arguments.length === 3) {
+            target = typeof target === "object" || typeof target === "function" ? target : window;
+            target[name] = fn;
+        } else if (arguments.length === 2) {
+            if (typeof arguments[0] === "string" && typeof arguments[1] === "function") {
+                window[arguments[0]] = arguments[1];
+            } else if (typeof arguments[0] === "object" && (typeof arguments[1] === "object" || typeof target === "function")) {
+                for (let key in arguments[0]) {
+                    arguments[1][key] = arguments[0][key];
+                }
+            } else {
+                throw new Error("未知的函数注册方式");
+            }
         } else if (arguments.length === 1 && typeof arguments[0] === "object") {
             for (let key in arguments[0]) {
                 window[key] = arguments[0][key];
@@ -168,8 +184,10 @@
 
                 if (outArgs.length === 1) {
                     if (isWKWebView()) {
+                        // WKWebView
                         bridge[fn].postMessage();
                     } else {
+                        // Android和IOS的UIWebView
                         bridge[fn]();
                     }
                 } else if (outArgs.length >= 2) {
@@ -182,8 +200,10 @@
 
                     let result;
                     if (isWKWebView()) {
+                        // WKWebView
                         result = bridge[fn].postMessage(args);
                     } else {
+                        // Android和IOS的UIWebView
                         result = bridge[fn](args);
                     }
                     if (typeof callback === "function") {
@@ -191,6 +211,10 @@
                     }
                 }
 
+                /**
+                 * 判断是否是IOS的WKWebView
+                 * @returns {boolean} 是否是IOS的WKWebView
+                 */
                 function isWKWebView() {
                     return typeof window.webkit !== "undefined" && typeof window.webkit.messageHandlers !== "undefined";
                 }
@@ -208,13 +232,15 @@
      * @param callback 回调方法
      */
     environment: function (callback) {
-        let urlFlag = Hybrid.urlParam(Hybrid.config.urlFlagName);
-        // 是否携带移动端WebView标志
-        if (!Hybrid.config.strict || urlFlag === Hybrid.config.urlFlagValue) {
-            // 只有非严格模式或者携带urlFlag的页面，才算是移动端页面（便于区分wap站和WebView加载的页面）
-            callback(Hybrid.browser.versions.mobile, Hybrid.browser.versions.android, Hybrid.browser.versions.ios);
+        if (Hybrid.config.strict) {
+            // 是否携带移动端WebView标志
+            let urlFlag = Hybrid.urlParam(Hybrid.config.urlFlagName);
+            // 严格模式，只有携带urlFlag的页面，才算是移动端页面（便于区分wap站和WebView加载的页面）
+            if (urlFlag === Hybrid.config.urlFlagValue) {
+                callback(Hybrid.browser.versions.mobile, Hybrid.browser.versions.android, Hybrid.browser.versions.ios);
+            }
         } else {
-            callback();
+            callback(Hybrid.browser.versions.mobile, Hybrid.browser.versions.android, Hybrid.browser.versions.ios);
         }
     },
 
@@ -231,4 +257,25 @@
         }
         return "";
     },
+
+    /**
+     * 扩展方法
+     *
+     * 传入一个参数时必须是js对象
+     * 传入两个参数时必须是方法名和方法体
+     *
+     * @param name 方法名
+     * @param fn 方法体
+     */
+    extend: function (name, fn) {
+        if (arguments.length === 2) {
+            Hybrid[name] = fn;
+        } else if (arguments.length === 1) {
+            for (let key in arguments[0]) {
+                Hybrid[key] = arguments[0][key];
+            }
+        } else {
+            throw new Error("参数格式错误");
+        }
+    }
 });

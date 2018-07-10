@@ -1,6 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/jCenter-1.3.9-brightgreen.svg)
-
+![widget](https://img.shields.io/badge/jCenter-1.3.11-brightgreen.svg)
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 ## 效果展示
@@ -44,30 +43,30 @@
 
   > 核心控件，即各种独立使用的控件
 
-  |                     名称                      |                     描述                      |
-  | :-------------------------------------------: | :-------------------------------------------: |
-  |      [`PreImgActivity`](#PreImgActivity)      |             点击图片查看大图控件              |
-  |             [`AdvView`](#AdvView)             |               滚动广告轮播控件                |
-  |     [`CheckedTextView`](#CheckedTextView)     |              可选中的`TextView`               |
-  |      [`ExpandTextView`](#ExpandTextView)      |            可展开收起的`TextView`             |
-  |     [`SquareImageView`](#SquareImageView)     | 正方形`ImageView`，右上角可设置按钮及点击事件 |
-  |     [`CircleImageView`](#CircleImageView)     |                   圆形图片                    |
-  |      [`RoundImageView`](#RoundImageView)      |                   圆角图片                    |
-  |      [`HackyViewPager`](#HackyViewPager)      |    多点触摸滑动时防止内存溢出的`ViewPager`    |
-  |          [`PickerView`](#PickerView)          |             上下滚动数据选取控件              |
-  |  [`RecyclerScrollView`](#RecyclerScrollView)  |     用来嵌套`RecyclerView`的`ScrollView`      |
-  |           [`RvDivider`](#RvDivider)           |            `RecyclerView`的分割线             |
-  |    [`SettingsItemView`](#SettingsItemView)    |           常用设置布局中的条目控件            |
-  |            [`TitleBar`](#TitleBar)            |                常用标题栏控件                 |
-  |        [`SwitchButton`](#SwitchButton)        |                   开关控件                    |
-  |            [`StepView`](#StepView)            |                  步骤化控件                   |
-  |        [`HybridBridge`](#HybridBridge)        |         用于混合开发的加强版`WebView`         |
-  |            [`CheckBox`](#CheckBox)            |                带动画的多选框                 |
-  |       [`LoadingDialog`](#LoadingDialog)       |                加载中进度弹窗                 |
-  |     [`InputDialogView`](#InputDialogView)     |                  输入框弹窗                   |
-  | [`ConstraintImageView`](#ConstraintImageView) |          按比例约束宽高的`ImageView`          |
-  |    [`GradientTextView`](#GradientTextView)    |             渐变动画的`TextView`              |
-  |        [`LineTextView`](#LineTextView)        |             添加线条的`TextView`              |
+  |                    名称                    |               描述                |
+  | :--------------------------------------: | :-----------------------------: |
+  |   [`PreImgActivity`](#PreImgActivity)    |           点击图片查看大图控件            |
+  |          [`AdvView`](#AdvView)           |            滚动广告轮播控件             |
+  |  [`CheckedTextView`](#CheckedTextView)   |         可选中的`TextView`          |
+  |   [`ExpandTextView`](#ExpandTextView)    |        可展开收起的`TextView`         |
+  |  [`SquareImageView`](#SquareImageView)   |  正方形`ImageView`，右上角可设置按钮及点击事件   |
+  |  [`CircleImageView`](#CircleImageView)   |              圆形图片               |
+  |   [`RoundImageView`](#RoundImageView)    |              圆角图片               |
+  |   [`HackyViewPager`](#HackyViewPager)    |    多点触摸滑动时防止内存溢出的`ViewPager`    |
+  |       [`PickerView`](#PickerView)        |           上下滚动数据选取控件            |
+  | [`RecyclerScrollView`](#RecyclerScrollView) | 用来嵌套`RecyclerView`的`ScrollView` |
+  |        [`RvDivider`](#RvDivider)         |       `RecyclerView`的分割线        |
+  | [`SettingsItemView`](#SettingsItemView)  |          常用设置布局中的条目控件           |
+  |         [`TitleBar`](#TitleBar)          |             常用标题栏控件             |
+  |     [`SwitchButton`](#SwitchButton)      |              开关控件               |
+  |         [`StepView`](#StepView)          |              步骤化控件              |
+  |     [`HybridBridge`](#HybridBridge)      |       用于混合开发的加强版`WebView`       |
+  |         [`CheckBox`](#CheckBox)          |             带动画的多选框             |
+  |    [`LoadingDialog`](#LoadingDialog)     |             加载中进度弹窗             |
+  |  [`InputDialogView`](#InputDialogView)   |              输入框弹窗              |
+  | [`ConstraintImageView`](#ConstraintImageView) |       按比例约束宽高的`ImageView`       |
+  | [`GradientTextView`](#GradientTextView)  |         渐变动画的`TextView`         |
+  |     [`LineTextView`](#LineTextView)      |         添加线条的`TextView`         |
 
 * `layout`控件
 
@@ -140,12 +139,12 @@
     ```java
     // 参数1为点击的ImageView；参数2为当前要预览的图片地址。
     ImgPreCfg cfg = new ImgPreCfg(iv, url);
-    
+
     // 配置为不可下载
     cfg.setDownloadable(false);
     // 设置下载按钮图标
     cfg.setDownloadIconId(R.mipmap.ic_def_download);
-    
+
     // x, y, width, height 分别为图片x, y坐标和宽高度。
     ImgPreCfg cfg = new ImgPreCfg(x, y, width, height, url);
     ```
@@ -424,11 +423,11 @@
 
   * 自定义属性
 
-    |       属性        |            说明            | 默认值 |
-    | :---------------: | :------------------------: | :----: |
-    |   `siv_btn_img`   |       右上角按钮图片       |   无   |
-    |  `siv_btn_size`   |  右上角按钮大小，单位`dp`  |  `0`   |
-    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` |  `2`   |
+    |        属性         |       说明        | 默认值  |
+    | :---------------: | :-------------: | :--: |
+    |   `siv_btn_img`   |     右上角按钮图片     |  无   |
+    |  `siv_btn_size`   | 右上角按钮大小，单位`dp`  | `0`  |
+    | `siv_btn_padding` | 右上角按钮内边距，单位`dp` | `2`  |
 
 * <a name = "CircleImageView">`CircleImageView`</a>
 
@@ -460,10 +459,10 @@
 
   * 自定义属性
 
-    |        属性        |        说明        |  默认值   |
-    | :----------------: | :----------------: | :-------: |
+    |         属性         |     说明      |    默认值    |
+    | :----------------: | :---------: | :-------: |
     | `riv_border_width` | 边框宽度，单位`dp` |    `0`    |
-    | `riv_border_color` |      边框颜色      | `#000000` |
+    | `riv_border_color` |    边框颜色     | `#000000` |
 
 * <a name = "RoundImageView">`RoundImageView`</a>
 
@@ -501,10 +500,10 @@
 
   * 自定义属性
 
-    |           属性            |        说明        |    默认值    |
-    | :-----------------------: | :----------------: | :----------: |
+    |            属性             |     说明      |     默认值      |
+    | :-----------------------: | :---------: | :----------: |
     |    `civ_border_width`     | 边框宽度，单位`dp` |     `0`      |
-    |    `civ_border_color`     |      边框颜色      |  `#000000`   |
+    |    `civ_border_color`     |    边框颜色     |  `#000000`   |
     |       `riv_radius`        | 圆角半径，单位`dp` |     `0`      |
     |   `riv_radius_left_top`   |   左上角圆角半径   | `riv_radius` |
     |  `riv_radius_right_top`   |   右上角圆角半径   | `riv_radius` |
@@ -678,30 +677,30 @@
 
   * 自定义属性
 
-    |          属性           |                说明                 |    默认值    |
-    | :-------------------: | :-------------------------------: | :-------: |
-    |      `siv_icon`       |               左边图标                |     无     |
-    |    `siv_show_icon`    |             是否显示左边图标              |  `false`  |
-    |      `siv_arrow`      |               右边箭头                |     无     |
-    |   `siv_show_arrow`    |             是否显示右边箭头              |  `false`  |
-    |      `siv_name`       |               左边文本                |     空     |
-    |   `siv_name_width`    |           左边文本宽度，单位`dp`           |    自适应    |
-    |  `siv_name_gravity`   | 左边文本对其方式【`left`、`center`、`right`】 |`center`|
-    |    `siv_name_size`    |           左边文本大小，单位`sp`           |   `14`    |
-    |   `siv_name_color`    |              左边文本颜色               | `#000000` |
-    |      `siv_text`       |               右边内容                |     空     |
-    |  `siv_text_gravity`   | 右边内容对齐方式【`left`、`center`、`right`】 |`center`|
-    |      `siv_hint`       |              右边提示文本               |     空     |
-    |    `siv_text_size`    |           右边字体大小，单位`sp`           |   `14`    |
-    |   `siv_text_color`    |              右边字体颜色               | `#000000` |
-    |    `siv_switch_on`    |              是否打开开关               |  `false`  |
-    |  `siv_switch_width`   |           开关控件宽度，单位`dp`           |   `48`    |
-    |  `siv_switch_height`  |           开关控件高度，单位`dp`           |   `28`    |
-    |   `siv_show_switch`   |             是否显示开关控件              |  `false`  |
-    |    `siv_editable`     |               是否可编辑               |  `false`  |
-    | `siv_cursor_drawable` |              光标颜色资源               |   系统默认    |
-    | `siv_input_type` | 输入类型【`text`、`phone`、`email`、`password`】 | `text` |
-    | `siv_max_length` | 可输入最大长度 | 不限 |
+    |          属性           |                   说明                    |    默认值    |
+    | :-------------------: | :-------------------------------------: | :-------: |
+    |      `siv_icon`       |                  左边图标                   |     无     |
+    |    `siv_show_icon`    |                是否显示左边图标                 |  `false`  |
+    |      `siv_arrow`      |                  右边箭头                   |     无     |
+    |   `siv_show_arrow`    |                是否显示右边箭头                 |  `false`  |
+    |      `siv_name`       |                  左边文本                   |     空     |
+    |   `siv_name_width`    |              左边文本宽度，单位`dp`              |    自适应    |
+    |  `siv_name_gravity`   |    左边文本对其方式【`left`、`center`、`right`】    | `center`  |
+    |    `siv_name_size`    |              左边文本大小，单位`sp`              |   `14`    |
+    |   `siv_name_color`    |                 左边文本颜色                  | `#000000` |
+    |      `siv_text`       |                  右边内容                   |     空     |
+    |  `siv_text_gravity`   |    右边内容对齐方式【`left`、`center`、`right`】    | `center`  |
+    |      `siv_hint`       |                 右边提示文本                  |     空     |
+    |    `siv_text_size`    |              右边字体大小，单位`sp`              |   `14`    |
+    |   `siv_text_color`    |                 右边字体颜色                  | `#000000` |
+    |    `siv_switch_on`    |                 是否打开开关                  |  `false`  |
+    |  `siv_switch_width`   |              开关控件宽度，单位`dp`              |   `48`    |
+    |  `siv_switch_height`  |              开关控件高度，单位`dp`              |   `28`    |
+    |   `siv_show_switch`   |                是否显示开关控件                 |  `false`  |
+    |    `siv_editable`     |                  是否可编辑                  |  `false`  |
+    | `siv_cursor_drawable` |                 光标颜色资源                  |   系统默认    |
+    |   `siv_input_type`    | 输入类型【`text`、`phone`、`email`、`password`】 |  `text`   |
+    |   `siv_max_length`    |                 可输入最大长度                 |    不限     |
 
 * <a name = "TitleBar">`TitleBar`</a>
 
@@ -729,30 +728,30 @@
 
     ```java
     tbTest.setTitle("标题");
-    
+
     // 事件，该监听器不是接口或者抽象类，只需要重写对应的方法即可
     tbTest2.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
       @Override
       public void titleClick(View view) {
         toast("点击了标题");
       }
-    
+
       @Override
       public void leftIconClick(View view) {
         toast("返回");
         finish();
       }
-    
+
       @Override
       public void leftTextClick(View view) {
         toast("左边文本");
       }
-    
+
       @Override
       public void rightIconClick(View view) {
         toast("右边图标");
       }
-    
+
       @Override
       public void rightTextClick(View view) {
         toast("右边文本");
@@ -763,20 +762,20 @@
 
   * 自定义属性
 
-    |         属性          |          说明          |  默认值   |
-    | :-------------------: | :--------------------: | :-------: |
-    |      `tb_title`       |        标题文本        |    空     |
-    |    `tb_left_text`     |        左边文本        |    空     |
-    |    `tb_right_text`    |        右边文本        |    空     |
-    |    `tb_left_icon`     |        左边图标        |    无     |
-    |    `tb_right_icon`    |        右边图标        |    无     |
-    |    `tb_font_color`    |      全部字体颜色      | `#ffffff` |
-    |   `tb_title_color`    |      标题字体颜色      | `#ffffff` |
-    | `tb_left_text_color`  |      左边字体颜色      | `#ffffff` |
-    | `tb_right_text_color` |      右边字体颜色      | `#ffffff` |
+    |          属性           |      说明       |    默认值    |
+    | :-------------------: | :-----------: | :-------: |
+    |      `tb_title`       |     标题文本      |     空     |
+    |    `tb_left_text`     |     左边文本      |     空     |
+    |    `tb_right_text`    |     右边文本      |     空     |
+    |    `tb_left_icon`     |     左边图标      |     无     |
+    |    `tb_right_icon`    |     右边图标      |     无     |
+    |    `tb_font_color`    |    全部字体颜色     | `#ffffff` |
+    |   `tb_title_color`    |    标题字体颜色     | `#ffffff` |
+    | `tb_left_text_color`  |    左边字体颜色     | `#ffffff` |
+    | `tb_right_text_color` |    右边字体颜色     | `#ffffff` |
     |    `tb_title_size`    | 标题字体大小，单位`sp` |   `18`    |
-    |  `tb_left_text_size`  |      左边字体大小      |   `18`    |
-    | `tb_right_text_size`  |      右边字体大小      |   `18`    |
+    |  `tb_left_text_size`  | 左边字体大小，单位`sp` |   `14`    |
+    | `tb_right_text_size`  | 右边字体大小，单位`sp` |   `14`    |
 
 * <a name = "SwitchButton">`SwitchButton`</a>
 
@@ -819,26 +818,26 @@
 
   * 自定义属性
 
-    |          属性          |              说明              |   默认值    |
-    | :--------------------: | :----------------------------: | :---------: |
-    |   `sb_shadow_radius`   |       阴影半径，单位`dp`       |    `2.5`    |
-    |   `sb_shadow_offset`   |      阴影偏移值，单位`dp`      |    `1.5`    |
-    |   `sb_shadow_color`    |            阴影颜色            | `#33000000` |
-    |     `sb_off_color`     |           关闭时颜色           |  `#dddddd`  |
-    |     `sb_on_color`      |           打开时颜色           |  `#51d367`  |
-    |   `sb_border_width`    |       边框宽度，单位`dp`       |     `1`     |
-    |   `sb_on_line_color`   |      打开状态中短竖线颜色      |  `#ffffff`  |
+    |           属性           |        说明         |     默认值     |
+    | :--------------------: | :---------------: | :---------: |
+    |   `sb_shadow_radius`   |    阴影半径，单位`dp`    |    `2.5`    |
+    |   `sb_shadow_offset`   |   阴影偏移值，单位`dp`    |    `1.5`    |
+    |   `sb_shadow_color`    |       阴影颜色        | `#33000000` |
+    |     `sb_off_color`     |       关闭时颜色       |  `#dddddd`  |
+    |     `sb_on_color`      |       打开时颜色       |  `#51d367`  |
+    |   `sb_border_width`    |    边框宽度，单位`dp`    |     `1`     |
+    |   `sb_on_line_color`   |    打开状态中短竖线颜色     |  `#ffffff`  |
     |   `sb_on_line_width`   | 打开状态中短竖线宽度，单位`dp` |     `1`     |
-    | `sb_off_circle_color`  |       关闭状态中圆圈颜色       |  `#aaaaaa`  |
-    | `sb_off_circle_width`  |  关闭状态中圆圈宽度，单位`dp`  |    `1.5`    |
-    | `sb_off_circle_radius` |  关闭状态中圆圈半径，单位`dp`  |     `4`     |
-    |        `sb_on`         |            是否打开            |   `false`   |
-    |   `sb_shadow_effect`   |        是否支持阴影效果        |   `true`    |
-    |  `sb_effect_duration`  |     效果显示时间，单位`ms`     |    `300`    |
-    |   `sb_button_color`    |            按钮颜色            |  `#ffffff`  |
-    |  `sb_show_indicator`   |         是否显示指示器         |   `true`    |
-    |    `sb_background`     |            背景颜色            |  `#ffffff`  |
-    |   `sb_enable_effect`   |          是否开启特效          |   `true`    |
+    | `sb_off_circle_color`  |     关闭状态中圆圈颜色     |  `#aaaaaa`  |
+    | `sb_off_circle_width`  | 关闭状态中圆圈宽度，单位`dp`  |    `1.5`    |
+    | `sb_off_circle_radius` | 关闭状态中圆圈半径，单位`dp`  |     `4`     |
+    |        `sb_on`         |       是否打开        |   `false`   |
+    |   `sb_shadow_effect`   |     是否支持阴影效果      |   `true`    |
+    |  `sb_effect_duration`  |   效果显示时间，单位`ms`   |    `300`    |
+    |   `sb_button_color`    |       按钮颜色        |  `#ffffff`  |
+    |  `sb_show_indicator`   |      是否显示指示器      |   `true`    |
+    |    `sb_background`     |       背景颜色        |  `#ffffff`  |
+    |   `sb_enable_effect`   |      是否开启特效       |   `true`    |
 
 * <a name = "StepView">`StepView`</a>
 
@@ -939,20 +938,20 @@
 
   * 自定义属性
 
-    |         属性          |                             说明                             |   默认值   |
-    | :-------------------: | :----------------------------------------------------------: | :--------: |
-    |   `sv_orientation`    |             显示方向【`vertical`，`horizontal`】             | `vertical` |
-    |  `sv_complete_color`  |                     完成状态节点圆的颜色                     | `#00beaf`  |
-    |  `sv_current_color`   |                     当前状态节点圆的颜色                     | `#ff7500`  |
-    |  `sv_default_color`   |                     默认状态节点圆的颜色                     | `#dcdcdc`  |
-    | `sv_solid_line_color` |                           实线颜色                           | `#00beaf`  |
-    | `sv_solid_line_width` |                           实线宽度                           |   `2dp`    |
-    | `sv_dash_line_color`  |                           虚线颜色                           | `#00beaf`  |
-    | `sv_dash_line_width`  |                           虚线宽度                           |   `1dp`    |
-    |      `sv_radius`      |                         节点圆的半径                         |   `8dp`    |
-    |  `sv_complete_icon`   |                      完成状态节点的图标                      |     无     |
-    |   `sv_current_icon`   |                      当前状态节点的图标                      |     无     |
-    |   `sv_default_icon`   |                      默认状态节点的图标                      |     无     |
+    |          属性           |                    说明                    |    默认值     |
+    | :-------------------: | :--------------------------------------: | :--------: |
+    |   `sv_orientation`    |      显示方向【`vertical`，`horizontal`】       | `vertical` |
+    |  `sv_complete_color`  |                完成状态节点圆的颜色                | `#00beaf`  |
+    |  `sv_current_color`   |                当前状态节点圆的颜色                | `#ff7500`  |
+    |  `sv_default_color`   |                默认状态节点圆的颜色                | `#dcdcdc`  |
+    | `sv_solid_line_color` |                   实线颜色                   | `#00beaf`  |
+    | `sv_solid_line_width` |                   实线宽度                   |   `2dp`    |
+    | `sv_dash_line_color`  |                   虚线颜色                   | `#00beaf`  |
+    | `sv_dash_line_width`  |                   虚线宽度                   |   `1dp`    |
+    |      `sv_radius`      |                  节点圆的半径                  |   `8dp`    |
+    |  `sv_complete_icon`   |                完成状态节点的图标                 |     无      |
+    |   `sv_current_icon`   |                当前状态节点的图标                 |     无      |
+    |   `sv_default_icon`   |                默认状态节点的图标                 |     无      |
     |   `sv_align_middle`   | 是否将节点圆与`itemView`的中间位置对齐，不对齐则对齐`itemView`的左边或者上边 |   `true`   |
 
 * <a name = "HybridBridge">`HybridBridge`</a>
@@ -1047,13 +1046,14 @@
 
   * 自定义属性
 
-    |         属性         |          说明           |   默认值   |
-    | :------------------: | :---------------------: | :--------: |
-    | `hwv_url_flag_name`  |      `URL`标识名称      | `platform` |
-    | `hwv_url_flag_value` |       `URL`标识值       |   `app`    |
-    |  `hwv_bridge_name`   |      交互桥梁名称       |   `app`    |
-    |  `hwv_cache_enable`  |      是否开启缓存       |   `true`   |
-    |  `hwv_cache_expire`  | 缓存保存时间，单位：`s` |    一周    |
+    |         属性         |                   说明                    |   默认值   |
+    | :------------------: | :---------------------------------------: | :--------: |
+    |  `hwv_strict_mode`   | 是否使用严格模式（需要严格匹配`url`参数） |  `false`   |
+    | `hwv_url_flag_name`  |               `URL`标识名称               | `platform` |
+    | `hwv_url_flag_value` |                `URL`标识值                |   `app`    |
+    |  `hwv_bridge_name`   |               交互桥梁名称                |   `app`    |
+    |  `hwv_cache_enable`  |               是否开启缓存                |   `true`   |
+    |  `hwv_cache_expire`  |          缓存保存时间，单位：`s`          |    一周    |
 
 * <a name = "CheckBox">`CheckBox`</a>
 
@@ -1068,7 +1068,7 @@
       android:layout_marginTop="24dp"
       android:gravity="center"
       android:orientation="horizontal">
-    
+
       <com.yhy.widget.core.checked.CheckBox
         android:id="@+id/cb_cancel"
         android:layout_width="wrap_content"
@@ -1080,7 +1080,7 @@
         app:cb_duration="1000"
         app:cb_stroke_width="4dp"
         app:cb_click_cancel_able="false" />
-    
+
       <TextView
         android:id="@+id/tv_cancel"
         android:layout_width="wrap_content"
@@ -1108,7 +1108,7 @@
             toast("是否选中：" + isChecked);
         }
     });
-    
+
     tvCancel.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -1120,15 +1120,15 @@
 
   * 自定义属性
 
-    |            属性             |         说明         |  默认值   |
-    | :-------------------------: | :------------------: | :-------: |
+    |             属性              |      说明      |    默认值    |
+    | :-------------------------: | :----------: | :-------: |
     |        `cb_duration`        | 动画时长，单位：`ms` |   `300`   |
     |      `cb_stroke_width`      | 边框宽度，单位：`dp` |    `0`    |
-    |       `cb_color_tick`       |     打钩图标颜色     | `#ffffff` |
-    |     `cb_color_checked`      |     选中时的颜色     | `#fb4846` |
-    |    `cb_color_unchecked`     |    未选中时的颜色    | `#ffffff` |
-    | `cb_color_unchecked_stroke` |  未选中时边框的颜色  | `#dfdfdf` |
-    |   `cb_click_cancel_able`    |    是否可点击取消    |  `true`   |
+    |       `cb_color_tick`       |    打钩图标颜色    | `#ffffff` |
+    |     `cb_color_checked`      |    选中时的颜色    | `#fb4846` |
+    |    `cb_color_unchecked`     |   未选中时的颜色    | `#ffffff` |
+    | `cb_color_unchecked_stroke` |  未选中时边框的颜色   | `#dfdfdf` |
+    |   `cb_click_cancel_able`    |   是否可点击取消    |  `true`   |
 
 * <a name = "LoadingDialog">`LoadingDialog`</a>
 
@@ -1152,7 +1152,7 @@
         public void onClick(View v) {
             mDialog = new LoadingDialog(LoadingDialogActivity.this, "加载中...");
             mDialog.show();
-    
+
             // 3秒后消失
             tvLoading.postDelayed(new Runnable() {
                 @Override
@@ -1185,13 +1185,13 @@
                 dialog.dismiss();
                 toast(content);
             }
-    
+
             @Override
             public void onShow(int offsetX, int offsetY, int[] position) {
                 // 点击某条评论则这条评论刚好在输入框上面，点击评论按钮则输入框刚好挡住按钮
                 rvContent.smoothScrollBy(0, offsetY, new AccelerateDecelerateInterpolator());
             }
-    
+
             @Override
             public void onDismiss() {
             }
@@ -1220,7 +1220,7 @@
       android:src="@mipmap/ic_avatar"
       app:civ_ratio="720:300"
       app:civ_reference="width" />
-    
+
     <!-- 以height为准，宽高比为：200:300 -->
     <com.yhy.widget.core.img.ConstraintImageView
       android:id="@+id/civ_height"
@@ -1231,7 +1231,7 @@
       android:src="@mipmap/ic_avatar"
       app:civ_ratio="200:300"
       app:civ_reference="height" />
-    
+
     <!-- 默认以width为准，逐个设置各个角落的圆角半径 -->
     <com.yhy.widget.core.img.ConstraintImageView
       android:id="@+id/civ_a"
@@ -1243,7 +1243,7 @@
       app:civ_radius_left_bottom="30dp"
       app:civ_radius_right_top="30dp"
       app:civ_ratio="150:100" />
-    
+
     <!-- 默认以width为准，统一设置各个角落的圆角半径 -->
     <com.yhy.widget.core.img.ConstraintImageView
       android:id="@+id/civ_test"
@@ -1276,17 +1276,17 @@
 
   * 自定义属性
 
-    |           属性            |                            说明                             |  默认值   |
-    | :-----------------------: | :---------------------------------------------------------: | :-------: |
+    |            属性             |                  说明                   |    默认值    |
+    | :-----------------------: | :-----------------------------------: | :-------: |
     |      `civ_reference`      | 参考标准，以【`width`，`height`】为准，计算另一方向的实际值 |  `width`  |
-    |        `civ_ratio`        |      比例字符串，**图片实际的宽高即可，格式：“宽:高”**      |    无     |
-    |       `civ_radius`        |                   四个角半径，单位：`dp`                    |    `0`    |
-    |   `civ_radius_left_top`   |                   左上角半径，单位：`dp`                    |    `0`    |
-    |  `civ_radius_right_top`   |                   右上角半径，单位：`dp`                    |    `0`    |
-    | `civ_radius_right_bottom` |                   右下角半径，单位：`dp`                    |    `0`    |
-    | `civ_radius_left_bottom`  |                   左下角半径，单位：`dp`                    |    `0`    |
-    |    `civ_border_width`     |                    边框宽度，单位：`dp`                     |    `0`    |
-    |    `civ_border_color`     |                          边框颜色                           | `#000000` |
+    |        `civ_ratio`        |     比例字符串，**图片实际的宽高即可，格式：“宽:高”**      |     无     |
+    |       `civ_radius`        |             四个角半径，单位：`dp`             |    `0`    |
+    |   `civ_radius_left_top`   |             左上角半径，单位：`dp`             |    `0`    |
+    |  `civ_radius_right_top`   |             右上角半径，单位：`dp`             |    `0`    |
+    | `civ_radius_right_bottom` |             右下角半径，单位：`dp`             |    `0`    |
+    | `civ_radius_left_bottom`  |             左下角半径，单位：`dp`             |    `0`    |
+    |    `civ_border_width`     |             边框宽度，单位：`dp`              |    `0`    |
+    |    `civ_border_color`     |                 边框颜色                  | `#000000` |
 
 * <a name = "GradientTextView">`GradientTextView`</a>
 
@@ -1300,7 +1300,7 @@
       android:layout_height="wrap_content"
       android:text="默认样式"
       android:textSize="16sp" />
-    
+
     <com.yhy.widget.core.text.GradientTextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -1321,10 +1321,10 @@
 
   * 自定义属性
 
-    |         属性          |                说明                |                默认值                 |
-    | :-------------------: | :--------------------------------: | :-----------------------------------: |
+    |          属性           |         说明          |                  默认值                  |
+    | :-------------------: | :-----------------: | :-----------------------------------: |
     | `gtv_speed_millions`  | 刷新颜色动画的时间间隔，单位：`ms` |                 `200`                 |
-    | `gtv_text_color_list` |         需要渐变的颜色数组         | `@array/color_arr_gradient_text_view` |
+    | `gtv_text_color_list` |      需要渐变的颜色数组      | `@array/color_arr_gradient_text_view` |
 
   * 自定义颜色数组`res/values/arrays.xml`
 
@@ -1352,7 +1352,7 @@
       android:text="默认长这个样子"
       android:textColor="@color/textPrimary"
       android:textSize="16sp" />
-    
+
     <com.yhy.widget.core.text.LineTextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -1361,7 +1361,7 @@
       android:textColor="@color/textPrimary"
       android:textSize="16sp"
       app:ltv_line_size="1dp" />
-    
+
     <com.yhy.widget.core.text.LineTextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -1371,7 +1371,7 @@
       android:textSize="16sp"
       app:ltv_line_size="1dp"
       app:ltv_line_style="delete_middle" />
-    
+
     <com.yhy.widget.core.text.LineTextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -1385,14 +1385,12 @@
 
   * 自定义属性
 
-    |        属性         |                            说明                            |    默认值     |
-    | :-----------------: | :--------------------------------------------------------: | :-----------: |
-    |   `ltv_line_size`   |                    线条宽度，单位：`dp`                    |      `0`      |
-    |  `ltv_line_color`   |                          线条颜色                          |   `#000000`   |
-    | `ltv_line_interval` |      线条间隔，该属性只在下划线风格中有效，单位：`dp`      |      `0`      |
+    |         属性          |                    说明                    |      默认值      |
+    | :-----------------: | :--------------------------------------: | :-----------: |
+    |   `ltv_line_size`   |               线条宽度，单位：`dp`               |      `0`      |
+    |  `ltv_line_color`   |                   线条颜色                   |   `#000000`   |
+    | `ltv_line_interval` |        线条间隔，该属性只在下划线风格中有效，单位：`dp`        |      `0`      |
     |  `ltv_line_style`   | 线条风格【`underline`，`delete_middle`，`delete_oblique`】 | ``underline`` |
-
-
 
 ----
 
@@ -1907,8 +1905,6 @@
     // 空数据
     slContent.showEmpty();
     ```
-
-
 
 ----
 

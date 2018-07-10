@@ -63,6 +63,10 @@
                 }
             });
 
+            Hy.register("noArg", function(){
+                alert("没有任何参数");
+            });
+
             let test = document.getElementById("test");
             Hy.click(test, function () {
                 // 调用原生方法，并传递一些参数过去，并通过回调获取到原生方法的返回值

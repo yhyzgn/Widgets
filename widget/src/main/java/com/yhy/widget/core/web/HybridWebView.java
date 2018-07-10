@@ -78,6 +78,7 @@ public class HybridWebView extends WebView {
         mLoader = new Loader();
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HybridWebView);
+        boolean strictMode = ta.getBoolean(R.styleable.HybridWebView_hwv_strict_mode, mConfig.isStrictMode());
         String urlFlagName = ta.getString(R.styleable.HybridWebView_hwv_url_flag_name);
         String urlFlagValue = ta.getString(R.styleable.HybridWebView_hwv_url_flag_value);
         String urlBridgeName = ta.getString(R.styleable.HybridWebView_hwv_bridge_name);
@@ -89,7 +90,7 @@ public class HybridWebView extends WebView {
         urlFlagValue = TextUtils.isEmpty(urlFlagValue) ? mConfig.getUrlFlagValue() : urlFlagValue;
         urlBridgeName = TextUtils.isEmpty(urlBridgeName) ? mConfig.getBridgeName() : urlBridgeName;
 
-        mConfig.setUrlFlagName(urlFlagName).setUrlFlagValue(urlFlagValue).setBridgeName(urlBridgeName).setCacheEnable(cacheEnable).setCacheExpire(cacheExpire * 1000L);
+        mConfig.setStrictMode(strictMode).setUrlFlagName(urlFlagName).setUrlFlagValue(urlFlagValue).setBridgeName(urlBridgeName).setCacheEnable(cacheEnable).setCacheExpire(cacheExpire * 1000L);
 
         // 初始化控件
         initComponent();
@@ -178,6 +179,16 @@ public class HybridWebView extends WebView {
     }
 
     /**
+     * 将参数添加到url上
+     *
+     * @param url 原始url
+     * @return 添加参数后的url
+     */
+    public String joinUrl(String url) {
+        return mLoader.joinUrl(url);
+    }
+
+    /**
      * 设置配置参数
      *
      * @param config 配置参数
@@ -239,33 +250,48 @@ public class HybridWebView extends WebView {
      * 调用js的函数
      *
      * @param name 函数名称
+     * @return 当前对象
+     */
+    public HybridWebView js(final String name) {
+        return js(name, null);
+    }
+
+    /**
+     * 调用js的函数
+     *
+     * @param name 函数名称
      * @param args 要传递的参数
      * @return 当前对象
      */
     public HybridWebView js(final String name, final String args) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                HybridWebView.super.loadUrl("javascript:" + name + "('" + args + "')");
-            }
-        });
-        return this;
+        return js(name, args, null);
     }
 
     /**
-     * Android 4.4+ 调用js函数
+     * 调用js函数
      *
      * @param name     函数名称
      * @param args     要传递的参数
      * @param callback 回调，可以接收函数返回值
      * @return 当前对象
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public HybridWebView js(final String name, final String args, final ValueCallback<String> callback) {
         post(new Runnable() {
             @Override
             public void run() {
-                HybridWebView.this.evaluateJavascript(name + "('" + args + "')", callback);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    if (null == args) {
+                        HybridWebView.this.evaluateJavascript(name + "();", callback);
+                    } else {
+                        HybridWebView.this.evaluateJavascript(name + "('" + args + "');", callback);
+                    }
+                } else {
+                    if (null == args) {
+                        HybridWebView.super.loadUrl("javascript:" + name + "()");
+                    } else {
+                        HybridWebView.super.loadUrl("javascript:" + name + "('" + args + "')");
+                    }
+                }
             }
         });
         return this;
@@ -494,7 +520,7 @@ public class HybridWebView extends WebView {
          */
         private void loadUrl(String url) {
             setCacheConfig();
-            if (!url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
+            if (mConfig.isStrictMode() && !url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
                 param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
             }
             url = joinUrl(url);
@@ -509,7 +535,7 @@ public class HybridWebView extends WebView {
          */
         private void loadUrl(String url, Map<String, String> additionalHttpHeaders) {
             setCacheConfig();
-            if (!url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
+            if (mConfig.isStrictMode() && !url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
                 param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
             }
             url = joinUrl(url);
@@ -549,8 +575,7 @@ public class HybridWebView extends WebView {
         private String joinUrl(String url) {
             url = url
                     .replaceAll("#&", "#")
-                    .replaceAll("\\\\", "\\")
-                    .replaceAll("//", "/");
+                    .replaceAll("\\\\", "\\");
 
             String[] temp = new String[]{url, ""};
             if (url.contains("#")) {
@@ -560,7 +585,7 @@ public class HybridWebView extends WebView {
             StringBuilder sbParams = new StringBuilder();
 
             for (Param param : mParams) {
-                if (null != param.value) {
+                if (null != param.value && !url.contains(param.key + "=" + param.value) && !sbParams.toString().contains(param.key + "=" + param.value)) {
                     sbParams.append("&").append(param.key).append("=").append(param.value);
                 }
             }
@@ -572,10 +597,8 @@ public class HybridWebView extends WebView {
             if (!url.contains("?") && sbParams.length() > 0) {
                 sbParams.replace(0, 1, "?");
             }
-            // 保证参数只有效一次
-            mParams.clear();
             // 考虑锚点
-            return sbUrl.append(sbParams).append(temp.length == 2 && null != temp[1] ? "#" + temp[1] : "").toString();
+            return sbUrl.append(sbParams).append(temp.length == 2 && !TextUtils.isEmpty(temp[1]) ? "#" + temp[1] : "").toString();
         }
 
         /**
