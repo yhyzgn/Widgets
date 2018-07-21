@@ -30,6 +30,7 @@
         app:tb_title="测试标题" />
 
     <com.yhy.widget.core.title.TitleBar
+        android:id="@+id/tb_test_3"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -42,4 +43,34 @@
         app:tb_right_text_color="@color/textPrimary"
         app:tb_right_text_size="16sp"
         app:tb_title="测试标题" />
+
+    <com.yhy.widget.core.title.TitleBar
+        android:id="@+id/tb_test_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="#7ad"
+        android:elevation="8dp"
+        app:tb_left_icon="@mipmap/ic_back"
+        app:tb_left_text="菜单"
+        app:tb_right_icon="@mipmap/ic_more"
+        app:tb_right_text="添加"
+        app:tb_right_text_color="@color/textPrimary"
+        app:tb_right_text_size="16sp"
+        app:tb_title="wrap padding" />
+
+    <com.yhy.widget.core.title.TitleBar
+        android:id="@+id/tb_test_5"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="48dp"
+        android:background="#7ad"
+        android:elevation="8dp"
+        app:tb_left_icon="@mipmap/ic_back"
+        app:tb_left_text="菜单"
+        app:tb_right_icon="@mipmap/ic_more"
+        app:tb_right_text="添加"
+        app:tb_right_text_color="@color/textPrimary"
+        app:tb_right_text_size="16sp"
+        app:tb_title="action padding" />
 </LinearLayout>

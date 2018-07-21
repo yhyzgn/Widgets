@@ -1,10 +1,8 @@
 package com.yhy.widget.core.title;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhy.widget.R;
@@ -38,6 +35,7 @@ public class TitleBar extends FrameLayout {
     private ImageView ivLeft;
     private ImageView ivRight;
     private OnTitleBarListener mListener;
+    private int mActionBarHeight;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -75,6 +73,14 @@ public class TitleBar extends FrameLayout {
         float rightSize = WidgetCoreUtils.px2sp(getContext(), ta.getDimension(R.styleable.TitleBar_tb_right_text_size, WidgetCoreUtils.sp2px(getContext(), 14)));
 
         ta.recycle();
+
+        TypedValue tv = new TypedValue();
+        if (getContext().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            mActionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        if (mActionBarHeight == 0) {
+            mActionBarHeight = WidgetCoreUtils.dp2px(getContext(), 56);
+        }
 
         setTitle(title)
                 .setLeftText(leftText)
@@ -334,31 +340,6 @@ public class TitleBar extends FrameLayout {
      */
     public <T extends View> T $(View parent, int resId) {
         return parent.findViewById(resId);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        // 调整高度
-        int height = getMeasuredHeight();
-        int actionBarHeight = 0;
-        @SuppressLint("DrawAllocation") TypedValue tv = new TypedValue();
-        if (getContext().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
-        if (actionBarHeight == 0) {
-            actionBarHeight = WidgetCoreUtils.dp2px(getContext(), 56);
-        }
-        if (height == 0 || height > actionBarHeight) {
-            height = actionBarHeight;
-        }
-        ViewGroup.LayoutParams params = getLayoutParams();
-        if (null == params) {
-            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        params.height = height;
-        setMeasuredDimension(getMeasuredWidth(), height);
     }
 
     /**
