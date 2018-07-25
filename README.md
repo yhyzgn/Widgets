@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/jCenter-1.3.12-brightgreen.svg)
+![widget](https://img.shields.io/badge/jCenter-1.3.13-brightgreen.svg)
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 ## 效果展示
@@ -728,36 +728,89 @@
 
     ```java
     tbTest.setTitle("标题");
-
+    
+    // ******** 该方法已过时 ********
     // 事件，该监听器不是接口或者抽象类，只需要重写对应的方法即可
     tbTest2.setOnTitleBarListener(new TitleBar.OnTitleBarListener() {
-      @Override
-      public void titleClick(View view) {
-        toast("点击了标题");
-      }
-
-      @Override
-      public void leftIconClick(View view) {
-        toast("返回");
-        finish();
-      }
-
-      @Override
-      public void leftTextClick(View view) {
-        toast("左边文本");
-      }
-
-      @Override
-      public void rightIconClick(View view) {
-        toast("右边图标");
-      }
-
-      @Override
-      public void rightTextClick(View view) {
-        toast("右边文本");
-      }
+        @Override
+        public void titleClick(View view) {
+            toast("点击了标题");
+        }
+    
+        @Override
+        public void leftIconClick(View view) {
+            toast("返回");
+            finish();
+        }
+    
+        @Override
+        public void leftTextClick(View view) {
+            toast("左边文本");
+        }
+    
+        @Override
+        public void rightIconClick(View view) {
+            toast("右边图标");
+        }
+    
+        @Override
+        public void rightTextClick(View view) {
+            toast("右边文本");
+        }
     });
-    }
+    
+    // 以上方法已过时，用一下方法代替
+    // 点击事件
+    tbTest2.setOnTitleBarClickListener(new TitleBar.OnTitleBarClickListener() {
+        @Override
+        public void titleClick(View view) {
+            toast("点击了标题");
+        }
+    
+        @Override
+        public void leftIconClick(View view) {
+            toast("返回");
+            finish();
+        }
+    
+        @Override
+        public void leftTextClick(View view) {
+            toast("左边文本");
+        }
+    
+        @Override
+        public void rightIconClick(View view) {
+            toast("右边图标");
+        }
+    
+        @Override
+        public void rightTextClick(View view) {
+            toast("右边文本");
+        }
+    });
+    
+    // 长按事件【是否在长按后再加一个短按动作（true为不加短按,false为加入短按）】
+    tbTest2.setOnTitleBarLongClickListener(new TitleBar.OnTitleBarLongClickListener {
+        public boolean titleLongClick(View view) {
+            return false;
+        }
+    
+        public boolean leftTextLongClick(View view) {
+            return false;
+        }
+    
+        public boolean rightTextLongClick(View view) {
+            return false;
+        }
+    
+        public boolean leftIconLongClick(View view) {
+            return false;
+        }
+    
+        public boolean rightIconLongClick(View view) {
+            return false;
+        }
+    });
     ```
 
   * 自定义属性
