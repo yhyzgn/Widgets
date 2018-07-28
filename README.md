@@ -958,7 +958,7 @@
 
   > 加强版的`WebView`，可以直接和`js`交互
   >
-  > 这里只是`Android`端说明，**`Web`端说明请参考[`HybridBridge`](https://github.com/yhyzgn/HybridBridge)**
+  > 这里只是`Android`端说明，**`Web`端说明请参考[`hybrid`](https://github.com/yhyzgn/hybrid)**
 
   * 布局文件
 
