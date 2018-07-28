@@ -573,9 +573,7 @@ public class HybridWebView extends WebView {
          * @return 完整url
          */
         private String joinUrl(String url) {
-            url = url
-                    .replaceAll("#&", "#")
-                    .replaceAll("\\\\", "\\");
+            url = url.replaceAll("\\\\", "\\");
 
             String[] temp = new String[]{url, ""};
             if (url.contains("#")) {

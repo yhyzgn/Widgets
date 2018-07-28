@@ -1,10 +1,8 @@
 package com.yhy.widget.core.title;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -13,10 +11,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhy.widget.R;
@@ -29,6 +25,7 @@ import com.yhy.widget.utils.WidgetCoreUtils;
  * version: 1.0.0
  * desc   : 标题栏
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 public class TitleBar extends FrameLayout {
 
     private View mView;
@@ -37,7 +34,9 @@ public class TitleBar extends FrameLayout {
     private TextView tvRight;
     private ImageView ivLeft;
     private ImageView ivRight;
-    private OnTitleBarListener mListener;
+    private OnTitleBarListener mClickListener;
+    private OnTitleBarLongClickListener mLongClickListener;
+    private int mActionBarHeight;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -76,6 +75,14 @@ public class TitleBar extends FrameLayout {
 
         ta.recycle();
 
+        TypedValue tv = new TypedValue();
+        if (getContext().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            mActionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        if (mActionBarHeight == 0) {
+            mActionBarHeight = WidgetCoreUtils.dp2px(getContext(), 56);
+        }
+
         setTitle(title)
                 .setLeftText(leftText)
                 .setRightText(rightText)
@@ -101,9 +108,15 @@ public class TitleBar extends FrameLayout {
         tvTitle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (null != mListener) {
-                    mListener.titleClick(view);
+                if (null != mClickListener) {
+                    mClickListener.titleClick(view);
                 }
+            }
+        });
+        tvTitle.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return null != mLongClickListener && mLongClickListener.titleLongClick(v);
             }
         });
         return this;
@@ -124,9 +137,15 @@ public class TitleBar extends FrameLayout {
             tvLeft.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != mListener) {
-                        mListener.leftTextClick(view);
+                    if (null != mClickListener) {
+                        mClickListener.leftTextClick(view);
                     }
+                }
+            });
+            tvLeft.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return null != mLongClickListener && mLongClickListener.leftTextLongClick(v);
                 }
             });
         }
@@ -148,9 +167,15 @@ public class TitleBar extends FrameLayout {
             tvRight.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != mListener) {
-                        mListener.rightTextClick(view);
+                    if (null != mClickListener) {
+                        mClickListener.rightTextClick(view);
                     }
+                }
+            });
+            tvRight.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return null != mLongClickListener && mLongClickListener.rightTextLongClick(v);
                 }
             });
         }
@@ -172,9 +197,15 @@ public class TitleBar extends FrameLayout {
             ivLeft.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != mListener) {
-                        mListener.leftIconClick(view);
+                    if (null != mClickListener) {
+                        mClickListener.leftIconClick(view);
                     }
+                }
+            });
+            ivLeft.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return null != mLongClickListener && mLongClickListener.leftIconLongClick(v);
                 }
             });
         }
@@ -196,9 +227,15 @@ public class TitleBar extends FrameLayout {
             ivRight.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != mListener) {
-                        mListener.rightIconClick(view);
+                    if (null != mClickListener) {
+                        mClickListener.rightIconClick(view);
                     }
+                }
+            });
+            ivRight.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return null != mLongClickListener && mLongClickListener.rightIconLongClick(v);
                 }
             });
         }
@@ -336,29 +373,16 @@ public class TitleBar extends FrameLayout {
         return parent.findViewById(resId);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        // 调整高度
-        int height = getMeasuredHeight();
-        int actionBarHeight = 0;
-        @SuppressLint("DrawAllocation") TypedValue tv = new TypedValue();
-        if (getContext().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
-        if (actionBarHeight == 0) {
-            actionBarHeight = WidgetCoreUtils.dp2px(getContext(), 56);
-        }
-        if (height == 0 || height > actionBarHeight) {
-            height = actionBarHeight;
-        }
-        ViewGroup.LayoutParams params = getLayoutParams();
-        if (null == params) {
-            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        params.height = height;
-        setMeasuredDimension(getMeasuredWidth(), height);
+    /**
+     * 设置各控件点击事件
+     * <p>
+     * 已过时，用{@link TitleBar#setOnTitleBarClickListener(OnTitleBarClickListener)}代替
+     *
+     * @param listener 点击事件
+     */
+    @Deprecated
+    public void setOnTitleBarListener(OnTitleBarListener listener) {
+        mClickListener = listener;
     }
 
     /**
@@ -366,13 +390,25 @@ public class TitleBar extends FrameLayout {
      *
      * @param listener 点击事件
      */
-    public void setOnTitleBarListener(OnTitleBarListener listener) {
-        mListener = listener;
+    public void setOnTitleBarClickListener(OnTitleBarClickListener listener) {
+        mClickListener = listener;
+    }
+
+    /**
+     * 设置各控件长按事件
+     *
+     * @param listener 长按事件
+     */
+    public void setOnTitleBarLongClickListener(OnTitleBarLongClickListener listener) {
+        mLongClickListener = listener;
     }
 
     /**
      * 事件监听器
+     * <p>
+     * 已过时，用{@link TitleBar.OnTitleBarClickListener}代替
      */
+    @Deprecated
     public static class OnTitleBarListener {
         /**
          * 标题栏被点击
@@ -412,6 +448,67 @@ public class TitleBar extends FrameLayout {
          * @param view 当前控件
          */
         public void rightIconClick(View view) {
+        }
+    }
+
+    /**
+     * 点击事件监听器
+     */
+    public static class OnTitleBarClickListener extends OnTitleBarListener {
+    }
+
+    /**
+     * 长按事件监听器
+     */
+    public static class OnTitleBarLongClickListener {
+        /**
+         * 标题栏被点击
+         *
+         * @param view 当前控件
+         * @return 是否在长按后再加一个短按动作（true为不加短按,false为加入短按）
+         */
+        public boolean titleLongClick(View view) {
+            return false;
+        }
+
+        /**
+         * 左边文本被点击
+         *
+         * @param view 当前控件
+         * @return 是否在长按后再加一个短按动作（true为不加短按,false为加入短按）
+         */
+        public boolean leftTextLongClick(View view) {
+            return false;
+        }
+
+        /**
+         * 右边文本被点击
+         *
+         * @param view 当前控件
+         * @return 是否在长按后再加一个短按动作（true为不加短按,false为加入短按）
+         */
+        public boolean rightTextLongClick(View view) {
+            return false;
+        }
+
+        /**
+         * 左边图标被点击
+         *
+         * @param view 当前控件
+         * @return 是否在长按后再加一个短按动作（true为不加短按,false为加入短按）
+         */
+        public boolean leftIconLongClick(View view) {
+            return false;
+        }
+
+        /**
+         * 右边图标被点击
+         *
+         * @param view 当前控件
+         * @return 是否在长按后再加一个短按动作（true为不加短按,false为加入短按）
+         */
+        public boolean rightIconLongClick(View view) {
+            return false;
         }
     }
 }
