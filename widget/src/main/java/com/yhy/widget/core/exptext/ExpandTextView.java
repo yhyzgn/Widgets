@@ -1,5 +1,6 @@
 package com.yhy.widget.core.exptext;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -86,7 +87,6 @@ public class ExpandTextView extends LinearLayout implements View.OnClickListener
     @Override
     public void setOrientation(int orientation) {
         if (LinearLayout.HORIZONTAL == orientation) {
-//            throw new IllegalArgumentException("ExpandTextView only supports Vertical Orientation.");
             //强制使用垂直布局
             super.setOrientation(LinearLayout.VERTICAL);
         }
@@ -99,12 +99,13 @@ public class ExpandTextView extends LinearLayout implements View.OnClickListener
      * @param tvContentId 显示内容的TextView的id
      * @param vExpandId   扩展按钮的id
      */
+    @SuppressLint("ResourceType")
     public void mapViewId(@IdRes int tvContentId, @IdRes int vExpandId) {
         if (tvContentId > 0) {
-            tvContent = (TextView) ((Activity) getContext()).findViewById(tvContentId);
+            tvContent = findViewById(tvContentId);
         }
         if (vExpandId > 0) {
-            vExpand = ((Activity) getContext()).findViewById(vExpandId);
+            vExpand = findViewById(vExpandId);
             vExpand.setOnClickListener(this);
         }
     }

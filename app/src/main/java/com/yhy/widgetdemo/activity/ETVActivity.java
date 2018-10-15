@@ -17,7 +17,7 @@ public class ETVActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        etvContent = (ExpandTextView) findViewById(R.id.etv_content);
+        etvContent = findViewById(R.id.etv_content);
         etvContent.mapViewId(R.id.tv_content, R.id.tv_expand);
     }
 
