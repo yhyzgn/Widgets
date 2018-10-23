@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support.test:runner-0.5">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/runner-0.5.aar/480bd124d98438b76680bddca5399ae7/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Library/gradle/caches/transforms-1/files-1.1/runner-0.5.aar/6111c141eb45d9571c333a0935630057/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/runner-0.5.aar/480bd124d98438b76680bddca5399ae7/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/runner-0.5.aar/480bd124d98438b76680bddca5399ae7/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../Library/gradle/caches/transforms-1/files-1.1/runner-0.5.aar/6111c141eb45d9571c333a0935630057/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../Library/gradle/caches/transforms-1/files-1.1/runner-0.5.aar/6111c141eb45d9571c333a0935630057/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://D:/Software/Android/SDK/extras/android/m2repository/com/android/support/test/runner/0.5/runner-0.5-javadoc.jar!/" />
