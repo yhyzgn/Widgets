@@ -22,15 +22,6 @@ allprojects {
         jcenter()
 
         maven { url "https://jitpack.io" }
-        maven { url 'https://dl.bintray.com/yhyzgn/maven/' }
-    }
-
-    tasks.withType(Javadoc) {
-        options {
-            encoding 'UTF-8'
-            charSet 'UTF-8'
-            links "http://docs.oracle.com/javase/8/docs/api"
-        }
     }
 }
 
