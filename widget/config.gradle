@@ -2,7 +2,7 @@ ext {
     pkg = [
             groupId   : 'com.yhy.widget',
             artifactId: 'view-core',
-            version   : '1.3.22',
+            version   : '1.3.24',
             desc      : 'Some custom view.'
     ]
 
