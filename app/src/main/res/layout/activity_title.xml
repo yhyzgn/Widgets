@@ -27,7 +27,7 @@
         app:tb_right_text="添加"
         app:tb_right_text_color="@color/textPrimary"
         app:tb_right_text_size="16sp"
-        app:tb_title="测试标题" />
+        app:tb_title="测试标题测试标题测试标题测试标题测试标题测试标题" />
 
     <com.yhy.widget.core.title.TitleBar
         android:id="@+id/tb_test_3"

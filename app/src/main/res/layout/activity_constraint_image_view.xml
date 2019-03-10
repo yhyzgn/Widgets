@@ -21,7 +21,7 @@
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_avatar"
-            app:civ_ratio="720:300"
+            app:civ_original_ratio="720:300"
             app:civ_reference="width" />
 
         <com.yhy.widget.core.img.ConstraintImageView
@@ -31,7 +31,7 @@
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_avatar"
-            app:civ_ratio="200:300"
+            app:civ_ratio="0.75"
             app:civ_reference="height" />
 
         <LinearLayout
@@ -52,9 +52,9 @@
                     android:src="@mipmap/ic_avatar"
                     app:civ_border_color="#8c9eff"
                     app:civ_border_width="2dp"
+                    app:civ_original_ratio="150:100"
                     app:civ_radius_left_bottom="30dp"
-                    app:civ_radius_right_top="30dp"
-                    app:civ_ratio="150:100" />
+                    app:civ_radius_right_top="30dp" />
 
                 <com.yhy.widget.core.img.ConstraintImageView
                     android:id="@+id/civ_b"
@@ -64,9 +64,9 @@
                     android:scaleType="centerCrop"
                     app:civ_border_color="#8c9eff"
                     app:civ_border_width="2dp"
+                    app:civ_original_ratio="150:100"
                     app:civ_radius_left_top="30dp"
-                    app:civ_radius_right_bottom="30dp"
-                    app:civ_ratio="150:100" />
+                    app:civ_radius_right_bottom="30dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,9 +82,9 @@
                     android:scaleType="centerCrop"
                     app:civ_border_color="#8c9eff"
                     app:civ_border_width="2dp"
+                    app:civ_original_ratio="150:100"
                     app:civ_radius_left_top="30dp"
-                    app:civ_radius_right_bottom="30dp"
-                    app:civ_ratio="150:100" />
+                    app:civ_radius_right_bottom="30dp" />
 
                 <com.yhy.widget.core.img.ConstraintImageView
                     android:id="@+id/civ_d"
@@ -95,9 +95,9 @@
                     android:src="@mipmap/ic_avatar"
                     app:civ_border_color="#8c9eff"
                     app:civ_border_width="2dp"
+                    app:civ_original_ratio="150:100"
                     app:civ_radius_left_bottom="30dp"
-                    app:civ_radius_right_top="30dp"
-                    app:civ_ratio="150:100" />
+                    app:civ_radius_right_top="30dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -109,8 +109,8 @@
             android:src="@mipmap/ic_avatar"
             app:civ_border_color="#8c9eff"
             app:civ_border_width="2dp"
+            app:civ_original_ratio="150:100"
             app:civ_radius="12dp"
-            app:civ_ratio="150:100"
             app:civ_reference="height" />
 
         <com.yhy.widget.core.img.ConstraintImageView
@@ -120,8 +120,8 @@
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_avatar"
+            app:civ_original_ratio="200:300"
             app:civ_radius="12dp"
-            app:civ_ratio="200:300"
             app:civ_reference="height" />
     </LinearLayout>
 </ScrollView>

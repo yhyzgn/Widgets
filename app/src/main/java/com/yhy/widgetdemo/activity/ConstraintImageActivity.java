@@ -1,9 +1,6 @@
 package com.yhy.widgetdemo.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.view.View;
 
 import com.yhy.widget.core.img.ConstraintImageView;
 import com.yhy.widgetdemo.R;
@@ -60,5 +57,13 @@ public class ConstraintImageActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
+        civWidth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                civWidth.setRatio(1.5f);
+                civHeight.setRatio("250:300");
+                civTest.setRatio(400, 400);
+            }
+        });
     }
 }

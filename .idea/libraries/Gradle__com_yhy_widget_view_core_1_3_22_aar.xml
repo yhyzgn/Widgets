@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.yhy.widget:view-core:1.3.22@aar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../Library/.gradle/caches/transforms-1/files-1.1/view-core-1.3.22.aar/fb927dea81ed696a35c356df592b1e93/res" />
-      <root url="jar://$PROJECT_DIR$/../../../../Library/.gradle/caches/transforms-1/files-1.1/view-core-1.3.22.aar/fb927dea81ed696a35c356df592b1e93/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Library/.gradle/caches/transforms-1/files-1.1/view-core-1.3.22.aar/a24ffee2fdb0e145f9aef14378b64da5/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../Library/.gradle/caches/transforms-1/files-1.1/view-core-1.3.22.aar/a24ffee2fdb0e145f9aef14378b64da5/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

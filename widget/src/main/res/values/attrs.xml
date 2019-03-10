@@ -342,7 +342,9 @@
             <enum name="height" value="1" />
         </attr>
         <!--比例字符串，图片实际的宽高即可，格式：“宽:高”-->
-        <attr name="civ_ratio" format="string" />
+        <attr name="civ_original_ratio" format="string" />
+        <!--比例，宽比高的值，格式：“0.75”-->
+        <attr name="civ_ratio" format="float" />
         <!--四个角半径，默认：0dp-->
         <attr name="civ_radius" format="dimension|reference" />
         <!--左上角半径，默认：0dp-->

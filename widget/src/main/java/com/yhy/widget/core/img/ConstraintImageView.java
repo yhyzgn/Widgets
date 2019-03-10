@@ -84,7 +84,8 @@ public class ConstraintImageView extends AppCompatImageView {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ConstraintImageView);
         int reference = ta.getInt(R.styleable.ConstraintImageView_civ_reference, mReference.code);
         mReference = reference == 0 ? Reference.WIDTH : Reference.HEIGHT;
-        mOriginalRatio = ta.getString(R.styleable.ConstraintImageView_civ_ratio);
+        mOriginalRatio = ta.getString(R.styleable.ConstraintImageView_civ_original_ratio);
+        mRealRatio = ta.getFloat(R.styleable.ConstraintImageView_civ_ratio, 0);
         mRadius = ta.getDimension(R.styleable.ConstraintImageView_civ_radius, 0);
         mRadiusLeftTop = ta.getDimension(R.styleable.ConstraintImageView_civ_radius_left_top, mRadius);
         mRadiusRightTop = ta.getDimension(R.styleable.ConstraintImageView_civ_radius_right_top, mRadius);
@@ -104,6 +105,43 @@ public class ConstraintImageView extends AppCompatImageView {
         mShaderMatrix = new Matrix();
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+    }
+
+    /**
+     * 设置比例
+     *
+     * @param width  图片真实宽度
+     * @param height 图片真实高度
+     */
+    public void setRatio(int width, int height) {
+        mRealRatio = (float) width / (float) height;
+        // 触发 onMeasure() 方法执行
+        requestLayout();
+        // 触发 onDraw() 方法执行
+        postInvalidate();
+    }
+
+    /**
+     * 设置比例
+     *
+     * @param originalRatio 图片真实宽高比字符串，如：“100:200”
+     */
+    public void setRatio(String originalRatio) {
+        mOriginalRatio = originalRatio;
+        calculateRatio();
+        requestLayout();
+        postInvalidate();
+    }
+
+    /**
+     * 设置比例
+     *
+     * @param ratio 图片真实宽高比值，如：“1.75f”
+     */
+    public void setRatio(float ratio) {
+        mRealRatio = ratio;
+        requestLayout();
+        postInvalidate();
     }
 
     /**

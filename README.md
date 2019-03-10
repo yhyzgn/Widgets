@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/jCenter-1.3.24-brightgreen.svg)
+![widget](https://img.shields.io/badge/jCenter-1.3.25-brightgreen.svg)
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 ## 效果展示
@@ -1271,9 +1271,9 @@
       android:layout_margin="16dp"
       android:scaleType="centerCrop"
       android:src="@mipmap/ic_avatar"
-      app:civ_ratio="720:300"
+      app:civ_original_ratio="720:300"
       app:civ_reference="width" />
-
+    
     <!-- 以height为准，宽高比为：200:300 -->
     <com.yhy.widget.core.img.ConstraintImageView
       android:id="@+id/civ_height"
@@ -1282,9 +1282,9 @@
       android:layout_marginTop="16dp"
       android:scaleType="centerCrop"
       android:src="@mipmap/ic_avatar"
-      app:civ_ratio="200:300"
+      app:civ_original_ratio="200:300"
       app:civ_reference="height" />
-
+    
     <!-- 默认以width为准，逐个设置各个角落的圆角半径 -->
     <com.yhy.widget.core.img.ConstraintImageView
       android:id="@+id/civ_a"
@@ -1295,8 +1295,8 @@
       app:civ_border_width="2dp"
       app:civ_radius_left_bottom="30dp"
       app:civ_radius_right_top="30dp"
-      app:civ_ratio="150:100" />
-
+      app:civ_ratio="0.75" />
+    
     <!-- 默认以width为准，统一设置各个角落的圆角半径 -->
     <com.yhy.widget.core.img.ConstraintImageView
       android:id="@+id/civ_test"
@@ -1305,7 +1305,7 @@
       android:layout_marginTop="16dp"
       android:src="@mipmap/ic_avatar"
       app:civ_radius="12dp"
-      app:civ_ratio="150:100"
+      app:civ_ratio="0.5"
       app:civ_reference="height" />
     ```
 
@@ -1325,21 +1325,27 @@
     ImgUtils.load(this, civHeight, ImgUrls.getAImgUrl());
     ImgUtils.load(this, civA, ImgUrls.getAImgUrl());
     ImgUtils.load(this, civTest, ImgUrls.getAImgUrl());
+    
+    // 动态设置图片真实宽高比例（三种重载方式）
+    civWidth.setRatio(1.5f);
+    civHeight.setRatio("250:300");
+    civTest.setRatio(400, 400);
     ```
 
   * 自定义属性
 
-    |            属性             |                  说明                   |    默认值    |
-    | :-----------------------: | :-----------------------------------: | :-------: |
+    |           属性            |                            说明                             |  默认值   |
+    | :-----------------------: | :---------------------------------------------------------: | :-------: |
     |      `civ_reference`      | 参考标准，以【`width`，`height`】为准，计算另一方向的实际值 |  `width`  |
-    |        `civ_ratio`        |     比例字符串，**图片实际的宽高即可，格式：“宽:高”**      |     无     |
-    |       `civ_radius`        |             四个角半径，单位：`dp`             |    `0`    |
-    |   `civ_radius_left_top`   |             左上角半径，单位：`dp`             |    `0`    |
-    |  `civ_radius_right_top`   |             右上角半径，单位：`dp`             |    `0`    |
-    | `civ_radius_right_bottom` |             右下角半径，单位：`dp`             |    `0`    |
-    | `civ_radius_left_bottom`  |             左下角半径，单位：`dp`             |    `0`    |
-    |    `civ_border_width`     |             边框宽度，单位：`dp`              |    `0`    |
-    |    `civ_border_color`     |                 边框颜色                  | `#000000` |
+    |   `civ_original_ratio`    |      比例字符串，**图片实际的宽高即可，格式：“宽:高”**      |    无     |
+    |        `civ_ratio`        |           图片真实宽高**比例值**，格式：“`0.75`”            |    `0`    |
+    |       `civ_radius`        |                   四个角半径，单位：`dp`                    |    `0`    |
+    |   `civ_radius_left_top`   |                   左上角半径，单位：`dp`                    |    `0`    |
+    |  `civ_radius_right_top`   |                   右上角半径，单位：`dp`                    |    `0`    |
+    | `civ_radius_right_bottom` |                   右下角半径，单位：`dp`                    |    `0`    |
+    | `civ_radius_left_bottom`  |                   左下角半径，单位：`dp`                    |    `0`    |
+    |    `civ_border_width`     |                    边框宽度，单位：`dp`                     |    `0`    |
+    |    `civ_border_color`     |                          边框颜色                           | `#000000` |
 
 * <a name = "GradientTextView">`GradientTextView`</a>
 
