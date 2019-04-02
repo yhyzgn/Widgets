@@ -43,7 +43,7 @@
         <activity android:name=".activity.CheckBoxActivity" />
         <activity android:name=".activity.LineTextViewActivity" />
         <activity android:name=".activity.GradientTextViewActivity" />
-        <activity android:name=".activity.LoadingDialogActivity" />
+        <activity android:name=".activity.StatusDialogActivity" />
         <activity android:name=".activity.InputDialogActivity" />
     </application>
 

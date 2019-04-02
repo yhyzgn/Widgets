@@ -11,7 +11,7 @@ import android.widget.ScrollView;
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-09-21 14:19
  * version: 1.0.0
- * desc   :
+ * desc   : 用来嵌套RecyclerView的ScrollView
  */
 public class RecyclerScrollView extends ScrollView {
     private int downX;

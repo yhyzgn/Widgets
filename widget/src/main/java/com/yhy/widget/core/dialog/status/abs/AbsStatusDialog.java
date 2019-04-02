@@ -24,6 +24,8 @@ public abstract class AbsStatusDialog extends AlertDialog {
     private TextView tvText;
     private CharSequence mText;
 
+    protected View mStatusView;
+
     protected AbsStatusDialog(@NonNull Context context) {
         this(context, R.style.Theme_DialogStyle_Transparent);
     }
@@ -53,8 +55,9 @@ public abstract class AbsStatusDialog extends AlertDialog {
         RelativeLayout rlContainer = view.findViewById(R.id.rl_status_container);
         tvText = view.findViewById(R.id.tv_status_text);
 
+        mStatusView = statusView();
         rlContainer.removeAllViews();
-        rlContainer.addView(statusView());
+        rlContainer.addView(mStatusView);
         tvText.setText(mText);
 
         setContentView(view);
@@ -103,5 +106,10 @@ public abstract class AbsStatusDialog extends AlertDialog {
         tvText.setText(mText);
     }
 
+    /**
+     * 从子类获取表现状态的view
+     *
+     * @return view
+     */
     protected abstract View statusView();
 }

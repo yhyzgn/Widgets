@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/widget_loading_dialog_shape"
+    android:background="@drawable/widget_status_dialog_shape"
     android:orientation="vertical"
     android:paddingStart="24dp"
     android:paddingLeft="24dp"

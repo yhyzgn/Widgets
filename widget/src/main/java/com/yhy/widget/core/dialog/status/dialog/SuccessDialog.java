@@ -35,6 +35,11 @@ public class SuccessDialog extends AbsUnableCancelStatusDialog {
         return defaultView();
     }
 
+    /**
+     * 默认view
+     *
+     * @return 默认view
+     */
     private View defaultView() {
         ImageView img = new ImageView(getContext());
         img.setImageResource(R.mipmap.icon_status_dialog_success);

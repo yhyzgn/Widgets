@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/jCenter-1.3.25-brightgreen.svg)
+![widget](https://img.shields.io/badge/jCenter-1.4.0-brightgreen.svg) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 ## 效果展示
@@ -43,30 +43,30 @@
 
   > 核心控件，即各种独立使用的控件
 
-  |                    名称                    |               描述                |
-  | :--------------------------------------: | :-----------------------------: |
-  |   [`PreImgActivity`](#PreImgActivity)    |           点击图片查看大图控件            |
-  |          [`AdvView`](#AdvView)           |            滚动广告轮播控件             |
-  |  [`CheckedTextView`](#CheckedTextView)   |         可选中的`TextView`          |
-  |   [`ExpandTextView`](#ExpandTextView)    |        可展开收起的`TextView`         |
-  |  [`SquareImageView`](#SquareImageView)   |  正方形`ImageView`，右上角可设置按钮及点击事件   |
-  |  [`CircleImageView`](#CircleImageView)   |              圆形图片               |
-  |   [`RoundImageView`](#RoundImageView)    |              圆角图片               |
-  |   [`HackyViewPager`](#HackyViewPager)    |    多点触摸滑动时防止内存溢出的`ViewPager`    |
-  |       [`PickerView`](#PickerView)        |           上下滚动数据选取控件            |
-  | [`RecyclerScrollView`](#RecyclerScrollView) | 用来嵌套`RecyclerView`的`ScrollView` |
-  |        [`RvDivider`](#RvDivider)         |       `RecyclerView`的分割线        |
-  | [`SettingsItemView`](#SettingsItemView)  |          常用设置布局中的条目控件           |
-  |         [`TitleBar`](#TitleBar)          |             常用标题栏控件             |
-  |     [`SwitchButton`](#SwitchButton)      |              开关控件               |
-  |         [`StepView`](#StepView)          |              步骤化控件              |
-  |     [`HybridBridge`](#HybridBridge)      |       用于混合开发的加强版`WebView`       |
-  |         [`CheckBox`](#CheckBox)          |             带动画的多选框             |
-  |    [`LoadingDialog`](#LoadingDialog)     |             加载中进度弹窗             |
-  |  [`InputDialogView`](#InputDialogView)   |              输入框弹窗              |
-  | [`ConstraintImageView`](#ConstraintImageView) |       按比例约束宽高的`ImageView`       |
-  | [`GradientTextView`](#GradientTextView)  |         渐变动画的`TextView`         |
-  |     [`LineTextView`](#LineTextView)      |         添加线条的`TextView`         |
+  |                     名称                      |                     描述                      |
+  | :-------------------------------------------: | :-------------------------------------------: |
+  |      [`PreImgActivity`](#PreImgActivity)      |             点击图片查看大图控件              |
+  |             [`AdvView`](#AdvView)             |               滚动广告轮播控件                |
+  |     [`CheckedTextView`](#CheckedTextView)     |              可选中的`TextView`               |
+  |      [`ExpandTextView`](#ExpandTextView)      |            可展开收起的`TextView`             |
+  |     [`SquareImageView`](#SquareImageView)     | 正方形`ImageView`，右上角可设置按钮及点击事件 |
+  |     [`CircleImageView`](#CircleImageView)     |                   圆形图片                    |
+  |      [`RoundImageView`](#RoundImageView)      |                   圆角图片                    |
+  |      [`HackyViewPager`](#HackyViewPager)      |    多点触摸滑动时防止内存溢出的`ViewPager`    |
+  |          [`PickerView`](#PickerView)          |             上下滚动数据选取控件              |
+  |  [`RecyclerScrollView`](#RecyclerScrollView)  |     用来嵌套`RecyclerView`的`ScrollView`      |
+  |           [`RvDivider`](#RvDivider)           |            `RecyclerView`的分割线             |
+  |    [`SettingsItemView`](#SettingsItemView)    |           常用设置布局中的条目控件            |
+  |            [`TitleBar`](#TitleBar)            |                常用标题栏控件                 |
+  |        [`SwitchButton`](#SwitchButton)        |                   开关控件                    |
+  |            [`StepView`](#StepView)            |                  步骤化控件                   |
+  |        [`HybridBridge`](#HybridBridge)        |         用于混合开发的加强版`WebView`         |
+  |            [`CheckBox`](#CheckBox)            |                带动画的多选框                 |
+  |        [`StatusDialog`](#StatusDialog)        |                 状态进度弹窗                  |
+  |     [`InputDialogView`](#InputDialogView)     |                  输入框弹窗                   |
+  | [`ConstraintImageView`](#ConstraintImageView) |          按比例约束宽高的`ImageView`          |
+  |    [`GradientTextView`](#GradientTextView)    |             渐变动画的`TextView`              |
+  |        [`LineTextView`](#LineTextView)        |             添加线条的`TextView`              |
 
 * `layout`控件
 
@@ -1183,39 +1183,140 @@
     | `cb_color_unchecked_stroke` |  未选中时边框的颜色   | `#dfdfdf` |
     |   `cb_click_cancel_able`    |   是否可点击取消    |  `true`   |
 
-* <a name = "LoadingDialog">`LoadingDialog`</a>
+* <a name = "StatusDialog">`StatusDialog`</a>
 
-  > 加载中的进度条弹窗，比如网络加载时的等待提示
+  > 各状态【加载中|成功|失败|错误】弹窗提示
   >
   > 不用布局文件
 
-  * 进度条颜色
+  * `Common`
 
-    > 在资源文件`colors.xml`中重新定义`colorLoading`颜色值
-
-    ```xml
-    <color name="colorLoading">@color/colorAccent</color>
-    ```
-
-  * 显示和隐藏进度条
+    >   所有弹窗都继承了`AbsStatusDialog`，提供抽象方法`View statusView()`，用来从子类获取具体的状态`View`
+    >
+    >   【成功|失败|错误】三种弹窗继承于`AbsUnableCancelStatusDialog`，其内部禁用了弹窗取消事件，且也继承于`AbsStatusDialog`，**默认弹出`3s`后自动消失，具体时间可以在构造方法参数控制**
+    >
+    >   各弹窗都可以自定义弹窗图标部分，重写父类的`View statusView()`方法，返回具体的`View`即可
 
     ```java
-    tvLoading.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mDialog = new LoadingDialog(LoadingDialogActivity.this, "加载中...");
-            mDialog.show();
-
-            // 3秒后消失
-            tvLoading.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mDialog.dismiss();
-                }
-            }, 3000);
-        }
-    });
+    // 顶级抽象类
+    public abstract class AbsStatusDialog extends AlertDialog { ... }
+    
+    // 禁止取消抽象类
+    public abstract class AbsUnableCancelStatusDialog extends AbsStatusDialog { ... }
+    
+    // 加载中状态，直接继承于顶级抽象类
+    public class LoadingDialog extends AbsStatusDialog { ... }
+    
+    // 成功状态，继承于禁止取消抽象类
+    public class SuccessDialog extends AbsUnableCancelStatusDialog { ... }
+    
+    // 失败状态，继承于禁止取消抽象类
+    public class FailedDialog extends AbsUnableCancelStatusDialog { ... }
+    
+    // 错误状态，继承于禁止取消抽象类
+    public class ErrorDialog extends AbsUnableCancelStatusDialog { ... }
     ```
+
+  * 加载中弹窗
+
+    > 重写了父类的`statusView()`方法，返回了默认的`ProgressBar`控件
+    >
+    > 未禁止返回取消弹窗，已禁止点击外部取消弹窗
+
+    ```java
+    LoadingDialog dialog = new LoadingDialog(getContext());
+    dialog.setText("加载中...");
+    // 或者直接构造方法这样写
+    LoadingDialog dialog = new LoadingDialog(getContext(), "加载中...");
+    dialog.setCancelable(true, false);
+    dialog.setText("...");
+    dialog.show();
+    
+    // 取消弹窗
+    dialog.dismiss();
+    ```
+
+  * 【成功|失败|错误】
+
+    >   这三种状态用法一致，只是要用不同的类而已
+    >
+    >   已禁止所有的手动取消事件，默认为显示后`3s`后消失，该时间可自定义
+
+    ```java
+    // 成功
+    SuccessDialog dialog = new SuccessDialog(getContext(), "加载成功", 3000);
+    // 失败
+    FailedDialog dialog = new FailedDialog(getContext(), "加载失败", 3000);
+    // 错误
+    ErrorDialog dialog = new ErrorDialog(getContext(), "加载错误", 3000);
+    
+    // 设置文本
+    dialog.setText("...");
+    
+    // 显示3s后自动消失
+    dialog.show();
+    ```
+
+  * 状态弹窗管理器
+
+      >   这里提供个默认的弹窗管理器`StatusDialogManager`，用来管理各种弹窗并处理其表现形式
+      >
+      >   其用法如下
+
+      ```java
+      // 创建管理器
+      StatusDialogManager manager = StatusDialogManager.with(this)
+          .loadingText("正在加载...")
+          .successText("成功啦")
+          .failedText("失败咯")
+          .errorText("出错啦")
+          .enableLoadingCancel(true)
+          .duration(3000)
+          .create();
+      
+      // 触发控制各种弹窗事件
+      tvLoading.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              manager.loading();
+              // 或者
+              manager.loading("加载中，哈哈...");
+              new Handler().postDelayed(new Runnable() {
+                  @Override
+                  public void run() {
+                      mManager.dismiss();
+                  }
+              },3000);
+          }
+      });
+      
+      tvSuccess.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              manager.success();
+              // 或者
+              manager.success("成功啦，哈哈");
+          }
+      });
+      
+      tvFailed.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              manager.failed();
+              // 或者
+              manager.failed("成功啦，哈哈");
+          }
+      });
+      
+      tvError.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              manager.error();
+              // 或者
+              manager.error("成功啦，哈哈");
+          }
+      });
+      ```
 
 * <a name = "InputDialogView">`InputDialogView`</a>
 

@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
  */
 public abstract class AbsUnableCancelStatusDialog extends AbsStatusDialog {
     // 默认显示时间为3s
-    protected static final long DURATION = 3000;
+    private static final long DURATION = 3000;
 
     public AbsUnableCancelStatusDialog(@NonNull Context context) {
         this(context, "Text");

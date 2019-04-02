@@ -20,7 +20,7 @@ import com.yhy.widgetdemo.activity.FlowLayoutActivity;
 import com.yhy.widgetdemo.activity.GradientTextViewActivity;
 import com.yhy.widgetdemo.activity.InputDialogActivity;
 import com.yhy.widgetdemo.activity.LineTextViewActivity;
-import com.yhy.widgetdemo.activity.LoadingDialogActivity;
+import com.yhy.widgetdemo.activity.StatusDialogActivity;
 import com.yhy.widgetdemo.activity.PickViewActivity;
 import com.yhy.widgetdemo.activity.PreviewImageActivity;
 import com.yhy.widgetdemo.activity.RIVActivity;
@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("CheckBox");
         WIDGET_NAME_LIST.add("LineTextView");
         WIDGET_NAME_LIST.add("GradientTextView");
-        WIDGET_NAME_LIST.add("LoadingDialog");
+        WIDGET_NAME_LIST.add("StatusDialog");
         WIDGET_NAME_LIST.add("InputDialog");
 
         WIDGET_CLASS_LIST.add(AdvActivity.class);
@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_CLASS_LIST.add(CheckBoxActivity.class);
         WIDGET_CLASS_LIST.add(LineTextViewActivity.class);
         WIDGET_CLASS_LIST.add(GradientTextViewActivity.class);
-        WIDGET_CLASS_LIST.add(LoadingDialogActivity.class);
+        WIDGET_CLASS_LIST.add(StatusDialogActivity.class);
         WIDGET_CLASS_LIST.add(InputDialogActivity.class);
 
         lvWidget.setAdapter(new BaseAdapter() {

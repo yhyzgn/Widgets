@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -27,12 +22,18 @@ import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.lang.reflect.Field;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 /**
  * author : 颜洪毅
  * e-mail : yhyzgn@gmail.com
  * time   : 2017-09-21 14:18
  * version: 1.0.0
- * desc   :
+ * desc   : 【设置】类型界面条目布局
  */
 public class SettingsItemView extends LinearLayout {
     //默认字体大小，14sp
