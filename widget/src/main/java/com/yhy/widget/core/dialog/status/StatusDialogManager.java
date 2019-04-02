@@ -37,6 +37,26 @@ public class StatusDialogManager {
         return new StatusDialogManager(context);
     }
 
+    public StatusDialogManager loadingDialog(LoadingDialog dialog) {
+        mLoadingDialog = dialog;
+        return this;
+    }
+
+    public StatusDialogManager successDialog(SuccessDialog dialog) {
+        mSuccessDialog = dialog;
+        return this;
+    }
+
+    public StatusDialogManager failedDialog(FailedDialog dialog) {
+        mFailedDialog = dialog;
+        return this;
+    }
+
+    public StatusDialogManager errorDialog(ErrorDialog dialog) {
+        mErrorDialog = dialog;
+        return this;
+    }
+
     public StatusDialogManager loadingText(String text) {
         mLoadingText = text;
         return this;
