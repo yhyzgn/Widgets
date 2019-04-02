@@ -105,8 +105,10 @@ public class StatusDialogManager {
     }
 
     public void loading(String text) {
-        mLoadingDialog.setText(text);
-        mLoadingDialog.show();
+        if (null != mLoadingDialog) {
+            mLoadingDialog.setText(text);
+            mLoadingDialog.show();
+        }
     }
 
     public void dismiss() {
@@ -120,8 +122,10 @@ public class StatusDialogManager {
     }
 
     public void success(String text) {
-        mSuccessDialog.setText(text);
-        mSuccessDialog.show();
+        if (null != mSuccessDialog) {
+            mSuccessDialog.setText(text);
+            mSuccessDialog.show();
+        }
     }
 
     public void failed() {
@@ -129,8 +133,10 @@ public class StatusDialogManager {
     }
 
     public void failed(String text) {
-        mFailedDialog.setText(mFailedText);
-        mFailedDialog.show();
+        if (null != mFailedDialog) {
+            mFailedDialog.setText(mFailedText);
+            mFailedDialog.show();
+        }
     }
 
     public void error() {
@@ -138,7 +144,9 @@ public class StatusDialogManager {
     }
 
     public void error(String text) {
-        mErrorDialog.setText(text);
-        mErrorDialog.show();
+        if (null != mErrorDialog) {
+            mErrorDialog.setText(text);
+            mErrorDialog.show();
+        }
     }
 }
