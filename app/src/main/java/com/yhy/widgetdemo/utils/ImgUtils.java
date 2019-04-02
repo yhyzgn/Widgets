@@ -1,7 +1,6 @@
 package com.yhy.widgetdemo.utils;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
 import android.widget.ImageView;
 
 /**

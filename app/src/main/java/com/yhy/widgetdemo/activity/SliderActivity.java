@@ -1,7 +1,5 @@
 package com.yhy.widgetdemo.activity;
 
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,6 +8,9 @@ import android.widget.TextView;
 import com.yhy.widget.layout.slider.SlideLayout;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * author : 颜洪毅

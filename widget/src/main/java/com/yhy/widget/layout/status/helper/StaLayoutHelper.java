@@ -1,8 +1,8 @@
 package com.yhy.widget.layout.status.helper;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
+
+import androidx.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 

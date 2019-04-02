@@ -3,7 +3,7 @@ package com.yhy.widgetdemo.activity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yhy.widget.core.dialog.LoadingDialog;
+import com.yhy.widget.core.dialog.status.StatusDialogManager;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
 
@@ -17,7 +17,7 @@ import com.yhy.widgetdemo.activity.base.BaseActivity;
 public class LoadingDialogActivity extends BaseActivity {
 
     private TextView tvLoading;
-    private LoadingDialog mDialog;
+    private StatusDialogManager manager;
 
     @Override
     protected int getLayout() {
@@ -27,6 +27,8 @@ public class LoadingDialogActivity extends BaseActivity {
     @Override
     protected void initView() {
         tvLoading = $(R.id.tv_loading);
+
+        manager = StatusDialogManager.get(LoadingDialogActivity.this).create();
     }
 
     @Override
@@ -38,16 +40,10 @@ public class LoadingDialogActivity extends BaseActivity {
         tvLoading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDialog = new LoadingDialog(LoadingDialogActivity.this, "加载中...");
-                mDialog.show();
-
-                // 3秒后消失
-                tvLoading.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDialog.dismiss();
-                    }
-                }, 3000);
+//                manager.loading("加载中，哈哈...");
+//                manager.success();
+//                manager.failed();
+                manager.error();
             }
         });
     }

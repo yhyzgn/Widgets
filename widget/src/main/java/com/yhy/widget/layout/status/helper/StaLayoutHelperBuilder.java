@@ -1,6 +1,6 @@
 package com.yhy.widget.layout.status.helper;
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.view.View;
 
 import com.yhy.widget.layout.status.StatusLayout;

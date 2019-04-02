@@ -3,8 +3,8 @@ package com.yhy.widgetdemo.status;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhy.widget.layout.status.StatusLayout;
-import com.yhy.widget.layout.status.helper.StaLayoutHelper;
 import com.yhy.widget.layout.status.helper.StaLayoutHelperBuilder;
 import com.yhy.widget.layout.status.listener.OnStatusRetryListener;
 import com.yhy.widgetdemo.R;

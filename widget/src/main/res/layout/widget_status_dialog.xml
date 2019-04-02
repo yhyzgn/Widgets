@@ -6,22 +6,27 @@
     android:layout_gravity="center_horizontal"
     android:background="@drawable/widget_loading_dialog_shape"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingStart="24dp"
+    android:paddingLeft="24dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="24dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="16dp">
 
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+    <RelativeLayout
+        android:id="@+id/rl_status_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp" />
 
     <TextView
-        android:id="@+id/tv_loading"
+        android:id="@+id/tv_status_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textColor="#cacbb8"
         android:textSize="14sp" />
 </LinearLayout>

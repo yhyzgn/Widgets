@@ -1,8 +1,6 @@
 package com.yhy.widgetdemo.activity;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +11,6 @@ import com.yhy.widget.core.step.entity.StepAble;
 import com.yhy.widgetdemo.R;
 import com.yhy.widgetdemo.activity.base.BaseActivity;
 import com.yhy.widgetdemo.entity.TestStep;
-import com.yhy.widgetdemo.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

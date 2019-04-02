@@ -1,16 +1,19 @@
 package com.yhy.widget.core.preview;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.github.chrisbanes.photoview.OnOutsidePhotoTapListener;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.yhy.widget.R;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * author : 颜洪毅
@@ -19,7 +22,7 @@ import com.yhy.widget.R;
  * version: 1.0.0
  * desc   : 图片适配器
  */
-public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
+public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener, OnOutsidePhotoTapListener {
     private Context mCtx;
     private ImgPreCfg mCfg;
     private View mPrimaryItem;
@@ -41,12 +44,12 @@ public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
     @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         super.setPrimaryItem(container, position, object);
         mPrimaryItem = (View) object;
     }
@@ -69,14 +72,16 @@ public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
         return (ImageView) getPrimaryItem().findViewById(R.id.pv_img);
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(mCtx).inflate(R.layout.widget_item_pager_per_img, null);
         PhotoView pvImg = view.findViewById(R.id.pv_img);
         ProgressBar pbLoading = view.findViewById(R.id.pb_loading);
 
         //设置点击事件
         pvImg.setOnPhotoTapListener(this);
+        pvImg.setOnOutsidePhotoTapListener(this);
 
         //加载图片
         if (null == ImgPreHelper.getInstance().getLoader()) {
@@ -89,12 +94,17 @@ public class PreImgAdapter extends PagerAdapter implements OnPhotoTapListener {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
 
     @Override
     public void onPhotoTap(ImageView view, float x, float y) {
+        ((PreImgActivity) mCtx).finishWithAnim();
+    }
+
+    @Override
+    public void onOutsidePhotoTap(ImageView imageView) {
         ((PreImgActivity) mCtx).finishWithAnim();
     }
 }
