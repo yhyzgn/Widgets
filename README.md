@@ -2,6 +2,10 @@
 ![widget](https://img.shields.io/badge/jCenter-1.4.0-brightgreen.svg) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) 
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
+**☆ 注意 ☆**
+
+> **`1.4.0`开始，全面支持`AndroidX`，弃用`support`**
+
 ## 效果展示
 
 > 控件展示较多，更新也较频繁，不方便录制`gif`图片，请下载`demo`体验。
