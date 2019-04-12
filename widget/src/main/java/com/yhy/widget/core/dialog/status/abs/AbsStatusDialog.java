@@ -23,7 +23,6 @@ public abstract class AbsStatusDialog extends AlertDialog {
 
     private TextView tvText;
     private CharSequence mText;
-
     protected View mStatusView;
 
     protected AbsStatusDialog(@NonNull Context context) {

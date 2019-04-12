@@ -22,7 +22,7 @@ public class StatusDialogManager {
     private String mFailedText = "加载失败";
     private String mErrorText = "加载错误";
     private boolean mEnableLoadingCancel = true;
-    private long mDuration = 3000;
+    private long mDuration = 1000;
 
     private LoadingDialog mLoadingDialog;
     private SuccessDialog mSuccessDialog;

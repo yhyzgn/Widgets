@@ -14,8 +14,9 @@ import androidx.annotation.NonNull;
  * desc   : 禁止取消的抽象类弹窗
  */
 public abstract class AbsUnableCancelStatusDialog extends AbsStatusDialog {
-    // 默认显示时间为3s
-    private static final long DURATION = 3000;
+    // 默认显示时间为1s
+    private static final long DURATION = 1000;
+    private long mDuration;
 
     public AbsUnableCancelStatusDialog(@NonNull Context context) {
         this(context, "Text");
@@ -25,20 +26,22 @@ public abstract class AbsUnableCancelStatusDialog extends AbsStatusDialog {
         this(context, text, DURATION);
     }
 
-    public AbsUnableCancelStatusDialog(@NonNull Context context, CharSequence text, final long duration) {
+    public AbsUnableCancelStatusDialog(@NonNull Context context, CharSequence text, long duration) {
         super(context, text);
-        // 显示后设置回调，定时隐藏
-        setOnShowListener(new OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        AbsUnableCancelStatusDialog.this.dismiss();
-                    }
-                }, duration);
-            }
-        });
+        mDuration = duration;
+        setOnShowListener();
+    }
+
+    /**
+     * 设置显示时长，单位：ms
+     *
+     * @param duration 显示时长
+     * @return 当前对象
+     */
+    public final AbsUnableCancelStatusDialog setDuration(long duration) {
+        mDuration = duration;
+        setOnShowListener();
+        return this;
     }
 
     @Override
@@ -54,5 +57,20 @@ public abstract class AbsUnableCancelStatusDialog extends AbsStatusDialog {
     @Override
     public final void setCanceledOnTouchOutside(boolean cancel) {
         super.setCanceledOnTouchOutside(false);
+    }
+
+    private void setOnShowListener() {
+        // 显示后设置回调，定时隐藏
+        setOnShowListener(new OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        AbsUnableCancelStatusDialog.this.dismiss();
+                    }
+                }, mDuration);
+            }
+        });
     }
 }

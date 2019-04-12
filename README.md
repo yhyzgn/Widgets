@@ -1244,15 +1244,15 @@
 
     >   这三种状态用法一致，只是要用不同的类而已
     >
-    >   已禁止所有的手动取消事件，默认为显示后`3s`后消失，该时间可自定义
+    >   已禁止所有的手动取消事件，默认为显示后`1s`后消失，该时间可自定义
 
     ```java
     // 成功
-    SuccessDialog dialog = new SuccessDialog(getContext(), "加载成功", 3000);
+    SuccessDialog dialog = new SuccessDialog(getContext(), "加载成功", 1000);
     // 失败
-    FailedDialog dialog = new FailedDialog(getContext(), "加载失败", 3000);
+    FailedDialog dialog = new FailedDialog(getContext(), "加载失败", 1000);
     // 错误
-    ErrorDialog dialog = new ErrorDialog(getContext(), "加载错误", 3000);
+    ErrorDialog dialog = new ErrorDialog(getContext(), "加载错误", 1000);
     
     // 设置文本
     dialog.setText("...");
