@@ -51,9 +51,7 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
 
         if (type == ImgPreHelper.DataSourceType.BASE64) {
             byte[] decodedString = Base64.decode(model.split(",")[1], Base64.DEFAULT);
-
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
             final File f = new File(saveDir, UUID.randomUUID().toString() + ".jpg");
             if (f.exists()) {
                 f.delete();
@@ -77,17 +75,7 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
                         }
                     });
                 }
-            } catch (final FileNotFoundException e) {
-                e.printStackTrace();
-                if (null != listener) {
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            listener.onError(e.getMessage());
-                        }
-                    });
-                }
-            } catch (final IOException e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
                 if (null != listener) {
                     activity.runOnUiThread(new Runnable() {
