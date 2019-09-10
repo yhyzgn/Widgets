@@ -44,22 +44,64 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
         if (TextUtils.isEmpty(model)) {
             return;
         }
+        final File saveDir = new File(getSaveDir(activity));
+        if (!saveDir.exists()) {
+            saveDir.mkdirs();
+        }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                File saveDir = new File(getSaveDir(activity));
-                if (!saveDir.exists()) {
-                    saveDir.mkdirs();
+        if (type == ImgPreHelper.DataSourceType.BASE64) {
+            byte[] decodedString = Base64.decode(model.split(",")[1], Base64.DEFAULT);
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+            final File f = new File(saveDir, UUID.randomUUID().toString() + ".jpg");
+            if (f.exists()) {
+                f.delete();
+            }
+            try {
+                FileOutputStream out = new FileOutputStream(f);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                out.flush();
+                out.close();
+                if (null != listener) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onSuccess(f, "图片下载成功");
+                            // 刷新媒体库
+                            try {
+                                ImgPreHelper.getInstance().refreshMediaStore(f);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
-
-                if (type == ImgPreHelper.DataSourceType.BASE64){
-                    byte[] decodedString = Base64.decode(model.split(",")[1], Base64.DEFAULT);
-
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-                    saveBitmap(saveDir,bitmap);
-                }else {
+            } catch (final FileNotFoundException e) {
+                e.printStackTrace();
+                if (null != listener) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onError(e.getMessage());
+                        }
+                    });
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+                if (null != listener) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onError(e.getMessage());
+                        }
+                    });
+                }
+            }
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
                     BufferedInputStream bis = null;
                     BufferedOutputStream bos = null;
 
@@ -136,35 +178,8 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
                         }
                     }
                 }
-            }
-        }).start();
-    }
 
-    /** 保存Bitmap */
-    public void saveBitmap(File saveDir,Bitmap bm) {
-
-        File f = new File(saveDir, UUID.randomUUID().toString() + ".jpg");
-        if (f.exists()) {
-            f.delete();
-        }
-        try {
-            FileOutputStream out = new FileOutputStream(f);
-            bm.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.flush();
-            out.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        // 刷新媒体库
-        try {
-            ImgPreHelper.getInstance().refreshMediaStore(f);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            }).start();
         }
     }
 
