@@ -25,7 +25,7 @@ import com.yhy.widget.core.pager.HackyViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -138,8 +138,8 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
             if (null != downloader) {
                 Object model = mCfg.getModelList().get(vpImg.getCurrentItem());
                 // 只有预览网络图片时才能下载
-                if (model instanceof String && isNetImg((String) model)) {
-                    downloader.download(PreImgActivity.this, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
+                if (model instanceof String) {
+                    downloader.download(PreImgActivity.this, isNetImg((String) model) ? ImgPreHelper.DataSourceType.URL : ImgPreHelper.DataSourceType.BASE64, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
                     return;
                 }
                 throw new IllegalStateException("Unknown resource : [" + model + "]");
@@ -147,8 +147,9 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         }
     }
 
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQ_CODE_PERMISSION) {
             checkPermissionAndDownload();
