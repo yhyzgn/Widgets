@@ -4,8 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -37,8 +40,8 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
     }
 
     @Override
-    public void download(final PreImgActivity activity, final String imgUrl, final ImgPreHelper.OnDownloadListener listener) {
-        if (TextUtils.isEmpty(imgUrl)) {
+    public void download(final PreImgActivity activity, final ImgPreHelper.DataSourceType type, final String model, final ImgPreHelper.OnDownloadListener listener) {
+        if (TextUtils.isEmpty(model)) {
             return;
         }
 
@@ -50,83 +53,119 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
                     saveDir.mkdirs();
                 }
 
-                BufferedInputStream bis = null;
-                BufferedOutputStream bos = null;
+                if (type == ImgPreHelper.DataSourceType.BASE64){
+                    byte[] decodedString = Base64.decode(model.split(",")[1], Base64.DEFAULT);
 
-                try {
-                    URL url = new URL(imgUrl);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(8 * 1000);
-                    conn.setReadTimeout(8 * 1000);
-                    conn.connect();
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        long totalSize = conn.getContentLength();
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                            totalSize = conn.getContentLengthLong();
-                        }
+                    saveBitmap(saveDir,bitmap);
+                }else {
+                    BufferedInputStream bis = null;
+                    BufferedOutputStream bos = null;
 
-                        final File img = new File(saveDir, getFilename(conn));
+                    try {
+                        URL url = new URL(model);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("GET");
+                        conn.setConnectTimeout(8 * 1000);
+                        conn.setReadTimeout(8 * 1000);
+                        conn.connect();
 
-                        Log.e("Img", img.getAbsolutePath());
+                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                            long totalSize = conn.getContentLength();
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                totalSize = conn.getContentLengthLong();
+                            }
 
-                        bis = new BufferedInputStream(conn.getInputStream());
-                        bos = new BufferedOutputStream(new FileOutputStream(img));
-                        byte[] buffer = new byte[1024 * 8];
-                        int len = 0;
-                        long downloaded = 0;
-                        while ((len = bis.read(buffer)) != -1) {
-                            bos.write(buffer, 0, len);
-                            bos.flush();
+                            final File img = new File(saveDir, getFilename(conn));
 
-                            downloaded += len;
+                            Log.e("Img", img.getAbsolutePath());
 
-                            final long total = totalSize;
-                            final long current = downloaded;
-                            if (null != listener) {
-                                activity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        listener.onProgress((float) current / (float) total, current, total);
-                                        if (current >= total) {
-                                            listener.onSuccess(img, "图片下载成功");
-                                            // 刷新媒体库
-                                            try {
-                                                ImgPreHelper.getInstance().refreshMediaStore(img);
-                                            } catch (FileNotFoundException e) {
-                                                e.printStackTrace();
+                            bis = new BufferedInputStream(conn.getInputStream());
+                            bos = new BufferedOutputStream(new FileOutputStream(img));
+                            byte[] buffer = new byte[1024 * 8];
+                            int len = 0;
+                            long downloaded = 0;
+                            while ((len = bis.read(buffer)) != -1) {
+                                bos.write(buffer, 0, len);
+                                bos.flush();
+
+                                downloaded += len;
+
+                                final long total = totalSize;
+                                final long current = downloaded;
+                                if (null != listener) {
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            listener.onProgress((float) current / (float) total, current, total);
+                                            if (current >= total) {
+                                                listener.onSuccess(img, "图片下载成功");
+                                                // 刷新媒体库
+                                                try {
+                                                    ImgPreHelper.getInstance().refreshMediaStore(img);
+                                                } catch (FileNotFoundException e) {
+                                                    e.printStackTrace();
+                                                }
                                             }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         }
-                    }
-                } catch (final Exception e) {
-                    e.printStackTrace();
-                    if (null != listener) {
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                listener.onError(e.getMessage());
-                            }
-                        });
-                    }
-                } finally {
-                    try {
-                        if (null != bos) {
-                            bos.close();
-                        }
-                        if (null != bis) {
-                            bis.close();
-                        }
-                    } catch (IOException e) {
+                    } catch (final Exception e) {
                         e.printStackTrace();
+                        if (null != listener) {
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listener.onError(e.getMessage());
+                                }
+                            });
+                        }
+                    } finally {
+                        try {
+                            if (null != bos) {
+                                bos.close();
+                            }
+                            if (null != bis) {
+                                bis.close();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
         }).start();
+    }
+
+    /** 保存Bitmap */
+    public void saveBitmap(File saveDir,Bitmap bm) {
+
+        File f = new File(saveDir, UUID.randomUUID().toString() + ".jpg");
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bm.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        // 刷新媒体库
+        try {
+            ImgPreHelper.getInstance().refreshMediaStore(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getFilename(URLConnection conn) {
