@@ -208,10 +208,15 @@ public class ImgPreHelper {
          * 下载图片
          *
          * @param activity 图片预览Activity
-         * @param imgUrl   图片地址
+         * @param type     数据类型
+         * @param model    图片地址
          * @param listener 下载监听器
          */
-        void download(PreImgActivity activity, String imgUrl, OnDownloadListener listener);
+        void download(PreImgActivity activity, DataSourceType type, String model, OnDownloadListener listener);
+    }
+
+    public enum DataSourceType {
+        BASE64, URL
     }
 
     /**
