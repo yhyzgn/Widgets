@@ -36,6 +36,7 @@ captures/
 *.iml
 .idea/workspace.xml
 .idea/caches/build_file_checksums.ser
+.idea/caches/gradle_models.ser
 
 # Keystore files
 *.jks
