@@ -46,7 +46,7 @@ publish {
     userOrg = 'yhyzgn'
     groupId = 'com.yhy.widget'
     artifactId = 'view-core'
-    publishVersion = '1.4.2'
+    publishVersion = '1.4.3'
     desc = 'Some custom view.'
     website = 'https://github.com/yhyzgn/Widgets'
 }

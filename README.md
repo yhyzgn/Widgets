@@ -1,5 +1,5 @@
 # Widgets
-![widget](https://img.shields.io/badge/jCenter-1.4.2-brightgreen.svg) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) 
+![widget](https://img.shields.io/badge/jCenter-1.4.3-brightgreen.svg) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 **☆ 注意 ☆**

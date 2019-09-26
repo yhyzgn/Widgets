@@ -7,9 +7,13 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+
+import java.io.File;
 
 /**
  * author : 颜洪毅
@@ -138,5 +142,52 @@ public class WidgetCoreUtils {
             return;
         }
         view.setVisibility(gone ? View.GONE : View.VISIBLE);
+    }
+
+    /**
+     * 获取文件后缀名
+     *
+     * @param filename 文件名
+     * @return 文件后缀
+     */
+    public static String getExt(String filename) {
+        if (!TextUtils.isEmpty(filename)) {
+            if (filename.contains(".")) {
+                return filename.substring(filename.lastIndexOf(".") + 1);
+            }
+            return "";
+        }
+        return null;
+    }
+
+    /**
+     * 获取文件后缀名
+     *
+     * @param file 文件
+     * @return 后缀
+     */
+    public static String getExt(File file) {
+        return null == file ? null : getExt(file.getName());
+    }
+
+    /**
+     * 获取文件MimeType
+     *
+     * @param filename 文件名
+     * @return MimeType
+     */
+    public static String getMimeType(String filename) {
+        String ext = getExt(filename);
+        return TextUtils.isEmpty(ext) ? null : MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext);
+    }
+
+    /**
+     * 获取文件MimeType
+     *
+     * @param file 文件
+     * @return MimeType
+     */
+    public static String getMimeType(File file) {
+        return null == file ? null : getMimeType(file.getName());
     }
 }

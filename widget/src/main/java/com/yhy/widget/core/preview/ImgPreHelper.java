@@ -1,6 +1,7 @@
 package com.yhy.widget.core.preview;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.yhy.widget.R;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -178,9 +180,16 @@ public class ImgPreHelper {
      */
     public void refreshMediaStore(File file) throws FileNotFoundException {
         // 把文件插入图库
-        MediaStore.Images.Media.insertImage(mApp.getContentResolver(), file.getAbsolutePath(), file.getName(), null);
+        // MediaStore.Images.Media.insertImage(mApp.getContentResolver(), file.getAbsolutePath(), file.getName(), null);
         // 通知图库刷新
-        mApp.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+        // mApp.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+        // 以上方法会导致保存两张一模一样的图片，改用一下方法
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DATA, file.getAbsolutePath());
+        values.put(MediaStore.Images.Media.MIME_TYPE, WidgetCoreUtils.getMimeType(file));
+        Uri uri = mApp.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        // 通知图库刷新
+        mApp.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
     }
 
     /**
