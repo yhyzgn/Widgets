@@ -10,7 +10,7 @@
 
 > 控件展示较多，更新也较频繁，不方便录制`gif`图片，请下载`demo`体验。
 
-* [`Demo`](https://fir.im/zufy)下载
+* [`Demo`](http://d.firim.top/zufy)下载
 
   ![download](imgs/download_qr.png)
 
