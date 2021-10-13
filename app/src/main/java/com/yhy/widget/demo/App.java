@@ -92,7 +92,7 @@ public class App extends Application {
             return;
         }
 
-        Picasso picasso = Picasso.with(ctx);
+        Picasso picasso = Picasso.get();
         RequestCreator rc = null;
         if (model instanceof String) {
             rc = picasso.load((String) model);
