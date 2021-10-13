@@ -3,9 +3,11 @@ package com.yhy.widget.core.title;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -34,7 +36,7 @@ public class TitleBar extends FrameLayout {
     private TextView tvRight;
     private ImageView ivLeft;
     private ImageView ivRight;
-    private OnTitleBarListener mClickListener;
+    private OnTitleBarClickListener mClickListener;
     private OnTitleBarLongClickListener mLongClickListener;
     private int mActionBarHeight;
 
@@ -375,18 +377,6 @@ public class TitleBar extends FrameLayout {
 
     /**
      * 设置各控件点击事件
-     * <p>
-     * 已过时，用{@link TitleBar#setOnTitleBarClickListener(OnTitleBarClickListener)}代替
-     *
-     * @param listener 点击事件
-     */
-    @Deprecated
-    public void setOnTitleBarListener(OnTitleBarListener listener) {
-        mClickListener = listener;
-    }
-
-    /**
-     * 设置各控件点击事件
      *
      * @param listener 点击事件
      */
@@ -404,12 +394,9 @@ public class TitleBar extends FrameLayout {
     }
 
     /**
-     * 事件监听器
-     * <p>
-     * 已过时，用{@link TitleBar.OnTitleBarClickListener}代替
+     * 点击事件监听器
      */
-    @Deprecated
-    public static class OnTitleBarListener {
+    public static class OnTitleBarClickListener {
         /**
          * 标题栏被点击
          *
@@ -449,12 +436,6 @@ public class TitleBar extends FrameLayout {
          */
         public void rightIconClick(View view) {
         }
-    }
-
-    /**
-     * 点击事件监听器
-     */
-    public static class OnTitleBarClickListener extends OnTitleBarListener {
     }
 
     /**
