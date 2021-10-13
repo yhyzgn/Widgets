@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(15)
+        languageVersion = JavaLanguageVersion.of(11)
     }
 }
 
@@ -31,8 +31,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_15
-        targetCompatibility JavaVersion.VERSION_15
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     // 打包apk自动生成名称
