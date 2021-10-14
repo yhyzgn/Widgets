@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
-}
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(11)
+//    }
+//}
 
 android {
     compileSdkVersion 31
