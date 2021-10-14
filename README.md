@@ -1,5 +1,6 @@
 # Widgets
-![widget](https://img.shields.io/bintray/v/yhyzgn/maven/view-core?color=brightgreen&label=jcenter) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+![](https://jitpack.io/v/yhyzgn/Widgets.svg) [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
 > `widget`是一个`Android`自定义控件库。包含多种常用控件。
 
 **☆ 注意 ☆**
@@ -18,7 +19,7 @@
 
 * 引入`jitpack`
 
-  > 由于引用了`PhotoView`，而其中使用了`jitpack`中的库，所以需要在项目根目录下的`build.gradle`中引入`jitpack`
+  > 仓库已迁移到`jitpack`
 
   ```groovy
   allprojects {
@@ -35,7 +36,7 @@
 
   ```groovy
   dependencies {
-      compile 'com.yhy.widget:view-core:latestVersion'
+      implementation 'com.github.yhyzgn:Widgets:latestVersion'
   }
   ```
 
@@ -1343,13 +1344,13 @@
                 dialog.dismiss();
                 toast(content);
             }
-  
+    
             @Override
             public void onShow(int offsetX, int offsetY, int[] position) {
                 // 点击某条评论则这条评论刚好在输入框上面，点击评论按钮则输入框刚好挡住按钮
                 rvContent.smoothScrollBy(0, offsetY, new AccelerateDecelerateInterpolator());
             }
-  
+    
             @Override
             public void onDismiss() {
             }
@@ -1611,14 +1612,14 @@
         toast("点击了TextView");
       }
     });
-  
+    
     crlTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         toast("点击");
       }
     });
-  
+    
     crlTest.setOnCheckedChangeListener(new CheckedRelativeLayout.OnCheckedChangeListener() {
       @Override
       public void onChanged(CheckedRelativeLayout crl, boolean isChecked) {
@@ -1821,12 +1822,12 @@
       public int getCount() {
         return 4;
       }
-  
+    
       @Override
       public boolean isViewFromObject(View view, Object object) {
         return view == object;
       }
-  
+    
       @Override
       public Object instantiateItem(ViewGroup container, int position) {
         ImageView iv = new ImageView(SliderActivity.this);
@@ -1844,13 +1845,13 @@
         container.addView(iv);
         return iv;
       }
-  
+    
       @Override
       public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
       }
     });
-  
+    
     // 设置事件
     // 当菜单按钮点击时关闭菜单
     tvMenu.setOnClickListener(new View.OnClickListener() {
@@ -1859,7 +1860,7 @@
         slSlide.close();
       }
     });
-  
+    
     // 监听内容，根据需要改变侧滑菜单的可用性
     slSlide.setOnSlideEnableWatcher(new SlideLayout.OnSlideEnableWatcher() {
       @Override
@@ -1868,19 +1869,19 @@
         return vpContent.getCurrentItem() != 1;
       }
     });
-  
+    
     // 菜单滑动状态监听
     slSlide.setOnStateChangeListener(new SlideLayout.OnStateChangeListener() {
       @Override
       public void onOpened() {
         tvMenu.setText("已打开");
       }
-  
+    
       @Override
       public void onClosed() {
         tvMenu.setText("已关闭");
       }
-  
+    
       @Override
       public void onDragging(float percent, int dx, int total) {
         tvMenu.setText("比例：" + percent);
@@ -1917,7 +1918,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff">
-    
+      
         <!--当只有一个子控件时，该子控件会被当作[成功]状态的界面，此时无需指定tag为success-->
         <LinearLayout
           android:layout_width="match_parent"
@@ -1925,7 +1926,7 @@
           android:gravity="center"
           android:orientation="vertical"
           android:tag="success">
-    
+      
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -1946,25 +1947,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff">
-    
+      
         <!-- 默认的加载中页面 -->
         <com.yhy.widget.layout.status.view.StaLoadingView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:tag="loading" />
-    
+      
         <!-- 默认的错误页面 -->
         <com.yhy.widget.layout.status.view.StaErrorView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:tag="error" />
-    
+      
         <!-- 默认的空数据页面 -->
         <com.yhy.widget.layout.status.view.StaEmptyView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:tag="empty" />
-    
+      
         <!-- 成功页面 -->
         <LinearLayout
           android:layout_width="match_parent"
@@ -1972,7 +1973,7 @@
           android:gravity="center"
           android:orientation="vertical"
           android:tag="success">
-    
+      
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -2042,7 +2043,7 @@
       StaLayoutHelperBuilder builder = new StaLayoutHelperBuilder.Builder(slContent).setLoadingLayout(getLoadingView()).build();
       // builder 还可以设置各种状态的view
       slContent.setHelper(builder.getHelper());
-    
+      
       // ...
       private View getLoadingView() {
         TextView tv = new TextView(this);
