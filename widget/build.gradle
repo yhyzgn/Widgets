@@ -63,7 +63,6 @@ afterEvaluate {
 
                 group = "com.github.yhyzgn"
                 artifactId = "Widgets"
-                version = "1.0.0"
 
                 // Adds javadocs and sources as separate jars.
                 artifact androidJavadocsJar
