@@ -1,10 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply plugin: 'maven-publish'
-
-apply from: "config.gradle"
-def rootConfig = rootProject.ext
-
-group = rootConfig.pkg.groupId
 
 buildscript {
     repositories {

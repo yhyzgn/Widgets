@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
     }
 }
-
-apply from: "../config.gradle"
-def rootConfig = rootProject.ext
 
 android {
     compileSdkVersion 31
@@ -63,18 +61,18 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                group = rootConfig.pkg.groupId
-                artifactId = rootConfig.pkg.artifactId
-                version = rootConfig.pkg.version
+                group = "com.github.yhyzgn"
+                artifactId = "Widgets"
+                version = "1.0.0"
 
                 // Adds javadocs and sources as separate jars.
                 artifact androidJavadocsJar
                 artifact(sourceJar)
 
                 pom {
-                    name = rootConfig.pkg.artifactId
-                    description = rootConfig.pkg.desc
-                    url = rootConfig.cvs.url
+                    name = "Widgets"
+                    description = 'Android UI Components.'
+                    url = 'https://github.com/yhyzgn/Widgets'
                     licenses {
                         license {
                             name = 'The Apache License, Version 2.0'
