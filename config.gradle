@@ -1,9 +1,9 @@
 ext {
     pkg = [
-            groupId   : 'com.yhy.widget',
-            artifactId: 'view-core',
-            version   : '1.3.24',
-            desc      : 'Some custom view.'
+            groupId   : 'com.github.yhyzgn',
+            artifactId: 'Widgets',
+            version   : '1.0.0',
+            desc      : 'Android UI Components.'
     ]
 
     developer = [
@@ -21,6 +21,6 @@ ext {
     ]
 
     doc = [
-            title: 'Doc for View-Core'
+            title: 'Doc for Widgets'
     ]
 }

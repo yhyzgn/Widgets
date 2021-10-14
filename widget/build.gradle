@@ -6,6 +6,9 @@ java {
     }
 }
 
+apply from: "../config.gradle"
+def rootConfig = rootProject.ext
+
 android {
     compileSdkVersion 31
 
@@ -52,4 +55,66 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0-alpha04'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation 'com.nineoldandroids:library:2.4.0'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                group = rootConfig.pkg.groupId
+                artifactId = rootConfig.pkg.artifactId
+                version = rootConfig.pkg.version
+
+                // Adds javadocs and sources as separate jars.
+                artifact androidJavadocsJar
+                artifact(sourceJar)
+
+                pom {
+                    name = rootConfig.pkg.artifactId
+                    description = rootConfig.pkg.desc
+                    url = rootConfig.cvs.url
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'yhyzgn'
+                            name = 'yhyzgn'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git@github.com/yhyzgn/Widgets.git'
+                        developerConnection = 'scm:git@github.com/yhyzgn/Widgets.git'
+                        url = 'https://github.com/yhyzgn/Widgets'
+                    }
+                }
+            }
+        }
+    }
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            owner.classpath += variant.javaCompileProvider.get().classpath
+        }
+    }
+    exclude '**/R.html', '**/R.*.html', '**/index.html'
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    archiveClassifier.set('javadoc')
+    from androidJavadocs.destinationDir
+}
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
 }
