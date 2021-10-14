@@ -1,2 +1,8 @@
-jdk:
-  - openjdk11
+#jdk:
+#  - openjdk11
+
+before_install:
+  - source "$HOME/.sdkman/bin/sdkman-init.sh"
+  - sdk update
+  - sdk install java 15.0.2-open
+  - sdk use java 15.0.2-open
