@@ -41,23 +41,23 @@ public class TitleActivity extends BaseActivity {
     }
 
     private void setPadding(final TitleBar titleBar) {
-        titleBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int paddingTop = WidgetCoreUtils.dp2px(TitleActivity.this, 24);
-                titleBar.setPadding(0, paddingTop, 0, 0);
-
-                ViewGroup.LayoutParams params = titleBar.getLayoutParams();
-                if (null == params) {
-                    params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                }
-                params.width = titleBar.getMeasuredWidth();
-                params.height = titleBar.getMeasuredHeight() + paddingTop;
-                titleBar.setLayoutParams(params);
-
-                titleBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-            }
-        });
+//        titleBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                int paddingTop = WidgetCoreUtils.dp2px(TitleActivity.this, 24);
+//                titleBar.setPadding(0, paddingTop, 0, 0);
+//
+//                ViewGroup.LayoutParams params = titleBar.getLayoutParams();
+//                if (null == params) {
+//                    params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                }
+//                params.width = titleBar.getMeasuredWidth();
+//                params.height = titleBar.getMeasuredHeight() + paddingTop;
+//                titleBar.setLayoutParams(params);
+//
+//                titleBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//            }
+//        });
     }
 
     @Override

@@ -3,19 +3,20 @@ package com.yhy.widget.core.title;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.yhy.widget.R;
 import com.yhy.widget.utils.WidgetCoreUtils;
@@ -27,10 +28,11 @@ import com.yhy.widget.utils.WidgetCoreUtils;
  * version: 1.0.0
  * desc   : 标题栏
  */
-@SuppressWarnings("DeprecatedIsStillUsed")
-public class TitleBar extends FrameLayout {
+public class TitleBar extends ConstraintLayout {
 
     private View mView;
+    private LinearLayout llContainerLeft;
+    private LinearLayout llContainerRight;
     private TextView tvTitle;
     private TextView tvLeft;
     private TextView tvRight;
@@ -56,6 +58,8 @@ public class TitleBar extends FrameLayout {
     private void init(Context context, AttributeSet attrs) {
         mView = LayoutInflater.from(context).inflate(R.layout.widget_titb_bar, this);
         tvTitle = $(mView, R.id.tv_title);
+        llContainerLeft = $(mView, R.id.ll_title_container_left);
+        llContainerRight = $(mView, R.id.ll_title_container_right);
         tvLeft = $(mView, R.id.tv_left);
         tvRight = $(mView, R.id.tv_right);
         ivLeft = $(mView, R.id.iv_left);
@@ -85,6 +89,21 @@ public class TitleBar extends FrameLayout {
             mActionBarHeight = WidgetCoreUtils.dp2px(getContext(), 56);
         }
 
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int wdLeft = llContainerLeft.getWidth();
+                int wdRight = llContainerRight.getWidth();
+
+                int paddingHorizontal = Math.max(wdLeft, wdRight);
+
+                // 设置 padding
+                tvTitle.setPadding(paddingHorizontal, tvTitle.getPaddingTop(), paddingHorizontal, tvTitle.getPaddingBottom());
+
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
         setTitle(title)
                 .setLeftText(leftText)
                 .setRightText(rightText)
@@ -107,20 +126,12 @@ public class TitleBar extends FrameLayout {
      */
     public TitleBar setTitle(String title) {
         tvTitle.setText(title);
-        tvTitle.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (null != mClickListener) {
-                    mClickListener.titleClick(view);
-                }
+        tvTitle.setOnClickListener(view -> {
+            if (null != mClickListener) {
+                mClickListener.titleClick(view);
             }
         });
-        tvTitle.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return null != mLongClickListener && mLongClickListener.titleLongClick(v);
-            }
-        });
+        tvTitle.setOnLongClickListener(v -> null != mLongClickListener && mLongClickListener.titleLongClick(v));
         return this;
     }
 
@@ -136,20 +147,12 @@ public class TitleBar extends FrameLayout {
         } else {
             tvLeft.setVisibility(VISIBLE);
             tvLeft.setText(text);
-            tvLeft.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (null != mClickListener) {
-                        mClickListener.leftTextClick(view);
-                    }
+            tvLeft.setOnClickListener(view -> {
+                if (null != mClickListener) {
+                    mClickListener.leftTextClick(view);
                 }
             });
-            tvLeft.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return null != mLongClickListener && mLongClickListener.leftTextLongClick(v);
-                }
-            });
+            tvLeft.setOnLongClickListener(v -> null != mLongClickListener && mLongClickListener.leftTextLongClick(v));
         }
         return this;
     }
@@ -166,20 +169,12 @@ public class TitleBar extends FrameLayout {
         } else {
             tvRight.setVisibility(VISIBLE);
             tvRight.setText(text);
-            tvRight.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (null != mClickListener) {
-                        mClickListener.rightTextClick(view);
-                    }
+            tvRight.setOnClickListener(view -> {
+                if (null != mClickListener) {
+                    mClickListener.rightTextClick(view);
                 }
             });
-            tvRight.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return null != mLongClickListener && mLongClickListener.rightTextLongClick(v);
-                }
-            });
+            tvRight.setOnLongClickListener(v -> null != mLongClickListener && mLongClickListener.rightTextLongClick(v));
         }
         return this;
     }
@@ -196,20 +191,12 @@ public class TitleBar extends FrameLayout {
         } else {
             ivLeft.setVisibility(VISIBLE);
             ivLeft.setImageResource(resId);
-            ivLeft.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (null != mClickListener) {
-                        mClickListener.leftIconClick(view);
-                    }
+            ivLeft.setOnClickListener(view -> {
+                if (null != mClickListener) {
+                    mClickListener.leftIconClick(view);
                 }
             });
-            ivLeft.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return null != mLongClickListener && mLongClickListener.leftIconLongClick(v);
-                }
-            });
+            ivLeft.setOnLongClickListener(v -> null != mLongClickListener && mLongClickListener.leftIconLongClick(v));
         }
         return this;
     }
@@ -226,20 +213,12 @@ public class TitleBar extends FrameLayout {
         } else {
             ivRight.setVisibility(VISIBLE);
             ivRight.setImageResource(resId);
-            ivRight.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (null != mClickListener) {
-                        mClickListener.rightIconClick(view);
-                    }
+            ivRight.setOnClickListener(view -> {
+                if (null != mClickListener) {
+                    mClickListener.rightIconClick(view);
                 }
             });
-            ivRight.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return null != mLongClickListener && mLongClickListener.rightIconLongClick(v);
-                }
-            });
+            ivRight.setOnLongClickListener(v -> null != mLongClickListener && mLongClickListener.rightIconLongClick(v));
         }
         return this;
     }

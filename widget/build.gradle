@@ -103,7 +103,7 @@ task androidJavadocs(type: Javadoc) {
             owner.classpath += variant.javaCompileProvider.get().classpath
         }
     }
-    exclude '**/R.html', '**/R.*.html', '**/index.html'
+    exclude '**/R.html', '**/R.*.html'
 }
 
 task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
