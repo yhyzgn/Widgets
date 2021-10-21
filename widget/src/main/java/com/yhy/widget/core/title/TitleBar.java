@@ -67,6 +67,7 @@ public class TitleBar extends ConstraintLayout {
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
         String title = ta.getString(R.styleable.TitleBar_tb_title);
+        int maxLines = ta.getInt(R.styleable.TitleBar_tb_max_line, 1);
         String leftText = ta.getString(R.styleable.TitleBar_tb_left_text);
         String rightText = ta.getString(R.styleable.TitleBar_tb_right_text);
         int leftIcon = ta.getResourceId(R.styleable.TitleBar_tb_left_icon, 0);
@@ -96,15 +97,19 @@ public class TitleBar extends ConstraintLayout {
                 int wdRight = llContainerRight.getWidth();
 
                 int paddingHorizontal = Math.max(wdLeft, wdRight);
+                int shouldIndent = paddingHorizontal * 2;
 
-                // 设置 padding
-                tvTitle.setPadding(paddingHorizontal, tvTitle.getPaddingTop(), paddingHorizontal, tvTitle.getPaddingBottom());
+                if (tvTitle.getWidth() > mView.getWidth() - shouldIndent) {
+                    // 不覆盖左右按钮图标
+                    tvTitle.setWidth(tvTitle.getWidth() - shouldIndent);
+                }
 
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
 
         setTitle(title)
+                .setMaxLines(maxLines)
                 .setLeftText(leftText)
                 .setRightText(rightText)
                 .setLeftIcon(leftIcon)
@@ -132,6 +137,17 @@ public class TitleBar extends ConstraintLayout {
             }
         });
         tvTitle.setOnLongClickListener(v -> null != mLongClickListener && mLongClickListener.titleLongClick(v));
+        return this;
+    }
+
+    /**
+     * 设置最大行数
+     *
+     * @param lines 行数
+     * @return 当前对象
+     */
+    public TitleBar setMaxLines(int lines) {
+        tvTitle.setMaxLines(lines);
         return this;
     }
 

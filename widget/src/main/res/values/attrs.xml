@@ -16,6 +16,8 @@
     <declare-styleable name="TitleBar">
         <!--标题文本，默认空-->
         <attr name="tb_title" format="string|reference" />
+        <!--最大行数，默认1-->
+        <attr name="tb_max_line" format="integer" min="1" />
         <!--左边文本，默认空-->
         <attr name="tb_left_text" format="string|reference" />
         <!--右边文本，默认空-->
