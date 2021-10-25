@@ -1,9 +1,9 @@
 package com.yhy.widget.demo.activity;
 
+import android.view.animation.AccelerateDecelerateInterpolator;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.yhy.widget.core.dialog.InputDialogView;
 import com.yhy.widget.core.recycler.div.RvDivider;
@@ -53,34 +53,31 @@ public class InputDialogActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-        mAdapter.setOnItemClickListener(new RvTestAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(final View itemView, RecyclerView.Adapter adapter, int position) {
-                // 显示输入框弹窗
-                InputDialogView.Builder builder = new InputDialogView.Builder(InputDialogActivity.this);
-                builder
-                        .hint(position % 2 != 0 ? "回复" + mDataList.get(position) : "说点儿什么呀...")
-                        .contentSize(14)
-                        .anchor(itemView)
-                        .listener(new InputDialogView.OnInputDialogListener() {
-                            @Override
-                            public void onPublish(InputDialogView dialog, CharSequence content) {
-                                dialog.dismiss();
-                                toast(content);
-                            }
+        mAdapter.setOnItemClickListener((itemView, adapter, position) -> {
+            // 显示输入框弹窗
+            InputDialogView.Builder builder = new InputDialogView.Builder(InputDialogActivity.this);
+            builder
+                    .hint(position % 2 != 0 ? "回复" + mDataList.get(position) : "说点儿什么呀...")
+                    .contentSize(14)
+                    .anchor(itemView)
+                    .listener(new InputDialogView.OnInputDialogListener() {
+                        @Override
+                        public void onPublish(InputDialogView dialog, CharSequence content) {
+                            dialog.dismiss();
+                            toast(content);
+                        }
 
-                            @Override
-                            public void onShow(int offsetX, int offsetY, int[] position) {
-                                // 点击某条评论则这条评论刚好在输入框上面，点击评论按钮则输入框刚好挡住按钮
-                                rvContent.smoothScrollBy(0, offsetY, new AccelerateDecelerateInterpolator());
-                            }
+                        @Override
+                        public void onShow(int offsetX, int offsetY, int[] position) {
+                            // 点击某条评论则这条评论刚好在输入框上面，点击评论按钮则输入框刚好挡住按钮
+                            rvContent.smoothScrollBy(0, offsetY, new AccelerateDecelerateInterpolator());
+                        }
 
-                            @Override
-                            public void onDismiss() {
-                            }
-                        });
-                builder.build().show();
-            }
+                        @Override
+                        public void onDismiss() {
+                        }
+                    });
+            builder.build().show();
         });
     }
 }
