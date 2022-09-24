@@ -30,8 +30,8 @@ public class CircleImageView extends AbsRoundImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int width = Math.max(getMeasuredWidth(), getMeasuredHeight());
-        setMeasuredDimension(width, width);
+        int size = Math.max(getMeasuredWidth(), getMeasuredHeight());
+        setMeasuredDimension(size, size);
     }
 
     @Override

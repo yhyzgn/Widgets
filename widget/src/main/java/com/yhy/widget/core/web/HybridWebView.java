@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,6 +15,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.yhy.widget.R;
 import com.yhy.widget.core.web.bridge.HybridBridge;
@@ -446,17 +447,12 @@ public class HybridWebView extends WebView {
             mHelper = new DownHelper(getContext());
 
             settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-            settings.setAppCacheEnabled(true);
             settings.setDatabaseEnabled(true);
             // 开启 DOM storage API 功能
             // 开启DOM缓存，关闭的话H5自身的一些操作是无效的
             settings.setDomStorageEnabled(true);
-            settings.setAppCachePath(mHelper.getCacheDir());
-            // 设置缓存时间
-            settings.setAppCacheMaxSize(mConfig.getCacheExpire());
         } else {
             settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-            settings.setAppCacheEnabled(false);
             settings.setDatabaseEnabled(false);
             settings.setDomStorageEnabled(false);
         }

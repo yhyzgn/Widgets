@@ -3,8 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Widgets.iml" filepath="$PROJECT_DIR$/Widgets.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/widget/widget.iml" filepath="$PROJECT_DIR$/widget/widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Widgets.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Widgets.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Widgets.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Widgets.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Widgets.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Widgets.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Widgets.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Widgets.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.main.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/Widgets.widget.unitTest.iml" />
     </modules>
   </component>
 </project>

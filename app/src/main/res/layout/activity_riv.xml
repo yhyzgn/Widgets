@@ -8,8 +8,8 @@
 
     <com.yhy.widget.core.img.round.CircleImageView
         android:id="@+id/civ_avatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_avatar"
         app:riv_border_color="#8c9eff"
