@@ -14,6 +14,13 @@
             android:layout_gravity="center"
             app:SpinKit_Color="#06C1AE" />
 
+    <com.yhy.widget.core.loading.LoadingView
+            style="@style/LoadingView.Small"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:indicator_color="#06C1AE"
+            app:indicator_name="PacmanIndicator" />
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

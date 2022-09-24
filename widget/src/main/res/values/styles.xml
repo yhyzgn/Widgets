@@ -44,4 +44,30 @@
         <item name="colorAccent">@color/colorLoading</item>
     </style>
 
+    <!--加载中控件-->
+    <style name="LoadingView" parent="AppTheme">
+        <item name="min_width">48dip</item>
+        <item name="max_width">48dip</item>
+        <item name="min_height">48dip</item>
+        <item name="max_height">48dip</item>
+        <item name="indicator_name">BallPulseIndicator</item>
+    </style>
+
+    <!--加载中控件-->
+    <style name="LoadingView.Large" parent="AppTheme">
+        <item name="min_width">76dip</item>
+        <item name="max_width">76dip</item>
+        <item name="min_height">76dip</item>
+        <item name="max_height">76dip</item>
+        <item name="indicator_name">BallPulseIndicator</item>
+    </style>
+
+    <!--加载中控件-->
+    <style name="LoadingView.Small" parent="AppTheme">
+        <item name="min_width">24dip</item>
+        <item name="max_width">24dip</item>
+        <item name="min_height">24dip</item>
+        <item name="max_height">24dip</item>
+        <item name="indicator_name">BallPulseIndicator</item>
+    </style>
 </resources>

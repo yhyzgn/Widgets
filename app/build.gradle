@@ -2,8 +2,14 @@ plugins {
     id 'com.android.application'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
 android {
-    namespace 'com.yhy.widgetdemo'
+    namespace 'com.yhy.widget.demo'
     compileSdkVersion 33
 
     defaultConfig {
@@ -25,6 +31,11 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     // 打包apk自动生成名称

@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,11 +23,11 @@ import com.yhy.widget.R;
  * desc   : 输入框弹窗
  */
 public class InputDialogView {
-    private Builder mBuilder;
-    private Handler mHandler;
+    private final Builder mBuilder;
+    private final Handler mHandler;
     private Runnable mRunnable;
     private Dialog mDialog;
-    private int[] mAnchorLocation;
+    private final int[] mAnchorLocation;
 
     /**
      * 构造方法
@@ -35,7 +36,9 @@ public class InputDialogView {
      */
     private InputDialogView(Builder builder) {
         mBuilder = builder;
-        mHandler = new Handler();
+        mHandler = new Handler(msg -> {
+            return true;
+        });
         mAnchorLocation = new int[2];
     }
 
@@ -71,16 +74,13 @@ public class InputDialogView {
 
         mDialog.setCancelable(true);
 
-        mDialog.findViewById(R.id.ll_input_area_container).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-                //取消滚动
-                cancelScroll();
+        mDialog.findViewById(R.id.ll_input_area_container).setOnClickListener(v -> {
+            mDialog.dismiss();
+            //取消滚动
+            cancelScroll();
 
-                if (mBuilder.listener != null) {
-                    mBuilder.listener.onDismiss();
-                }
+            if (mBuilder.listener != null) {
+                mBuilder.listener.onDismiss();
             }
         });
 
@@ -100,12 +100,10 @@ public class InputDialogView {
             }
         });
 
-        tvPublish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mBuilder.listener) {
-                    mBuilder.listener.onPublish(InputDialogView.this, etInput.getText().toString().trim());
-                }
+        tvPublish.setOnClickListener(v -> {
+            hideKeyboard(etInput);
+            if (null != mBuilder.listener) {
+                mBuilder.listener.onPublish(InputDialogView.this, etInput.getText().toString().trim());
             }
         });
         mDialog.show();
@@ -113,25 +111,25 @@ public class InputDialogView {
         if (null != mBuilder.anchor) {
             mBuilder.anchor.getLocationOnScreen(mAnchorLocation);
         }
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if (null != mBuilder.listener) {
-                    int[] position = new int[2];
-                    // 输入框距离屏幕顶部（不包括状态栏）的长度
-                    llInputArea.getLocationOnScreen(position);
-                    int width = 0;
-                    int height = 0;
-                    // 计算偏移量，以便进行相关操作，如：点击某个view时，让该view刚好在输入框上面
-                    if (null != mBuilder.anchor) {
-                        width = mBuilder.anchor.getWidth();
-                        height = mBuilder.anchor.getHeight();
-                    }
-                    int offsetX = mAnchorLocation[0] + width - position[0];
-                    int offsetY = mAnchorLocation[1] + height - position[1];
 
-                    mBuilder.listener.onShow(offsetX, offsetY, position);
+        showKeyboard(etInput);
+
+        mRunnable = () -> {
+            if (null != mBuilder.listener) {
+                int[] position = new int[2];
+                // 输入框距离屏幕顶部（不包括状态栏）的长度
+                llInputArea.getLocationOnScreen(position);
+                int width = 0;
+                int height = 0;
+                // 计算偏移量，以便进行相关操作，如：点击某个view时，让该view刚好在输入框上面
+                if (null != mBuilder.anchor) {
+                    width = mBuilder.anchor.getWidth();
+                    height = mBuilder.anchor.getHeight();
                 }
+                int offsetX = mAnchorLocation[0] + width - position[0];
+                int offsetY = mAnchorLocation[1] + height - position[1];
+
+                mBuilder.listener.onShow(offsetX, offsetY, position);
             }
         };
 
@@ -156,12 +154,23 @@ public class InputDialogView {
         }
     }
 
+    private void showKeyboard(View view) {
+        view.requestFocus();
+        InputMethodManager imm = (InputMethodManager) mBuilder.context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, 0);
+    }
+
+    private boolean hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) mBuilder.context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        return imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
     /**
      * 构造器
      */
     public static class Builder {
         // 上下文
-        private Context context;
+        private final Context context;
         // 提示文字
         private CharSequence hint;
         // 文本内容
@@ -244,7 +253,7 @@ public class InputDialogView {
          * @return 当前构造器对象
          */
         public Builder contentColorRes(int res) {
-            return contentColor(context.getResources().getColor(res));
+            return contentColor(context.getResources().getColor(res, null));
         }
 
         /**
@@ -287,7 +296,7 @@ public class InputDialogView {
          * @return 当前构造器对象
          */
         public Builder publishColorRes(int res) {
-            return publishColor(context.getResources().getColor(res));
+            return publishColor(context.getResources().getColor(res, null));
         }
 
         /**
@@ -319,7 +328,7 @@ public class InputDialogView {
          * @return 当前构造器对象
          */
         public Builder bgColorRes(int res) {
-            return bgColor(context.getResources().getColor(res));
+            return bgColor(context.getResources().getColor(res, null));
         }
 
         /**
