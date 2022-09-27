@@ -40,7 +40,7 @@ public class RIVActivity extends BaseActivity {
         ImgUtils.load(this, civAvatar, ImgUrls.getAImgUrl());
         ImgUtils.load(this, rivA, ImgUrls.getAImgUrl());
         ImgUtils.load(this, rivB, ImgUrls.getAImgUrl());
-        ImgUtils.load(this, rivC, ImgUrls.getAImgUrl());
+        ImgUtils.load(this, rivC, "https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel1.png");
         ImgUtils.load(this, rivD, ImgUrls.getAImgUrl());
 
         String testUrl = ImgUrls.getAImgUrl();

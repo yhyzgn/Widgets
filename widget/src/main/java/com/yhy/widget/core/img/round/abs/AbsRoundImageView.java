@@ -9,8 +9,9 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.yhy.widget.R;
 import com.yhy.widget.utils.WidgetCoreUtils;
@@ -27,10 +28,14 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     protected float mBorderWidth;
     // 边框颜色，默认：#000000
     protected int mBorderColor;
+    // 背景填充颜色；默认：#000000
+    protected int mFillColor;
     // 图片可视区
     protected Path mRoundPath;
     // 图片边框
     protected Path mBorderPath;
+    // 背景填充画笔
+    private Paint mFillPaint;
     // 边框画笔
     private Paint mBorderPaint;
     // 图片
@@ -63,6 +68,7 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
             TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AbsRoundImageView);
             mBorderWidth = ta.getDimension(R.styleable.AbsRoundImageView_riv_border_width, 0);
             mBorderColor = ta.getColor(R.styleable.AbsRoundImageView_riv_border_color, 0);
+            mFillColor = ta.getColor(R.styleable.AbsRoundImageView_riv_fill_color, 0);
             ta.recycle();
         }
 
@@ -71,11 +77,11 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
         mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBorderPaint.setStrokeWidth(mBorderWidth);
 
+        mFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
         mShaderMatrix = new Matrix();
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-
-        setScaleType(ScaleType.CENTER_CROP);
     }
 
     @Override
@@ -106,10 +112,19 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        // 绘制背景填充
+        drawFillColor(canvas);
         // 绘制图片路径
         drawImagePath(canvas);
         // 绘制边框
         drawBorder(canvas);
+    }
+
+    private void drawFillColor(Canvas canvas) {
+        mFillPaint.setColor(mFillColor);
+        mFillPaint.setStyle(Paint.Style.FILL);
+        mFillPaint.setAntiAlias(true);
+        canvas.drawPath(mRoundPath, mFillPaint);
     }
 
     /**

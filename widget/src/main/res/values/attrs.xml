@@ -58,6 +58,8 @@
         <attr name="riv_border_width" format="dimension|reference" />
         <!-- 边框颜色；默认：#000000 -->
         <attr name="riv_border_color" format="color|reference" />
+        <!-- 背景填充颜色；默认：#000000 -->
+        <attr name="riv_fill_color" format="color|reference" />
     </declare-styleable>
 
     <!-- 圆角ImageView属性 -->
