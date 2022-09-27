@@ -42,6 +42,7 @@
         <activity android:name=".activity.WebHybridActivity" />
         <activity android:name=".activity.ConstraintImageActivity" />
         <activity android:name=".activity.CheckBoxActivity" />
+        <activity android:name=".activity.ClearEditTextActivity" />
         <activity android:name=".activity.LineTextViewActivity" />
         <activity android:name=".activity.GradientTextViewActivity" />
         <activity android:name=".activity.StatusDialogActivity" />

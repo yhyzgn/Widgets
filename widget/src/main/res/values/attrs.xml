@@ -1,235 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--广告控件基类-->
+    <!-- 广告控件基类 -->
     <declare-styleable name="AdvView">
-        <!--动画定时，默认3000ms-->
+        <!-- 动画定时，默认3000ms -->
         <attr name="av_interval" format="integer|reference" />
-        <!--动画执行时间，默认800ms-->
+        <!-- 动画执行时间，默认800ms -->
         <attr name="av_anim_duration" format="integer|reference" />
-        <!--入场动画-->
+        <!-- 入场动画 -->
         <attr name="av_anim_in" format="reference" />
-        <!--出场动画-->
+        <!-- 出场动画 -->
         <attr name="av_anim_out" format="reference" />
     </declare-styleable>
 
-    <!--文字标题栏控件-->
+    <!-- 文字标题栏控件 -->
     <declare-styleable name="TitleBar">
-        <!--标题文本，默认空-->
+        <!-- 标题文本，默认空 -->
         <attr name="tb_title" format="string|reference" />
-        <!--最大行数，默认1-->
+        <!-- 最大行数，默认1 -->
         <attr name="tb_max_line" format="integer" min="1" />
-        <!--左边文本，默认空-->
+        <!-- 左边文本，默认空 -->
         <attr name="tb_left_text" format="string|reference" />
-        <!--右边文本，默认空-->
+        <!-- 右边文本，默认空 -->
         <attr name="tb_right_text" format="string|reference" />
-        <!--左边图标，默认空-->
+        <!-- 左边图标，默认空 -->
         <attr name="tb_left_icon" format="reference" />
-        <!--右边图标，默认空-->
+        <!-- 右边图标，默认空 -->
         <attr name="tb_right_icon" format="reference" />
-        <!--全部字体颜色，默认#ffffff-->
+        <!-- 全部字体颜色，默认#ffffff -->
         <attr name="tb_font_color" format="color|reference" />
-        <!--标题字体颜色，默认#ffffff-->
+        <!-- 标题字体颜色，默认#ffffff -->
         <attr name="tb_title_color" format="color|reference" />
-        <!--左边字体颜色，默认#ffffff-->
+        <!-- 左边字体颜色，默认#ffffff -->
         <attr name="tb_left_text_color" format="color|reference" />
-        <!--右边字体颜色，默认#ffffff-->
+        <!-- 右边字体颜色，默认#ffffff -->
         <attr name="tb_right_text_color" format="color|reference" />
-        <!--标题字体大小，默认18sp-->
+        <!-- 标题字体大小，默认18sp -->
         <attr name="tb_title_size" format="dimension|reference" />
-        <!--左边字体大小，默认14sp-->
+        <!-- 左边字体大小，默认14sp -->
         <attr name="tb_left_text_size" format="dimension|reference" />
-        <!--右边字体大小，默认14sp-->
+        <!-- 右边字体大小，默认14sp -->
         <attr name="tb_right_text_size" format="dimension|reference" />
     </declare-styleable>
 
-    <!--文字标题栏控件-->
+    <!-- 文字标题栏控件 -->
     <declare-styleable name="ExpandTextView">
-        <!--收缩时显示的最大行数，默认2-->
+        <!-- 收缩时显示的最大行数，默认2 -->
         <attr name="etv_max_collapsed_lines" format="integer" />
-        <!--动画执行时间，默认400-->
+        <!-- 动画执行时间，默认400 -->
         <attr name="etv_anim_duration" format="integer" />
-        <!--透明度动画开始时的值，默认0.6f-->
+        <!-- 透明度动画开始时的值，默认0.6f -->
         <attr name="etv_anim_alpha_start" format="float" />
     </declare-styleable>
 
-    <!--圆角ImageView属性-->
+    <!-- 圆角ImageView属性 -->
     <declare-styleable name="AbsRoundImageView">
-        <!--边框宽度，默认：0dp-->
+        <!-- 边框宽度，默认：0dp -->
         <attr name="riv_border_width" format="dimension|reference" />
-        <!--边框颜色；默认：#000000-->
+        <!-- 边框颜色；默认：#000000 -->
         <attr name="riv_border_color" format="color|reference" />
     </declare-styleable>
 
-    <!--圆角ImageView属性-->
+    <!-- 圆角ImageView属性 -->
     <declare-styleable name="RoundImageView">
-        <!--四个角半径，默认：0dp-->
+        <!-- 四个角半径，默认：0dp -->
         <attr name="riv_radius" format="dimension|reference" />
-        <!--左上角半径，默认：0dp-->
+        <!-- 左上角半径，默认：0dp -->
         <attr name="riv_radius_left_top" format="dimension|reference" />
-        <!--右上角半径，默认：0dp-->
+        <!-- 右上角半径，默认：0dp -->
         <attr name="riv_radius_right_top" format="dimension|reference" />
-        <!--右下角半径，默认：0dp-->
+        <!-- 右下角半径，默认：0dp -->
         <attr name="riv_radius_right_bottom" format="dimension|reference" />
-        <!--左下角半径，默认：0dp-->
+        <!-- 左下角半径，默认：0dp -->
         <attr name="riv_radius_left_bottom" format="dimension|reference" />
     </declare-styleable>
 
-    <!--加载控件属性-->
+    <!-- 加载控件属性 -->
     <declare-styleable name="LoadingView">
-        <!--最大宽度-->
+        <!-- 最大宽度 -->
         <attr name="min_width" format="dimension|reference" />
-        <!--最大高度-->
+        <!-- 最大高度 -->
         <attr name="max_width" format="dimension|reference" />
-        <!--最小宽度-->
+        <!-- 最小宽度 -->
         <attr name="min_height" format="dimension|reference" />
-        <!--最小高度-->
+        <!-- 最小高度 -->
         <attr name="max_height" format="dimension|reference" />
-        <!--指示器名称-->
+        <!-- 指示器名称 -->
         <attr name="indicator_name" format="string|reference" />
-        <!--加载控件颜色，默认：#FF4400-->
+        <!-- 加载控件颜色，默认：#FF4400 -->
         <attr name="indicator_color" format="color|reference" />
     </declare-styleable>
 
-    <!--SwitchButton属性-->
+    <!-- SwitchButton属性 -->
     <declare-styleable name="SwitchButton">
-        <!--阴影半径，单位dp，默认2.5-->
+        <!-- 阴影半径，单位dp，默认2.5 -->
         <attr name="sb_shadow_radius" format="reference|dimension" />
-        <!--阴影偏移值，单位dp，默认1.5-->
+        <!-- 阴影偏移值，单位dp，默认1.5 -->
         <attr name="sb_shadow_offset" format="reference|dimension" />
-        <!--阴影颜色，默认#33000000-->
+        <!-- 阴影颜色，默认#33000000 -->
         <attr name="sb_shadow_color" format="reference|color" />
-        <!--关闭时颜色，默认#dddddd-->
+        <!-- 关闭时颜色，默认#dddddd -->
         <attr name="sb_off_color" format="reference|color" />
-        <!--打开时颜色，默认#51d367-->
+        <!-- 打开时颜色，默认#51d367 -->
         <attr name="sb_on_color" format="reference|color" />
-        <!--边框宽度，单位dp，默认1-->
+        <!-- 边框宽度，单位dp，默认1 -->
         <attr name="sb_border_width" format="reference|dimension" />
-        <!--打开状态中短竖线颜色，默认#ffffff-->
+        <!-- 打开状态中短竖线颜色，默认#ffffff -->
         <attr name="sb_on_line_color" format="reference|color" />
-        <!--打开状态中短竖线宽度，单位dp，默认1-->
+        <!-- 打开状态中短竖线宽度，单位dp，默认1 -->
         <attr name="sb_on_line_width" format="reference|dimension" />
-        <!--关闭状态中圆圈颜色，默认#aaaaaa-->
+        <!-- 关闭状态中圆圈颜色，默认#aaaaaa -->
         <attr name="sb_off_circle_color" format="reference|color" />
-        <!--关闭状态中圆圈宽度，单位dp，默认1.5-->
+        <!-- 关闭状态中圆圈宽度，单位dp，默认1.5 -->
         <attr name="sb_off_circle_width" format="reference|dimension" />
-        <!--关闭状态中圆圈半径，单位dp，默认4-->
+        <!-- 关闭状态中圆圈半径，单位dp，默认4 -->
         <attr name="sb_off_circle_radius" format="reference|dimension" />
-        <!--是否打开，默认false-->
+        <!-- 是否打开，默认false -->
         <attr name="sb_on" format="reference|boolean" />
-        <!--是否支持阴影效果，默认true-->
+        <!-- 是否支持阴影效果，默认true -->
         <attr name="sb_shadow_effect" format="reference|boolean" />
-        <!--效果显示时间，单位ms，默认300-->
+        <!-- 效果显示时间，单位ms，默认300 -->
         <attr name="sb_effect_duration" format="reference|integer" />
-        <!--按钮颜色，默认#ffffff-->
+        <!-- 按钮颜色，默认#ffffff -->
         <attr name="sb_button_color" format="reference|color" />
-        <!--是否显示指示器，默认true-->
+        <!-- 是否显示指示器，默认true -->
         <attr name="sb_show_indicator" format="reference|boolean" />
-        <!--背景颜色，默认#ffffff-->
+        <!-- 背景颜色，默认#ffffff -->
         <attr name="sb_background" format="reference|color" />
-        <!--是否开启特效，默认true-->
+        <!-- 是否开启特效，默认true -->
         <attr name="sb_enable_effect" format="reference|boolean" />
     </declare-styleable>
 
-    <!--SettingsItemView属性-->
+    <!-- SettingsItemView属性 -->
     <declare-styleable name="SettingsItemView">
-        <!--左边图标，默认空-->
+        <!-- 左边图标，默认空 -->
         <attr name="siv_icon" format="reference" />
-        <!--是否显示左边图标，默认false-->
+        <!-- 是否显示左边图标，默认false -->
         <attr name="siv_show_icon" format="boolean" />
-        <!--右边箭头，默认空-->
+        <!-- 右边箭头，默认空 -->
         <attr name="siv_arrow" format="reference" />
-        <!--是否显示右边箭头，默认false-->
+        <!-- 是否显示右边箭头，默认false -->
         <attr name="siv_show_arrow" format="boolean" />
-        <!--左边文本，默认空-->
+        <!-- 左边文本，默认空 -->
         <attr name="siv_name" format="reference|string" />
-        <!--左边文本宽度，单位dp，默认自适应-->
+        <!-- 左边文本宽度，单位dp，默认自适应 -->
         <attr name="siv_name_width" format="reference|dimension" />
-        <!--左边文本对其方式【left|center|right】，默认left-->
+        <!-- 左边文本对其方式【left|center|right】，默认left -->
         <attr name="siv_name_gravity" format="integer">
             <enum name="left" value="0" />
             <enum name="center" value="1" />
             <enum name="right" value="2" />
         </attr>
-        <!--左边文本大小，单位sp，默认14sp-->
+        <!-- 左边文本大小，单位sp，默认14sp -->
         <attr name="siv_name_size" format="reference|dimension" />
-        <!--左边文本颜色，默认#000000-->
+        <!-- 左边文本颜色，默认#000000 -->
         <attr name="siv_name_color" format="reference|color" />
-        <!--右边内容，默认空-->
+        <!-- 右边内容，默认空 -->
         <attr name="siv_text" format="reference|string" />
-        <!--右边内容对齐方式【left|center|right】，默认right-->
+        <!-- 右边内容对齐方式【left|center|right】，默认right -->
         <attr name="siv_text_gravity" format="integer">
             <enum name="left" value="0" />
             <enum name="center" value="1" />
             <enum name="right" value="2" />
         </attr>
-        <!--右边提示文本，默认空-->
+        <!-- 右边提示文本，默认空 -->
         <attr name="siv_hint" format="reference|string" />
-        <!--右边字体大小，单位sp，默认14sp-->
+        <!-- 右边字体大小，单位sp，默认14sp -->
         <attr name="siv_text_size" format="reference|dimension" />
-        <!--右边字体颜色，默认#000000-->
+        <!-- 右边字体颜色，默认#000000 -->
         <attr name="siv_text_color" format="reference|color" />
-        <!--是否打开开关，默认false-->
+        <!-- 是否打开开关，默认false -->
         <attr name="siv_switch_on" format="boolean" />
-        <!--开关控件宽度，单位dp，默认48dp-->
+        <!-- 开关控件宽度，单位dp，默认48dp -->
         <attr name="siv_switch_width" format="reference|dimension" />
-        <!--开关控件高度，单位dp，默认28dp-->
+        <!-- 开关控件高度，单位dp，默认28dp -->
         <attr name="siv_switch_height" format="reference|dimension" />
-        <!--是否显示开关控件，默认false-->
+        <!-- 是否显示开关控件，默认false -->
         <attr name="siv_show_switch" format="boolean" />
-        <!--是否可编辑，默认false-->
+        <!-- 是否可编辑，默认false -->
         <attr name="siv_editable" format="boolean" />
-        <!--光标颜色资源，默认为系统默认-->
+        <!-- 光标颜色资源，默认为系统默认 -->
         <attr name="siv_cursor_drawable" format="reference" />
-        <!--输入类型，默认为text-->
+        <!-- 输入类型，默认为text -->
         <attr name="siv_input_type" format="integer">
             <enum name="text" value="1" />
             <enum name="phone" value="2" />
             <enum name="email" value="3" />
             <enum name="password" value="4" />
         </attr>
-        <!--输入最大长度-->
+        <!-- 输入最大长度 -->
         <attr name="siv_max_length" format="integer" />
     </declare-styleable>
 
-    <!--PickerView属性-->
+    <!-- PickerView属性 -->
     <declare-styleable name="PickerView">
-        <!--字体最大尺寸，默认20sp-->
+        <!-- 字体最大尺寸，默认20sp -->
         <attr name="pv_max_text_size" format="reference|dimension" />
-        <!--字体最小尺寸，默认14sp-->
+        <!-- 字体最小尺寸，默认14sp -->
         <attr name="pv_min_text_size" format="reference|dimension" />
-        <!--字体颜色，默认#e84c3d-->
+        <!-- 字体颜色，默认#e84c3d -->
         <attr name="pv_text_color" format="reference|color" />
     </declare-styleable>
 
-    <!--侧边栏布局控件自定义属性-->
+    <!-- 侧边栏布局控件自定义属性 -->
     <declare-styleable name="SlideLayout">
-        <!--滑动过程中背景渐变的颜色，默认：#000000-->
+        <!-- 滑动过程中背景渐变的颜色，默认：#000000 -->
         <attr name="sl_anim_alpha_color" format="color|reference" />
-        <!--是否开启边缘滑动，默认：true-->
+        <!-- 是否开启边缘滑动，默认：true -->
         <attr name="sl_edge_enable" format="boolean" />
-        <!--主面板是否可透明，默认：false-->
+        <!-- 主面板是否可透明，默认：false -->
         <attr name="sl_main_alpha_enable" format="boolean" />
     </declare-styleable>
 
-    <!--可选中TextVIew自定义属性-->
+    <!-- 可选中TextVIew自定义属性 -->
     <declare-styleable name="CheckedTextView">
-        <!--是否阻止默认的click和longClick事件，默认：true，阻止-->
+        <!-- 是否阻止默认的click和longClick事件，默认：true，阻止 -->
         <attr name="ctv_prevent" format="boolean" />
     </declare-styleable>
 
-    <!--方形ImageView自定义属性-->
+    <!-- 方形ImageView自定义属性 -->
     <declare-styleable name="SquareImageView">
-        <!--右上角按钮图片，默认：空-->
+        <!-- 右上角按钮图片，默认：空 -->
         <attr name="siv_btn_img" format="reference" />
-        <!--右上角按钮大小，默认：0dp -->
+        <!-- 右上角按钮大小，默认：0dp  -->
         <attr name="siv_btn_size" format="reference|dimension" />
-        <!--右上角按钮内边距，默认：2dp -->
+        <!-- 右上角按钮内边距，默认：2dp  -->
         <attr name="siv_btn_padding" format="reference|dimension" />
     </declare-styleable>
 
-    <!--流式布局自定义属性-->
+    <!-- 流式布局自定义属性 -->
     <declare-styleable name="FlowLayout">
-        <!--布局对齐方式，默认left-->
+        <!-- 布局对齐方式，默认left -->
         <attr name="fl_gravity" format="enum">
             <enum name="left" value="-1" />
             <enum name="center" value="0" />
@@ -237,139 +237,145 @@
         </attr>
     </declare-styleable>
 
-    <!--标签流式布局自定义属性-->
+    <!-- 标签流式布局自定义属性 -->
     <declare-styleable name="TagFlowLayout">
-        <!--允许选中的最大数量，默认值：-1，无限-->
+        <!-- 允许选中的最大数量，默认值：-1，无限 -->
         <attr name="tfl_max_count" format="integer" />
-        <!--是否是单选，默认：false-->
+        <!-- 是否是单选，默认：false -->
         <attr name="tfl_is_single" format="boolean" />
-        <!--单选模式，默认：radio-->
+        <!-- 单选模式，默认：radio -->
         <attr name="tfl_single_mode" format="enum">
             <enum name="radio" value="0" />
             <enum name="check" value="1" />
         </attr>
     </declare-styleable>
 
-    <!--步骤控件自定义属性-->
+    <!-- 步骤控件自定义属性 -->
     <declare-styleable name="StepView">
-        <!--显示方向，默认：vertical-->
+        <!-- 显示方向，默认：vertical -->
         <attr name="sv_orientation" format="enum">
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>
-        <!--完成状态节点圆的颜色，默认：#00beaf-->
+        <!-- 完成状态节点圆的颜色，默认：#00beaf -->
         <attr name="sv_complete_color" format="color|reference" />
-        <!--当前状态节点圆的颜色，默认：#ff7500-->
+        <!-- 当前状态节点圆的颜色，默认：#ff7500 -->
         <attr name="sv_current_color" format="color|reference" />
-        <!--默认状态节点圆的颜色，默认：#dcdcdc-->
+        <!-- 默认状态节点圆的颜色，默认：#dcdcdc -->
         <attr name="sv_default_color" format="color|reference" />
-        <!--实线颜色，默认：#00beaf-->
+        <!-- 实线颜色，默认：#00beaf -->
         <attr name="sv_solid_line_color" format="color|reference" />
-        <!--实线宽度，默认：2dp-->
+        <!-- 实线宽度，默认：2dp -->
         <attr name="sv_solid_line_width" format="dimension|reference" />
-        <!--虚线颜色，默认：#00beaf-->
+        <!-- 虚线颜色，默认：#00beaf -->
         <attr name="sv_dash_line_color" format="color|reference" />
-        <!--虚线宽度，默认：1dp-->
+        <!-- 虚线宽度，默认：1dp -->
         <attr name="sv_dash_line_width" format="dimension|reference" />
-        <!--节点圆的半径，默认：8dp-->
+        <!-- 节点圆的半径，默认：8dp -->
         <attr name="sv_radius" format="dimension|reference" />
-        <!--完成状态节点的图标-->
+        <!-- 完成状态节点的图标 -->
         <attr name="sv_complete_icon" format="reference" />
-        <!--当前状态节点的图标-->
+        <!-- 当前状态节点的图标 -->
         <attr name="sv_current_icon" format="reference" />
-        <!--默认状态节点的图标-->
+        <!-- 默认状态节点的图标 -->
         <attr name="sv_default_icon" format="reference" />
-        <!--是否将节点圆与itemView的中间位置对齐，不对齐则对齐itemView的左边或者上边，默认：true-->
+        <!-- 是否将节点圆与itemView的中间位置对齐，不对齐则对齐itemView的左边或者上边，默认：true -->
         <attr name="sv_align_middle" format="boolean" />
     </declare-styleable>
 
-    <!--加强版WebView-->
+    <!-- 加强版WebView -->
     <declare-styleable name="HybridWebView">
-        <!--是否需要严格模式，默认：false。严格模式下需要匹配url参数-->
+        <!-- 是否需要严格模式，默认：false。严格模式下需要匹配url参数 -->
         <attr name="hwv_strict_mode" format="boolean" />
-        <!--URL标识名称，默认：platform-->
+        <!-- URL标识名称，默认：platform -->
         <attr name="hwv_url_flag_name" format="string" />
-        <!--URL标识值，默认：app-->
+        <!-- URL标识值，默认：app -->
         <attr name="hwv_url_flag_value" format="string" />
-        <!--交互桥梁名称，默认：app-->
+        <!-- 交互桥梁名称，默认：app -->
         <attr name="hwv_bridge_name" format="string" />
-        <!--是否开启缓存：默认：true-->
+        <!-- 是否开启缓存：默认：true -->
         <attr name="hwv_cache_enable" format="boolean" />
-        <!--缓存保存时间，单位：s，默认：一周-->
+        <!-- 缓存保存时间，单位：s，默认：一周 -->
         <attr name="hwv_cache_expire" format="integer" />
     </declare-styleable>
 
-    <!--多选框-->
+    <!-- 多选框 -->
     <declare-styleable name="CheckBox">
-        <!--动画时长，单位：ms，默认：300-->
+        <!-- 动画时长，单位：ms，默认：300 -->
         <attr name="cb_duration" format="integer" />
-        <!--边框宽度，默认：0dp-->
+        <!-- 边框宽度，默认：0dp -->
         <attr name="cb_stroke_width" format="dimension" />
-        <!--打钩图标颜色，默认：#ffffff-->
+        <!-- 打钩图标颜色，默认：#ffffff -->
         <attr name="cb_color_tick" format="color" />
-        <!--选中时的颜色，默认：#FB4846-->
+        <!-- 选中时的颜色，默认：#FB4846 -->
         <attr name="cb_color_checked" format="color" />
-        <!--未选中时的颜色，默认：#ffffff-->
+        <!-- 未选中时的颜色，默认：#ffffff -->
         <attr name="cb_color_unchecked" format="color" />
-        <!--未选中时边框的颜色，默认：#dfdfdf-->
+        <!-- 未选中时边框的颜色，默认：#dfdfdf -->
         <attr name="cb_color_unchecked_stroke" format="color" />
-        <!--是否可点击取消，默认：true-->
+        <!-- 是否可点击取消，默认：true -->
         <attr name="cb_click_cancel_able" format="boolean" />
     </declare-styleable>
 
-    <!--加线条的TextView-->
+    <!-- 可清空内容的 AppCompatEditText 控件 -->
+    <declare-styleable name="ClearEditText">
+        <!-- 图标资源 -->
+        <attr name="cet_icon" format="reference" />
+    </declare-styleable>
+
+    <!-- 加线条的TextView -->
     <declare-styleable name="LineTextView">
-        <!--线条宽度，默认：0dp-->
+        <!-- 线条宽度，默认：0dp -->
         <attr name="ltv_line_size" format="dimension|reference" />
-        <!--线条颜色，默认：#000000-->
+        <!-- 线条颜色，默认：#000000 -->
         <attr name="ltv_line_color" format="color|reference" />
-        <!--线条间隔，该属性只在下划线风格中有效，默认：0dp-->
+        <!-- 线条间隔，该属性只在下划线风格中有效，默认：0dp -->
         <attr name="ltv_line_interval" format="dimension|reference" />
-        <!--线条风格，默认：下划线-->
+        <!-- 线条风格，默认：下划线 -->
         <attr name="ltv_line_style" format="enum">
-            <!--下划线模式-->
+            <!-- 下划线模式 -->
             <enum name="underline" value="1" />
-            <!--中间删除线模式-->
+            <!-- 中间删除线模式 -->
             <enum name="delete_middle" value="2" />
-            <!--对角删除线模式-->
+            <!-- 对角删除线模式 -->
             <enum name="delete_oblique" value="3" />
         </attr>
     </declare-styleable>
 
-    <!--带动画的渐变TextView-->
+    <!-- 带动画的渐变TextView -->
     <declare-styleable name="GradientTextView">
-        <!--渐变颜色资源数组，默认：@array/color_arr_gradient_text_view-->
+        <!-- 渐变颜色资源数组，默认：@array/color_arr_gradient_text_view -->
         <attr name="gtv_text_color_list" format="reference" />
-        <!--动画刷新时间，单位：ms，默认：300-->
+        <!-- 动画刷新时间，单位：ms，默认：300 -->
         <attr name="gtv_speed_millions" format="integer" />
     </declare-styleable>
 
-    <!--约束宽高比的ImageView-->
+    <!-- 约束宽高比的ImageView -->
     <declare-styleable name="ConstraintImageView">
-        <!--参考标准，以宽或者高为准，计算另一方向的实际值，默认：宽-->
+        <!-- 参考标准，以宽或者高为准，计算另一方向的实际值，默认：宽 -->
         <attr name="civ_reference" format="enum">
-            <!--以宽为准-->
+            <!-- 以宽为准 -->
             <enum name="width" value="0" />
-            <!--以高为准-->
+            <!-- 以高为准 -->
             <enum name="height" value="1" />
         </attr>
-        <!--比例字符串，图片实际的宽高即可，格式：“宽:高”-->
+        <!-- 比例字符串，图片实际的宽高即可，格式：“宽:高” -->
         <attr name="civ_original_ratio" format="string" />
-        <!--比例，宽比高的值，格式：“0.75”-->
+        <!-- 比例，宽比高的值，格式：“0.75” -->
         <attr name="civ_ratio" format="float" />
-        <!--四个角半径，默认：0dp-->
+        <!-- 四个角半径，默认：0dp -->
         <attr name="civ_radius" format="dimension|reference" />
-        <!--左上角半径，默认：0dp-->
+        <!-- 左上角半径，默认：0dp -->
         <attr name="civ_radius_left_top" format="dimension|reference" />
-        <!--右上角半径，默认：0dp-->
+        <!-- 右上角半径，默认：0dp -->
         <attr name="civ_radius_right_top" format="dimension|reference" />
-        <!--右下角半径，默认：0dp-->
+        <!-- 右下角半径，默认：0dp -->
         <attr name="civ_radius_right_bottom" format="dimension|reference" />
-        <!--左下角半径，默认：0dp-->
+        <!-- 左下角半径，默认：0dp -->
         <attr name="civ_radius_left_bottom" format="dimension|reference" />
-        <!--边框宽度，默认：0dp-->
+        <!-- 边框宽度，默认：0dp -->
         <attr name="civ_border_width" format="dimension|reference" />
-        <!--边框颜色；默认：#000000-->
+        <!-- 边框颜色；默认：#000000 -->
         <attr name="civ_border_color" format="color|reference" />
     </declare-styleable>
 </resources>

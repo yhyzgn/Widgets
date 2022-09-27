@@ -16,6 +16,7 @@ import com.yhy.widget.demo.activity.AdvActivity;
 import com.yhy.widget.demo.activity.CheckBoxActivity;
 import com.yhy.widget.demo.activity.CheckedRLActivity;
 import com.yhy.widget.demo.activity.CheckedTVActivity;
+import com.yhy.widget.demo.activity.ClearEditTextActivity;
 import com.yhy.widget.demo.activity.ConstraintImageActivity;
 import com.yhy.widget.demo.activity.ETVActivity;
 import com.yhy.widget.demo.activity.FlowLayoutActivity;
@@ -83,6 +84,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_NAME_LIST.add("HybridBridge");
         WIDGET_NAME_LIST.add("ConstraintImageView");
         WIDGET_NAME_LIST.add("CheckBox");
+        WIDGET_NAME_LIST.add("ClearEditText");
         WIDGET_NAME_LIST.add("LineTextView");
         WIDGET_NAME_LIST.add("GradientTextView");
         WIDGET_NAME_LIST.add("StatusDialog");
@@ -108,6 +110,7 @@ public class MainActivity extends BaseActivity {
         WIDGET_CLASS_LIST.add(WebHybridActivity.class);
         WIDGET_CLASS_LIST.add(ConstraintImageActivity.class);
         WIDGET_CLASS_LIST.add(CheckBoxActivity.class);
+        WIDGET_CLASS_LIST.add(ClearEditTextActivity.class);
         WIDGET_CLASS_LIST.add(LineTextViewActivity.class);
         WIDGET_CLASS_LIST.add(GradientTextViewActivity.class);
         WIDGET_CLASS_LIST.add(StatusDialogActivity.class);
