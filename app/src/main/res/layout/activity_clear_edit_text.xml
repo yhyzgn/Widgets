@@ -8,7 +8,11 @@
 
     <com.yhy.widget.core.text.ClearEditText
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="120dp"
+            android:background="#dddddd"
+            android:drawablePadding="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:layout_centerInParent="true"
             android:text="1234"
             app:cet_icon="@mipmap/ic_clear" />
