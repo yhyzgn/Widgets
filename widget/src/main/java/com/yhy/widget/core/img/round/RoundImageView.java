@@ -74,17 +74,6 @@ public class RoundImageView extends AbsRoundImageView {
         mRoundPath.addRoundRect(rect, new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop, mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom}, Path.Direction.CW);
     }
 
-    /**
-     * 获取缩放比例
-     *
-     * @return 缩放比例
-     */
-    @Override
-    protected float getScale() {
-        // 如果图片的宽或者高与view的宽高不匹配，计算出需要缩放的比例；缩放后的图片的宽高，一定要大于我们view的宽高；所以我们这里取大值；
-        return Math.max(getWidth() * 1.0f / mBitmap.getWidth(), getHeight() * 1.0f / mBitmap.getHeight());
-    }
-
     @Override
     protected void initBorderPath() {
         mBorderPath.reset();

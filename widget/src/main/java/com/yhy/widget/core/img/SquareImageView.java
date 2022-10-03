@@ -1,16 +1,24 @@
 package com.yhy.widget.core.img;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.yhy.widget.R;
+import com.yhy.widget.helper.ImageViewScaleMatrixHelper;
 import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
@@ -21,6 +29,10 @@ import com.yhy.widget.utils.WidgetCoreUtils;
  * desc   : 方形ImageView
  */
 public class SquareImageView extends AppCompatImageView {
+    // Bitmap 画笔
+    private Paint mPaint;
+    // Bitmap
+    private Bitmap mBitmap;
     // 整个控件实际大小
     private int mSize;
     // 右上角按钮图片，默认为空
@@ -71,8 +83,8 @@ public class SquareImageView extends AppCompatImageView {
             mBtnWidth = mBtnHeight = size;
         }
 
-        // 默认使用 CENTER_CROP 模式显示图片
-        setScaleType(ScaleType.CENTER_CROP);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
     }
 
     /**
@@ -83,7 +95,7 @@ public class SquareImageView extends AppCompatImageView {
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int size = Math.min(widthMeasureSpec, widthMeasureSpec);
+        int size = Math.min(widthMeasureSpec, heightMeasureSpec);
         super.onMeasure(size, size);
 
         size = Math.min(getMeasuredWidth(), getMeasuredHeight());
@@ -97,11 +109,54 @@ public class SquareImageView extends AppCompatImageView {
      */
     @Override
     protected void onDraw(Canvas canvas) {
+        // 缩放变换
+        Matrix matrix = ImageViewScaleMatrixHelper.with(this).apply();
+        setImageMatrix(matrix);
+
         super.onDraw(canvas);
+
         if (null != mBtnImg) {
             // 绘制按钮
             drawBtn(canvas);
         }
+    }
+
+
+    /**
+     * 绘制图片
+     *
+     * @param canvas 画布
+     */
+    private void drawImagePath(Canvas canvas) {
+        if (null == getDrawable()) {
+            return;
+        }
+        transform();
+        canvas.drawBitmap(mBitmap, 0, 0, mPaint);
+    }
+
+    /**
+     * 变换图片
+     */
+    private void transform() {
+        Drawable drawable = getDrawable();
+        if (getWidth() == 0 && getHeight() == 0 || null == drawable) {
+            return;
+        }
+        mBitmap = WidgetCoreUtils.drawableToBitmap(drawable);
+        if (mBitmap == null) {
+            invalidate();
+            return;
+        }
+
+        BitmapShader mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
+        // 获取缩放变换矩阵
+        Matrix shaderMatrix = ImageViewScaleMatrixHelper.with(this).apply();
+        // 设置变换矩阵
+        mBitmapShader.setLocalMatrix(shaderMatrix);
+        // 设置shader
+        mPaint.setShader(mBitmapShader);
     }
 
     /**
@@ -142,7 +197,11 @@ public class SquareImageView extends AppCompatImageView {
      * @param resId 图片资源id
      */
     public void setBtn(int resId) {
-        mBtnImg = resId <= 0 ? null : WidgetCoreUtils.drawableToBitmap(getResources().getDrawable(resId));
+        if (resId <= 0) {
+            return;
+        }
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), resId, getContext().getTheme());
+        mBtnImg = WidgetCoreUtils.drawableToBitmap(drawable);
         postInvalidate();
     }
 
@@ -152,6 +211,7 @@ public class SquareImageView extends AppCompatImageView {
      * @param event 具体事件
      * @return 是否已经消费当前事件
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {

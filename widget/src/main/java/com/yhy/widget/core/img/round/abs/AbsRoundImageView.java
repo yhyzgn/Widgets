@@ -9,11 +9,13 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.yhy.widget.R;
+import com.yhy.widget.helper.ImageViewScaleMatrixHelper;
 import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
@@ -40,8 +42,6 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     private Paint mBorderPaint;
     // 图片
     protected Bitmap mBitmap;
-    // 变换矩阵
-    private Matrix mShaderMatrix;
     // 图片画笔
     private Paint mPaint;
 
@@ -79,7 +79,6 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
 
         mFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        mShaderMatrix = new Matrix();
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
     }
@@ -102,13 +101,6 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      * 初始化图片区域Path
      */
     protected abstract void initRoundPath();
-
-    /**
-     * 获取缩放比例
-     *
-     * @return 缩放比例
-     */
-    protected abstract float getScale();
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -157,24 +149,23 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      * 变换图片
      */
     private void transform() {
-        if (getWidth() == 0 && getHeight() == 0 || null == getDrawable()) {
+        Drawable drawable = getDrawable();
+        if (getWidth() == 0 && getHeight() == 0 || null == drawable) {
             return;
         }
-        mBitmap = WidgetCoreUtils.drawableToBitmap(getDrawable());
+        mBitmap = WidgetCoreUtils.drawableToBitmap(drawable);
         if (mBitmap == null) {
             invalidate();
             return;
         }
 
-        BitmapShader mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        float scale = getScale();
-        // shader的变换矩阵，我们这里主要用于放大或者缩小
-        mShaderMatrix.setScale(scale, scale);
-        // 将放大后的图片向上移动，达到中心位置
-        mShaderMatrix.postTranslate(-(mBitmap.getWidth() * scale - getWidth()) / 2.0f, -(mBitmap.getHeight() * scale - getHeight()) / 2.0f);
+        BitmapShader bitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
+        // 获取缩放变换矩阵
+        Matrix shaderMatrix = ImageViewScaleMatrixHelper.with(this).apply();
         // 设置变换矩阵
-        mBitmapShader.setLocalMatrix(mShaderMatrix);
+        bitmapShader.setLocalMatrix(shaderMatrix);
         // 设置shader
-        mPaint.setShader(mBitmapShader);
+        mPaint.setShader(bitmapShader);
     }
 }

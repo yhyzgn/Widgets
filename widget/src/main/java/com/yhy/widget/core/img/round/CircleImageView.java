@@ -45,18 +45,6 @@ public class CircleImageView extends AbsRoundImageView {
         mRoundPath.addCircle(cx, cy, radius, Path.Direction.CW);
     }
 
-    /**
-     * 获取缩放比例
-     *
-     * @return 缩放比例
-     */
-    @Override
-    protected float getScale() {
-        // 拿到bitmap宽或高的小值
-        int size = Math.min(mBitmap.getWidth(), mBitmap.getHeight());
-        return getWidth() * 1.0f / size;
-    }
-
     @Override
     protected void initBorderPath() {
         mBorderPath.reset();
