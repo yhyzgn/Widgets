@@ -40,7 +40,7 @@ public class RIVActivity extends BaseActivity {
         ImgUtils.load(this, civAvatar, ImgUrls.getAImgUrl());
         ImgUtils.load(this, rivA, ImgUrls.getAImgUrl());
         ImgUtils.load(this, rivB, ImgUrls.getAImgUrl());
-        ImgUtils.load(this, rivC, "https://fanyi-cdn.cdn.bcebos.com/webStatic/translation/asset/wechat-icon.194f5b65.png");
+//        ImgUtils.load(this, rivC, "https://fanyi-cdn.cdn.bcebos.com/webStatic/translation/asset/wechat-icon.194f5b65.png");
         ImgUtils.load(this, rivD, ImgUrls.getAImgUrl());
 
         String testUrl = ImgUrls.getAImgUrl();

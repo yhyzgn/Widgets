@@ -4,12 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -119,44 +117,6 @@ public class SquareImageView extends AppCompatImageView {
             // 绘制按钮
             drawBtn(canvas);
         }
-    }
-
-
-    /**
-     * 绘制图片
-     *
-     * @param canvas 画布
-     */
-    private void drawImagePath(Canvas canvas) {
-        if (null == getDrawable()) {
-            return;
-        }
-        transform();
-        canvas.drawBitmap(mBitmap, 0, 0, mPaint);
-    }
-
-    /**
-     * 变换图片
-     */
-    private void transform() {
-        Drawable drawable = getDrawable();
-        if (getWidth() == 0 && getHeight() == 0 || null == drawable) {
-            return;
-        }
-        mBitmap = WidgetCoreUtils.drawableToBitmap(drawable);
-        if (mBitmap == null) {
-            invalidate();
-            return;
-        }
-
-        BitmapShader mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-
-        // 获取缩放变换矩阵
-        Matrix shaderMatrix = ImageViewScaleMatrixHelper.with(this).apply();
-        // 设置变换矩阵
-        mBitmapShader.setLocalMatrix(shaderMatrix);
-        // 设置shader
-        mPaint.setShader(mBitmapShader);
     }
 
     /**

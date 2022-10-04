@@ -7,6 +7,8 @@ import android.widget.ImageView;
 /**
  * 图片矩阵变换助手
  * <p>
+ * 参考：<a href="https://juejin.cn/post/6961687341928808455?share_token=3c26828c-b2ba-4286-a7f6-d29eaf4b6b03">彻底搞懂ImageView的ScaleType，用Matrix实现各种ScaleType效果</a>
+ * <p>
  * Created on 2022-10-04 03:20
  *
  * @author 颜洪毅
@@ -20,7 +22,7 @@ public class ImageViewScaleMatrixHelper {
 
     private ImageViewScaleMatrixHelper(ImageView imageView) {
         mImageView = imageView;
-        mMatrix = imageView.getImageMatrix();
+        mMatrix = new Matrix();
     }
 
     public static ImageViewScaleMatrixHelper with(ImageView imageView) {
@@ -35,7 +37,7 @@ public class ImageViewScaleMatrixHelper {
     }
 
     private Matrix fitScaleTranslate(Drawable drawable) {
-        if (null == drawable || null == mMatrix) {
+        if (null == drawable) {
             return mMatrix;
         }
         mMatrix.reset();
@@ -119,7 +121,7 @@ public class ImageViewScaleMatrixHelper {
     /**
      * {@link ImageView.ScaleType#FIT_CENTER}
      * <p>
-     * 保持图片的宽高比，对图片进行X和Y方向缩放，直到一个方向铺满 {@code ImageView} 。
+     * 保持图片的宽高比，对图片进行 {@code X} 和 {@code Y} 方向缩放，直到一个方向铺满 {@code ImageView} 。
      * <p>
      * 缩放后的图片居中显示在 {@code ImageView} 中。
      *
@@ -132,8 +134,8 @@ public class ImageViewScaleMatrixHelper {
         float percentWidth = w / dw;
         float percentHeight = h / dh;
         float minPercent = Math.min(percentWidth, percentHeight);
-        int targetWidth = Math.round(minPercent * dw);
-        int targetHeight = Math.round(minPercent * dh);
+        float targetWidth = minPercent * dw;
+        float targetHeight = minPercent * dh;
         mMatrix.setScale(minPercent, minPercent);
         mMatrix.postTranslate((w - targetWidth) * 0.5f, (h - targetHeight) * 0.5f);
     }
@@ -187,14 +189,18 @@ public class ImageViewScaleMatrixHelper {
      * @param dh 图片高度
      */
     private void centerCrop(float w, float h, float dw, float dh) {
-        float percentWidth = w / dw;
-        float percentHeight = h / dh;
-        float maxPercent = Math.max(percentWidth, percentHeight);
-
-        int targetWidth = Math.round(maxPercent * dw);
-        int targetHeight = Math.round(maxPercent * dh);
-        mMatrix.setScale(maxPercent, maxPercent);
-        mMatrix.postTranslate((w - targetWidth) * 0.5f, (h - targetHeight) * 0.5f);
+        float scale, dx, dy;
+        if (dw * h > w * dh) {
+            scale = h / dh;
+            dx = (w - dw * scale) * 0.5f;
+            dy = 0;
+        } else {
+            scale = w / dw;
+            dx = 0;
+            dy = (h - dh * scale) * 0.5f;
+        }
+        mMatrix.setScale(scale, scale);
+        mMatrix.postTranslate(dx + 0.5f, dy + 0.5f);
     }
 
     /**
@@ -212,7 +218,7 @@ public class ImageViewScaleMatrixHelper {
     private void centerInside(float w, float h, float dw, float dh) {
         if (dw <= w && dh <= h) {
             mMatrix.setScale(1.0f, 1.0f);
-            mMatrix.setTranslate((w - dw) * 0.5f, (h - dh) * 0.5f);
+            mMatrix.postTranslate((w - dw) * 0.5f, (h - dh) * 0.5f);
         } else {
             fitCenter(w, h, dw, dh);
         }

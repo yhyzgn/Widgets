@@ -58,7 +58,7 @@
                     android:id="@+id/riv_c"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerInside"
                     app:riv_border_color="#8c9eff"
                     app:riv_border_width="2dp"
                     android:src="@mipmap/ic_clear"
@@ -74,7 +74,7 @@
                     android:scaleType="centerCrop"
                     app:riv_border_color="#8c9eff"
                     app:riv_border_width="2dp"
-                    android:src="@mipmap/ic_avatar"
+                    android:src="@mipmap/ic_logo"
                     app:riv_radius_left_bottom="30dp"
                     app:riv_radius_right_top="30dp" />
         </LinearLayout>
@@ -87,7 +87,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             app:riv_border_color="#8c9eff"
-            android:src="@mipmap/ic_avatar"
+            android:src="@mipmap/ic_logo"
+            android:scaleType="centerInside"
             app:riv_border_width="2dp"
             app:riv_radius="12dp" />
 
@@ -97,6 +98,6 @@
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
-            android:src="@mipmap/ic_avatar"
-            android:scaleType="centerCrop" />
+            android:src="@mipmap/ic_logo"
+            android:scaleType="centerInside" />
 </LinearLayout>
