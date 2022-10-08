@@ -173,7 +173,7 @@ public class SettingsItemView extends LinearLayout {
         }
 
         sbSwitch.setOnStateChangeListener((switchButton, isChecked) -> {
-            if (null != mOnSwitchStateChangeListener) {
+            if (mShowSwitch && null != mOnSwitchStateChangeListener) {
                 mOnSwitchStateChangeListener.onStateChanged(SettingsItemView.this, switchButton, isChecked);
             }
         });
@@ -189,7 +189,7 @@ public class SettingsItemView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (null != mOnInputTextChangedListener) {
+                if (mEditable && null != mOnInputTextChangedListener) {
                     mOnInputTextChangedListener.onChanged(s.toString());
                 }
             }
