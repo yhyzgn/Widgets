@@ -1,11 +1,15 @@
 package com.yhy.widget.core.settings;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -16,17 +20,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yhy.widget.R;
-import com.yhy.widget.core.toggle.SwitchButton;
-import com.yhy.widget.utils.WidgetCoreUtils;
-
-import java.lang.reflect.Field;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+
+import com.yhy.widget.R;
+import com.yhy.widget.core.toggle.SwitchButton;
+import com.yhy.widget.utils.WidgetCoreUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * author : 颜洪毅
@@ -69,7 +73,8 @@ public class SettingsItemView extends LinearLayout {
     private boolean mShowSwitch;
     private boolean mEditable;
     private int mCursorDrawableRes;
-    private OnSwitchStateChangeListener mSwitchListener;
+    private OnSwitchStateChangeListener mOnSwitchStateChangeListener;
+    private OnInputTextChangedListener mOnInputTextChangedListener;
 
     public SettingsItemView(Context context) {
         this(context, null);
@@ -119,11 +124,11 @@ public class SettingsItemView extends LinearLayout {
         mCursorDrawableRes = ta.getResourceId(R.styleable.SettingsItemView_siv_cursor_drawable, -1);
 
         int nameGravity = ta.getInt(R.styleable.SettingsItemView_siv_name_gravity, 0);
-        mNameGravity = nameGravity == 0 ? Gravity.LEFT : nameGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
+        mNameGravity = nameGravity == 0 ? Gravity.START : nameGravity == 1 ? Gravity.CENTER : Gravity.END;
         mNameGravity |= Gravity.CENTER_VERTICAL;
 
         int textGravity = ta.getInt(R.styleable.SettingsItemView_siv_text_gravity, 2);
-        mTextGravity = textGravity == 0 ? Gravity.LEFT : textGravity == 1 ? Gravity.CENTER : Gravity.RIGHT;
+        mTextGravity = textGravity == 0 ? Gravity.START : textGravity == 1 ? Gravity.CENTER : Gravity.END;
         mTextGravity |= Gravity.CENTER_VERTICAL;
 
         int tempInputType = ta.getInt(R.styleable.SettingsItemView_siv_input_type, 1);
@@ -167,11 +172,25 @@ public class SettingsItemView extends LinearLayout {
             }
         }
 
-        sbSwitch.setOnStateChangeListener(new SwitchButton.OnStateChangeListener() {
+        sbSwitch.setOnStateChangeListener((switchButton, isChecked) -> {
+            if (null != mOnSwitchStateChangeListener) {
+                mOnSwitchStateChangeListener.onStateChanged(SettingsItemView.this, switchButton, isChecked);
+            }
+        });
+
+        etText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (null != mSwitchListener) {
-                    mSwitchListener.onStateChanged(SettingsItemView.this, view, isChecked);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (null != mOnInputTextChangedListener) {
+                    mOnInputTextChangedListener.onChanged(s.toString());
                 }
             }
         });
@@ -297,18 +316,25 @@ public class SettingsItemView extends LinearLayout {
         return this;
     }
 
+    @SuppressLint("ResourceType")
     public SettingsItemView setCursorDrawableRes(@DrawableRes int resId) {
         if (resId <= 0) {
             return this;
         }
-        //利用反射设置光标样式
-        //EditText继承于TextView，mCursorDrawableRes是TextView中的私有成员，获取私有成员需要getDeclaredField()而不是getField()
-        try {
-            Field cursorDrawableResField = TextView.class.getDeclaredField("mCursorDrawableRes");
-            cursorDrawableResField.setAccessible(true);
-            cursorDrawableResField.set(etText, resId);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+            //利用反射设置光标样式
+            //EditText继承于TextView，mCursorDrawableRes是TextView中的私有成员，获取私有成员需要getDeclaredField()而不是getField()
+            try {
+                Field cursorDrawableResField = TextView.class.getDeclaredField("mCursorDrawableRes");
+                cursorDrawableResField.setAccessible(true);
+                cursorDrawableResField.set(etText, resId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            etText.setTextCursorDrawable(resId);
+        } else {
+            throw new UnsupportedOperationException("Not supported between api version 29 to 32.");
         }
         return this;
     }
@@ -356,11 +382,21 @@ public class SettingsItemView extends LinearLayout {
     }
 
     public SettingsItemView setOnSwitchStateChangeListener(OnSwitchStateChangeListener listener) {
-        mSwitchListener = listener;
+        mOnSwitchStateChangeListener = listener;
         return this;
     }
 
     public interface OnSwitchStateChangeListener {
         void onStateChanged(SettingsItemView siv, SwitchButton sb, boolean isOn);
+    }
+
+    public SettingsItemView setOnInputTextChangedListener(OnInputTextChangedListener listener) {
+        mOnInputTextChangedListener = listener;
+        return this;
+    }
+
+    public interface OnInputTextChangedListener {
+
+        void onChanged(String text);
     }
 }
