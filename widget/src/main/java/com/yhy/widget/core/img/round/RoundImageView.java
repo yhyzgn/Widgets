@@ -75,6 +75,20 @@ public class RoundImageView extends AbsRoundImageView {
     }
 
     @Override
+    protected void initFillPath() {
+        mFillPath.reset();
+        final int width = getWidth();
+        final int height = getHeight();
+        mRadiusLeftTop = Math.min(mRadiusLeftTop, Math.min(width, height) * 0.5f);
+        mRadiusRightTop = Math.min(mRadiusRightTop, Math.min(width, height) * 0.5f);
+        mRadiusRightBottom = Math.min(mRadiusRightBottom, Math.min(width, height) * 0.5f);
+        mRadiusLeftBottom = Math.min(mRadiusLeftBottom, Math.min(width, height) * 0.5f);
+
+        RectF rect = new RectF(0, 0, width, height);
+        mFillPath.addRoundRect(rect, new float[]{mRadiusLeftTop, mRadiusLeftTop, mRadiusRightTop, mRadiusRightTop, mRadiusRightBottom, mRadiusRightBottom, mRadiusLeftBottom, mRadiusLeftBottom}, Path.Direction.CW);
+    }
+
+    @Override
     protected void initBorderPath() {
         mBorderPath.reset();
 

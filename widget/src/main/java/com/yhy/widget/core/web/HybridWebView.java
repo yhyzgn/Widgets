@@ -23,7 +23,6 @@ import com.yhy.widget.R;
 import com.yhy.widget.core.web.bridge.HybridBridge;
 import com.yhy.widget.core.web.client.ChromeClient;
 import com.yhy.widget.core.web.client.WebClient;
-import com.yhy.widget.core.web.config.Config;
 import com.yhy.widget.core.web.helper.DownHelper;
 import com.yhy.widget.core.web.listener.OnWebEventListener;
 import com.yhy.widget.core.web.listener.OnWebLoadListener;
@@ -40,13 +39,17 @@ import java.util.Map;
  * desc   : 加强版WebView，用于混合开发
  */
 public class HybridWebView extends WebView {
-    private Config mConfig;
+    private static final String DEF_NAMESPACE = "app";
+    private static final boolean DEF_CACHE_ENABLED = true;
+
     private Loader mLoader;
     private DownHelper mHelper;
     private OnWebLoadListener mLoadListener;
     private OnWebEventListener mEventListener;
     private WebClient mWebClient;
     private ChromeClient mChromeClient;
+    private String mNamespace;
+    private boolean mCacheEnabled;
 
     public HybridWebView(Context context) {
         this(context, null);
@@ -75,26 +78,50 @@ public class HybridWebView extends WebView {
      * @param attrs   自定义属性集
      */
     private void init(Context context, AttributeSet attrs) {
-        mConfig = new Config();
         mLoader = new Loader();
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HybridWebView);
-        boolean strictMode = ta.getBoolean(R.styleable.HybridWebView_hwv_strict_mode, mConfig.isStrictMode());
-        String urlFlagName = ta.getString(R.styleable.HybridWebView_hwv_url_flag_name);
-        String urlFlagValue = ta.getString(R.styleable.HybridWebView_hwv_url_flag_value);
-        String urlBridgeName = ta.getString(R.styleable.HybridWebView_hwv_bridge_name);
-        boolean cacheEnable = ta.getBoolean(R.styleable.HybridWebView_hwv_cache_enable, mConfig.isCacheEnable());
-        int cacheExpire = ta.getInt(R.styleable.HybridWebView_hwv_cache_expire, (int) (mConfig.getCacheExpire() / 1000L));
+
+        String namespace = ta.getString(R.styleable.HybridWebView_hwv_namespace);
+        boolean cacheEnable = ta.getBoolean(R.styleable.HybridWebView_hwv_cache_enable, DEF_CACHE_ENABLED);
+
         ta.recycle();
 
-        urlFlagName = TextUtils.isEmpty(urlFlagName) ? mConfig.getUrlFlagName() : urlFlagName;
-        urlFlagValue = TextUtils.isEmpty(urlFlagValue) ? mConfig.getUrlFlagValue() : urlFlagValue;
-        urlBridgeName = TextUtils.isEmpty(urlBridgeName) ? mConfig.getBridgeName() : urlBridgeName;
-
-        mConfig.setStrictMode(strictMode).setUrlFlagName(urlFlagName).setUrlFlagValue(urlFlagValue).setBridgeName(urlBridgeName).setCacheEnable(cacheEnable).setCacheExpire(cacheExpire * 1000L);
+        setNamespace(namespace).setCacheEnable(cacheEnable);
 
         // 初始化控件
         initComponent();
+    }
+
+    /**
+     * 设置 bridge 调用的 namespace，即 bridge 名称
+     *
+     * @param namespace 命名空间
+     * @return 当前对象
+     */
+    public HybridWebView setNamespace(String namespace) {
+        mNamespace = !TextUtils.isEmpty(namespace) ? namespace : DEF_NAMESPACE;
+        return this;
+    }
+
+    /**
+     * 设置是否启用缓存
+     *
+     * @param enable 是否启用
+     * @return 当前对象
+     */
+    public HybridWebView setCacheEnable(boolean enable) {
+        mCacheEnabled = enable;
+        return this;
+    }
+
+    /**
+     * 获取当前是否已启用缓存
+     *
+     * @return 是否已启用
+     */
+    public boolean isCacheEnabled() {
+        return mCacheEnabled;
     }
 
     /**
@@ -190,26 +217,6 @@ public class HybridWebView extends WebView {
     }
 
     /**
-     * 设置配置参数
-     *
-     * @param config 配置参数
-     * @return 当前对象
-     */
-    public HybridWebView setConfig(Config config) {
-        mConfig = config;
-        return this;
-    }
-
-    /**
-     * 获取参数配置对象
-     *
-     * @return 参数配置对象
-     */
-    public Config getConfig() {
-        return mConfig;
-    }
-
-    /**
      * 获取下载助手
      *
      * @return 下载助手
@@ -227,7 +234,7 @@ public class HybridWebView extends WebView {
      * @return 当前对象
      */
     public HybridWebView register(HybridBridge bridge) {
-        return register(mConfig.getBridgeName(), bridge);
+        return register(mNamespace, bridge);
     }
 
     /**
@@ -235,14 +242,17 @@ public class HybridWebView extends WebView {
      * <p>
      * 只有注册过的方法才会被js调用
      *
-     * @param name   桥梁名称
-     * @param bridge 桥梁对象
+     * @param namespace 桥梁名称
+     * @param bridge    桥梁对象
      * @return 当前对象
      */
     @SuppressLint({"JavascriptInterface", "AddJavascriptInterface"})
-    public HybridWebView register(String name, HybridBridge bridge) {
-        if (!TextUtils.isEmpty(name) && null != bridge) {
-            addJavascriptInterface(bridge, name);
+    public HybridWebView register(String namespace, HybridBridge bridge) {
+        if (TextUtils.isEmpty(namespace)) {
+            namespace = mNamespace;
+        }
+        if (null != bridge) {
+            addJavascriptInterface(bridge, namespace);
         }
         return this;
     }
@@ -277,21 +287,18 @@ public class HybridWebView extends WebView {
      * @return 当前对象
      */
     public HybridWebView js(final String name, final String args, final ValueCallback<String> callback) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    if (null == args) {
-                        HybridWebView.this.evaluateJavascript(name + "();", callback);
-                    } else {
-                        HybridWebView.this.evaluateJavascript(name + "('" + args + "');", callback);
-                    }
+        post(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (null == args) {
+                    HybridWebView.this.evaluateJavascript(name + "();", callback);
                 } else {
-                    if (null == args) {
-                        HybridWebView.super.loadUrl("javascript:" + name + "()");
-                    } else {
-                        HybridWebView.super.loadUrl("javascript:" + name + "('" + args + "')");
-                    }
+                    HybridWebView.this.evaluateJavascript(name + "('" + args + "');", callback);
+                }
+            } else {
+                if (null == args) {
+                    HybridWebView.super.loadUrl("javascript:" + name + "()");
+                } else {
+                    HybridWebView.super.loadUrl("javascript:" + name + "('" + args + "')");
                 }
             }
         });
@@ -443,13 +450,13 @@ public class HybridWebView extends WebView {
 
     private void setCacheConfig() {
         WebSettings settings = getSettings();
-        if (mConfig.isCacheEnable()) {
+        if (mCacheEnabled) {
             mHelper = new DownHelper(getContext());
 
             settings.setCacheMode(WebSettings.LOAD_DEFAULT);
             settings.setDatabaseEnabled(true);
             // 开启 DOM storage API 功能
-            // 开启DOM缓存，关闭的话H5自身的一些操作是无效的
+            // 开启 DOM 缓存，关闭的话 H5 自身的一些操作是无效的
             settings.setDomStorageEnabled(true);
         } else {
             settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -491,7 +498,7 @@ public class HybridWebView extends WebView {
      * 加载器
      */
     private class Loader {
-        private List<Param> mParams;
+        private final List<Param> mParams;
 
         private Loader() {
             mParams = new ArrayList<>();
@@ -516,9 +523,6 @@ public class HybridWebView extends WebView {
          */
         private void loadUrl(String url) {
             setCacheConfig();
-            if (mConfig.isStrictMode() && !url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
-                param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
-            }
             url = joinUrl(url);
             HybridWebView.super.loadUrl(url);
         }
@@ -531,9 +535,6 @@ public class HybridWebView extends WebView {
          */
         private void loadUrl(String url, Map<String, String> additionalHttpHeaders) {
             setCacheConfig();
-            if (mConfig.isStrictMode() && !url.contains(mConfig.getUrlFlagName() + "=" + mConfig.getUrlFlagValue())) {
-                param(mConfig.getUrlFlagName(), mConfig.getUrlFlagValue());
-            }
             url = joinUrl(url);
             HybridWebView.super.loadUrl(url, additionalHttpHeaders);
         }
@@ -599,8 +600,8 @@ public class HybridWebView extends WebView {
          * 参数类
          */
         private class Param {
-            private String key;
-            private Object value;
+            private final String key;
+            private final Object value;
 
             /**
              * 构造行数

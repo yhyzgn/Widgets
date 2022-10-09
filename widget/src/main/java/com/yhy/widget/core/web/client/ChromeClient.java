@@ -18,7 +18,7 @@ import com.yhy.widget.core.web.HybridWebView;
  * desc   : 默认的WebChromeClient
  */
 public class ChromeClient extends WebChromeClient {
-    private HybridWebView mWebView;
+    private final HybridWebView mWebView;
 
     /**
      * 构造函数

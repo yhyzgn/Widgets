@@ -22,20 +22,12 @@
 }, {
     /**
      * 配置参数
-     *
-     * strict：是否使用严格模式，默认为true。即只有在移动端访问并且传入"urlFlagName=urlFlagValue"参数的情况下才能证明是真正的移动端（用来辨别浏览器和WebView访问）
-     * urlFlagName和urlFlagValue：可以辨别是WebView加载的网页还是手机浏览器加载的，如果是WebView加载的网页的话，就可以对页面做相应调整，比如隐藏某些按钮等；
+
      * bridge：Android端与js交互的桥梁，默认是window.app
      */
     config: {
-        // 是否使用严格模式（不仅辨别是否是移动端内核浏览器，还需要判断“config.urlFlagName”参数），默认为false
-        strict: false,
-        // URL标识名称
-        urlFlagName: "platform",
-        // URL标识值
-        urlFlagValue: "app",
-        // Android端交互桥梁名称
-        bridge: window.app
+        // Android 端交互桥梁名称
+        namespace: window.app
     },
 
     /**
@@ -89,19 +81,17 @@
             Hybrid.environment(function (mobile, android, ios) {
                 // 为所有的a标签加上URL标识
                 let as = null;
-                if (Hy.config.strict && mobile && (as = document.getElementsByTagName("a"))) {
+                if (mobile && (as = document.getElementsByTagName("a"))) {
                     let href = null;
                     for (let i = 0; i < as.length; i++) {
                         href = as[i].getAttribute("href");
                         if (href && href.length > 0 && href !== "/" &&
                             href.indexOf("javascript:") === -1 &&
                             href.indexOf("tel:") === -1 &&
-                            href.indexOf("mailto:") === -1 &&
-                            href.indexOf(Hybrid.config.urlFlagName + "=" + Hybrid.config.urlFlagValue) === -1) {
+                            href.indexOf("mailto:") === -1) {
 
                             href = href.replace(/\/$/, "");
                             href += href.indexOf("?") === -1 ? "?" : "&";
-                            href += Hybrid.config.urlFlagName + "=" + Hybrid.config.urlFlagValue;
                             as[i].setAttribute("href", href);
                         }
                     }
@@ -176,7 +166,7 @@
                 // Android使用桥梁【bridge[方法名](参数)】方式
                 // WKWebView使用【window.webkit.messageHandlers[方法名].postMessage(参数)】方式
                 // UIWebView使用【JavaScriptCore】库，直接【window[方法名](参数)】方式
-                let bridge = android ? Hybrid.config.bridge : ios ? (isWKWebView() ? window.webkit.messageHandlers : window) : undefined;
+                let bridge = android ? Hybrid.config.namespace : ios ? (isWKWebView() ? window.webkit.messageHandlers : window) : undefined;
 
                 if (bridge === undefined || typeof bridge[fn] === "undefined") {
                     return;
@@ -232,16 +222,7 @@
      * @param callback 回调方法
      */
     environment: function (callback) {
-        if (Hybrid.config.strict) {
-            // 是否携带移动端WebView标志
-            let urlFlag = Hybrid.urlParam(Hybrid.config.urlFlagName);
-            // 严格模式，只有携带urlFlag的页面，才算是移动端页面（便于区分wap站和WebView加载的页面）
-            if (urlFlag === Hybrid.config.urlFlagValue) {
-                callback(Hybrid.browser.versions.mobile, Hybrid.browser.versions.android, Hybrid.browser.versions.ios);
-            }
-        } else {
-            callback(Hybrid.browser.versions.mobile, Hybrid.browser.versions.android, Hybrid.browser.versions.ios);
-        }
+         callback(Hybrid.browser.versions.mobile, Hybrid.browser.versions.android, Hybrid.browser.versions.ios);
     },
 
     /**

@@ -34,6 +34,8 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     protected int mFillColor;
     // 图片可视区
     protected Path mRoundPath;
+    // 图片可视区
+    protected Path mFillPath;
     // 图片边框
     protected Path mBorderPath;
     // 背景填充画笔
@@ -73,6 +75,8 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
         }
 
         mRoundPath = new Path();
+        mFillPath = new Path();
+
         mBorderPath = new Path();
         mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBorderPaint.setStrokeWidth(mBorderWidth);
@@ -84,24 +88,20 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
         mPaint.setStyle(Paint.Style.FILL);
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        if (changed) {
-            initBorderPath();
-            initRoundPath();
-        }
-    }
-
     /**
-     * 初始化边框Path
+     * 初始化边框 Path
      */
     protected abstract void initBorderPath();
 
     /**
-     * 初始化图片区域Path
+     * 初始化图片区域 Path
      */
     protected abstract void initRoundPath();
+
+    /**
+     * 初始化背景填充区域 Path
+     */
+    protected abstract void initFillPath();
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -114,11 +114,13 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
     }
 
     private void drawFillColor(Canvas canvas) {
+        initFillPath();
         mFillPaint.setColor(mFillColor);
         mFillPaint.setStyle(Paint.Style.FILL);
         mFillPaint.setAntiAlias(true);
-        canvas.drawPath(mRoundPath, mFillPaint);
+        canvas.drawPath(mFillPath, mFillPaint);
     }
+
 
     /**
      * 绘制边框
@@ -126,6 +128,7 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
      * @param canvas 画布
      */
     private void drawBorder(Canvas canvas) {
+        initBorderPath();
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setColor(mBorderColor);
         canvas.drawPath(mBorderPath, mBorderPaint);
@@ -142,6 +145,7 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
                 return;
             }
             transform();
+            initRoundPath();
             canvas.drawPath(mRoundPath, mPaint);
         }
     }
@@ -164,6 +168,7 @@ public abstract class AbsRoundImageView extends AppCompatImageView {
 
         // 获取缩放变换矩阵
         Matrix shaderMatrix = ImageViewScaleMatrixHelper.with(this).apply();
+
         // 设置变换矩阵
         bitmapShader.setLocalMatrix(shaderMatrix);
         // 设置shader

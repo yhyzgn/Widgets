@@ -46,6 +46,17 @@ public class CircleImageView extends AbsRoundImageView {
     }
 
     @Override
+    protected void initFillPath() {
+        mFillPath.reset();
+        final int width = getWidth();
+        final int height = getHeight();
+        final float cx = width * 0.5f;
+        final float cy = height * 0.5f;
+        final float radius = Math.min(width, height) * 0.5f;
+        mFillPath.addCircle(cx, cy, radius, Path.Direction.CW);
+    }
+
+    @Override
     protected void initBorderPath() {
         mBorderPath.reset();
         final float halfBorderWidth = mBorderWidth * 0.5f;

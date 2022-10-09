@@ -1,21 +1,22 @@
 package com.yhy.widget.core.web.client;
 
+import static android.webkit.WebView.SCHEME_TEL;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
-import androidx.core.app.ActivityCompat;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.yhy.widget.core.web.HybridWebView;
+import androidx.core.app.ActivityCompat;
 
-import static android.webkit.WebView.SCHEME_TEL;
+import com.yhy.widget.core.web.HybridWebView;
 
 /**
  * author : 颜洪毅
@@ -25,7 +26,7 @@ import static android.webkit.WebView.SCHEME_TEL;
  * desc   : 默认的WebViewClient
  */
 public class WebClient extends WebViewClient {
-    private HybridWebView mWebView;
+    private final HybridWebView mWebView;
 
     /**
      * 构造函数
@@ -52,7 +53,7 @@ public class WebClient extends WebViewClient {
 
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView webView, String url) {
-        if (mWebView.getConfig().isCacheEnable() && null != mWebView.getHelper()) {
+        if (mWebView.isCacheEnabled() && null != mWebView.getHelper()) {
             WebResourceResponse response = mWebView.getHelper().shouldInterceptRequest(url);
             return null != response ? response : super.shouldInterceptRequest(webView, url);
         }
