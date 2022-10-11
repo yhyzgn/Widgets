@@ -22,6 +22,11 @@ android {
         }
     }
 
+    // 已包含 viewBinding 的所有功能
+    dataBinding {
+        enabled true
+    }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false

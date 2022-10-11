@@ -25,12 +25,16 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 import com.yhy.widget.R;
 import com.yhy.widget.core.toggle.SwitchButton;
 import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 /**
  * author : 颜洪毅
@@ -75,6 +79,7 @@ public class SettingsItemView extends LinearLayout {
     private int mCursorDrawableRes;
     private OnSwitchStateChangeListener mOnSwitchStateChangeListener;
     private OnInputTextChangedListener mOnInputTextChangedListener;
+    private static InverseBindingListener mInputInverseBindingListener;
 
     public SettingsItemView(Context context) {
         this(context, null);
@@ -189,8 +194,14 @@ public class SettingsItemView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (mEditable && null != mOnInputTextChangedListener) {
-                    mOnInputTextChangedListener.onChanged(s.toString());
+                if (mEditable) {
+                    if (null != mInputInverseBindingListener) {
+                        mInputInverseBindingListener.onChange();
+                    }
+
+                    if (null != mOnInputTextChangedListener) {
+                        mOnInputTextChangedListener.onChanged(s.toString());
+                    }
                 }
             }
         });
@@ -316,12 +327,12 @@ public class SettingsItemView extends LinearLayout {
         return this;
     }
 
-    @SuppressLint("ResourceType")
+    @SuppressLint({"ResourceType", "SoonBlockedPrivateApi"})
     public SettingsItemView setCursorDrawableRes(@DrawableRes int resId) {
         if (resId <= 0) {
             return this;
         }
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
             //利用反射设置光标样式
             //EditText继承于TextView，mCursorDrawableRes是TextView中的私有成员，获取私有成员需要getDeclaredField()而不是getField()
             try {
@@ -331,10 +342,8 @@ public class SettingsItemView extends LinearLayout {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            etText.setTextCursorDrawable(resId);
         } else {
-            throw new UnsupportedOperationException("Not supported between api version 29 to 32.");
+            etText.setTextCursorDrawable(resId);
         }
         return this;
     }
@@ -379,6 +388,30 @@ public class SettingsItemView extends LinearLayout {
         mShowSwitch = show;
         sbSwitch.setVisibility(show ? VISIBLE : GONE);
         return this;
+    }
+
+    @BindingAdapter({"siv_name"})
+    public static void setSivName(SettingsItemView siv, String name) {
+        if (!Objects.equals(name, siv.getName())) {
+            siv.setName(name);
+        }
+    }
+
+    @BindingAdapter({"siv_text"})
+    public static void setSivText(SettingsItemView siv, String text) {
+        if (!Objects.equals(text, siv.getText())) {
+            siv.setText(text);
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "siv_text", event = "sivTextChanged")
+    public static String getSivText(SettingsItemView siv) {
+        return siv.getText();
+    }
+
+    @BindingAdapter("sivTextChanged")
+    public static void sivTextChanged(SettingsItemView siv, InverseBindingListener listener) {
+        mInputInverseBindingListener = listener;
     }
 
     public SettingsItemView setOnSwitchStateChangeListener(OnSwitchStateChangeListener listener) {
