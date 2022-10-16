@@ -1,6 +1,7 @@
 package com.yhy.widget.core.checked;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,6 +18,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Checkable;
+
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 import com.yhy.widget.R;
 import com.yhy.widget.utils.WidgetCoreUtils;
@@ -38,6 +43,7 @@ public class CheckBox extends View implements Checkable {
 
     private static final int DEF_DRAW_SIZE = 25;
     private static final int DEF_ANIM_DURATION = 300;
+    private static InverseBindingListener mCheckedBindingListener;
 
     private Paint mPaint, mTickPaint, mFloorPaint;
     private Point[] mTickPoints;
@@ -174,6 +180,9 @@ public class CheckBox extends View implements Checkable {
         if (mListener != null) {
             mListener.onCheckedChanged(this, mChecked);
         }
+        if (null != mCheckedBindingListener) {
+            mCheckedBindingListener.onChange();
+        }
     }
 
     /**
@@ -221,8 +230,8 @@ public class CheckBox extends View implements Checkable {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         mWidth = getMeasuredWidth();
         mStrokeWidth = (mStrokeWidth == 0 ? getMeasuredWidth() / 10 : mStrokeWidth);
-        mStrokeWidth = mStrokeWidth > getMeasuredWidth() / 5 ? getMeasuredWidth() / 5 : mStrokeWidth;
-        mStrokeWidth = (mStrokeWidth < 3) ? 3 : mStrokeWidth;
+        mStrokeWidth = Math.min(mStrokeWidth, getMeasuredWidth() / 5);
+        mStrokeWidth = Math.max(mStrokeWidth, 3);
         mCenterPoint.x = mWidth / 2;
         mCenterPoint.y = getMeasuredHeight() / 2;
 
@@ -245,6 +254,7 @@ public class CheckBox extends View implements Checkable {
         drawTick(canvas);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isEnabled()) {
@@ -337,7 +347,7 @@ public class CheckBox extends View implements Checkable {
                 mTickPath.lineTo(stopX, stopY);
                 canvas.drawPath(mTickPath, mTickPaint);
 
-                float step = (mWidth / 20) < 3 ? 3 : (mWidth / 20);
+                float step = Math.max((mWidth / 20), 3);
                 mDrewDistance += step;
             } else {
                 mTickPath.reset();
@@ -349,12 +359,7 @@ public class CheckBox extends View implements Checkable {
 
         // invalidate
         if (mDrewDistance < mLeftLineDistance + mRightLineDistance) {
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    postInvalidate();
-                }
-            }, 10);
+            postDelayed(this::postInvalidate, 10);
         }
     }
 
@@ -365,25 +370,19 @@ public class CheckBox extends View implements Checkable {
         ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 0f);
         animator.setDuration(mAnimDuration / 3 * 2);
         animator.setInterpolator(new LinearInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mScaleVal = (float) animation.getAnimatedValue();
-                mBorderColor = getGradientColor(mUnCheckedColor, mCheckedColor, 1 - mScaleVal);
-                postInvalidate();
-            }
+        animator.addUpdateListener(animation -> {
+            mScaleVal = (float) animation.getAnimatedValue();
+            mBorderColor = getGradientColor(mUnCheckedColor, mCheckedColor, 1 - mScaleVal);
+            postInvalidate();
         });
         animator.start();
 
         ValueAnimator floorAnimator = ValueAnimator.ofFloat(1.0f, 0.8f, 1.0f);
         floorAnimator.setDuration(mAnimDuration);
         floorAnimator.setInterpolator(new LinearInterpolator());
-        floorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mFloorScale = (float) animation.getAnimatedValue();
-                postInvalidate();
-            }
+        floorAnimator.addUpdateListener(animation -> {
+            mFloorScale = (float) animation.getAnimatedValue();
+            postInvalidate();
         });
         floorAnimator.start();
 
@@ -397,25 +396,19 @@ public class CheckBox extends View implements Checkable {
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1.0f);
         animator.setDuration(mAnimDuration);
         animator.setInterpolator(new LinearInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mScaleVal = (float) animation.getAnimatedValue();
-                mBorderColor = getGradientColor(mCheckedColor, mBorderUnCheckedColor, mScaleVal);
-                postInvalidate();
-            }
+        animator.addUpdateListener(animation -> {
+            mScaleVal = (float) animation.getAnimatedValue();
+            mBorderColor = getGradientColor(mCheckedColor, mBorderUnCheckedColor, mScaleVal);
+            postInvalidate();
         });
         animator.start();
 
         ValueAnimator floorAnimator = ValueAnimator.ofFloat(1.0f, 0.8f, 1.0f);
         floorAnimator.setDuration(mAnimDuration);
         floorAnimator.setInterpolator(new LinearInterpolator());
-        floorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mFloorScale = (float) animation.getAnimatedValue();
-                postInvalidate();
-            }
+        floorAnimator.addUpdateListener(animation -> {
+            mFloorScale = (float) animation.getAnimatedValue();
+            postInvalidate();
         });
         floorAnimator.start();
     }
@@ -424,12 +417,9 @@ public class CheckBox extends View implements Checkable {
      * 绘制对钩
      */
     private void drawTickDelayed() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mTickDrawing = true;
-                postInvalidate();
-            }
+        postDelayed(() -> {
+            mTickDrawing = true;
+            postInvalidate();
         }, mAnimDuration);
     }
 
@@ -457,6 +447,21 @@ public class CheckBox extends View implements Checkable {
         int currentG = (int) (startG * (1 - percent) + endG * percent);
         int currentB = (int) (startB * (1 - percent) + endB * percent);
         return Color.argb(currentA, currentR, currentG, currentB);
+    }
+
+    @BindingAdapter({"android:checked"})
+    public static void setCheckBoxChecked(CheckBox cb, boolean checked) {
+        cb.setChecked(checked, true);
+    }
+
+    @InverseBindingAdapter(attribute = "android:checked", event = "cbStatusChanged")
+    public static boolean isCheckBoxChecked(CheckBox cb) {
+        return cb.isChecked();
+    }
+
+    @BindingAdapter("cbStatusChanged")
+    public static void sivTextChanged(CheckBox cb, InverseBindingListener listener) {
+        mCheckedBindingListener = listener;
     }
 
     /**

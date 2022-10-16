@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,10 +25,6 @@ android {
         enabled true
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -39,6 +33,10 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
