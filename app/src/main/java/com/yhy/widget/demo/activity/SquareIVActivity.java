@@ -1,18 +1,19 @@
 package com.yhy.widget.demo.activity;
 
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.yhy.widget.core.img.SquareImageView;
 import com.yhy.widget.core.preview.ImgPreCfg;
 import com.yhy.widget.core.preview.PreImgActivity;
-import com.yhy.widget.core.img.SquareImageView;
+import com.yhy.widget.core.preview.PreviewModel;
 import com.yhy.widget.core.recycler.div.RvDivider;
 import com.yhy.widget.demo.R;
 import com.yhy.widget.demo.activity.base.BaseActivity;
@@ -60,26 +61,15 @@ public class SquareIVActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-        sivDef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) view, ImgUrls.getAImgUrl());
-                PreImgActivity.preview(SquareIVActivity.this, cfg);
-            }
+        sivDef.setOnClickListener(view -> {
+            ImgPreCfg cfg = new ImgPreCfg(view, new PreviewModel().setUrl(ImgUrls.getAImgUrl()).setType(PreviewModel.TYPE_IMAGE));
+            PreImgActivity.preview(SquareIVActivity.this, cfg);
         });
 
-        sivAttrs.setOnBtnClickListener(new SquareImageView.OnBtnClickListener() {
-            @Override
-            public void onClick(SquareImageView siv) {
-                Toast.makeText(SquareIVActivity.this, "删除图片", Toast.LENGTH_SHORT).show();
-            }
-        });
-        sivAttrs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) view, ImgUrls.getAImgUrl());
-                PreImgActivity.preview(SquareIVActivity.this, cfg);
-            }
+        sivAttrs.setOnBtnClickListener(siv -> Toast.makeText(SquareIVActivity.this, "删除图片", Toast.LENGTH_SHORT).show());
+        sivAttrs.setOnClickListener(view -> {
+            ImgPreCfg cfg = new ImgPreCfg(view, new PreviewModel().setUrl(ImgUrls.getAImgUrl()).setType(PreviewModel.TYPE_IMAGE));
+            PreImgActivity.preview(SquareIVActivity.this, cfg);
         });
     }
 
@@ -107,18 +97,10 @@ public class SquareIVActivity extends BaseActivity {
                 ((SquareImageView) holder.itemView).setBtn(0);
             }
 
-            ((SquareImageView) holder.itemView).setOnBtnClickListener(new SquareImageView.OnBtnClickListener() {
-                @Override
-                public void onClick(SquareImageView siv) {
-                    Toast.makeText(SquareIVActivity.this, "删除第" + holder.getAdapterPosition() + "张图片", Toast.LENGTH_SHORT).show();
-                }
-            });
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ImgPreCfg<String> cfg = new ImgPreCfg<>((ImageView) view, mImgUrls.get(holder.getAdapterPosition()));
-                    PreImgActivity.preview(SquareIVActivity.this, cfg);
-                }
+            ((SquareImageView) holder.itemView).setOnBtnClickListener(siv -> Toast.makeText(SquareIVActivity.this, "删除第" + holder.getAdapterPosition() + "张图片", Toast.LENGTH_SHORT).show());
+            holder.itemView.setOnClickListener(view -> {
+                ImgPreCfg cfg = new ImgPreCfg(view, new PreviewModel().setUrl(mImgUrls.get(holder.getLayoutPosition())).setType(PreviewModel.TYPE_IMAGE));
+                PreImgActivity.preview(SquareIVActivity.this, cfg);
             });
         }
 

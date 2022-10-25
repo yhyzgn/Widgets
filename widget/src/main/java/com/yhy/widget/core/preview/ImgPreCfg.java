@@ -1,6 +1,6 @@
 package com.yhy.widget.core.preview;
 
-import android.widget.ImageView;
+import android.view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,55 +13,55 @@ import java.util.List;
  * version: 1.0.0
  * desc   : 图片预览器配置参数
  */
-public class ImgPreCfg<T> implements Serializable {
+public class ImgPreCfg implements Serializable {
     private static final long serialVersionUID = 671615371513873774L;
 
     private boolean mDownloadable = ImgPreHelper.getInstance().isDownloadable();
     private int mDownloadIconId = ImgPreHelper.getInstance().getDownloadIconId();
 
+    private final List<PreviewModel> mModelList = new ArrayList<>();
+
     private int mIvX;
     private int mIvY;
     private int mIvWidth;
     private int mIvHeight;
-    private List<T> mModelList;
     private int mCurrent;
 
     /**
      * 构造函数
      *
-     * @param imgView 点击的ImageView
-     * @param model   图片路径
+     * @param view  点击的 View
+     * @param model 预览条目
      */
-    public ImgPreCfg(ImageView imgView, T model) {
-        List<T> temp = new ArrayList<>();
-        temp.add(model);
-
-        this.mModelList = temp;
-        calculateIv(imgView);
-        this.mCurrent = 0;
+    public ImgPreCfg(View view, PreviewModel model) {
+        mModelList.clear();
+        mModelList.add(model);
+        calculateIv(view);
+        mCurrent = 0;
     }
 
     /**
      * 构造函数
      *
-     * @param imgView   点击的ImageView
-     * @param modelList 图片路径集合
+     * @param view      点击的 View
+     * @param modelList 预览条目集合
      */
-    public ImgPreCfg(ImageView imgView, List<T> modelList) {
-        this(imgView, modelList, 0);
+    public ImgPreCfg(View view, List<PreviewModel> modelList) {
+        this(view, modelList, 0);
     }
 
     /**
      * 构造函数
      *
-     * @param imgView   点击的ImageView
-     * @param modelList 图片路径集合
+     * @param view      点击的 View
+     * @param modelList 预览条目集合
      * @param current   当前选中的索引
      */
-    public ImgPreCfg(ImageView imgView, List<T> modelList, int current) {
-        this.mModelList = modelList;
-        calculateIv(imgView);
-        this.mCurrent = current;
+    public ImgPreCfg(View view, List<PreviewModel> modelList, int current) {
+        mModelList.clear();
+        mModelList.addAll(modelList);
+        calculateIv(view);
+        mCurrent = current;
     }
 
     /**
@@ -71,18 +71,16 @@ public class ImgPreCfg<T> implements Serializable {
      * @param ivY      图片y坐标
      * @param ivWidth  图片宽度
      * @param ivHeight 图片高度
-     * @param model    图片路径
+     * @param model    预览条目
      */
-    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, T model) {
-        List<T> temp = new ArrayList<>();
-        temp.add(model);
-
-        this.mModelList = temp;
-        this.mIvX = ivX;
-        this.mIvY = ivY;
-        this.mIvWidth = ivWidth;
-        this.mIvHeight = ivHeight;
-        this.mCurrent = 0;
+    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, PreviewModel model) {
+        mModelList.clear();
+        mModelList.add(model);
+        mIvX = ivX;
+        mIvY = ivY;
+        mIvWidth = ivWidth;
+        mIvHeight = ivHeight;
+        mCurrent = 0;
     }
 
     /**
@@ -92,9 +90,9 @@ public class ImgPreCfg<T> implements Serializable {
      * @param ivY       图片y坐标
      * @param ivWidth   图片宽度
      * @param ivHeight  图片高度
-     * @param modelList 图片路径集合
+     * @param modelList 预览条目合
      */
-    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, List<T> modelList) {
+    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, List<PreviewModel> modelList) {
         this(ivX, ivY, ivWidth, ivHeight, modelList, 0);
     }
 
@@ -105,17 +103,17 @@ public class ImgPreCfg<T> implements Serializable {
      * @param ivY       图片y坐标
      * @param ivWidth   图片宽度
      * @param ivHeight  图片高度
-     * @param modelList 图片路径集合
+     * @param modelList 预览条目集合
      * @param current   当前选中的索引
      */
-    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, List<T> modelList, int current) {
-        this.mModelList = modelList;
-        this.mCurrent = 0;
-        this.mIvX = ivX;
-        this.mIvY = ivY;
-        this.mIvWidth = ivWidth;
-        this.mIvHeight = ivHeight;
-        this.mCurrent = current;
+    public ImgPreCfg(int ivX, int ivY, int ivWidth, int ivHeight, List<PreviewModel> modelList, int current) {
+        mModelList.clear();
+        mModelList.addAll(modelList);
+        mIvX = ivX;
+        mIvY = ivY;
+        mIvWidth = ivWidth;
+        mIvHeight = ivHeight;
+        mCurrent = current;
     }
 
     /**
@@ -124,7 +122,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @param enable 是否可下载
      * @return 当前对象
      */
-    public ImgPreCfg<T> setDownloadable(boolean enable) {
+    public ImgPreCfg setDownloadable(boolean enable) {
         this.mDownloadable = enable;
         return this;
     }
@@ -135,7 +133,7 @@ public class ImgPreCfg<T> implements Serializable {
      * @param iconId 图标id
      * @return 当前对象
      */
-    public ImgPreCfg<T> setDownloadIconId(int iconId) {
+    public ImgPreCfg setDownloadIconId(int iconId) {
         this.mDownloadIconId = iconId;
         return this;
     }
@@ -163,7 +161,7 @@ public class ImgPreCfg<T> implements Serializable {
      *
      * @return 图片路径集合
      */
-    public List<T> getModelList() {
+    public List<PreviewModel> getModelList() {
         return mModelList;
     }
 
@@ -222,18 +220,18 @@ public class ImgPreCfg<T> implements Serializable {
     }
 
     /**
-     * 计算点击的ImageView的大小
+     * 计算点击的 View 的大小
      *
-     * @param iv 点击的ImageView
+     * @param view 点击的 View
      */
-    private void calculateIv(ImageView iv) {
-        if (null != iv) {
+    private void calculateIv(View view) {
+        if (null != view) {
             // 如果传入ImageView，就按该ImageView计算
-            mIvWidth = iv.getWidth();
-            mIvHeight = iv.getHeight();
+            mIvWidth = view.getWidth();
+            mIvHeight = view.getHeight();
 
             int[] points = new int[2];
-            iv.getLocationInWindow(points);
+            view.getLocationInWindow(points);
             mIvX = points[0];
             mIvY = points[1];
         } else {

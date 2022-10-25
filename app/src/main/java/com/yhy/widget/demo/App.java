@@ -90,6 +90,8 @@ public class App extends Application {
             return;
         }
 
+        Log.i("loadImgByPicasso", model.toString());
+
         Picasso picasso = Picasso.with(ctx);
         RequestCreator rc = null;
         if (model instanceof String) {

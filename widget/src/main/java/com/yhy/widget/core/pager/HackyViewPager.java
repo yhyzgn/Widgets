@@ -1,9 +1,11 @@
 package com.yhy.widget.core.pager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * author : 颜洪毅
@@ -22,6 +24,7 @@ public class HackyViewPager extends ViewPager {
         super(context, attrs);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         try {

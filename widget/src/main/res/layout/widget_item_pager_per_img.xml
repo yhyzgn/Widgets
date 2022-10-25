@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/pv_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/img_def_loading" />
+            android:id="@+id/pv_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/img_def_loading" />
+
+    <cn.jzvd.JzvdStd
+            android:id="@+id/jz_video_player"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_centerInParent="true" />
 
     <ProgressBar
-        android:id="@+id/pb_loading"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
+            android:id="@+id/pb_loading"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 </RelativeLayout>

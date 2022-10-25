@@ -45,26 +45,22 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
             return;
         }
         final File saveDir = new File(getSaveDir(activity));
-        if (!saveDir.exists()) {
-            saveDir.mkdirs();
+        if (!saveDir.exists() && !saveDir.mkdirs()) {
+            throw new IllegalStateException("无法创建图片保存文件夹");
         }
 
         if (type == ImgPreHelper.DataSourceType.BASE64) {
             byte[] decodedString = Base64.decode(model.split(",")[1], Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             final File f = new File(saveDir, UUID.randomUUID().toString() + ".jpg");
-            if (f.exists()) {
-                f.delete();
-            }
-            try {
-                FileOutputStream out = new FileOutputStream(f);
-                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
-                out.flush();
-                out.close();
-                if (null != listener) {
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+            if (!f.exists() || f.delete()) {
+                try {
+                    FileOutputStream out = new FileOutputStream(f);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                    out.flush();
+                    out.close();
+                    if (null != listener) {
+                        activity.runOnUiThread(() -> {
                             listener.onSuccess(f, "图片下载成功");
                             // 刷新媒体库
                             try {
@@ -72,101 +68,84 @@ public class DefImgDownloader implements ImgPreHelper.ImgDownloader {
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             }
-                        }
-                    });
-                }
-            } catch (final Exception e) {
-                e.printStackTrace();
-                if (null != listener) {
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            listener.onError(e.getMessage());
-                        }
-                    });
+                        });
+                    }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                    if (null != listener) {
+                        activity.runOnUiThread(() -> listener.onError(e.getMessage()));
+                    }
                 }
             }
         } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    BufferedInputStream bis = null;
-                    BufferedOutputStream bos = null;
+            new Thread(() -> {
+                BufferedInputStream bis = null;
+                BufferedOutputStream bos = null;
 
-                    try {
-                        URL url = new URL(model);
-                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                        conn.setRequestMethod("GET");
-                        conn.setConnectTimeout(8 * 1000);
-                        conn.setReadTimeout(8 * 1000);
-                        conn.connect();
+                try {
+                    URL url = new URL(model);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setConnectTimeout(8 * 1000);
+                    conn.setReadTimeout(8 * 1000);
+                    conn.connect();
 
-                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                            long totalSize = conn.getContentLength();
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                                totalSize = conn.getContentLengthLong();
-                            }
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        long totalSize = conn.getContentLength();
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                            totalSize = conn.getContentLengthLong();
+                        }
 
-                            final File img = new File(saveDir, getFilename(conn));
+                        final File img = new File(saveDir, getFilename(conn));
 
-                            Log.e("Img", img.getAbsolutePath());
+                        Log.e("Img", img.getAbsolutePath());
 
-                            bis = new BufferedInputStream(conn.getInputStream());
-                            bos = new BufferedOutputStream(new FileOutputStream(img));
-                            byte[] buffer = new byte[1024 * 8];
-                            int len = 0;
-                            long downloaded = 0;
-                            while ((len = bis.read(buffer)) != -1) {
-                                bos.write(buffer, 0, len);
-                                bos.flush();
+                        bis = new BufferedInputStream(conn.getInputStream());
+                        bos = new BufferedOutputStream(new FileOutputStream(img));
+                        byte[] buffer = new byte[1024 * 8];
+                        int len;
+                        long downloaded = 0;
+                        while ((len = bis.read(buffer)) != -1) {
+                            bos.write(buffer, 0, len);
+                            bos.flush();
 
-                                downloaded += len;
+                            downloaded += len;
 
-                                final long total = totalSize;
-                                final long current = downloaded;
-                                if (null != listener) {
-                                    activity.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            listener.onProgress((float) current / (float) total, current, total);
-                                            if (current >= total) {
-                                                listener.onSuccess(img, "图片下载成功");
-                                                // 刷新媒体库
-                                                try {
-                                                    ImgPreHelper.getInstance().refreshMediaStore(img);
-                                                } catch (FileNotFoundException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
+                            final long total = totalSize;
+                            final long current = downloaded;
+                            if (null != listener) {
+                                activity.runOnUiThread(() -> {
+                                    listener.onProgress((float) current / (float) total, current, total);
+                                    if (current >= total) {
+                                        listener.onSuccess(img, "图片下载成功");
+                                        // 刷新媒体库
+                                        try {
+                                            ImgPreHelper.getInstance().refreshMediaStore(img);
+                                        } catch (FileNotFoundException e) {
+                                            e.printStackTrace();
                                         }
-                                    });
-                                }
+                                    }
+                                });
                             }
-                        }
-                    } catch (final Exception e) {
-                        e.printStackTrace();
-                        if (null != listener) {
-                            activity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    listener.onError(e.getMessage());
-                                }
-                            });
-                        }
-                    } finally {
-                        try {
-                            if (null != bos) {
-                                bos.close();
-                            }
-                            if (null != bis) {
-                                bis.close();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
                     }
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                    if (null != listener) {
+                        activity.runOnUiThread(() -> listener.onError(e.getMessage()));
+                    }
+                } finally {
+                    try {
+                        if (null != bos) {
+                            bos.close();
+                        }
+                        if (null != bis) {
+                            bis.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
             }).start();
         }
     }

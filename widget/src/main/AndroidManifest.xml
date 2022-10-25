@@ -11,11 +11,15 @@
 
     <application
             android:allowBackup="true"
-            android:supportsRtl="true">
+            android:supportsRtl="true"
+            android:usesCleartextTraffic="true"
+            android:networkSecurityConfig="@xml/network_security_config">
 
         <activity
                 android:name=".core.preview.PreImgActivity"
                 android:exported="false"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.Transparent" />
     </application>
 

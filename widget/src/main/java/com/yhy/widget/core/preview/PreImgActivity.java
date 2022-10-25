@@ -19,18 +19,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.viewpager.widget.ViewPager;
+
 import com.yhy.widget.R;
 import com.yhy.widget.core.pager.HackyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
-import androidx.viewpager.widget.ViewPager;
+import cn.jzvd.Jzvd;
 
 /**
  * author : 颜洪毅
@@ -100,6 +102,11 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         vpImg.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                Jzvd lastPlayer = mAdapter.getPlayer(mCfg.getCurrent());
+                if (null != lastPlayer && lastPlayer.getVisibility() == View.VISIBLE) {
+                    lastPlayer.reset();
+                }
+
                 mCfg.setCurrent(position);
                 tvItem.setText(String.format(getString(R.string.pre_img_current_item), mCfg.getCurrent() + 1, mCfg.getModelList().size()));
             }
@@ -107,14 +114,8 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
         tvItem.setText(String.format(getString(R.string.pre_img_current_item), mCfg.getCurrent() + 1, mCfg.getModelList().size()));
 
-        // 只有预览网络图片时才显示下载按钮
         ivDownload.setImageResource(mCfg.getDownloadIconId());
-        ivDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkPermissionAndDownload();
-            }
-        });
+        ivDownload.setOnClickListener(v -> checkPermissionAndDownload());
     }
 
     private void checkPermissionAndDownload() {
@@ -131,25 +132,22 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         }
 
         if (null != permissions && !permissions.isEmpty()) {
-            ActivityCompat.requestPermissions(PreImgActivity.this, permissions.toArray(new String[permissions.size()]), REQ_CODE_PERMISSION);
+            ActivityCompat.requestPermissions(PreImgActivity.this, permissions.toArray(new String[0]), REQ_CODE_PERMISSION);
         } else {
             // 已授权
             ImgPreHelper.ImgDownloader downloader = ImgPreHelper.getInstance().getDownloader();
             if (null != downloader) {
-                Object model = mCfg.getModelList().get(vpImg.getCurrentItem());
-                // 只有预览网络图片时才能下载
-                if (model instanceof String) {
-                    downloader.download(PreImgActivity.this, isNetImg((String) model) ? ImgPreHelper.DataSourceType.URL : ImgPreHelper.DataSourceType.BASE64, (String) model, ImgPreHelper.getInstance().getOnDownloadListener());
-                    return;
+                PreviewModel model = mCfg.getModelList().get(vpImg.getCurrentItem());
+                // 只有预览图片时才能下载
+                if (model.getType() == PreviewModel.TYPE_IMAGE) {
+                    downloader.download(PreImgActivity.this, isNetImg(model.getUrl()) ? ImgPreHelper.DataSourceType.URL : ImgPreHelper.DataSourceType.BASE64, model.getUrl(), ImgPreHelper.getInstance().getOnDownloadListener());
                 }
-                throw new IllegalStateException("Unknown resource : [" + model + "]");
             }
         }
     }
 
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQ_CODE_PERMISSION) {
             checkPermissionAndDownload();
@@ -184,23 +182,20 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         final float vy = mCfg.getIvHeight() * 1.0f / mImgHeight;
 
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1.0f);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                long duration = animation.getDuration();
-                long playTime = animation.getCurrentPlayTime();
-                float fraction = duration > 0 ? (float) playTime / duration : 1f;
-                if (fraction > 1) fraction = 1;
-                view.setTranslationX(evaluateFloat(fraction, mCfg.getIvX() + mCfg.getIvWidth() / 2 - ivImg.getWidth() / 2, 0));
-                view.setTranslationY(evaluateFloat(fraction, mCfg.getIvY() + mCfg.getIvHeight() / 2 - ivImg.getHeight() / 2, 0));
+        animator.addUpdateListener(animation -> {
+            long duration = animation.getDuration();
+            long playTime = animation.getCurrentPlayTime();
+            float fraction = duration > 0 ? (float) playTime / duration : 1f;
+            if (fraction > 1) fraction = 1;
+            view.setTranslationX(evaluateFloat(fraction, mCfg.getIvX() + mCfg.getIvWidth() / 2 - ivImg.getWidth() / 2, 0));
+            view.setTranslationY(evaluateFloat(fraction, mCfg.getIvY() + mCfg.getIvHeight() / 2 - ivImg.getHeight() / 2, 0));
 
-                view.setScaleX(evaluateFloat(fraction, vx, 1));
-                view.setScaleY(evaluateFloat(fraction, vy, 1));
+            view.setScaleX(evaluateFloat(fraction, vx, 1));
+            view.setScaleY(evaluateFloat(fraction, vy, 1));
 
-                view.setAlpha(evaluateFloat(fraction, 0f, 1.0f));
+            view.setAlpha(evaluateFloat(fraction, 0f, 1.0f));
 
-                rlRoot.setBackgroundColor(evaluateArgb(fraction, Color.TRANSPARENT, Color.BLACK));
-            }
+            rlRoot.setBackgroundColor(evaluateArgb(fraction, Color.TRANSPARENT, Color.BLACK));
         });
         addIntoListener(animator);
         animator.setDuration(ANIMATE_DURATION);
@@ -227,23 +222,20 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         final float vy = mCfg.getIvHeight() * 1.0f / mImgHeight;
 
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1.0f);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                long duration = animation.getDuration();
-                long playTime = animation.getCurrentPlayTime();
-                float fraction = duration > 0 ? (float) playTime / duration : 1f;
-                if (fraction > 1) fraction = 1;
-                view.setTranslationX(evaluateFloat(fraction, 0, mCfg.getIvX() + mCfg.getIvWidth() / 2 - ivImg.getWidth() / 2));
-                view.setTranslationY(evaluateFloat(fraction, 0, mCfg.getIvY() + mCfg.getIvHeight() / 2 - ivImg.getHeight() / 2));
+        animator.addUpdateListener(animation -> {
+            long duration = animation.getDuration();
+            long playTime = animation.getCurrentPlayTime();
+            float fraction = duration > 0 ? (float) playTime / duration : 1f;
+            if (fraction > 1) fraction = 1;
+            view.setTranslationX(evaluateFloat(fraction, 0, mCfg.getIvX() + mCfg.getIvWidth() / 2 - ivImg.getWidth() / 2));
+            view.setTranslationY(evaluateFloat(fraction, 0, mCfg.getIvY() + mCfg.getIvHeight() / 2 - ivImg.getHeight() / 2));
 
-                view.setScaleX(evaluateFloat(fraction, 1, vx));
-                view.setScaleY(evaluateFloat(fraction, 1, vy));
+            view.setScaleX(evaluateFloat(fraction, 1, vx));
+            view.setScaleY(evaluateFloat(fraction, 1, vy));
 
-                view.setAlpha(evaluateFloat(fraction, 1.0f, 0f));
+            view.setAlpha(evaluateFloat(fraction, 1.0f, 0f));
 
-                rlRoot.setBackgroundColor(evaluateArgb(fraction, Color.BLACK, Color.TRANSPARENT));
-            }
+            rlRoot.setBackgroundColor(evaluateArgb(fraction, Color.BLACK, Color.TRANSPARENT));
         });
         addOutListener(animator);
         animator.setDuration(ANIMATE_DURATION);
@@ -252,7 +244,16 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
     @Override
     public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
         finishWithAnim();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
     }
 
     /**
@@ -388,7 +389,9 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
      */
     private Float evaluateFloat(float fraction, Number startValue, Number endValue) {
         float startFloat = startValue.floatValue();
-        return startFloat + fraction * (endValue.floatValue() - startFloat);
+        float result = startFloat + fraction * (endValue.floatValue() - startFloat);
+        return Float.isNaN(result) ? 0 : result;
+
     }
 
     /**
