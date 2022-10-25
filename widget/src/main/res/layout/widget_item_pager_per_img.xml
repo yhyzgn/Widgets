@@ -9,8 +9,8 @@
             android:layout_height="match_parent"
             android:src="@mipmap/img_def_loading" />
 
-    <cn.jzvd.JzvdStd
-            android:id="@+id/jz_video_player"
+    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+            android:id="@+id/svp_player"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:layout_centerInParent="true" />

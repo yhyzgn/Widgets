@@ -18,8 +18,8 @@
         <activity
                 android:name=".core.preview.PreImgActivity"
                 android:exported="false"
-                android:configChanges="orientation|screenSize|keyboardHidden"
-                android:screenOrientation="portrait"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+                android:screenOrientation="fullSensor"
                 android:theme="@style/Theme.Transparent" />
     </application>
 

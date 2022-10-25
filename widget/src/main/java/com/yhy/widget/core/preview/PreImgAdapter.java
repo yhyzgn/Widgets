@@ -2,24 +2,25 @@ package com.yhy.widget.core.preview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.yhy.widget.R;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import cn.jzvd.Jzvd;
-import cn.jzvd.JzvdStd;
 
 /**
  * author : 颜洪毅
@@ -31,7 +32,7 @@ import cn.jzvd.JzvdStd;
 public class PreImgAdapter extends PagerAdapter {
     private final Context mCtx;
     private final ImgPreCfg mCfg;
-    private final Map<Integer, Jzvd> mPlayerMap;
+    private final Map<Integer, StandardGSYVideoPlayer> mPlayerMap;
     private View mPrimaryItem;
 
     /**
@@ -46,7 +47,7 @@ public class PreImgAdapter extends PagerAdapter {
         mPlayerMap = new HashMap<>();
     }
 
-    public Jzvd getPlayer(int position) {
+    public StandardGSYVideoPlayer getPlayer(int position) {
         return mPlayerMap.get(position);
     }
 
@@ -82,8 +83,8 @@ public class PreImgAdapter extends PagerAdapter {
      */
     public ImageView getPrimaryImgView() {
         ImageView pvImg = getPrimaryItem().findViewById(R.id.pv_img);
-        JzvdStd jsPlayer = getPrimaryItem().findViewById(R.id.jz_video_player);
-        return pvImg.getVisibility() == View.VISIBLE ? pvImg : jsPlayer.posterImageView;
+        StandardGSYVideoPlayer svpPlayer = getPrimaryItem().findViewById(R.id.svp_player);
+        return pvImg.getVisibility() == View.VISIBLE || null == svpPlayer.getThumbImageView() || !(svpPlayer.getThumbImageView() instanceof ImageView) ? pvImg : (ImageView) svpPlayer.getThumbImageView();
     }
 
     @SuppressLint("InflateParams")
@@ -92,7 +93,7 @@ public class PreImgAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(mCtx).inflate(R.layout.widget_item_pager_per_img, null);
         PhotoView pvImg = view.findViewById(R.id.pv_img);
-        JzvdStd jsPlayer = view.findViewById(R.id.jz_video_player);
+        StandardGSYVideoPlayer svpPlayer = view.findViewById(R.id.svp_player);
         ProgressBar pbLoading = view.findViewById(R.id.pb_loading);
 
         //设置点击事件
@@ -109,17 +110,36 @@ public class PreImgAdapter extends PagerAdapter {
 
         if (pm.getType() == PreviewModel.TYPE_IMAGE) {
             pvImg.setVisibility(View.VISIBLE);
-            jsPlayer.setVisibility(View.GONE);
+            svpPlayer.setVisibility(View.GONE);
 
             ImgPreHelper.getInstance().getLoader().load(pvImg, pm.getUrl(), pbLoading);
         } else {
-            pvImg.setVisibility(View.GONE);
-            jsPlayer.setVisibility(View.VISIBLE);
+            pvImg.setVisibility(View.INVISIBLE);
+            svpPlayer.setVisibility(View.VISIBLE);
 
-            jsPlayer.setUp(pm.getUrl(), pm.getName());
-            ImgPreHelper.getInstance().getLoader().load(jsPlayer.posterImageView, !TextUtils.isEmpty(pm.getThumbnail()) ? pm.getThumbnail() : R.mipmap.img_def_loading, pbLoading);
+            ImageView ivThumb = new ImageView(mCtx);
+            ivThumb.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            svpPlayer.setThumbImageView(ivThumb);
+            ViewGroup.LayoutParams lp = ivThumb.getLayoutParams();
+            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            lp.height = (int) dpToPx(mCtx, 240);
+            ivThumb.setLayoutParams(lp);
+            svpPlayer.getThumbImageViewLayout().setVisibility(View.VISIBLE);
+            svpPlayer.setThumbPlay(true);
+
+            svpPlayer.setUp(pm.getUrl(), true, pm.getName());
+            svpPlayer.setTag(pm.getThumbnail());
+            svpPlayer.setAutoFullWithSize(true);
+            svpPlayer.setShowFullAnimation(true);
+            svpPlayer.setReleaseWhenLossAudio(true);
+            svpPlayer.getTitleTextView().setVisibility(View.GONE);
+            svpPlayer.getBackButton().setVisibility(View.GONE);
+            //设置全屏按键功能
+            svpPlayer.getFullscreenButton().setOnClickListener(v -> svpPlayer.startWindowFullscreen(mCtx, false, true));
+
+            ImgPreHelper.getInstance().getLoader().load(ivThumb, !TextUtils.isEmpty(pm.getThumbnail()) ? pm.getThumbnail() : R.mipmap.img_def_loading, pbLoading);
         }
-        mPlayerMap.put(position, jsPlayer);
+        mPlayerMap.put(position, svpPlayer);
         container.addView(view);
         return view;
     }
@@ -127,5 +147,10 @@ public class PreImgAdapter extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+    }
+
+    public static float dpToPx(@NonNull Context context, @Dimension(unit = Dimension.DP) int dp) {
+        Resources r = context.getResources();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
     }
 }

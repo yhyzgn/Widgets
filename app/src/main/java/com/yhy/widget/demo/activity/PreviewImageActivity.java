@@ -52,7 +52,7 @@ public class PreviewImageActivity extends BaseActivity {
         list.add(new PreviewModel().setName("图片--1234").setUrl(ImgUrls.getAImgUrl()).setType(PreviewModel.TYPE_IMAGE));
         list.add(new PreviewModel().setName("SIN_TEL").setUrl("http://rbv01.ku6.com/7lut5JlEO-v6a8K3X9xBNg.mp4").setType(PreviewModel.TYPE_VIDEO).setThumbnail(ImgUrls.getAImgUrl()));
         list.add(new PreviewModel().setName("图片--34234").setUrl(ImgUrls.getAImgUrl()).setType(PreviewModel.TYPE_IMAGE));
-        ImgPreCfg cfg = new ImgPreCfg(iv, list, 1);
+        ImgPreCfg cfg = new ImgPreCfg(iv, list, 4);
 //        cfg.setDownloadable(false);
 //        cfg.setDownloadIconId(R.mipmap.ic_def_download);
         PreImgActivity.preview(this, cfg);

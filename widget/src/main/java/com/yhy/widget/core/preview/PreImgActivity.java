@@ -3,6 +3,7 @@ package com.yhy.widget.core.preview;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,13 +27,13 @@ import androidx.core.content.ContextCompat;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.viewpager.widget.ViewPager;
 
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.yhy.widget.R;
 import com.yhy.widget.core.pager.HackyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.jzvd.Jzvd;
 
 /**
  * author : 颜洪毅
@@ -82,6 +83,8 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         //设置透明状态栏
         setStatusBar();
 
+        setFullScreen();
+
         setContentView(R.layout.widget_activity_pre_img);
 
         rlRoot = findViewById(R.id.rl_root);
@@ -102,9 +105,9 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
         vpImg.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                Jzvd lastPlayer = mAdapter.getPlayer(mCfg.getCurrent());
+                StandardGSYVideoPlayer lastPlayer = mAdapter.getPlayer(mCfg.getCurrent());
                 if (null != lastPlayer && lastPlayer.getVisibility() == View.VISIBLE) {
-                    lastPlayer.reset();
+                    lastPlayer.release();
                 }
 
                 mCfg.setCurrent(position);
@@ -116,6 +119,26 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
         ivDownload.setImageResource(mCfg.getDownloadIconId());
         ivDownload.setOnClickListener(v -> checkPermissionAndDownload());
+    }
+
+    private void setFullScreen() {
+        // 屏幕常亮
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // 状态栏隐藏
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        ActionBar actionBar = getActionBar();
+        if (null != actionBar) {
+            actionBar.hide();
+        }
+        // 解决 android 水滴屏刘海屏隐藏上方状态栏后仍然有小黑条的方法/水滴屏 fullscreen 后上方状态栏为黑条
+        WindowManager.LayoutParams lp = this.getWindow().getAttributes();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
+        this.getWindow().setAttributes(lp);
     }
 
     private void checkPermissionAndDownload() {
@@ -244,7 +267,7 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
     @Override
     public void onBackPressed() {
-        if (Jzvd.backPress()) {
+        if (GSYVideoManager.backFromWindowFull(this)) {
             return;
         }
         finishWithAnim();
@@ -253,7 +276,7 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
     @Override
     protected void onPause() {
         super.onPause();
-        Jzvd.releaseAllVideos();
+        GSYVideoManager.releaseAllVideos();
     }
 
     /**
