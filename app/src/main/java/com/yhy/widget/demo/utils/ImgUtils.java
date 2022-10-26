@@ -27,6 +27,7 @@ public class ImgUtils {
     /**
      * 图片加载器
      */
+    @FunctionalInterface
     public interface ImgLoader {
         <T> void load(Context ctx, ImageView iv, T model);
     }

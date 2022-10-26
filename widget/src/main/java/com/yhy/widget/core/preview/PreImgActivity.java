@@ -6,12 +6,16 @@ import android.animation.ValueAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -20,20 +24,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.viewpager.widget.ViewPager;
 
+import com.permissionx.guolindev.PermissionX;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.yhy.widget.R;
+import com.yhy.widget.component.downloader.WidgetDownloader;
 import com.yhy.widget.core.pager.HackyViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * author : 颜洪毅
@@ -43,8 +45,8 @@ import java.util.List;
  * desc   : 图片预览页面
  */
 public class PreImgActivity extends AppCompatActivity implements ViewTreeObserver.OnPreDrawListener {
+    private static final String TAG = "PreImgActivity";
     private static final long ANIMATE_DURATION = 200;
-    private static final int REQ_CODE_PERMISSION = 1000;
 
     private ImgPreCfg mCfg;
     private RelativeLayout rlRoot;
@@ -145,47 +147,56 @@ public class PreImgActivity extends AppCompatActivity implements ViewTreeObserve
 
     private void checkPermissionAndDownload() {
         // 检查SD卡读取权限
-        List<String> permissions = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            permissions = new ArrayList<>();
-            if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-            }
-            if (ContextCompat.checkSelfPermission(PreImgActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            }
-        }
-
-        if (null != permissions && !permissions.isEmpty()) {
-            ActivityCompat.requestPermissions(PreImgActivity.this, permissions.toArray(new String[0]), REQ_CODE_PERMISSION);
-        } else {
-            // 已授权
-            ImgPreHelper.ImgDownloader downloader = ImgPreHelper.getInstance().getDownloader();
-            if (null != downloader) {
-                PreviewModel model = mCfg.getModelList().get(vpImg.getCurrentItem());
-                // 只有预览图片时才能下载
-                if (model.getType() == PreviewModel.TYPE_IMAGE) {
-                    downloader.download(PreImgActivity.this, isNetImg(model.getUrl()) ? ImgPreHelper.DataSourceType.URL : ImgPreHelper.DataSourceType.BASE64, model.getUrl(), ImgPreHelper.getInstance().getOnDownloadListener());
+        PermissionX.init(this).permissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).request((allGranted, grantedList, deniedList) -> {
+            if (allGranted) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    PermissionX.init(this).permissions(Manifest.permission.MANAGE_EXTERNAL_STORAGE).request((al, gl, dl) -> {
+                        if (al) {
+                            if (Environment.isExternalStorageManager()) {
+                                Log.i(TAG, "此手机是Android 11或更高的版本，且已获得访问所有文件权限");
+                                download();
+                            } else {
+                                ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                                    boolean granted = result.getResultCode() == Activity.RESULT_OK;
+                                    Log.i(TAG, "权限申请结果：" + granted);
+                                    if (granted) {
+                                        download();
+                                    }
+                                });
+                                Log.i(TAG, "此手机是Android 11或更高的版本，且没有访问所有文件权限");
+                                launcher.launch(new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION));
+                            }
+                        }
+                    });
                 }
             }
-        }
+        });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQ_CODE_PERMISSION) {
-            checkPermissionAndDownload();
+    private void download() {
+        PreviewModel model = mCfg.getModelList().get(vpImg.getCurrentItem());
+        if (null != model && !TextUtils.isEmpty(model.getUrl())) {
+            WidgetDownloader.with(this)
+                    .allowedMobileNetwork(true)
+                    .allowedNotification(true)
+                    .url(model.getUrl())
+                    .launch((current, total, percent) -> {
+                        Log.i(TAG, "文件总的大小：" + total + "，已下载：" + current + "，进度：" + (percent * 100) + "%");
+                    }, uri -> {
+                        refreshMediaStore(uri);
+                        Log.i(TAG, "文件下载完成，uri = " + uri.getPath());
+                    });
         }
     }
 
     /**
-     * 是否是网络图片
+     * 刷新媒体库
      *
-     * @return 是否是网络图片
+     * @param uri 已下载的图片文件
      */
-    private boolean isNetImg(String model) {
-        return model.startsWith("http:") || model.startsWith("https:") || model.startsWith("ftp:");
+    public void refreshMediaStore(Uri uri) {
+        // 通知图库刷新
+        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
     }
 
     /**

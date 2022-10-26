@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.yhy.widget.core.preview.ImgPreHelper;
@@ -36,54 +38,33 @@ public class App extends Application {
         ToastUtils.init(this);
 
         //图片加载器工具初始化
-        ImgUtils.init(new ImgUtils.ImgLoader() {
-            @Override
-            public <T> void load(Context ctx, final ImageView iv, T model) {
-                loadImgByPicasso(ctx, iv, model);
+        //                loadImgByGlide(ctx, iv, model);
+        ImgUtils.init(this::loadImgByPicasso);
 
-//                Glide.with(ctx)
-//                        .load(model)
-//                        .placeholder(R.mipmap.ic_launcher)
-//                        .error(R.mipmap.ic_launcher)
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//使用磁盘缓存
-//                        .skipMemoryCache(true)//跳过内存缓存
-//                        .animate(R.anim.anim_alpha_image_load)
-//                        .crossFade()//渐变切换
-//                        .into(iv);
-////                        .into(new SimpleTarget<Bitmap>() {
-////                            @Override
-////                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super
-////                                    Bitmap> glideAnimation) {
-////                                iv.setImageBitmap(bitmap);
-////                            }
-////                        });
-            }
-        });
-
-        ImgPreHelper.getInstance().init(this).setLoader(new ImgPreHelper.ImgLoader() {
+        ImgPreHelper.getInstance().init(this, new ImgPreHelper.ImgLoader() {
             @Override
             public <T> void load(ImageView iv, T model, ProgressBar pbLoading) {
-//                Glide.with(iv.getContext()).load(model).into(iv);
                 loadImgByPicasso(iv.getContext(), iv, model);
-            }
-        }).setOnDownloadListener(new ImgPreHelper.OnDownloadListener() {
-            @Override
-            public void onProgress(float progress, long current, long total) {
-                Log.i("ImgDownloader", "下载进度：" + (progress * 100F) + "%，总大小：" + total + " bytes, 已下载：" + current + " bytes.");
-            }
-
-            @Override
-            public void onSuccess(File img, String msg) {
-                ToastUtils.shortT(msg);
-            }
-
-            @Override
-            public void onError(String error) {
-                ToastUtils.shortT(error);
             }
         });
     }
 
+    private <T> void loadImgByGlide(Context ctx, ImageView iv, T model) {
+        RequestBuilder<Drawable> builder = GlideApp.with(ctx).load(model);
+        if (null != iv.getDrawable()) {
+            // 图片占位仅通过 xml 方式设置，布局中未设置占位图的这里就不设置了
+            builder = builder.placeholder(iv.getDrawable());
+        }
+        if (null != iv.getDrawable()) {
+            builder = builder.error(iv.getDrawable());
+        } else {
+            builder = builder.error(R.mipmap.img_def_loading);
+        }
+        builder.diskCacheStrategy(DiskCacheStrategy.ALL)
+                .skipMemoryCache(true)
+                .into(iv);
+        Log.i("App", "图片加载完成：" + model);
+    }
 
     private <T> void loadImgByPicasso(Context ctx, ImageView iv, T model) {
         if (null == model) {
@@ -92,10 +73,16 @@ public class App extends Application {
 
         Log.i("loadImgByPicasso", model.toString());
 
-        Picasso picasso = Picasso.with(ctx);
+        Picasso picasso = Picasso.get();
+        picasso.setLoggingEnabled(true);
+
         RequestCreator rc = null;
         if (model instanceof String) {
-            rc = picasso.load((String) model);
+            String filepath = (String) model;
+            if (filepath.startsWith("/")) {
+                filepath = "file://" + filepath;
+            }
+            rc = picasso.load(filepath);
         } else if (model instanceof Integer) {
             rc = picasso.load((Integer) model);
         } else if (model instanceof Uri) {

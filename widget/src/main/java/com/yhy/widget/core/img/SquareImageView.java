@@ -16,7 +16,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.yhy.widget.R;
-import com.yhy.widget.helper.ImageViewScaleMatrixHelper;
+import com.yhy.widget.component.helper.ImageViewScaleMatrixHelper;
 import com.yhy.widget.utils.WidgetCoreUtils;
 
 /**
