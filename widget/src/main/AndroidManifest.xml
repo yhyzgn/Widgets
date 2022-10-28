@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <application
             android:allowBackup="true"

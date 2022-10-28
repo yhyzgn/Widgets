@@ -10,7 +10,7 @@ import java.util.Random;
  * desc   :
  */
 public class ImgUrls {
-    private static final Random RAND = new Random();
+    private static final Random RAND = new Random(System.currentTimeMillis());
 
     final static String[] ICON_ARR = {
             "https://meitulu.me/p/3134-1b4f79.jpg",
@@ -40,7 +40,17 @@ public class ImgUrls {
             "https://meitulu.me/p/3139-6a8eee.jpg",
             "https://meitulu.me/p/3139-a59494.jpg",
             "https://meitulu.me/p/3139-014ff1.jpg",
-            "https://meitulu.me/p/3139-c62697.jpg"
+            "https://meitulu.me/p/3139-c62697.jpg",
+
+            "https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-736bc3917fe92142.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-7fe8c323e533f656.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-caf66b935fd00e18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-48dd99da471ffa3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-4de5440a56bff58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+            "https://upload-images.jianshu.io/upload_images/5809200-03bbbd715c24750e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+
     };
 
     public static String getAImgUrl() {

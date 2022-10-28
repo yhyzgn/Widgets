@@ -1,16 +1,28 @@
 package com.yhy.widget.component.downloader;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.danikula.videocache.file.Md5FileNameGenerator;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.fragment.app.FragmentActivity;
+
+import com.permissionx.guolindev.PermissionX;
+import com.yhy.widget.utils.WidgetCoreUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -29,8 +41,8 @@ import java.util.concurrent.TimeUnit;
  * @since 1.0.0
  */
 public class WidgetDownloader {
-    private final Context mContext;
-    private final Md5FileNameGenerator mFilenameGenerator;
+    private static final String TAG = "WidgetDownloader";
+    private final FragmentActivity mActivity;
     private final Map<String, String> headerMap = new HashMap<>();
     private boolean mAllowedMobileNetwork;
     private boolean mAllowScanningByMediaScanner;
@@ -45,19 +57,18 @@ public class WidgetDownloader {
     private long mDownloadId;
     private DownloadChangeObserver mObserver;
 
-    private WidgetDownloader(Context context) {
-        mContext = context;
-        mFilenameGenerator = new Md5FileNameGenerator();
+    private WidgetDownloader(FragmentActivity activity) {
+        mActivity = activity;
     }
 
     /**
      * 获取一个实例
      *
-     * @param context 上下文
+     * @param activity Activity 上下文
      * @return 实例
      */
-    public static WidgetDownloader with(Context context) {
-        return new WidgetDownloader(context);
+    public static WidgetDownloader with(FragmentActivity activity) {
+        return new WidgetDownloader(activity);
     }
 
     /**
@@ -185,10 +196,56 @@ public class WidgetDownloader {
      * @return 当前实例
      */
     public WidgetDownloader launch(OnProgressChangedListener progressChangedListener, OnFinishedListener finishedListener) {
+        // 检查SD卡读取权限
+        PermissionX.init(mActivity).permissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).request((allGranted, grantedList, deniedList) -> {
+            if (allGranted) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    PermissionX.init(mActivity).permissions(Manifest.permission.MANAGE_EXTERNAL_STORAGE).request((al, gl, dl) -> {
+                        if (al) {
+                            if (Environment.isExternalStorageManager()) {
+                                Log.d(TAG, "此手机是 Android 11 或更高的版本，且已获得访问所有文件权限");
+                                download(progressChangedListener, finishedListener);
+                            } else {
+                                ActivityResultLauncher<Intent> launcher = mActivity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                                    boolean granted = result.getResultCode() == Activity.RESULT_OK;
+                                    Log.i(TAG, "权限申请结果：" + granted);
+                                    if (granted) {
+                                        download(progressChangedListener, finishedListener);
+                                    }
+                                });
+                                Log.d(TAG, "此手机是 Android 11 或更高的版本，但没有访问所有文件权限");
+                                launcher.launch(new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION));
+                            }
+                        }
+                    });
+                }
+            } else {
+                Log.d(TAG, "此手机是 Android 11 以下的版本，且已获得访问所有文件权限");
+                download(progressChangedListener, finishedListener);
+            }
+        });
+        return this;
+    }
+
+    /**
+     * 取消下载
+     */
+    public void cancel() {
+        if (null != mDm && mDownloadId > 0) {
+            mDm.remove(mDownloadId);
+            mActivity.getContentResolver().unregisterContentObserver(mObserver);
+            mObserver.mScheduleExecutor.shutdown();
+        }
+    }
+
+    private void download(OnProgressChangedListener progressChangedListener, OnFinishedListener finishedListener) {
         if (TextUtils.isEmpty(mUrl)) {
             throw new IllegalArgumentException("请先设置下载地址");
         }
 
+        if (!isInternetFile()) {
+            throw new IllegalArgumentException("只能下载网络文件");
+        }
 
         int networkTypes = DownloadManager.Request.NETWORK_WIFI;
         if (mAllowedMobileNetwork) {
@@ -199,7 +256,7 @@ public class WidgetDownloader {
             mDestRelativePath = "";
         }
         if (TextUtils.isEmpty(mFilename)) {
-            mFilename = mFilenameGenerator.generate(mUrl);
+            mFilename = FilenameGenerator.generate(mUrl);
         }
         if (TextUtils.isEmpty(mTitle)) {
             mTitle = "文件下载";
@@ -224,23 +281,11 @@ public class WidgetDownloader {
             request.allowScanningByMediaScanner();
         }
 
-        mDm = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+        mDm = (DownloadManager) mActivity.getSystemService(Context.DOWNLOAD_SERVICE);
         mDownloadId = mDm.enqueue(request);
 
         mObserver = new DownloadChangeObserver(null, this, progressChangedListener, finishedListener);
-        mContext.getContentResolver().registerContentObserver(Uri.parse("content://downloads/my_downloads"), true, mObserver);
-        return this;
-    }
-
-    /**
-     * 取消下载
-     */
-    public void cancel() {
-        if (null != mDm && mDownloadId > 0) {
-            mDm.remove(mDownloadId);
-        }
-        mContext.getContentResolver().unregisterContentObserver(mObserver);
-        mObserver.mScheduleExecutor.shutdown();
+        mActivity.getContentResolver().registerContentObserver(Uri.parse("content://downloads/my_downloads"), true, mObserver);
     }
 
     private void progress() {
@@ -250,20 +295,40 @@ public class WidgetDownloader {
             long total = cursor.getLong(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
             long current = cursor.getLong(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
             int status = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS));
-            float percent = current * 1.0f / total;
+            float percent = current * 100.0f / total;
             if (null != mObserver) {
                 if (null != mObserver.mOnProgressChangedListener) {
                     mObserver.mOnProgressChangedListener.progress(current, total, percent);
                 }
-                if (percent == 1.0f) {
+                if (percent == 100.0f) {
+                    Uri fileUri = mDm.getUriForDownloadedFile(mDownloadId);
                     if (null != mObserver.mOnFinishedListener) {
-                        mObserver.mOnFinishedListener.finished(mDm.getUriForDownloadedFile(mDownloadId));
+                        mObserver.mOnFinishedListener.finished(fileUri);
                     }
-                    mContext.getContentResolver().unregisterContentObserver(mObserver);
+                    // 刷新媒体库
+                    scanMedia(fileUri);
+                    mActivity.getContentResolver().unregisterContentObserver(mObserver);
                     mObserver.mScheduleExecutor.shutdown();
                 }
             }
+            cursor.close();
         }
+    }
+
+    private void scanMedia(Uri fileUri) {
+        if (mAllowScanningByMediaScanner && null != fileUri) {
+            String filepath = WidgetCoreUtils.getPath(mActivity, fileUri);
+            if (!TextUtils.isEmpty(filepath)) {
+                MediaScannerConnection.scanFile(mActivity, new String[]{filepath}, null, (path, uri) -> {
+                    Log.i(TAG, "MediaScanner scanned " + path);
+                    Log.i(TAG, "MediaScanner -> uri=" + uri);
+                });
+            }
+        }
+    }
+
+    private boolean isInternetFile() {
+        return mUrl.matches("^((http)|(ftp)s?://).+");
     }
 
     private static class DownloadChangeObserver extends ContentObserver {
