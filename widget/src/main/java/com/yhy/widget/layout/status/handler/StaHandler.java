@@ -1,5 +1,6 @@
 package com.yhy.widget.layout.status.handler;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -21,11 +22,12 @@ public class StaHandler {
     private View vSuccess;
     private View vError;
     private View vEmpty;
-    // 具体执行操作的Handler
+    // 具体执行操作的 Handler
     private Handler mHandler;
     // 当前页面状态
     private StatusLayout.Status mStatus;
 
+    @SuppressLint("HandlerLeak")
     public StaHandler() {
         mHandler = new Handler() {
             @Override

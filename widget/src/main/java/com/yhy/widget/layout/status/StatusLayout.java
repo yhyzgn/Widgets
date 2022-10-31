@@ -63,7 +63,7 @@ public class StatusLayout extends FrameLayout {
     // 页面助手
     private StaLayoutHelper mHelper;
     // 默认的页面助手
-    private StaLayoutHelper mDefHelper;
+    private final StaLayoutHelper mDefHelper;
 
     // 点击重试事件
     private OnStatusRetryListener mListener;

@@ -1,10 +1,5 @@
 package com.yhy.widget.core.picker;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,12 +17,21 @@ import android.view.View;
 
 import com.yhy.widget.R;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
- * author : 颜洪毅
- * e-mail : yhyzgn@gmail.com
- * time   : 2016-08-30 15:39
- * version: 1.0.0
- * desc   : 滚动选择器
+ * 滚动选择器
+ * <p>
+ * Created on 2016-08-30 15:39
+ *
+ * @author 颜洪毅
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public class PickerView<T> extends View {
 
@@ -41,13 +45,13 @@ public class PickerView<T> extends View {
 
     private List<T> mDataList;
 
-    // 选中的位置，这个位置是mDataList的中心位置，一直不变
+    // 选中的位置，这个位置是 mDataList 的中心位置，一直不变
     private int mCurrentSelected;
     private Paint mPaint;
 
-    // 字体最大大小20sp
+    // 字体最大大小 20sp
     private float mMaxTextSize = sp2px(getContext(), 20);
-    // 字体最小大小14sp
+    // 字体最小大小 14sp
     private float mMinTextSize = sp2px(getContext(), 14);
 
     private float mMaxTextAlpha = 255;
@@ -198,6 +202,25 @@ public class PickerView<T> extends View {
         timer.schedule(mTask, 0, 10);
 
         return this;
+    }
+
+    /**
+     * 获取当前选中的索引
+     *
+     * @return 索引
+     */
+    public int getSelectedIndex() {
+        return mCurrentSelected;
+    }
+
+    /**
+     * 获取当前已选中的元素
+     *
+     * @return 选中的元素
+     */
+    @NotNull
+    public T getSelected() {
+        return mDataList.get(mCurrentSelected);
     }
 
     private void moveHeadToTail() {
@@ -372,7 +395,7 @@ public class PickerView<T> extends View {
                 .getResources().getDisplayMetrics());
     }
 
-    class PvTimerTask extends TimerTask {
+    static class PvTimerTask extends TimerTask {
         Handler handler;
 
         public PvTimerTask(Handler handler) {
