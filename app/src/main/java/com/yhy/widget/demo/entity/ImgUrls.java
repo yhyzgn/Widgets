@@ -1,6 +1,14 @@
 package com.yhy.widget.demo.entity;
 
+import android.content.Context;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * author : 颜洪毅
@@ -11,49 +19,26 @@ import java.util.Random;
  */
 public class ImgUrls {
     private static final Random RAND = new Random(System.currentTimeMillis());
+    private static final List<String> IMG_URL_LIST = new ArrayList<>();
 
-    final static String[] ICON_ARR = {
-            "https://meitulu.me/p/3134-1b4f79.jpg",
-            "https://meitulu.me/p/3134-9bde7a.jpg",
-            "https://meitulu.me/p/3006-894c88.jpg",
-            "https://meitulu.me/p/3142-52de53.jpg",
-            "https://meitulu.me/p/3142-96436b.jpg",
-            "https://meitulu.me/p/7517-5eb28d.jpg",
-            "https://meitulu.me/p/7517-9a7a79.jpg",
-            "https://meitulu.me/p/7517-3392dd.jpg",
-            "https://meitulu.me/p/7517-f70f41.jpg",
-            "https://meitulu.me/p/7517-960972.jpg",
-            "https://meitulu.me/p/7517-e8fd3c.jpg",
-            "https://meitulu.me/p/7517-ab23c9.jpg",
-            "https://meitulu.me/p/7517-15bdf1.jpg",
-            "https://meitulu.me/p/7517-09e8e0.jpg",
-            "https://meitulu.me/p/3201-9ecd1a.jpg",
-            "https://meitulu.me/p/3201-3af46f.jpg",
-            "https://meitulu.me/p/3201-f9b756.jpg",
-            "https://meitulu.me/p/3183-8b212f.jpg",
-            "https://meitulu.me/p/3183-862f9a.jpg",
-            "https://meitulu.me/p/3139-840f7a.jpg",
-            "https://meitulu.me/p/3139-09c40c.jpg",
-            "https://meitulu.me/p/3139-b65dc6.jpg",
-            "https://meitulu.me/p/3139-750e03.jpg",
-            "https://meitulu.me/p/3139-d05604.jpg",
-            "https://meitulu.me/p/3139-6a8eee.jpg",
-            "https://meitulu.me/p/3139-a59494.jpg",
-            "https://meitulu.me/p/3139-014ff1.jpg",
-            "https://meitulu.me/p/3139-c62697.jpg",
-
-            "https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-736bc3917fe92142.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-7fe8c323e533f656.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-caf66b935fd00e18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-48dd99da471ffa3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-4de5440a56bff58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
-            "https://upload-images.jianshu.io/upload_images/5809200-03bbbd715c24750e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
-
-    };
+    public static void init(Context context) {
+        try {
+            InputStream is = context.getAssets().open("img-url.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            List<String> tempList = reader.lines().collect(Collectors.toList());
+            if (!tempList.isEmpty()) {
+                IMG_URL_LIST.addAll(tempList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getAImgUrl() {
-        return ICON_ARR[RAND.nextInt(ICON_ARR.length)];
+        if (IMG_URL_LIST.size() == 0) {
+            throw new IllegalStateException("请先初始化 ImgUrls 类");
+        }
+        int index = RAND.nextInt(IMG_URL_LIST.size());
+        return IMG_URL_LIST.get(index);
     }
 }

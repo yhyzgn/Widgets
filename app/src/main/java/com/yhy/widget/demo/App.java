@@ -1,6 +1,5 @@
 package com.yhy.widget.demo;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -8,11 +7,14 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.yhy.widget.core.preview.ImgPreHelper;
+import com.yhy.widget.demo.entity.ImgUrls;
 import com.yhy.widget.demo.utils.ImgUtils;
 import com.yhy.widget.demo.utils.ToastUtils;
 
@@ -25,7 +27,7 @@ import java.io.File;
  * version: 1.0.0
  * desc   :
  */
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     @Override
     public void onCreate() {
@@ -35,9 +37,11 @@ public class App extends Application {
     }
 
     private void init() {
+        ImgUrls.init(this);
+
         ToastUtils.init(this);
 
-        //图片加载器工具初始化
+        // 图片加载器工具初始化
         //                loadImgByGlide(ctx, iv, model);
         ImgUtils.init(this::loadImgByPicasso);
 
@@ -61,8 +65,8 @@ public class App extends Application {
             builder = builder.error(R.mipmap.img_def_loading);
         }
         builder.diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true)
-                .into(iv);
+            .skipMemoryCache(true)
+            .into(iv);
         Log.i("App", "图片加载完成：" + model);
     }
 
